@@ -1,0 +1,9 @@
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\MH4F.exe
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\MH4F.pdb
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Debug\MH4F.exe
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Debug\MH4F.pdb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST2.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\combinedsprite.xnb
