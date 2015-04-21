@@ -16,10 +16,18 @@ namespace MH4F
         //
         String name;
 
+        int currentInputCommandIndex;
+
         public List<String> InputCommand
         {
             get { return inputCommand; }
             set { inputCommand = value; }
+        }
+
+        public int CurrentInputCommandIndex
+        {
+            get { return currentInputCommandIndex; }
+            set { currentInputCommandIndex = value; }
         }
 
         public String Name
@@ -32,8 +40,18 @@ namespace MH4F
         {
             this.name = name;
             this.inputCommand = inputCommand;
+            currentInputCommandIndex = 0;
         }
 
+        public void resetCurrentInputCommandIndex()
+        {
+            CurrentInputCommandIndex = InputCommand.Count() - 1;
+        }
+
+        public void decrementCurrentInputCommandIndex()
+        {
+            CurrentInputCommandIndex--;
+        }
         public static Boolean checkStringInputToKeyInput(String input, KeyboardState keyboardState)
         {
             if (input == "A" && keyboardState.IsKeyDown(Keys.A))

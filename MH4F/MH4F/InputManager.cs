@@ -30,21 +30,28 @@ namespace MH4F
         public String checkMoves(KeyboardState newKeyboardState)
         {
             inputs.Enqueue(newKeyboardState);
+            foreach(MoveInput moveInput in moveList)
+            {
+                moveInput.resetCurrentInputCommandIndex();
+            }
             List<String> fireball = moveList[0].InputCommand;
             int x = moveList[0].InputCommand.Count - 1;
             foreach (KeyboardState n in inputs)
             {
-                
-                if( MoveInput.checkStringInputToKeyInput(fireball[x],n))
+                foreach (MoveInput moveInput in moveList)
                 {
-                    x--;
-                    if (x < 0)
+                    if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], n))
                     {
-                        System.Diagnostics.Debug.WriteLine("Fireball");
-                        return "TEST";
+                        moveInput.decrementCurrentInputCommandIndex();
+                        if (moveInput.CurrentInputCommandIndex < 0)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Fireball");
+                            return "TEST";
+                        }
+                        //System.Diagnostics.Debug.WriteLine("A PRESSED DOWN");
                     }
-                    //System.Diagnostics.Debug.WriteLine("A PRESSED DOWN");
                 }
+               
                       
             }
             return "NULL";
