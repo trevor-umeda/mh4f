@@ -27,4 +27,7 @@ This will get added to as I think of stuff
 - Music?
 - Timeout
 - Game Mode Statemachine
-- 
+
+
+### Move Inputs ###
+Documentation on move inputs is [here](https://github.com/trevor-umeda/mh4f/tree/master/Design/moveInputs.md)
