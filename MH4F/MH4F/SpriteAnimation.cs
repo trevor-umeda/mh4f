@@ -40,10 +40,6 @@ namespace MH4F
         // the right.
         bool bRotateByPosition = false;
 
-        // How much the sprite should be rotated by when drawn
-        // Value is in Radians, and 0 indicates no rotation.
-        float fRotation = 0f;
-
         // Calcualted center of the sprite
         Vector2 v2Center;
 

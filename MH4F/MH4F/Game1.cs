@@ -66,6 +66,7 @@ namespace MH4F
             player1.Sprite.AddAnimation("aattack", 0, 2708, 264, 280, 9, 0.044f, true);
 
             player1.registerMove("fireball",new List<string>{"2","3","6","A"});
+            player1.registerMove("aattack", new List<string> { "A" });
             player1.Position = new Vector2(100, 100);
         }
 

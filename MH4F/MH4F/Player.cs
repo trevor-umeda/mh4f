@@ -15,9 +15,6 @@ namespace MH4F
 
         InputManager inputManager;
 
-        // The location the sprite is currently moving towards
-        Vector2 v2Target;
-
         // The speed at which the sprite will close with it's target
         float speed = 1f;
 
@@ -33,9 +30,6 @@ namespace MH4F
         // Determines if the sprite should track towards a v2Target.  If set to false, the sprite
         // will not move on it's own towards v2Target, and will not process pathing information
         bool movingTowardsTarget = true;
-
-        // If true, any pathing node popped from the Queue will be placed back onto the end of the queue
-        bool bLoopPath = true;
 
         // If true, the sprite can collide with other objects.  Note that this is only provided as a flag
         // for testing with outside code.

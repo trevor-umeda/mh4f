@@ -45,16 +45,17 @@ namespace MH4F
                         moveInput.decrementCurrentInputCommandIndex();
                         if (moveInput.CurrentInputCommandIndex < 0)
                         {
-                            System.Diagnostics.Debug.WriteLine("Fireball");
-                            return "TEST";
+                            System.Diagnostics.Debug.WriteLine(moveInput.Name);
+                            inputs.Reset();
+                            return moveInput.Name;
                         }
-                        //System.Diagnostics.Debug.WriteLine("A PRESSED DOWN");
+                        
                     }
                 }
                
                       
             }
-            return "NULL";
+            return null;
         }
 
         public void registerMove(String name, List<String> input)

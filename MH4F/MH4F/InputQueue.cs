@@ -28,6 +28,12 @@ namespace MH4F
             inputQueue[currentPosition] = state;
             currentPosition = (currentPosition + 1) % inputBufferSize;
         }
+
+        public void Reset()
+        {
+            inputQueue = new T[inputBufferSize];
+        }
+
         // These make Stack<T> implement IEnumerable<T> allowing 
         // a stack to be used in a foreach statement. 
         public IEnumerator<T> GetEnumerator()
