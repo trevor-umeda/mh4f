@@ -38,10 +38,10 @@ namespace MH4F
         // a stack to be used in a foreach statement. 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = inputBufferSize; i >= 0;  i--)
+            for (int i = 0; i < inputBufferSize; i++)
             {
-                int index = (currentPosition - i + inputBufferSize) % inputBufferSize;
-                
+                //int index = (currentPosition - i + inputBufferSize) % inputBufferSize;
+                var index = (currentPosition + i ) % inputBufferSize;
                 yield return inputQueue[index];
             }
         }

@@ -15,7 +15,7 @@ namespace MH4F
         int maxInputQueueSize = 7;
 
         List<MoveInput> moveList;
-
+        
         public KeyboardState LastKeyboardState
         {
             get { return lastKeyboardState; }
@@ -30,53 +30,53 @@ namespace MH4F
         public String checkMoves(KeyboardState newKeyboardState)
         {
             inputs.Enqueue(newKeyboardState);
-            foreach(MoveInput moveInput in moveList)
-            {
-                moveInput.resetCurrentInputCommandIndex();
-            }
-            List<String> fireball = moveList[0].InputCommand;
-            int x = moveList[0].InputCommand.Count - 1;
-            foreach (KeyboardState n in inputs)
-            {
-                foreach (MoveInput moveInput in moveList)
+            if (DetermineButtonPress(newKeyboardState, lastKeyboardState))
+              {
+                System.Diagnostics.Debug.WriteLine("A button pressed");
+            
+                foreach(MoveInput moveInput in moveList)
                 {
-                    if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], n))
-                    {
-                        moveInput.decrementCurrentInputCommandIndex();
-                        if (moveInput.CurrentInputCommandIndex < 0)
-                        {
-                            System.Diagnostics.Debug.WriteLine(moveInput.Name);
-                            inputs.Reset();
-                            return moveInput.Name;
-                        }
-                        
-                    }
+                    moveInput.resetCurrentInputCommandIndex();
                 }
-               
-                      
+            
+                lastKeyboardState = newKeyboardState;
+           
+                foreach (KeyboardState keyboardState in inputs)
+                {
+                    foreach (MoveInput moveInput in moveList)
+                    {
+                         if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState))
+                        {
+                            moveInput.moveCurrentInputCommandIndex();
+                            if (moveInput.CurrentInputCommandIndex >= moveInput.InputCommand.Count)
+                            {
+                                System.Diagnostics.Debug.WriteLine(moveInput.Name);
+                                inputs.Reset();                       
+                                return moveInput.Name;
+                            }
+                        }
+                    }              
+                }
             }
+            lastKeyboardState = newKeyboardState;
             return null;
+        }
+
+        public bool DetermineButtonPress(KeyboardState presentState, KeyboardState pastState)
+        {
+            if (MoveInput.KeyboardPressed(presentState, pastState, Keys.A))
+            {
+                return true;
+            }
+            return false;
         }
 
         public void registerMove(String name, List<String> input)
         {
-            input.Reverse();
+           // input.Reverse();
             moveList.Add(new MoveInput(name, input));
         }
 
-        public bool KeyboardPressed(KeyboardState keyboardState, Keys key)
-        {
-            return (keyboardState.IsKeyDown(key) && LastKeyboardState.IsKeyUp(key));
-        }
 
-        public bool KeyboardReleased(KeyboardState keyboardState, Keys key)
-        {
-            return (keyboardState.IsKeyUp(key) && LastKeyboardState.IsKeyDown(key));
-        }
-
-        public bool KeyboardDown(KeyboardState keyboardState, Keys key)
-        {
-            return keyboardState.IsKeyDown(key);
-        }
     }
 }

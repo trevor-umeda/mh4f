@@ -45,12 +45,12 @@ namespace MH4F
 
         public void resetCurrentInputCommandIndex()
         {
-            CurrentInputCommandIndex = InputCommand.Count() - 1;
+            CurrentInputCommandIndex = 0;
         }
 
-        public void decrementCurrentInputCommandIndex()
+        public void moveCurrentInputCommandIndex()
         {
-            CurrentInputCommandIndex--;
+            CurrentInputCommandIndex++;
         }
         public static Boolean checkStringInputToKeyInput(String input, KeyboardState keyboardState)
         {
@@ -71,6 +71,20 @@ namespace MH4F
                 return true;
             }
             return false;
+        }
+        public static bool KeyboardPressed(KeyboardState keyboardState, KeyboardState lastKeyboardState, Keys key)
+        {
+            return (keyboardState.IsKeyDown(key) && lastKeyboardState.IsKeyUp(key));
+        }
+
+        public static bool KeyboardReleased(KeyboardState keyboardState, KeyboardState lastKeyboardState, Keys key)
+        {
+            return (keyboardState.IsKeyUp(key) && lastKeyboardState.IsKeyDown(key));
+        }
+
+        public static bool KeyboardDown(KeyboardState keyboardState, Keys key)
+        {
+            return keyboardState.IsKeyDown(key);
         }
     }
 }

@@ -58,7 +58,6 @@ namespace MH4F
             {
                 v2LastPosition = v2Position;
                 v2Position = value;
-                UpdateRotation();
             }
         }
 
@@ -72,7 +71,6 @@ namespace MH4F
             {
                 v2LastPosition.X = v2Position.X;
                 v2Position.X = value;
-                UpdateRotation();
             }
         }
 
@@ -86,7 +84,6 @@ namespace MH4F
             {
                 v2LastPosition.Y = v2Position.Y;
                 v2Position.Y = value;
-                UpdateRotation();
             }
         }
 
@@ -115,17 +112,6 @@ namespace MH4F
             get { return bRotateByPosition; }
             set { bRotateByPosition = value; }
         }
-
-        ///
-        /// The degree of rotation (in radians) to be applied to the
-        /// sprite when drawn.
-        ///
-        public float Rotation
-        {
-            get { return fRotation; }
-            set { fRotation = value; }
-        }
-
         ///
         /// Screen coordinates of the bounding box surrounding this sprite
         ///
@@ -206,14 +192,6 @@ namespace MH4F
             t2dTexture = Texture;
         }
 
-        void UpdateRotation()
-        {
-            if (bRotateByPosition)
-            {
-                fRotation = (float)Math.Atan2(v2Position.Y - v2LastPosition.Y, v2Position.X - v2LastPosition.X);
-            }
-        }
-
         public void AddAnimation(string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength)
         {
             animations.Add(Name, new Move(X, Y, Width, Height, Frames, FrameLength));
@@ -256,7 +234,6 @@ namespace MH4F
             v2LastPosition = v2Position;
             v2Position.X += x;
             v2Position.Y += y;
-            UpdateRotation();
         }
 
         public void Update(GameTime gameTime)
@@ -304,7 +281,7 @@ namespace MH4F
             if (bAnimating)
                 spriteBatch.Draw(t2dTexture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
                                 CurrentMoveAnimation.FrameRectangle, colorTint,
-                                fRotation, v2Center, 1f, SpriteEffects.None, 0);
+                                0, v2Center, 1f, SpriteEffects.None, 0);
         }
     }
     

@@ -3,6 +3,21 @@
 ### Design Overview ###
 Inputs will be passed in to an InputManager. The manager will parse inputs and then return the name of the move done. Will be responsible for determining special commands and dashing. Walking, jumping, and crouching maybe as well
 
+### Algorithm ###
+
+### Idea 1 ###
+Store every input in our input buffer. Traverse it backwards for speed so on a attack button press we can determine if it matches a special command input as soon as possible and exit the search loop. However if we traverse it forwards we can determine move priority much easier. However that would mean a full search no matter what. 
+
+As an optimization we can only do a full search once a button is pressed down. If no button is pressed we shouldn't have to look for a special move. Parsing dashes will be separate.
+
+Atm going forward doesn't seem too expensive so I'll continue on it for now.
+
+#### Idea 2 ####
+Don't store a new input if its the same as the previous input. These would keep the input buffer small and the amount of inputs you'd need to read in could be kept small. With a smaller queue we can process it reading forward rather than backwards which would leave priorities of different inputs to be much easier to implement.
+
+The one issue is if it only stores inputs of on detection of a new command inputted, then the queue would never grow stale. A potential workaround is to then store amount of repeated frames an input has to essentially track time. Then if the special command takes too many frames then we can then ignore the input 
+
+
 ### Implementation Details ###
 Rules and responsibilities of input manager
  

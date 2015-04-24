@@ -18,6 +18,8 @@ namespace MH4F
         // The speed at which the sprite will close with it's target
         float speed = 1f;
 
+        KeyboardState prevKeyboardState;
+
         // These two integers represent a clipping range for determining bounding-box style
         // collisions.  They return the bounding box of the sprite trimmed by a horizonal and
         // verticle offset to get a collision cushion
@@ -92,12 +94,6 @@ namespace MH4F
             set { sprite.Y = value; }
         }
 
-        public Vector2 Target
-        {
-            get { return v2Target; }
-            set { v2Target = value; }
-        }
-
         public int HorizontalCollisionBuffer
         {
             get { return collisionBufferX; }
@@ -108,12 +104,6 @@ namespace MH4F
         {
             get { return collisionBufferY; }
             set { collisionBufferY = value; }
-        }
-
-        public bool LoopPath
-        {
-            get { return bLoopPath; }
-            set { bLoopPath = value; }
         }
 
         public bool IsVisible
@@ -215,7 +205,10 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
-            InputManager.checkMoves(ks);
+            
+                InputManager.checkMoves(ks);
+            
+           
             if (!IsAirborne)
             {
                 if (ks.IsKeyDown(Keys.A))
@@ -293,6 +286,8 @@ namespace MH4F
       
             if (active)
                 sprite.Update(gameTime);
+
+            prevKeyboardState = Keyboard.GetState();
         }
 
         public void Crouch()
