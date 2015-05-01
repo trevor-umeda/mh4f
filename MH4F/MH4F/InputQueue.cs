@@ -51,5 +51,19 @@ namespace MH4F
             return GetEnumerator();
         }
 
+        // These make Stack<T> implement IEnumerable<T> allowing 
+        // a stack to be used in a foreach statement. 
+        public IEnumerable<T> GetReverseEnumerator
+        {
+            get
+            {
+                 for (int i = 0; i < 10; i++)
+                 {
+                    //int index = (currentPosition - i + inputBufferSize) % inputBufferSize;
+                    var index = (currentPosition + i) % inputBufferSize;
+                    yield return inputQueue[index];
+                 }
+            } 
+        }
     }
 }

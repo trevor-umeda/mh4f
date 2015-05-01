@@ -13,12 +13,14 @@ namespace MH4F
          // The SpriteAnimation object that holds the graphical and animation data for this object
         SpriteAnimation sprite;
 
-        InputManager inputManager;
+        SpecialInputManager specialInputManager;
 
         // The speed at which the sprite will close with it's target
         float speed = 1f;
 
         KeyboardState prevKeyboardState;
+
+        Direction directionFacing;
 
         // These two integers represent a clipping range for determining bounding-box style
         // collisions.  They return the bounding box of the sprite trimmed by a horizonal and
@@ -69,14 +71,20 @@ namespace MH4F
             get { return sprite; }
         }
 
-        public InputManager InputManager
+        public SpecialInputManager SpecialInputManager
         {
-            get { return inputManager; }
+            get { return specialInputManager; }
         }
         public Vector2 Position
         {
             get { return sprite.Position; }
             set { sprite.Position = value; }
+        }
+
+        public Direction Direction
+        {
+            get { return directionFacing; }
+            set { directionFacing = value; }
         }
 
         public int X
@@ -192,29 +200,23 @@ namespace MH4F
             }
         }
 
-        public void registerMove(String name, List<String> input)
+        public void registerGroundMove(String name, List<String> input)
         {
-            InputManager.registerMove(name, input);
+            SpecialInputManager.registerGroundMove(name, input);
         }
 
         public Player(Texture2D texture)
         {
             sprite = new SpriteAnimation(texture);
-            inputManager = new InputManager();
+            specialInputManager = new SpecialInputManager();
+            
         }
 
-        public void Update(GameTime gameTime, KeyboardState ks)
+        public void processBasicMovement(GameTime gameTime, KeyboardState ks)
         {
-            
-                InputManager.checkMoves(ks);
-            
-           
-            if (!IsAirborne)
-            {
-                if (ks.IsKeyDown(Keys.A))
-                {
-                    Sprite.CurrentAnimation = "aattack";
-                }
+            if (Sprite.CurrentMoveAnimation == null || 
+                Sprite.CurrentMoveAnimation.CharacterState != CharacterState.AIRBORNE)
+            {            
                 if (IsNotAttacking)
                 {
                     if (ks.IsKeyDown(Keys.Down))
@@ -251,22 +253,30 @@ namespace MH4F
                         Sprite.CurrentAnimation = "jumpup";
                     }
                 }
-                
+
                 if (!ks.IsKeyDown(Keys.Right) && !ks.IsKeyDown(Keys.Left) && !ks.IsKeyDown(Keys.Down) && !ks.IsKeyDown(Keys.Up) && Sprite.CurrentMoveAnimation != null)
                 {
                     if (IsNotAttacking)
                     {
+                        if (CurrentVelocity.X > 0)
+                        {
+                            currentVelocity.X -= 1000;
+                        }
+                        if (CurrentVelocity.X < 0)
+                        {
+                            currentVelocity.X += 100;
+                        }
                         Sprite.CurrentAnimation = "standing";
                     }
-                    
+
                 }
             }
 
-            if (IsAirborne)
+            else if (IsAirborne)
             {
                 float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                Position += CurrentVelocity * time;
                 
+
                 CurrentVelocity += gravityModifierV * time;
                 if (currentVelocity.Y > 0)
                 {
@@ -280,14 +290,63 @@ namespace MH4F
                 {
                     IsAirborne = false;
                     CurrentVelocity = new Vector2(0, 0);
+                    Sprite.CurrentAnimation = "standing";
                 }
             }
+
+        }
+
+        public void Update(GameTime gameTime, KeyboardState ks)
+        {
             
-      
+           String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);
+           if (moveName == null)
+           {          
+               processBasicMovement(gameTime, ks);
+           }
+           else
+           {
+               Sprite.CurrentAnimation = moveName;
+           }
+
+           // If dashing adjust velocity
+           //
+           if (Direction == Direction.Left)
+           {
+               if (moveName == "rightdash")
+               {
+                   Backstep();
+               }
+               if (moveName == "leftdash")
+               {
+                   Dash();
+               }
+           }
+           else
+           {
+               if (moveName == "rightdash")
+               {
+                   currentVelocity.X = 1000;
+               }
+               if (moveName == "leftdash")
+               {
+                   currentVelocity.X = -1000;
+               }
+           }
+           float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+           Position += CurrentVelocity * time;
             if (active)
                 sprite.Update(gameTime);
 
             prevKeyboardState = Keyboard.GetState();
+        }
+        public void Backstep()
+        {
+            currentVelocity.X = 5000;
+        }
+        public void Dash()
+        {
+            currentVelocity.X = -1000;
         }
 
         public void Crouch()

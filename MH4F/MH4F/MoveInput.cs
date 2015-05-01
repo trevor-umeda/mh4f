@@ -70,6 +70,14 @@ namespace MH4F
             {
                 return true;
             }
+            if (input == "4" && keyboardState.IsKeyDown(Keys.Left))
+            {
+                return true;
+            }
+            if (input == "5" && keyboardState.IsKeyUp(Keys.Down) && keyboardState.IsKeyUp(Keys.Up) && keyboardState.IsKeyUp(Keys.Right) && keyboardState.IsKeyUp(Keys.Left))
+            {
+                return true;
+            }
             return false;
         }
         public static bool KeyboardPressed(KeyboardState keyboardState, KeyboardState lastKeyboardState, Keys key)

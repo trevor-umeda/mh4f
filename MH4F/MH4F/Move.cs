@@ -13,6 +13,7 @@ namespace MH4F
         // frames on the fly based on this frame.
         private Rectangle rectInitialFrame;
 
+        private CharacterState characterState;
 
         // Number of frames in the Animation
         private int frameCount = 1;
@@ -89,6 +90,13 @@ namespace MH4F
             get { return isAttack; }
             set { isAttack = value; }
         }
+
+        public CharacterState CharacterState
+        {
+            get { return characterState; }
+            set { characterState = value; }
+        }
+
         /// 
         /// The rectangle associated with the current
         /// animation frame.
@@ -134,6 +142,23 @@ namespace MH4F
             frameLength = FrameLength;
         }
 
+        public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState)
+        {
+            rectInitialFrame = new Rectangle(X, Y, Width, Height);
+            frameCount = Frames;
+            frameLength = FrameLength;
+            characterState = CharacterState;
+        }
+
+        public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState, bool IsAnAttack)
+        {
+            rectInitialFrame = new Rectangle(X, Y, Width, Height);
+            frameCount = Frames;
+            frameLength = FrameLength;
+            characterState = CharacterState;
+            isAttack = IsAnAttack;
+        }
+
         public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength, bool IsAnAttack)
         {
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
@@ -144,11 +169,12 @@ namespace MH4F
 
         public Move(int X, int Y,
             int Width, int Height, int Frames,
-            float FrameLength, string strNextAnimation)
+            float FrameLength, CharacterState CharacterState, string strNextAnimation)
         {
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             frameLength = FrameLength;
+            characterState = CharacterState;
             nextAnimation = strNextAnimation;
         }
 
@@ -172,7 +198,7 @@ namespace MH4F
         {
             return new Move(this.rectInitialFrame.X, this.rectInitialFrame.Y,
                                       this.rectInitialFrame.Width, this.rectInitialFrame.Height,
-                                      this.frameCount, this.frameLength, nextAnimation);
+                                      this.frameCount, this.frameLength, this.characterState, nextAnimation);
         }
     }
     

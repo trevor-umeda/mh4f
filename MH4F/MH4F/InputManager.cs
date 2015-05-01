@@ -14,8 +14,8 @@ namespace MH4F
         KeyboardState lastKeyboardState;
         int maxInputQueueSize = 7;
 
-        List<MoveInput> moveList;
-        
+        List<MoveInput> groundMoveList;
+        List<MoveInput> dashList;
         public KeyboardState LastKeyboardState
         {
             get { return lastKeyboardState; }
@@ -24,38 +24,74 @@ namespace MH4F
         {
             inputs = new InputQueue<KeyboardState>();
             lastKeyboardState = new KeyboardState();
-            moveList = new List<MoveInput>();
+            groundMoveList = new List<MoveInput>();
+            dashList = new List<MoveInput>();
+            dashList.Add(new MoveInput("backstep", new List<string> { "4", "5", "4" }));
+            dashList.Add(new MoveInput("rightdash", new List<string> { "6", "5", "6" }));
+           
         }
 
-        public String checkMoves(KeyboardState newKeyboardState)
+        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState)
         {
             inputs.Enqueue(newKeyboardState);
+            // on a button press determine if a special move was inputted.
+            //
             if (DetermineButtonPress(newKeyboardState, lastKeyboardState))
-              {
+            {
                 System.Diagnostics.Debug.WriteLine("A button pressed");
-            
-                foreach(MoveInput moveInput in moveList)
+
+                foreach (MoveInput moveInput in groundMoveList)
                 {
                     moveInput.resetCurrentInputCommandIndex();
                 }
-            
+
                 lastKeyboardState = newKeyboardState;
-           
+
                 foreach (KeyboardState keyboardState in inputs)
                 {
-                    foreach (MoveInput moveInput in moveList)
+                    foreach (MoveInput moveInput in groundMoveList)
                     {
-                         if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState))
+                        if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState))
                         {
                             moveInput.moveCurrentInputCommandIndex();
                             if (moveInput.CurrentInputCommandIndex >= moveInput.InputCommand.Count)
                             {
                                 System.Diagnostics.Debug.WriteLine(moveInput.Name);
-                                inputs.Reset();                       
+                                inputs.Reset();
                                 return moveInput.Name;
                             }
                         }
-                    }              
+                    }
+                }
+            }
+            // Otherwise this is a movement special input
+            //
+            else
+            {
+                // Atm we only really care about reading a dash
+                //
+                foreach (MoveInput dashInput in dashList)
+                {
+                    dashInput.resetCurrentInputCommandIndex();
+                }
+                
+                foreach (KeyboardState keyboardState in inputs.GetReverseEnumerator)
+                {
+                    foreach (MoveInput dash in dashList)
+                    {
+
+                        if (MoveInput.checkStringInputToKeyInput(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState))
+                        {
+                            dash.moveCurrentInputCommandIndex();
+                            if (dash.CurrentInputCommandIndex >= dash.InputCommand.Count)
+                            {
+                                System.Diagnostics.Debug.WriteLine(dash.Name);
+                                inputs.Reset();
+                                return dash.Name;
+                            }
+
+                        }
+                    }
                 }
             }
             lastKeyboardState = newKeyboardState;
@@ -71,10 +107,10 @@ namespace MH4F
             return false;
         }
 
-        public void registerMove(String name, List<String> input)
+        public void registerGroundMove(String name, List<String> input)
         {
            // input.Reverse();
-            moveList.Add(new MoveInput(name, input));
+            groundMoveList.Add(new MoveInput(name, input));
         }
 
 

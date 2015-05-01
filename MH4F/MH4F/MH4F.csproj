@@ -107,6 +107,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Direction.cs" />
+    <Compile Include="SpecialInputManager.cs" />
+    <Compile Include="CharacterState.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="InputQueue.cs" />
     <Compile Include="Move.cs" />

@@ -192,26 +192,26 @@ namespace MH4F
             t2dTexture = Texture;
         }
 
-        public void AddAnimation(string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength)
+        public void AddAnimation(string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState)
         {
-            animations.Add(Name, new Move(X, Y, Width, Height, Frames, FrameLength));
+            animations.Add(Name, new Move(X, Y, Width, Height, Frames, FrameLength, characterState));
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
 
-        public void AddAnimation(string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, bool isAnAttack)
+        public void AddAnimation(string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState, bool isAnAttack)
         {
-            animations.Add(Name, new Move(X, Y, Width, Height, Frames, FrameLength, isAnAttack));
+            animations.Add(Name, new Move(X, Y, Width, Height, Frames, FrameLength, characterState, isAnAttack));
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
 
         public void AddAnimation(string Name, int X, int Y, int Width, int Height, int Frames,
-           float FrameLength, string NextAnimation)
+           float FrameLength, CharacterState characterState, string NextAnimation)
         {
-            animations.Add(Name, new Move(X, Y, Width, Height, Frames, FrameLength, NextAnimation));
+            animations.Add(Name, new Move(X, Y, Width, Height, Frames, FrameLength, characterState, NextAnimation));
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
