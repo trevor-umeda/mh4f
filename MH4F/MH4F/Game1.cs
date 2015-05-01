@@ -64,9 +64,9 @@ namespace MH4F
             player1.Sprite.AddAnimation("jumpdown", 0, 2048, 136, 380, 2, 0.1f, CharacterState.AIRBORNE);
             player1.Sprite.AddAnimation("jumptop", 0, 2428, 192, 280, 11, 0.1f, CharacterState.AIRBORNE);
             player1.Sprite.AddAnimation("rightdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
-            player1.Sprite.AddAnimation("leftdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
             player1.Sprite.AddAnimation("aattack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
-            player1.Sprite.AddAnimation("backstep", 0, 2988, 240, 280, 7, 0.044f, CharacterState.BACKSTEP, true);
+            player1.Sprite.AddAnimation("backstep", 0, 2988, 240, 280, 7, 0.1f, CharacterState.BACKSTEP);
+            player1.Sprite.AddAnimation("dash", 0, 3268, 320, 280, 13, 0.1f, CharacterState.DASHING);
 
             player1.registerGroundMove("fireball",new List<string>{"2","3","6","A"});
             player1.registerGroundMove("aattack", new List<string> { "A" });
