@@ -4,11 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MH4F
 {
     class Move : ICloneable
     {
+
+        // The move itself will hold onto its own sprite
+        private Texture2D t2dTexture;
+
          // The first frame of the Animation.  We will calculate other
         // frames on the fly based on this frame.
         private Rectangle rectInitialFrame;
@@ -42,6 +47,13 @@ namespace MH4F
         private bool isDone = false;
 
         private bool isAttack = false;
+
+        public Texture2D Texture
+        {
+            get { return t2dTexture; }
+            set { t2dTexture = value; }
+        }
+
         /// 
         /// The number of frames the animation contains
         /// 
@@ -142,16 +154,18 @@ namespace MH4F
             frameLength = FrameLength;
         }
 
-        public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState)
+        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState)
         {
+            t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             frameLength = FrameLength;
             characterState = CharacterState;
         }
 
-        public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState, bool IsAnAttack)
+        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState, bool IsAnAttack)
         {
+            t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             frameLength = FrameLength;
@@ -159,18 +173,20 @@ namespace MH4F
             isAttack = IsAnAttack;
         }
 
-        public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength, bool IsAnAttack)
+        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, bool IsAnAttack)
         {
+            t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             frameLength = FrameLength;
             isAttack = IsAnAttack;
         }
 
-        public Move(int X, int Y,
+        public Move(Texture2D texture, int X, int Y,
             int Width, int Height, int Frames,
             float FrameLength, CharacterState CharacterState, string strNextAnimation)
         {
+            t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             frameLength = FrameLength;
@@ -196,7 +212,7 @@ namespace MH4F
 
         object ICloneable.Clone()
         {
-            return new Move(this.rectInitialFrame.X, this.rectInitialFrame.Y,
+            return new Move(this.t2dTexture, this.rectInitialFrame.X, this.rectInitialFrame.Y,
                                       this.rectInitialFrame.Width, this.rectInitialFrame.Height,
                                       this.frameCount, this.frameLength, this.characterState, nextAnimation);
         }
