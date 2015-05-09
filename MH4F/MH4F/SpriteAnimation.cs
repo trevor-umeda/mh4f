@@ -11,9 +11,12 @@ namespace MH4F
     {
          // The texture that holds the images for this sprite
         Texture2D t2dTexture;
+        public Texture2D dummyTexture ;
 
         // True if animations are being played
         bool bAnimating = true;
+
+        Rectangle hitbox;
 
         // If set to anything other than Color.White, will colorize
         // the sprite with that color.
@@ -129,6 +132,11 @@ namespace MH4F
             get { return t2dTexture; }
         }
 
+        public Rectangle Hitbox
+        {
+            get { return hitbox; }
+        }
+
         ///
         /// Color value to tint the sprite with when drawing.  Color.White
         /// (the default) indicates no tinting.
@@ -217,6 +225,11 @@ namespace MH4F
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
 
+        public void AddHitbox(String moveName, int index, Hitbox hitbox)
+        {
+            animations[moveName].AddHitboxInfo(index, hitbox);
+        }
+
         public Move GetAnimationByName(string Name)
         {
             if (animations.ContainsKey(Name))
@@ -236,7 +249,7 @@ namespace MH4F
             v2Position.Y += y;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Direction direction)
         {
             // Don't do anything if the sprite is not animating
             if (bAnimating)
@@ -261,7 +274,30 @@ namespace MH4F
 
                 // Run the Animation's update method
                 CurrentMoveAnimation.Update(gameTime);
-
+                Hitbox info = CurrentMoveAnimation.CurrentHitboxInfo;
+                if (info != null)
+                {
+                    if (direction == Direction.Left)
+                    {
+                        hitbox.Height = info.Height;
+                        hitbox.Width = info.Width;
+                        hitbox.X = info.XPos - info.Width / 2 + (int)v2Position.X;
+                        hitbox.Y = info.YPos - info.Height / 2 + (int)v2Position.Y;
+                    }
+                    else
+                    {
+                        hitbox.Height = info.Height;
+                        hitbox.Width = info.Width;
+                        
+                        hitbox.X = (int)v2Position.X + CurrentMoveAnimation.FrameWidth - info.Width/2 - info.XPos;
+                        hitbox.Y = info.YPos - info.Height / 2 + (int)v2Position.Y;
+                    }
+                    
+                }
+                else
+                {
+                    hitbox = new Rectangle();
+                }
                 // Check to see if there is a "followup" animation named for this animation
                 if (!String.IsNullOrEmpty(CurrentMoveAnimation.NextAnimation))
                 {
@@ -276,12 +312,27 @@ namespace MH4F
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, int XOffset, int YOffset)
+        public void Draw(SpriteBatch spriteBatch, int XOffset, int YOffset, Direction direction)
         {
             if (bAnimating)
-                spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
-                                CurrentMoveAnimation.FrameRectangle, colorTint,
-                                0, v2Center, 1f, SpriteEffects.None, 0);
+            {
+                if (direction == Direction.Right)
+                {
+                    spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
+                                                   CurrentMoveAnimation.FrameRectangle, colorTint,
+                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
+                }
+                else
+                {
+                    spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
+                                                   CurrentMoveAnimation.FrameRectangle, colorTint,
+                                                   0, v2Center, 1f, SpriteEffects.None, 0);
+                }
+
+                Color translucentRed = Color.Red * 0.5f;
+                spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
+            }
+                
         }
     }
     

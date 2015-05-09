@@ -16,27 +16,27 @@ namespace MH4F
             inputManager = new InputManager();
         }
 
-        public String checkMoves(CharacterState characterState, Direction direction, KeyboardState newKeyboardState)
+        public String checkMoves(CharacterState characterState, Direction direction, KeyboardState newKeyboardState, Dictionary<string, Keys> controls)
         {
             String returnMove = null;
 
-            if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(Keys.Right))
+            if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["right"]))
             {
                 if (direction != Direction.Left)
                 {
-                    returnMove = "rightdash";
+                    return "dash";
                 }
             }
-            if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(Keys.Left))
+            if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["left"]))
             {
                 if (direction == Direction.Left)
                 {
-                    returnMove = "leftdash";
+                   return "dash";
                 }    
             }
-            if (characterState == CharacterState.STANDING)
+            if(characterState != CharacterState.AIRBORNE)
             {
-                returnMove = inputManager.checkGroundMoves(direction, newKeyboardState);
+                returnMove = inputManager.checkGroundMoves(direction, newKeyboardState, controls);
             }
 
             return returnMove; 
@@ -46,5 +46,7 @@ namespace MH4F
             // input.Reverse();
             inputManager.registerGroundMove(name, input);
         }
+
+        //public InputManager
     }
 }

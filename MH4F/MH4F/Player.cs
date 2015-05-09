@@ -15,6 +15,8 @@ namespace MH4F
 
         SpecialInputManager specialInputManager;
 
+        ControlSetting controlSetting;
+
         // The speed at which the sprite will close with it's target
         float speed = 1f;
 
@@ -51,9 +53,9 @@ namespace MH4F
 
         bool isInInterruptableAnimation = false;
 
-        readonly Vector2 gravityModifierV = new Vector2(0, 200f);
+        readonly Vector2 gravityModifierV = new Vector2(0, 600f);
 
-        readonly Vector2 initialJumpSpeed = new Vector2(0, -300);
+        readonly Vector2 initialJumpSpeed = new Vector2(0, -400);
 
         readonly float jumpHorizontalSpeed = 100f;
 
@@ -75,6 +77,12 @@ namespace MH4F
         {
             get { return specialInputManager; }
         }
+
+        public ControlSetting ControlSetting
+        {
+            get { return controlSetting; }
+        }
+
         public Vector2 Position
         {
             get { return sprite.Position; }
@@ -158,7 +166,9 @@ namespace MH4F
 
         public bool IsNotAttacking
         {
-            get { return Sprite.CurrentMoveAnimation != null && (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone || !Sprite.CurrentMoveAnimation.IsAttack); }
+            get { return Sprite.CurrentMoveAnimation != null && 
+                (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone ||
+                !Sprite.CurrentMoveAnimation.IsAttack); }
         }
 
         public Vector2 CurrentVelocity
@@ -205,11 +215,12 @@ namespace MH4F
             SpecialInputManager.registerGroundMove(name, input);
         }
 
-        public Player(Texture2D texture)
+        public Player(Texture2D texture, int xPosition)
         {
             sprite = new SpriteAnimation(texture);
             specialInputManager = new SpecialInputManager();
-            
+            Position = new Vector2(xPosition, 100);
+            controlSetting = new ControlSetting();
         }
 
         public void processBasicMovement(GameTime gameTime, KeyboardState ks)
@@ -219,7 +230,7 @@ namespace MH4F
             {            
                 if (IsNotAttacking)
                 {
-                    if (ks.IsKeyDown(Keys.Down))
+                    if (ks.IsKeyDown(controlSetting.Controls["down"]))
                     {
                         Crouch();
                     }
@@ -227,24 +238,24 @@ namespace MH4F
                     {
                         UnCrouch();
                     }
-                    if (ks.IsKeyDown(Keys.Right))
+                    if (ks.IsKeyDown(controlSetting.Controls["right"]))
                     {
                         Sprite.CurrentAnimation = "backwalk";
                         Sprite.MoveBy(3, 0)
         ;
                     }
-                    if (ks.IsKeyDown(Keys.Left))
+                    if (ks.IsKeyDown(controlSetting.Controls["left"]))
                     {
                         Sprite.CurrentAnimation = "walk";
                         Sprite.MoveBy(-3, 0);
                     }
-                    if (ks.IsKeyDown(Keys.Up))
+                    if (ks.IsKeyDown(controlSetting.Controls["up"]))
                     {
-                        if (ks.IsKeyDown(Keys.Right))
+                        if (ks.IsKeyDown(controlSetting.Controls["right"]))
                         {
                             CurrentVelocity = new Vector2(JumpHorizontalSpeed, 0);
                         }
-                        else if (ks.IsKeyDown(Keys.Left))
+                        else if (ks.IsKeyDown(controlSetting.Controls["left"]))
                         {
                             CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 0);
                         }
@@ -254,7 +265,7 @@ namespace MH4F
                     }
                 }
 
-                if (!ks.IsKeyDown(Keys.Right) && !ks.IsKeyDown(Keys.Left) && !ks.IsKeyDown(Keys.Down) && !ks.IsKeyDown(Keys.Up) && Sprite.CurrentMoveAnimation != null)
+                if (!ks.IsKeyDown(controlSetting.Controls["right"]) && !ks.IsKeyDown(controlSetting.Controls["left"]) && !ks.IsKeyDown(controlSetting.Controls["down"]) && !ks.IsKeyDown(controlSetting.Controls["up"]) && Sprite.CurrentMoveAnimation != null)
                 {
                     if (IsNotAttacking)
                     {
@@ -286,10 +297,14 @@ namespace MH4F
                 {
                     Sprite.CurrentAnimation = "jumptop";
                 }
-                if (Y >= 100)
+                
+                // Code to detect when to stop jumping. Its really bad right now
+                //
+                if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= 100 + 288 && currentVelocity.Y > 0)
                 {
                     IsAirborne = false;
                     CurrentVelocity = new Vector2(0, 0);
+                    Position = new Vector2(Position.X, 100);
                     Sprite.CurrentAnimation = "standing";
                 }
             }
@@ -299,7 +314,7 @@ namespace MH4F
         public void Update(GameTime gameTime, KeyboardState ks)
         {
             
-           String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);
+           String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks, controlSetting.Controls);
            if (moveName == null)
            {          
                processBasicMovement(gameTime, ks);
@@ -309,44 +324,49 @@ namespace MH4F
                Sprite.CurrentAnimation = moveName;
            }
 
+           if (Sprite.CurrentAnimation == "backstep")
+           {
+               Backstep();
+           }
+           if (Sprite.CurrentAnimation == "dash")
+           {
+               Dash();
+           }
            // If dashing adjust velocity
            //
-           if (Direction == Direction.Left)
-           {
-               if (moveName == "rightdash")
-               {
-                   Backstep();
-               }
-               if (moveName == "leftdash")
-               {
-                   Dash();
-               }
-           }
-           else
-           {
-               if (moveName == "rightdash")
-               {
-                   currentVelocity.X = 1000;
-               }
-               if (moveName == "leftdash")
-               {
-                   currentVelocity.X = -1000;
-               }
-           }
+          
            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
            Position += CurrentVelocity * time;
             if (active)
-                sprite.Update(gameTime);
+                sprite.Update(gameTime, Direction);
 
             prevKeyboardState = Keyboard.GetState();
         }
         public void Backstep()
         {
-            currentVelocity.X = 5000;
+            int backStepVel = 8;
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(backStepVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(-backStepVel, 0);
+            }
+            
         }
         public void Dash()
         {
-            currentVelocity.X = -1000;
+            int dashVel = 8;
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(-dashVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(dashVel, 0);
+            }
+            
         }
 
         public void Crouch()
@@ -373,7 +393,7 @@ namespace MH4F
         {
             if (bVisible)
             {
-                sprite.Draw(spriteBatch, 0, 0);
+                sprite.Draw(spriteBatch, 0, 0, Direction);
             }
         }
     }

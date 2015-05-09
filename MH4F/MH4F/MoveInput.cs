@@ -52,32 +52,37 @@ namespace MH4F
         {
             CurrentInputCommandIndex++;
         }
-        public static Boolean checkStringInputToKeyInput(String input, KeyboardState keyboardState)
+        public static Boolean checkStringInputToKeyInput(String input, KeyboardState keyboardState, Direction direction, Dictionary<string, Keys> controls)
         {
-            if (input == "A" && keyboardState.IsKeyDown(Keys.A))
+            if (input == "A" && keyboardState.IsKeyDown(controls["a"]))
             {
                 return true;
             }
-            if (input == "6" && keyboardState.IsKeyDown(Keys.Right))
+            if ( keyboardState.IsKeyDown(controls["right"]) && ((direction == Direction.Right && input == "6") || (direction == Direction.Left && input =="4")))
             {
                 return true;
             }
-            if (input == "3" && keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.Down))
+            if (keyboardState.IsKeyDown(controls["right"]) && keyboardState.IsKeyDown(controls["down"]) && ((direction == Direction.Right && input == "3") || (direction == Direction.Left && input == "1")))
             {
                 return true;
             }
-            if (input == "2" && keyboardState.IsKeyDown(Keys.Down))
+            if (keyboardState.IsKeyDown(controls["left"]) && keyboardState.IsKeyDown(controls["down"]) && ((direction == Direction.Right && input == "1") || (direction == Direction.Left && input == "3")))
             {
                 return true;
             }
-            if (input == "4" && keyboardState.IsKeyDown(Keys.Left))
+            if (input == "2" && keyboardState.IsKeyDown(controls["down"]))
             {
                 return true;
             }
-            if (input == "5" && keyboardState.IsKeyUp(Keys.Down) && keyboardState.IsKeyUp(Keys.Up) && keyboardState.IsKeyUp(Keys.Right) && keyboardState.IsKeyUp(Keys.Left))
+            if (keyboardState.IsKeyDown(controls["left"]) && ((direction == Direction.Right && input == "4") || (direction == Direction.Left && input == "6")))
             {
                 return true;
             }
+            if (input == "5" && keyboardState.IsKeyUp(controls["down"]) && keyboardState.IsKeyUp(controls["up"]) && keyboardState.IsKeyUp(controls["right"]) && keyboardState.IsKeyUp(controls["left"]))
+            {
+                return true;
+            }
+            
             return false;
         }
         public static bool KeyboardPressed(KeyboardState keyboardState, KeyboardState lastKeyboardState, Keys key)
@@ -94,5 +99,8 @@ namespace MH4F
         {
             return keyboardState.IsKeyDown(key);
         }
+
+        // Boring getters and setters here
+        //
     }
 }

@@ -10,7 +10,7 @@ namespace MH4F
     public class InputQueue<T> : IEnumerable<T>
     {
         //This will function like a queue. But we want to interate over it and it will be circular
-        private int inputBufferSize = 20;
+        private int inputBufferSize = 30;
         private T[] inputQueue;
      
         private int currentPosition = 0;
@@ -25,12 +25,14 @@ namespace MH4F
         }
         public void Enqueue(T state)
         {
+            
             inputQueue[currentPosition] = state;
             currentPosition = (currentPosition + 1) % inputBufferSize;
         }
 
         public void Reset()
         {
+            currentPosition = 0;
             inputQueue = new T[inputBufferSize];
         }
 
@@ -41,7 +43,10 @@ namespace MH4F
             for (int i = 0; i < inputBufferSize; i++)
             {
                 //int index = (currentPosition - i + inputBufferSize) % inputBufferSize;
-                var index = (currentPosition + i ) % inputBufferSize;
+                // Need t o
+                //
+                var index = ((currentPosition) + i ) % inputBufferSize;
+                
                 yield return inputQueue[index];
             }
         }
@@ -57,10 +62,10 @@ namespace MH4F
         {
             get
             {
-                 for (int i = 0; i < 10; i++)
+                 for (int i = 0; i < 10 ; i++)
                  {
                     //int index = (currentPosition - i + inputBufferSize) % inputBufferSize;
-                    var index = (currentPosition + i) % inputBufferSize;
+                    var index = ((currentPosition - 1) - i  + inputBufferSize) % inputBufferSize;
                     yield return inputQueue[index];
                  }
             } 

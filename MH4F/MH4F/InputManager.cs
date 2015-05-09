@@ -26,12 +26,14 @@ namespace MH4F
             lastKeyboardState = new KeyboardState();
             groundMoveList = new List<MoveInput>();
             dashList = new List<MoveInput>();
+            // TODO: this is a terrible place to put these. find a better spot
+            //
             dashList.Add(new MoveInput("backstep", new List<string> { "4", "5", "4" }));
-            dashList.Add(new MoveInput("rightdash", new List<string> { "6", "5", "6" }));
+            dashList.Add(new MoveInput("dash", new List<string> { "6", "5", "6" }));
            
         }
 
-        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState)
+        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState, Dictionary<string, Keys> controls)
         {
             inputs.Enqueue(newKeyboardState);
             // on a button press determine if a special move was inputted.
@@ -44,14 +46,12 @@ namespace MH4F
                 {
                     moveInput.resetCurrentInputCommandIndex();
                 }
-
                 lastKeyboardState = newKeyboardState;
-
                 foreach (KeyboardState keyboardState in inputs)
                 {
                     foreach (MoveInput moveInput in groundMoveList)
                     {
-                        if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState))
+                        if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState, direction, controls))
                         {
                             moveInput.moveCurrentInputCommandIndex();
                             if (moveInput.CurrentInputCommandIndex >= moveInput.InputCommand.Count)
@@ -80,7 +80,7 @@ namespace MH4F
                     foreach (MoveInput dash in dashList)
                     {
 
-                        if (MoveInput.checkStringInputToKeyInput(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState))
+                        if (MoveInput.checkStringInputToKeyInput(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState, direction, controls))
                         {
                             dash.moveCurrentInputCommandIndex();
                             if (dash.CurrentInputCommandIndex >= dash.InputCommand.Count)

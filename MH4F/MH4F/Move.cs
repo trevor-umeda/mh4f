@@ -14,6 +14,8 @@ namespace MH4F
         // The move itself will hold onto its own sprite
         private Texture2D t2dTexture;
 
+        private Hitbox[] hitboxInfo;
+
          // The first frame of the Animation.  We will calculate other
         // frames on the fly based on this frame.
         private Rectangle rectInitialFrame;
@@ -86,6 +88,11 @@ namespace MH4F
             get { return rectInitialFrame.Width; }
         }
 
+        public Hitbox CurrentHitboxInfo
+        {
+            get { return hitboxInfo[currentFrame]; }
+        }
+
         public int FrameHeight
         {
             get { return rectInitialFrame.Height; }
@@ -129,6 +136,11 @@ namespace MH4F
             set { playCount = value; }
         }
 
+        public void AddHitboxInfo(int index, Hitbox hitbox)
+        {
+            hitboxInfo[index] = hitbox;
+        }
+
         public string NextAnimation
         {
             get { return nextAnimation; }
@@ -139,18 +151,21 @@ namespace MH4F
         {
             rectInitialFrame = FirstFrame;
             frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
         }
 
         public Move(int X, int Y, int Width, int Height, int Frames)
         {
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
         }
 
         public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength)
         {
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
         }
 
@@ -159,6 +174,7 @@ namespace MH4F
             t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             characterState = CharacterState;
         }
@@ -168,6 +184,7 @@ namespace MH4F
             t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             characterState = CharacterState;
             isAttack = IsAnAttack;
@@ -178,6 +195,7 @@ namespace MH4F
             t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             isAttack = IsAnAttack;
         }
@@ -189,6 +207,7 @@ namespace MH4F
             t2dTexture = texture;
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             characterState = CharacterState;
             nextAnimation = strNextAnimation;
@@ -202,6 +221,7 @@ namespace MH4F
             {
                 frameTimer = 0.0f;
                 currentFrame = (currentFrame + 1) % frameCount;
+
                 if (currentFrame == 0)
                 {
                     playCount = (int)MathHelper.Min(playCount + 1, int.MaxValue);
