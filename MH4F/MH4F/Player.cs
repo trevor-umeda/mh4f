@@ -294,27 +294,30 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
-            
-           String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks, controlSetting.Controls);
-           if (moveName == null)
-           {          
-               processBasicMovement(gameTime, ks);
-           }
-           else
-           {
-               Sprite.CurrentAnimation = moveName;
-           }
-            
-            // Parse the special inputs here
-            //
-           if (Sprite.CurrentAnimation == "backstep")
-           {
-               Backstep();
-           }
-           if (Sprite.CurrentAnimation == "dash")
-           {
-               Dash();
-           }
+            if (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT)
+            {
+                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks, controlSetting.Controls);
+                if (moveName == null)
+                {
+                    processBasicMovement(gameTime, ks);
+                }
+                else
+                {
+                    Sprite.CurrentAnimation = moveName;
+                }
+
+                // Parse the special inputs here
+                //
+                if (Sprite.CurrentAnimation == "backstep")
+                {
+                    Backstep();
+                }
+                if (Sprite.CurrentAnimation == "dash")
+                {
+                    Dash();
+                }
+            }
+           
            // If dashing adjust velocity
            //
           

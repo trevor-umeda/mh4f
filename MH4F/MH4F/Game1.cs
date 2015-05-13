@@ -103,7 +103,7 @@ namespace MH4F
             //
             player2.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
             player2.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
-            player2.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT);
+            player2.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.04f, CharacterState.HIT, "standing");
 
             player2.registerGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
             player2.registerGroundMove("aattack", new List<string> { "A" });
@@ -207,7 +207,7 @@ namespace MH4F
 
             if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox))
             {
-                
+                player2.Sprite.CurrentAnimation = "hit";
                 System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
             }
            // leftBorder.Width += 10;
