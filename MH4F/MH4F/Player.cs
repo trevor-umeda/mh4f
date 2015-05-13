@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MH4F
 {
-    class Player
+    abstract class Player
     {
          // The SpriteAnimation object that holds the graphical and animation data for this object
         SpriteAnimation sprite;
@@ -225,6 +225,8 @@ namespace MH4F
 
         public void processBasicMovement(GameTime gameTime, KeyboardState ks)
         {
+            // I dislike having this in the player class, but atm it fits really well. 
+            //
             if (Sprite.CurrentMoveAnimation == null || 
                 Sprite.CurrentMoveAnimation.CharacterState != CharacterState.AIRBORNE)
             {            
@@ -240,28 +242,37 @@ namespace MH4F
                     }
                     if (ks.IsKeyDown(controlSetting.Controls["right"]))
                     {
-                        Sprite.CurrentAnimation = "backwalk";
-                        Sprite.MoveBy(3, 0)
-        ;
+                        if (Direction == Direction.Right)
+                        {
+                            ForwardWalk();
+                        }
+                        else
+                        {
+                            BackWalk();
+                        }
                     }
                     if (ks.IsKeyDown(controlSetting.Controls["left"]))
                     {
-                        Sprite.CurrentAnimation = "walk";
-                        Sprite.MoveBy(-3, 0);
+                        if (Direction == Direction.Right)
+                        {
+                            BackWalk(); 
+                        }
+                        else
+                        {
+                            ForwardWalk();    
+                        }            
                     }
                     if (ks.IsKeyDown(controlSetting.Controls["up"]))
                     {
                         if (ks.IsKeyDown(controlSetting.Controls["right"]))
                         {
-                            CurrentVelocity = new Vector2(JumpHorizontalSpeed, 0);
+                            Jump(Direction.Right);
                         }
                         else if (ks.IsKeyDown(controlSetting.Controls["left"]))
                         {
-                            CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 0);
+                            Jump(Direction.Left);
                         }
-                        IsAirborne = true;
-                        CurrentVelocity += InitialJumpVelocity;
-                        Sprite.CurrentAnimation = "jumpup";
+                        
                     }
                 }
 
@@ -269,44 +280,14 @@ namespace MH4F
                 {
                     if (IsNotAttacking)
                     {
-                        if (CurrentVelocity.X > 0)
-                        {
-                            currentVelocity.X -= 1000;
-                        }
-                        if (CurrentVelocity.X < 0)
-                        {
-                            currentVelocity.X += 100;
-                        }
-                        Sprite.CurrentAnimation = "standing";
+                        Neutral();
                     }
 
                 }
             }
-
             else if (IsAirborne)
             {
-                float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                
-
-                CurrentVelocity += gravityModifierV * time;
-                if (currentVelocity.Y > 0)
-                {
-                    Sprite.CurrentAnimation = "jumpdown";
-                }
-                else if (currentVelocity.Y > -230)
-                {
-                    Sprite.CurrentAnimation = "jumptop";
-                }
-                
-                // Code to detect when to stop jumping. Its really bad right now
-                //
-                if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= 100 + 288 && currentVelocity.Y > 0)
-                {
-                    IsAirborne = false;
-                    CurrentVelocity = new Vector2(0, 0);
-                    Position = new Vector2(Position.X, 100);
-                    Sprite.CurrentAnimation = "standing";
-                }
+                Jumping(gameTime);
             }
 
         }
@@ -323,7 +304,9 @@ namespace MH4F
            {
                Sprite.CurrentAnimation = moveName;
            }
-
+            
+            // Parse the special inputs here
+            //
            if (Sprite.CurrentAnimation == "backstep")
            {
                Backstep();
@@ -342,31 +325,74 @@ namespace MH4F
 
             prevKeyboardState = Keyboard.GetState();
         }
-        public void Backstep()
-        {
-            int backStepVel = 8;
-            if (Direction == Direction.Left)
-            {
-                Sprite.MoveBy(backStepVel, 0);
-            }
-            else
-            {
-                Sprite.MoveBy(-backStepVel, 0);
-            }
-            
+        public virtual void Backstep()
+        {  
         }
-        public void Dash()
+        public virtual void Dash()
+        {  
+        }
+        public virtual void BackWalk()
         {
-            int dashVel = 8;
-            if (Direction == Direction.Left)
+            Sprite.CurrentAnimation = "backwalk";
+        }
+
+        public virtual void ForwardWalk()
+        {
+
+            Sprite.CurrentAnimation = "walk";
+        }
+
+        public virtual void Neutral()
+        {
+            if (CurrentVelocity.X > 0)
             {
-                Sprite.MoveBy(-dashVel, 0);
+                currentVelocity.X -= 1000;
             }
-            else
+            if (CurrentVelocity.X < 0)
             {
-                Sprite.MoveBy(dashVel, 0);
+                currentVelocity.X += 100;
             }
-            
+            Sprite.CurrentAnimation = "standing";
+        }
+
+        public virtual void Jump(Direction directionJumped)
+        {
+            if (directionJumped == Direction.Right)
+            {
+                CurrentVelocity = new Vector2(JumpHorizontalSpeed, 0);
+            }
+            else if (directionJumped == Direction.Left)
+            {
+                CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 0);
+            }
+            IsAirborne = true;
+            CurrentVelocity += InitialJumpVelocity;
+            Sprite.CurrentAnimation = "jumpup";
+        }
+
+        public virtual void Jumping(GameTime gameTime)
+        {
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            CurrentVelocity += gravityModifierV * time;
+            if (currentVelocity.Y > 0)
+            {
+                Sprite.CurrentAnimation = "jumpdown";
+            }
+            else if (currentVelocity.Y > -230)
+            {
+                Sprite.CurrentAnimation = "jumptop";
+            }
+
+            // Code to detect when to stop jumping. Its really bad right now
+            //
+            if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= 100 + 288 && currentVelocity.Y > 0)
+            {
+                IsAirborne = false;
+                CurrentVelocity = new Vector2(0, 0);
+                Position = new Vector2(Position.X, 100);
+                Sprite.CurrentAnimation = "standing";
+            }
         }
 
         public void Crouch()

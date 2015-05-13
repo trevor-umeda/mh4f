@@ -19,20 +19,23 @@ namespace MH4F
         public String checkMoves(CharacterState characterState, Direction direction, KeyboardState newKeyboardState, Dictionary<string, Keys> controls)
         {
             String returnMove = null;
-
-            if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["right"]))
+            if(!inputManager.DetermineButtonPress(newKeyboardState,inputManager.LastKeyboardState))
             {
-                if (direction != Direction.Left)
+            
+                if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["right"]))
                 {
-                    return "dash";
+                    if (direction != Direction.Left)
+                    {
+                        return "dash";
+                    }
                 }
-            }
-            if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["left"]))
-            {
-                if (direction == Direction.Left)
+                if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["left"]))
                 {
-                   return "dash";
-                }    
+                    if (direction == Direction.Left)
+                    {
+                       return "dash";
+                    }    
+                }
             }
             if(characterState != CharacterState.AIRBORNE)
             {

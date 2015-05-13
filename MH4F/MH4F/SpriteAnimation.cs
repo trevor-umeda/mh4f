@@ -18,6 +18,8 @@ namespace MH4F
 
         Rectangle hitbox;
 
+        Rectangle hurtbox;
+
         // If set to anything other than Color.White, will colorize
         // the sprite with that color.
         Color colorTint = Color.White;
@@ -137,6 +139,11 @@ namespace MH4F
             get { return hitbox; }
         }
 
+        public Rectangle Hurtbox
+        {
+            get { return hurtbox; }
+        }
+
         ///
         /// Color value to tint the sprite with when drawing.  Color.White
         /// (the default) indicates no tinting.
@@ -230,6 +237,11 @@ namespace MH4F
             animations[moveName].AddHitboxInfo(index, hitbox);
         }
 
+        public void AddHurtbox(String moveName, int index, Hitbox hitbox)
+        {
+            animations[moveName].AddHurtboxInfo(index, hitbox);
+        }
+
         public Move GetAnimationByName(string Name)
         {
             if (animations.ContainsKey(Name))
@@ -275,6 +287,7 @@ namespace MH4F
                 // Run the Animation's update method
                 CurrentMoveAnimation.Update(gameTime);
                 Hitbox info = CurrentMoveAnimation.CurrentHitboxInfo;
+
                 if (info != null)
                 {
                     if (direction == Direction.Left)
@@ -291,12 +304,36 @@ namespace MH4F
                         
                         hitbox.X = (int)v2Position.X + CurrentMoveAnimation.FrameWidth - info.Width/2 - info.XPos;
                         hitbox.Y = info.YPos - info.Height / 2 + (int)v2Position.Y;
-                    }
-                    
+                    }                  
                 }
                 else
                 {
-                    hitbox = new Rectangle();
+                    hitbox = new Rectangle();         
+                }
+
+                Hitbox hurtboxInfo = CurrentMoveAnimation.CurrentHurtboxInfo;
+
+                if (hurtboxInfo != null)
+                {
+                    if (direction == Direction.Left)
+                    {
+                        hurtbox.Height = hurtboxInfo.Height;
+                        hurtbox.Width = hurtboxInfo.Width;
+                        hurtbox.X = hurtboxInfo.XPos - hurtboxInfo.Width / 2 + (int)v2Position.X;
+                        hurtbox.Y = hurtboxInfo.YPos - hurtboxInfo.Height / 2 + (int)v2Position.Y;
+                    }
+                    else
+                    {
+                        hurtbox.Height = hurtboxInfo.Height;
+                        hurtbox.Width = hurtboxInfo.Width;
+
+                        hurtbox.X = (int)v2Position.X + CurrentMoveAnimation.FrameWidth - hurtboxInfo.Width / 2 - hurtboxInfo.XPos;
+                        hurtbox.Y = hurtboxInfo.YPos - hurtboxInfo.Height / 2 + (int)v2Position.Y;
+                    }         
+                }
+                else
+                {
+                    hurtbox = new Rectangle();
                 }
                 // Check to see if there is a "followup" animation named for this animation
                 if (!String.IsNullOrEmpty(CurrentMoveAnimation.NextAnimation))
@@ -331,9 +368,10 @@ namespace MH4F
 
                 Color translucentRed = Color.Red * 0.5f;
                 spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
-            }
-                
+
+                Color translucentBlue = Color.Blue * 0.5f;
+                spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
+            }                
         }
     }
-    
 }

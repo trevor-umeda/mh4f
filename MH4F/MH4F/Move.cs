@@ -16,6 +16,8 @@ namespace MH4F
 
         private Hitbox[] hitboxInfo;
 
+        private Hitbox[] hurtboxInfo;
+
          // The first frame of the Animation.  We will calculate other
         // frames on the fly based on this frame.
         private Rectangle rectInitialFrame;
@@ -93,6 +95,11 @@ namespace MH4F
             get { return hitboxInfo[currentFrame]; }
         }
 
+        public Hitbox CurrentHurtboxInfo
+        {
+            get { return hurtboxInfo[currentFrame]; }
+        }
+
         public int FrameHeight
         {
             get { return rectInitialFrame.Height; }
@@ -141,6 +148,10 @@ namespace MH4F
             hitboxInfo[index] = hitbox;
         }
 
+        public void AddHurtboxInfo(int index, Hitbox hitbox)
+        {
+            hurtboxInfo[index] = hitbox;
+        }
         public string NextAnimation
         {
             get { return nextAnimation; }
@@ -152,6 +163,7 @@ namespace MH4F
             rectInitialFrame = FirstFrame;
             frameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
         }
 
         public Move(int X, int Y, int Width, int Height, int Frames)
@@ -159,6 +171,7 @@ namespace MH4F
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
         }
 
         public Move(int X, int Y, int Width, int Height, int Frames, float FrameLength)
@@ -166,6 +179,7 @@ namespace MH4F
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
         }
 
@@ -175,6 +189,7 @@ namespace MH4F
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             characterState = CharacterState;
         }
@@ -185,6 +200,7 @@ namespace MH4F
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             characterState = CharacterState;
             isAttack = IsAnAttack;
@@ -196,6 +212,7 @@ namespace MH4F
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             isAttack = IsAnAttack;
         }
@@ -208,6 +225,7 @@ namespace MH4F
             rectInitialFrame = new Rectangle(X, Y, Width, Height);
             frameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
             frameLength = FrameLength;
             characterState = CharacterState;
             nextAnimation = strNextAnimation;

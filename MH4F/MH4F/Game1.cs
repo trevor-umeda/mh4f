@@ -55,7 +55,7 @@ namespace MH4F
             standing = Content.Load<Texture2D>("combinedsprite");
 
 
-            player1 = new Player(standing, 100);
+            player1 = new LongSwordPlayer(standing, 100);
             player1.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
             player1.Sprite.AddAnimation(standing, "backwalk", 0, 288, 244, 288, 7, 0.1f, CharacterState.STANDING);
             player1.Sprite.AddAnimation(standing, "crouching", 0, 576, 176, 288, 2, 0.1f, CharacterState.CROUCHING, "crouchingidle");
@@ -71,7 +71,7 @@ namespace MH4F
             //
             player1.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
             player1.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
-
+            player1.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT);
             player1.registerGroundMove("fireball",new List<string>{"2","3","6","A"});
             player1.registerGroundMove("aattack", new List<string> { "A" });
             
@@ -87,7 +87,7 @@ namespace MH4F
             player1.ControlSetting.setControl("up", Keys.Up);
             player1.ControlSetting.setControl("a", Keys.A);
 
-            player2 = new Player(standing, 600);
+            player2 = new LongSwordPlayer(standing, 600);
             player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
             player2.Sprite.AddAnimation(standing, "backwalk", 0, 288, 244, 288, 7, 0.1f, CharacterState.STANDING);
             player2.Sprite.AddAnimation(standing, "crouching", 0, 576, 176, 288, 2, 0.1f, CharacterState.CROUCHING, "crouchingidle");
@@ -103,6 +103,7 @@ namespace MH4F
             //
             player2.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
             player2.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
+            player2.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT);
 
             player2.registerGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
             player2.registerGroundMove("aattack", new List<string> { "A" });
@@ -146,6 +147,32 @@ namespace MH4F
                 Console.WriteLine("File Size: " + stream.Length);
                 stream.Close();
             }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
+
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream("hurtbox.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data
+                while (sreader.Peek() >= 0)
+                {
+                    String hurtboxInfo = sreader.ReadLine();
+                    Console.WriteLine(hurtboxInfo);
+                    String[] sHb = hurtboxInfo.Split(';');
+                    Console.WriteLine(sHb[0]);
+
+                    player1.Sprite.AddHurtbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
+                    player2.Sprite.AddHurtbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
+                }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
             catch (System.IO.FileNotFoundException)
             {
                 // this will be thrown by OpenStream if gamedata.txt
@@ -178,9 +205,10 @@ namespace MH4F
 
             player2.Update(gameTime, Keyboard.GetState());
 
-            if(player1.Sprite.Hitbox.Intersects(testHitbox))
+            if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox))
             {
-                //System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
+                
+                System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
             }
            // leftBorder.Width += 10;
             base.Update(gameTime);
