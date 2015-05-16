@@ -1,9 +1,20 @@
 ## Reading Inputs ##
 
 ### Design Overview ###
-Inputs will be passed in to an InputManager. The manager will parse inputs and then return the name of the move done. Will be responsible for determining special commands and dashing. Walking, jumping, and crouching maybe as well
+Inputs will be passed in to a pair or collection of objects that will store, manage, and parse inputs. The manager will parse inputs and then return the name of the move done and that is all. It is not up to these classes to determine the validity of the special input, only what was inputted. Several optimizations are in place though to prevent needless checking and parsing
 
-### Algorithm ###
+### Current Solution ###
+The input manager will contain a queue of keyboard states. Its a specially modified one as it only tracks button presses and not held down buttons ( which could be a mistake).
+
+Basic movements that are universal, such as walking and jumping, are handled outside of the input manager and by the player itself.
+
+If an attack button is pressed then the InputManager runs through its tracked inputs and sees if if any registered special command was put in. It travels past to present through the queue, and the first special input to have been registered as "inputted" will be used.
+
+Special movement inputs such as dashing/backdashing are special universal inputs and cannot be changed. This looks through the tracked inputs from present to past. to have the most responsive dashing and does not need to worry about move priority.
+
+The input manager trickles the name of the move upwards .
+
+### Algorithm Ideas ###
 
 ### Idea 1 ###
 Store every input in our input buffer. Traverse it backwards for speed so on a attack button press we can determine if it matches a special command input as soon as possible and exit the search loop. However if we traverse it forwards we can determine move priority much easier. However that would mean a full search no matter what. 

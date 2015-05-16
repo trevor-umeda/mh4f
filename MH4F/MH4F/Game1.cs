@@ -212,11 +212,12 @@ namespace MH4F
             // TODO: Add your update logic here
             player1.Update(gameTime, Keyboard.GetState());
 
-          //  player2.Update(gameTime, Keyboard.GetState());
+            player2.Update(gameTime, Keyboard.GetState());
 
             if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox))
-            {
-                player2.Sprite.CurrentAnimation = "hit";
+            {                
+                player2.hitByEnemy();
+                player1.hitEnemy();
                 System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
             }
            // leftBorder.Width += 10;
@@ -239,7 +240,7 @@ namespace MH4F
           
             spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
             
-            //player2.Draw(spriteBatch);
+            player2.Draw(spriteBatch);
             player1.Draw(spriteBatch);
             spriteBatch.End();
 

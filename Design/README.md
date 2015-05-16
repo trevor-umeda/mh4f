@@ -1,6 +1,13 @@
 ## Design ##
 This is architectural design rather than gameplay design
 
+### Index of notes and documentation ###
+* [Sprites](https://github.com/trevor-umeda/mh4f/tree/master/Design/sprites.md)
+* [Move Inputs](https://github.com/trevor-umeda/mh4f/tree/master/Design/moveInputs.md)
+* [Control Scheme](https://github.com/trevor-umeda/mh4f/tree/master/Design/controlSettings.md)
+* [Hitboxes](https://github.com/trevor-umeda/mh4f/tree/master/Design/hitboxes.md)
+* [Attacking](https://github.com/trevor-umeda/mh4f/tree/master/Design/attacking.md)
+* 
 ### List of Done ( or at least partially ) ###
 Chances are these aren't completely done as I refactor and improve etc.
 
@@ -10,13 +17,12 @@ Chances are these aren't completely done as I refactor and improve etc.
 - Crouching
 - Normal Attacks
 - Special Attacks
-
+- Dashing
+- Hitboxes/Hurtboxes
 
 ### Long List Of TODO ###
 This will get added to as I think of stuff
 
-- Dashing
-- Hitboxes/Hurtboxes
 - Hitstun/blockstun
 - Move Canceling
 - Lowering Health
@@ -28,6 +34,3 @@ This will get added to as I think of stuff
 - Timeout
 - Game Mode Statemachine
 
-
-### Move Inputs ###
-Documentation on move inputs is [here](https://github.com/trevor-umeda/mh4f/tree/master/Design/moveInputs.md)

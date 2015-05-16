@@ -11,13 +11,26 @@ namespace MH4F
     class SpecialInputManager
     {
         private InputManager inputManager;
+        private ControlSetting controlSetting;
+        
         public SpecialInputManager()
         {
             inputManager = new InputManager();
         }
 
-        public String checkMoves(CharacterState characterState, Direction direction, KeyboardState newKeyboardState, Dictionary<string, Keys> controls)
+        public ControlSetting ControlSetting
         {
+            get { return controlSetting; }
+            set 
+            {
+                this.controlSetting = value;
+                this.inputManager.ControlSetting = value;
+            }
+        }
+
+        public String checkMoves(CharacterState characterState, Direction direction, KeyboardState newKeyboardState)
+        {
+            Dictionary<String, Keys> controls = controlSetting.Controls;
             String returnMove = null;
             if(!inputManager.DetermineButtonPress(newKeyboardState))
             {
@@ -39,7 +52,7 @@ namespace MH4F
             }
             if(characterState != CharacterState.AIRBORNE)
             {
-                returnMove = inputManager.checkGroundMoves(direction, newKeyboardState, controls);
+                returnMove = inputManager.checkGroundMoves(direction, newKeyboardState);
             }
 
             return returnMove; 

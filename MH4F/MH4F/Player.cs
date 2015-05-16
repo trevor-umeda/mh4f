@@ -49,6 +49,8 @@ namespace MH4F
 
         bool isAirborne = false;
 
+        bool canCancelMove = false;
+
         Vector2 currentVelocity = new Vector2(0, 0);
 
         bool isInInterruptableAnimation = false;
@@ -81,6 +83,11 @@ namespace MH4F
         public ControlSetting ControlSetting
         {
             get { return controlSetting; }
+            set
+            {
+                this.controlSetting = value;
+                specialInputManager.ControlSetting = value;
+            }
         }
 
         public Vector2 Position
@@ -220,7 +227,7 @@ namespace MH4F
             sprite = new SpriteAnimation(texture);
             specialInputManager = new SpecialInputManager();
             Position = new Vector2(xPosition, 100);
-            controlSetting = new ControlSetting();
+            ControlSetting = new ControlSetting();
         }
 
         public void processBasicMovement(GameTime gameTime, KeyboardState ks)
@@ -298,15 +305,16 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
-            if (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && IsCancealable)
+            if ((Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && IsCancealable) || canCancelMove)
             {
-                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks, controlSetting.Controls);
+                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);
                 if (moveName == null)
                 {
                     processBasicMovement(gameTime, ks);
                 }
                 else
                 {
+                    canCancelMove = false;
                     Sprite.CurrentAnimation = moveName;
                 }
 
@@ -325,6 +333,9 @@ namespace MH4F
             {
                 Dash();
             }
+
+            //if(Sprite.CurrentMoveAnimation.IsAttack)
+
            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
            Position += CurrentVelocity * time;
             if (active)
@@ -428,6 +439,16 @@ namespace MH4F
 
         }
 
+        public void hitByEnemy()
+        {
+            Sprite.CurrentAnimation = "hit";
+        }
+
+        public void hitEnemy()
+        {
+            canCancelMove = true;
+
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

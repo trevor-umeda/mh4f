@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST.xnb</Output>
-      <Time>2015-04-13T00:32:10.22681-07:00</Time>
+      <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\TEST.xnb</Output>
+      <Time>2015-04-30T17:09:33.6052411-07:00</Time>
     </Item>
     <Item>
       <Source>TEST2.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST2.xnb</Output>
-      <Time>2015-04-13T01:05:05.7368027-07:00</Time>
+      <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\TEST2.xnb</Output>
+      <Time>2015-04-30T17:09:33.6052411-07:00</Time>
     </Item>
     <Item>
       <Source>combinedsprite.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\combinedsprite.xnb</Output>
-      <Time>2015-05-13T00:53:59.2978389-07:00</Time>
+      <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\combinedsprite.xnb</Output>
+      <Time>2015-05-15T23:24:49.6070471-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -34,10 +34,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\</RootDirectory>
-      <LoggerRootDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\src\mh4f\MH4F\MH4FContent\</RootDirectory>
+      <LoggerRootDirectory>C:\src\mh4f\MH4F\MH4F\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\src\mh4f\MH4F\MH4FContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -66,7 +66,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2014-05-07T00:49:07.3795257-07:00</Value>
+        <Value>2015-04-30T16:56:32.7065801-07:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

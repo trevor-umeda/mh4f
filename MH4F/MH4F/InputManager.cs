@@ -12,6 +12,7 @@ namespace MH4F
 
         InputQueue<Keys[]> inputs;
         KeyboardState lastKeyboardState;
+        private ControlSetting controlSetting;
         int maxInputQueueSize = 7;
 
         String[] DIRECTIONS = {"up","down","left","right" };
@@ -36,11 +37,11 @@ namespace MH4F
            
         }
 
-        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState, Dictionary<string, Keys> controls)
+        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState)
         {
           
             //inputs.Enqueue(newKeyboardState);
-            enqueueState(newKeyboardState, controls);
+            enqueueState(newKeyboardState, controlSetting.Controls);
             // on a button press determine if a special move was inputted.
             //
             if (DetermineButtonPress(newKeyboardState))
@@ -55,7 +56,7 @@ namespace MH4F
                 {
                     foreach (MoveInput moveInput in groundMoveList)
                     {
-                        if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState, direction, controls))
+                        if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState, direction, controlSetting.Controls))
                         {
                            
                             moveInput.moveCurrentInputCommandIndex();
@@ -87,7 +88,7 @@ namespace MH4F
                     foreach (MoveInput dash in dashList)
                     {
 
-                        if (MoveInput.checkStringInputToKeyInput(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState, direction, controls))
+                        if (MoveInput.checkStringInputToKeyInput(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState, direction, controlSetting.Controls))
                         {
                             dash.moveCurrentInputCommandIndex();
                             if (dash.CurrentInputCommandIndex >= dash.InputCommand.Count)
@@ -149,6 +150,12 @@ namespace MH4F
                 }
             }
             inputs.Enqueue(keysPressed);
+        }
+        
+        public ControlSetting ControlSetting
+        {
+            get { return controlSetting; }
+            set { this.controlSetting = value; }
         }
     }
 }
