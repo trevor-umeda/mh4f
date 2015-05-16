@@ -305,7 +305,7 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
-            if ((Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && IsCancealable) || canCancelMove)
+            if (Sprite.CurrentMoveAnimation != null && (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && IsCancealable) || canCancelMove)
             {
                 String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);
                 if (moveName == null)

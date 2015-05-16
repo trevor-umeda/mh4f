@@ -190,7 +190,7 @@ namespace MH4F
             {
                 if (animations.ContainsKey(value))
                 {
-                    if (currentAnimation != value)
+                    if (( currentAnimation != value && !animations[value].IsAttack) || animations[value].IsAttack )
                     {     
                             currentAnimation = value;
                             animations[currentAnimation].CurrentFrame = 0;
