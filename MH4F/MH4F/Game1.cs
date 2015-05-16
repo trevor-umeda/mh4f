@@ -67,14 +67,19 @@ namespace MH4F
             player1.Sprite.AddAnimation(standing, "jumptop", 0, 2428, 192, 280, 11, 0.1f, CharacterState.AIRBORNE);
             //player1.Sprite.AddAnimation(standing, "rightdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
             player1.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
+            player1.Sprite.AddAnimation(standing, "battack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
             // For now an "attack" until i work out cancelable frames and moves
             //
             player1.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
             player1.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
             player1.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT);
+
+            
             player1.registerGroundMove("fireball",new List<string>{"2","3","6","A"});
+            player1.registerGroundMove("battack", new List<string> { "B" });
             player1.registerGroundMove("aattack", new List<string> { "A" });
             
+
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
 
@@ -86,6 +91,7 @@ namespace MH4F
             player1.ControlSetting.setControl("left", Keys.Left);
             player1.ControlSetting.setControl("up", Keys.Up);
             player1.ControlSetting.setControl("a", Keys.A);
+            player1.ControlSetting.setControl("b", Keys.S);
 
             player2 = new LongSwordPlayer(standing, 600);
             player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
@@ -99,6 +105,7 @@ namespace MH4F
             player2.Sprite.AddAnimation(standing, "jumptop", 0, 2428, 192, 280, 11, 0.1f, CharacterState.AIRBORNE);
             //player1.Sprite.AddAnimation(standing, "rightdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
             player2.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
+            player2.Sprite.AddAnimation(standing, "battack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
             // For now an "attack" until i work out cancelable frames and moves
             //
             player2.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
@@ -106,7 +113,9 @@ namespace MH4F
             player2.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.04f, CharacterState.HIT, "standing");
 
             player2.registerGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
-            player2.registerGroundMove("aattack", new List<string> { "A" });
+           // player2.registerGroundMove("battack", new List<string> { "S" });
+            //player2.registerGroundMove("aattack", new List<string> { "A" });
+           
 
             player2.Sprite.CurrentAnimation = "standing";
             player2.Direction = Direction.Left;
@@ -118,7 +127,7 @@ namespace MH4F
             player2.ControlSetting.setControl("left", Keys.J);
             player2.ControlSetting.setControl("up", Keys.I);
             player2.ControlSetting.setControl("a", Keys.F);
-
+            player2.ControlSetting.setControl("b", Keys.G);
             // Create a 1x1 white texture.
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
 
@@ -203,7 +212,7 @@ namespace MH4F
             // TODO: Add your update logic here
             player1.Update(gameTime, Keyboard.GetState());
 
-            player2.Update(gameTime, Keyboard.GetState());
+          //  player2.Update(gameTime, Keyboard.GetState());
 
             if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox))
             {
@@ -230,7 +239,7 @@ namespace MH4F
           
             spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
             
-            player2.Draw(spriteBatch);
+            //player2.Draw(spriteBatch);
             player1.Draw(spriteBatch);
             spriteBatch.End();
 

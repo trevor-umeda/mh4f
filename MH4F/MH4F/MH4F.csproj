@@ -111,7 +111,7 @@
     <Compile Include="Direction.cs" />
     <Compile Include="Hitbox.cs" />
     <Compile Include="LongSwordPlayer.cs" />
-    <Compile Include="InputParser.cs" />
+    <Compile Include="SpecialInputManager.cs" />
     <Compile Include="CharacterState.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="InputQueue.cs" />

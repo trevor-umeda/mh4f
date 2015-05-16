@@ -10,9 +10,12 @@ namespace MH4F
     class InputManager
     {
 
-        InputQueue<KeyboardState> inputs;
+        InputQueue<Keys[]> inputs;
         KeyboardState lastKeyboardState;
         int maxInputQueueSize = 7;
+
+        String[] DIRECTIONS = {"up","down","left","right" };
+        String[] ATTACKS = { "a", "b" };
 
         List<MoveInput> groundMoveList;
         List<MoveInput> dashList;
@@ -22,7 +25,7 @@ namespace MH4F
         }
         public InputManager()
         {
-            inputs = new InputQueue<KeyboardState>();
+            inputs = new InputQueue<Keys[]>();
             lastKeyboardState = new KeyboardState();
             groundMoveList = new List<MoveInput>();
             dashList = new List<MoveInput>();
@@ -35,28 +38,32 @@ namespace MH4F
 
         public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState, Dictionary<string, Keys> controls)
         {
-            inputs.Enqueue(newKeyboardState);
+          
+            //inputs.Enqueue(newKeyboardState);
+            enqueueState(newKeyboardState, controls);
             // on a button press determine if a special move was inputted.
             //
-            if (DetermineButtonPress(newKeyboardState, lastKeyboardState))
+            if (DetermineButtonPress(newKeyboardState))
             {
-                System.Diagnostics.Debug.WriteLine("A button pressed");
 
                 foreach (MoveInput moveInput in groundMoveList)
                 {
                     moveInput.resetCurrentInputCommandIndex();
                 }
-                lastKeyboardState = newKeyboardState;
-                foreach (KeyboardState keyboardState in inputs)
+                
+                foreach (Keys[] keyboardState in inputs)
                 {
                     foreach (MoveInput moveInput in groundMoveList)
                     {
                         if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState, direction, controls))
                         {
+                           
                             moveInput.moveCurrentInputCommandIndex();
                             if (moveInput.CurrentInputCommandIndex >= moveInput.InputCommand.Count)
                             {
-                                System.Diagnostics.Debug.WriteLine(moveInput.Name);
+                                
+                                lastKeyboardState = newKeyboardState;
+                                System.Diagnostics.Debug.WriteLine("Activating " + moveInput.Name);
                                 inputs.Reset();
                                 return moveInput.Name;
                             }
@@ -75,7 +82,7 @@ namespace MH4F
                     dashInput.resetCurrentInputCommandIndex();
                 }
                 
-                foreach (KeyboardState keyboardState in inputs.GetReverseEnumerator)
+                foreach (Keys[] keyboardState in inputs.GetReverseEnumerator)
                 {
                     foreach (MoveInput dash in dashList)
                     {
@@ -98,10 +105,16 @@ namespace MH4F
             return null;
         }
 
-        public bool DetermineButtonPress(KeyboardState presentState, KeyboardState pastState)
+        public bool DetermineButtonPress(KeyboardState presentState)
         {
-            if (MoveInput.KeyboardPressed(presentState, pastState, Keys.A))
+            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, Keys.A))
             {
+                System.Diagnostics.Debug.WriteLine("A button pressed");
+                return true;
+            }
+            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, Keys.S))
+            {
+                System.Diagnostics.Debug.WriteLine("B button pressed");
                 return true;
             }
             return false;
@@ -113,6 +126,29 @@ namespace MH4F
             groundMoveList.Add(new MoveInput(name, input));
         }
 
-
+        public void enqueueState(KeyboardState state, Dictionary<string, Keys> controls)
+        {
+            Keys[] keysDown = state.GetPressedKeys();
+            Keys[] keysPressed = new Keys[state.GetPressedKeys().Length];
+            int counter = 0;
+          
+            foreach (String attack in ATTACKS)
+            {
+                if (MoveInput.KeyboardPressed(state, lastKeyboardState, controls[attack]))
+                {
+                    keysPressed[counter] = controls[attack];
+                    counter++;
+                }
+            }
+            foreach(String direction in DIRECTIONS)
+            {
+                if (state.IsKeyDown(controls[direction]))
+                {
+                    keysPressed[counter] = controls[direction];
+                    counter++;
+                }
+            }
+            inputs.Enqueue(keysPressed);
+        }
     }
 }

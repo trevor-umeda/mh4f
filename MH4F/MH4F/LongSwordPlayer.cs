@@ -17,6 +17,7 @@ namespace MH4F
         }
         public override void Backstep()
         {
+            Console.WriteLine("BACKSTEPPING NOW");
             int backStepVel = 8;
             if (Direction == Direction.Left)
             {

@@ -19,7 +19,7 @@ namespace MH4F
         public String checkMoves(CharacterState characterState, Direction direction, KeyboardState newKeyboardState, Dictionary<string, Keys> controls)
         {
             String returnMove = null;
-            if(!inputManager.DetermineButtonPress(newKeyboardState,inputManager.LastKeyboardState))
+            if(!inputManager.DetermineButtonPress(newKeyboardState))
             {
             
                 if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["right"]))
@@ -49,7 +49,5 @@ namespace MH4F
             // input.Reverse();
             inputManager.registerGroundMove(name, input);
         }
-
-        //public InputManager
     }
 }

@@ -191,7 +191,7 @@ namespace MH4F
                 if (animations.ContainsKey(value))
                 {
                     if (currentAnimation != value)
-                    {
+                    {     
                             currentAnimation = value;
                             animations[currentAnimation].CurrentFrame = 0;
                             animations[currentAnimation].PlayCount = 0;

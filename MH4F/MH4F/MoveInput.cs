@@ -52,33 +52,39 @@ namespace MH4F
         {
             CurrentInputCommandIndex++;
         }
-        public static Boolean checkStringInputToKeyInput(String input, KeyboardState keyboardState, Direction direction, Dictionary<string, Keys> controls)
+        public static Boolean checkStringInputToKeyInput(String input, Keys[] keyboardState, Direction direction, Dictionary<string, Keys> controls)
         {
-            if (input == "A" && keyboardState.IsKeyDown(controls["a"]))
+            if (input == "B" && KeyboardDown(keyboardState, controls["b"]))
             {
                 return true;
             }
-            if ( keyboardState.IsKeyDown(controls["right"]) && ((direction == Direction.Right && input == "6") || (direction == Direction.Left && input =="4")))
+            if (input == "A" && KeyboardDown(keyboardState, controls["a"]))
+            {
+               
+                return true;
+            }
+            
+            if ( KeyboardDown(keyboardState, controls["right"]) && ((direction == Direction.Right && input == "6") || (direction == Direction.Left && input =="4")))
             {
                 return true;
             }
-            if (keyboardState.IsKeyDown(controls["right"]) && keyboardState.IsKeyDown(controls["down"]) && ((direction == Direction.Right && input == "3") || (direction == Direction.Left && input == "1")))
+            if (KeyboardDown(keyboardState, controls["right"]) && KeyboardDown(keyboardState, controls["down"]) && ((direction == Direction.Right && input == "3") || (direction == Direction.Left && input == "1")))
             {
                 return true;
             }
-            if (keyboardState.IsKeyDown(controls["left"]) && keyboardState.IsKeyDown(controls["down"]) && ((direction == Direction.Right && input == "1") || (direction == Direction.Left && input == "3")))
+            if (KeyboardDown(keyboardState ,controls["left"]) && KeyboardDown(keyboardState, controls["down"]) && ((direction == Direction.Right && input == "1") || (direction == Direction.Left && input == "3")))
             {
                 return true;
             }
-            if (input == "2" && keyboardState.IsKeyDown(controls["down"]))
+            if (input == "2" && KeyboardDown(keyboardState, controls["down"]))
             {
                 return true;
             }
-            if (keyboardState.IsKeyDown(controls["left"]) && ((direction == Direction.Right && input == "4") || (direction == Direction.Left && input == "6")))
+            if (KeyboardDown(keyboardState, controls["left"]) && ((direction == Direction.Right && input == "4") || (direction == Direction.Left && input == "6")))
             {
                 return true;
             }
-            if (input == "5" && keyboardState.IsKeyUp(controls["down"]) && keyboardState.IsKeyUp(controls["up"]) && keyboardState.IsKeyUp(controls["right"]) && keyboardState.IsKeyUp(controls["left"]))
+            if (input == "5" && !KeyboardDown(keyboardState, controls["down"]) && !KeyboardDown(keyboardState, controls["up"]) && !KeyboardDown(keyboardState, controls["right"]) && !KeyboardDown(keyboardState, controls["left"]))
             {
                 return true;
             }
@@ -95,9 +101,21 @@ namespace MH4F
             return (keyboardState.IsKeyUp(key) && lastKeyboardState.IsKeyDown(key));
         }
 
-        public static bool KeyboardDown(KeyboardState keyboardState, Keys key)
+        public static bool KeyboardDown(Keys[] keyboardState, Keys key)
         {
-            return keyboardState.IsKeyDown(key);
+            if (keyboardState == null || key == null)
+            {
+                return false;
+            }
+            int pos = Array.IndexOf(keyboardState, key);
+            if(pos >=0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         // Boring getters and setters here
