@@ -52,6 +52,8 @@ namespace MH4F
         int iWidth;
         int iHeight;
 
+        int currentXVelocity;
+
         ///
         /// Vector2 representing the position of the sprite's upper left
         /// corner pixel.
@@ -63,6 +65,16 @@ namespace MH4F
             {
                 v2LastPosition = v2Position;
                 v2Position = value;
+            }
+        }
+
+        public Vector2 PositionCenter
+        {
+            get
+            {
+                int xPos = X + CurrentMoveAnimation.FrameWidth/2;
+                int yPos = Y + CurrentMoveAnimation.FrameHeight/2;
+                return new Vector2(xPos, yPos);
             }
         }
 
@@ -163,6 +175,12 @@ namespace MH4F
         {
             get { return bAnimating; }
             set { bAnimating = value; }
+        }
+
+        public int CurrentXVelocity
+        {
+            get { return currentXVelocity; }
+            set { this.currentXVelocity = value; }
         }
 
         ///
@@ -272,6 +290,7 @@ namespace MH4F
             v2LastPosition = v2Position;
             v2Position.X += x;
             v2Position.Y += y;
+            currentXVelocity += x;
         }
 
         public void Update(GameTime gameTime, Direction direction)

@@ -17,7 +17,6 @@ namespace MH4F
         }
         public override void Backstep()
         {
-            Console.WriteLine("BACKSTEPPING NOW");
             int backStepVel = 8;
             if (Direction == Direction.Left)
             {
@@ -31,7 +30,7 @@ namespace MH4F
 
         public override void Dash()
         {
-            int dashVel = 8;
+            int dashVel = 4;
             if (Direction == Direction.Left)
             {
                 Sprite.MoveBy(-dashVel, 0);
@@ -40,7 +39,8 @@ namespace MH4F
             {
                 Sprite.MoveBy(dashVel, 0);
             }
-            
+
+            GivePlayerMomentum(7, 3, true);      
         }
         public override void BackWalk()
         {

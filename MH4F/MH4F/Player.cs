@@ -61,6 +61,13 @@ namespace MH4F
 
         readonly float jumpHorizontalSpeed = 200f;
 
+        // Some hacky stuff to give a player slight momentum
+        //
+        int momentumCounter = 0;
+
+        int momentumXMovement = 0;
+
+        int currentXVelocity = 0;
 
         public enum CharacterStates : byte
         {
@@ -206,6 +213,18 @@ namespace MH4F
 
         }
 
+        public int MomentumCounter
+        {
+            get { return momentumCounter; }
+            set { this.momentumCounter = value; }
+        }
+
+        public int MomentumXMovement
+        {
+            get { return momentumXMovement; }
+            set { this.momentumXMovement = value; }
+        }
+
         public Rectangle BoundingBox
         {
             get { return sprite.BoundingBox; }
@@ -221,6 +240,20 @@ namespace MH4F
                     sprite.Width - (2 * collisionBufferX),
                     sprite.Height - (2 * collisionBufferY));
             }
+        }
+
+        public void GivePlayerMomentum(int timeToGiveMomentum, int amountOfMomentum, bool momentumInDirectionFacing)
+        {
+            MomentumCounter = timeToGiveMomentum;
+            int momentumValue = amountOfMomentum;
+            if ((momentumInDirectionFacing && Direction == Direction.Left) || (!momentumInDirectionFacing && Direction == Direction.Right))
+            {
+                MomentumXMovement = -momentumValue;
+            }
+            else
+            {
+                MomentumXMovement = momentumValue;
+            }  
         }
 
         public void RegisterGroundMove(String name, List<String> input)
@@ -319,7 +352,7 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
-           
+            Sprite.CurrentXVelocity = 0;
             if (Sprite.CurrentMoveAnimation != null && (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && IsCancealable) || canCancelMove)
             {
                 String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);                
@@ -354,8 +387,19 @@ namespace MH4F
 
            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
            Position += CurrentVelocity * time;
-            if (active)
-                sprite.Update(gameTime, Direction);
+           
+           sprite.Update(gameTime, Direction);
+
+           if (momentumCounter > 0)
+           {
+               momentumCounter--;
+               sprite.MoveBy(momentumXMovement, 0);
+           }
+           if (momentumCounter == 0)
+           {
+               momentumXMovement = 0;
+
+           }
 
             prevKeyboardState = Keyboard.GetState();
         }
@@ -363,7 +407,8 @@ namespace MH4F
         {  
         }
         public virtual void Dash()
-        {  
+        {
+            
         }
         public virtual void BackWalk()
         {
@@ -461,15 +506,7 @@ namespace MH4F
         public void hitEnemy()
         {
             canCancelMove = true;
-            if (directionFacing == Direction.Left)
-            {
-                Sprite.MoveBy(30, 0); 
-            }
-            else
-            {
-                Sprite.MoveBy(-30, 0);
-
-            }
+            GivePlayerMomentum(5, 4, false);
         }
 
         public void Draw(SpriteBatch spriteBatch)

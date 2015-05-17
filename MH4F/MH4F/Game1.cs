@@ -23,12 +23,15 @@ namespace MH4F
         Player player2;
         Texture2D dummyTexture;
         Rectangle testHitbox;
+
+        int gameWidth = 1024;
+        int gameHeight = 720;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
 
-            graphics.PreferredBackBufferHeight = 720;
-            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = gameHeight;
+            graphics.PreferredBackBufferWidth = gameWidth;
             Content.RootDirectory = "Content";
         }
 
@@ -212,12 +215,53 @@ namespace MH4F
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+           
+            
             // TODO: Add your update logic here
             player1.Update(gameTime, Keyboard.GetState());
 
             player2.Update(gameTime, Keyboard.GetState());
 
-            if (player1.Sprite.X < player2.Sprite.X)
+
+            
+            // Detect Player Collision. Ghetto atm and full of bugs but its a start as a base
+            //
+            
+            if((Math.Abs(player1.Sprite.PositionCenter.X - player2.Sprite.PositionCenter.X) < 40))
+            {
+                if (Math.Abs(player1.Sprite.CurrentXVelocity + player2.Sprite.CurrentXVelocity) == 0)
+                {
+                    player1.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
+                    player2.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
+                }
+                else if (player1.Direction == Direction.Right)
+                {
+                    if (player1.Sprite.CurrentXVelocity > 0)
+                    {                        
+                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);                       
+                    }
+                   
+                    if (player2.Sprite.CurrentXVelocity < 0)
+                    {
+                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
+                    }
+                }
+                else
+                {
+                    
+                    if (player2.Sprite.CurrentXVelocity > 0)
+                    {
+                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
+                    }
+                    if (player1.Sprite.CurrentXVelocity < 0)
+                    {
+                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
+                    }
+                }
+            }
+            // Check to see which direction the player is facing
+            //
+            if (player1.Sprite.PositionCenter.X < player2.Sprite.PositionCenter.X)
             {
                 player1.Direction = Direction.Right;
                 player2.Direction = Direction.Left;
@@ -228,6 +272,30 @@ namespace MH4F
                 player2.Direction = Direction.Right;
             }
 
+            // Make sure the player doesn't go out of bound
+            //
+            if (player1.X < 0)
+            {
+                player1.X = 0;
+            }
+            if (player1.X + player1.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
+            {
+                player1.X = gameWidth - player1.Sprite.CurrentMoveAnimation.FrameWidth;
+            }
+
+            // Same out of bound checks for player 2
+            //
+            if (player2.X < 0)
+            {
+                player2.X = 0;
+            }
+            if (player2.X + player2.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
+            {
+                player2.X = gameWidth - player2.Sprite.CurrentMoveAnimation.FrameWidth;
+            }
+            
+            // Detect player collisions
+            //
             if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
             {                
                 player2.hitByEnemy();
@@ -239,7 +307,8 @@ namespace MH4F
                 player1.hitByEnemy();
                 player2.hitEnemy();
             }
-          
+           
+
            // leftBorder.Width += 10;
             base.Update(gameTime);
         }
