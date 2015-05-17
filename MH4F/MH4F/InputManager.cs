@@ -13,7 +13,6 @@ namespace MH4F
         InputQueue<Keys[]> inputs;
         KeyboardState lastKeyboardState;
         private ControlSetting controlSetting;
-        int maxInputQueueSize = 7;
 
         String[] DIRECTIONS = {"up","down","left","right" };
         String[] ATTACKS = { "a", "b" };

@@ -190,7 +190,7 @@ namespace MH4F
             {
                 if (animations.ContainsKey(value))
                 {
-                    if (( currentAnimation != value && !animations[value].IsAttack) || animations[value].IsAttack )
+                    if (( currentAnimation != value && !animations[value].IsAttack) || animations[value].IsAttack || animations[value].CharacterState == CharacterState.HIT )
                     {     
                             currentAnimation = value;
                             animations[currentAnimation].CurrentFrame = 0;
@@ -222,6 +222,13 @@ namespace MH4F
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
+        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState, bool isAnAttack, String NextAnmation)
+        {
+            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState, isAnAttack, NextAnmation));
+            iWidth = Width;
+            iHeight = Height;
+            v2Center = new Vector2(iWidth / 2, iHeight / 2);
+        }
 
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames,
            float FrameLength, CharacterState characterState, string NextAnimation)
@@ -240,6 +247,12 @@ namespace MH4F
         public void AddHurtbox(String moveName, int index, Hitbox hitbox)
         {
             animations[moveName].AddHurtboxInfo(index, hitbox);
+        }
+
+        public void SetMoveProperties(String moveName, int hitstun)
+        {
+            animations[moveName].Hitstun = hitstun;
+
         }
 
         public Move GetAnimationByName(string Name)

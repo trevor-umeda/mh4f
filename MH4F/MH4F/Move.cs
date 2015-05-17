@@ -44,7 +44,7 @@ namespace MH4F
         // The number of times this animation has been played
         private int playCount = 0;
 
-
+        private int hitstun = 0;
         // The animation that should be played after this animation
         private string nextAnimation = null;
 
@@ -115,6 +115,12 @@ namespace MH4F
         {
             get { return isAttack; }
             set { isAttack = value; }
+        }
+
+        public int Hitstun
+        {
+            get { return hitstun; }
+            set { hitstun = value; }
         }
 
         public CharacterState CharacterState
@@ -204,6 +210,19 @@ namespace MH4F
             frameLength = FrameLength;
             characterState = CharacterState;
             isAttack = IsAnAttack;
+        }
+
+        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState, bool IsAnAttack, String strNextAnimation)
+        {
+            t2dTexture = texture;
+            rectInitialFrame = new Rectangle(X, Y, Width, Height);
+            frameCount = Frames;
+            hitboxInfo = new Hitbox[Frames];
+            hurtboxInfo = new Hitbox[Frames];
+            frameLength = FrameLength;
+            characterState = CharacterState;
+            isAttack = IsAnAttack;
+            nextAnimation = strNextAnimation;
         }
 
         public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, bool IsAnAttack)

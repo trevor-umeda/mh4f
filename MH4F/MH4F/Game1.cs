@@ -26,6 +26,9 @@ namespace MH4F
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1024;
             Content.RootDirectory = "Content";
         }
 
@@ -66,19 +69,19 @@ namespace MH4F
             player1.Sprite.AddAnimation(standing, "jumpdown", 0, 2048, 136, 380, 2, 0.1f, CharacterState.AIRBORNE);
             player1.Sprite.AddAnimation(standing, "jumptop", 0, 2428, 192, 280, 11, 0.1f, CharacterState.AIRBORNE);
             //player1.Sprite.AddAnimation(standing, "rightdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
-            player1.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
+            player1.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.05f, CharacterState.STANDING, true, "standing");
             player1.Sprite.AddAnimation(standing, "battack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
-            // For now an "attack" until i work out cancelable frames and moves
-            //
+            
             player1.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
             player1.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
             player1.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT);
 
             
-            player1.registerGroundMove("fireball",new List<string>{"2","3","6","A"});
-            player1.registerGroundMove("battack", new List<string> { "B" });
-            player1.registerGroundMove("aattack", new List<string> { "A" });
-            
+            player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
+            player1.RegisterGroundMove("battack", new List<string> { "B" });
+            player1.RegisterGroundMove("aattack", new List<string> { "A" });
+
+            player1.SetMoveProperties("aattack", 5);
 
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
@@ -112,7 +115,7 @@ namespace MH4F
             player2.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
             player2.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.04f, CharacterState.HIT, "standing");
 
-            player2.registerGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
+            player2.RegisterGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
            // player2.registerGroundMove("battack", new List<string> { "S" });
             //player2.registerGroundMove("aattack", new List<string> { "A" });
            
@@ -140,7 +143,7 @@ namespace MH4F
             //
             try
             {
-                System.IO.Stream stream = TitleContainer.OpenStream("properties.txt");
+                System.IO.Stream stream = TitleContainer.OpenStream("hitbox.txt");
                 System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
                 // use StreamReader.ReadLine or other methods to read the file data
                 while (sreader.Peek() >= 0)
@@ -214,12 +217,29 @@ namespace MH4F
 
             player2.Update(gameTime, Keyboard.GetState());
 
-            if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox))
+            if (player1.Sprite.X < player2.Sprite.X)
+            {
+                player1.Direction = Direction.Right;
+                player2.Direction = Direction.Left;
+            }
+            else
+            {
+                player1.Direction = Direction.Left;
+                player2.Direction = Direction.Right;
+            }
+
+            if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
             {                
                 player2.hitByEnemy();
                 player1.hitEnemy();
                 System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
             }
+            else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
+            {
+                player1.hitByEnemy();
+                player2.hitEnemy();
+            }
+          
            // leftBorder.Width += 10;
             base.Update(gameTime);
         }
@@ -238,7 +258,7 @@ namespace MH4F
             // TODO: Add your drawing code here
             spriteBatch.Begin();
           
-            spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
+            //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
             
             player2.Draw(spriteBatch);
             player1.Draw(spriteBatch);

@@ -129,7 +129,7 @@
     <Content Include="hurtbox.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="properties.txt">
+    <Content Include="hitbox.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

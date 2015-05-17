@@ -103,7 +103,7 @@ namespace MH4F
 
         public static bool KeyboardDown(Keys[] keyboardState, Keys key)
         {
-            if (keyboardState == null || key == null)
+            if (keyboardState == null)
             {
                 return false;
             }

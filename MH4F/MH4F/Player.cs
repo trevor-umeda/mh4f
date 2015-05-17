@@ -55,11 +55,11 @@ namespace MH4F
 
         bool isInInterruptableAnimation = false;
 
-        readonly Vector2 gravityModifierV = new Vector2(0, 600f);
+        readonly Vector2 gravityModifierV = new Vector2(0, 900f);
 
-        readonly Vector2 initialJumpSpeed = new Vector2(0, -400);
+        readonly Vector2 initialJumpSpeed = new Vector2(0, -600);
 
-        readonly float jumpHorizontalSpeed = 100f;
+        readonly float jumpHorizontalSpeed = 200f;
 
 
         public enum CharacterStates : byte
@@ -200,6 +200,12 @@ namespace MH4F
             set { isInInterruptableAnimation = value; }
         }
 
+        public bool HasHitOpponent
+        {
+            get { return canCancelMove; }
+
+        }
+
         public Rectangle BoundingBox
         {
             get { return sprite.BoundingBox; }
@@ -217,16 +223,21 @@ namespace MH4F
             }
         }
 
-        public void registerGroundMove(String name, List<String> input)
+        public void RegisterGroundMove(String name, List<String> input)
         {
             SpecialInputManager.registerGroundMove(name, input);
+        }
+
+        public void SetMoveProperties(String moveName, int hitstun)
+        {
+            sprite.SetMoveProperties(moveName, hitstun);
         }
 
         public Player(Texture2D texture, int xPosition)
         {
             sprite = new SpriteAnimation(texture);
             specialInputManager = new SpecialInputManager();
-            Position = new Vector2(xPosition, 100);
+            Position = new Vector2(xPosition, 400);
             ControlSetting = new ControlSetting();
         }
 
@@ -236,57 +247,60 @@ namespace MH4F
             //
             if (Sprite.CurrentMoveAnimation == null || 
                 Sprite.CurrentMoveAnimation.CharacterState != CharacterState.AIRBORNE)
-            {            
+            {
+               
                 if (IsCancealable)
                 {
+                    
                     if (ks.IsKeyDown(controlSetting.Controls["down"]))
                     {
+                      
                         Crouch();
                     }
                     else
                     {
                         UnCrouch();
-                    }
-                    if (ks.IsKeyDown(controlSetting.Controls["right"]))
-                    {
-                        if (Direction == Direction.Right)
-                        {
-                            ForwardWalk();
-                        }
-                        else
-                        {
-                            BackWalk();
-                        }
-                    }
-                    if (ks.IsKeyDown(controlSetting.Controls["left"]))
-                    {
-                        if (Direction == Direction.Right)
-                        {
-                            BackWalk(); 
-                        }
-                        else
-                        {
-                            ForwardWalk();    
-                        }            
-                    }
-                    if (ks.IsKeyDown(controlSetting.Controls["up"]))
-                    {
+                    
                         if (ks.IsKeyDown(controlSetting.Controls["right"]))
                         {
-                            Jump(Direction.Right);
+                            if (Direction == Direction.Right)
+                            {
+                                ForwardWalk();
+                            }
+                            else
+                            {
+                                BackWalk();
+                            }
                         }
-                        else if (ks.IsKeyDown(controlSetting.Controls["left"]))
+                        if (ks.IsKeyDown(controlSetting.Controls["left"]))
                         {
-                            Jump(Direction.Left);
+                            if (Direction == Direction.Right)
+                            {
+                                BackWalk(); 
+                            }
+                            else
+                            {
+                                ForwardWalk();    
+                            }            
                         }
-                        else
+                        if (ks.IsKeyDown(controlSetting.Controls["up"]))
                         {
-                            Jump();
-                        }
+                            if (ks.IsKeyDown(controlSetting.Controls["right"]))
+                            {
+                                Jump(Direction.Right);
+                            }
+                            else if (ks.IsKeyDown(controlSetting.Controls["left"]))
+                            {
+                                Jump(Direction.Left);
+                            }
+                            else
+                            {
+                                Jump();
+                            }
                         
+                        }
                     }
                 }
-
                 if (!ks.IsKeyDown(controlSetting.Controls["right"]) && !ks.IsKeyDown(controlSetting.Controls["left"]) && !ks.IsKeyDown(controlSetting.Controls["down"]) && !ks.IsKeyDown(controlSetting.Controls["up"]) && Sprite.CurrentMoveAnimation != null)
                 {
                     if (IsCancealable)
@@ -305,15 +319,17 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
+           
             if (Sprite.CurrentMoveAnimation != null && (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && IsCancealable) || canCancelMove)
             {
-                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);
+                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);                
                 if (moveName == null)
                 {
                     processBasicMovement(gameTime, ks);
                 }
                 else
                 {
+                    UnCrouch();
                     canCancelMove = false;
                     Sprite.CurrentAnimation = moveName;
                 }
@@ -383,9 +399,7 @@ namespace MH4F
             {
                 CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 0);
             }
-            IsAirborne = true;
-            CurrentVelocity += InitialJumpVelocity;
-            Sprite.CurrentAnimation = "jumpup";
+            Jump();
         }
 
         public virtual void Jump()
@@ -411,11 +425,11 @@ namespace MH4F
 
             // Code to detect when to stop jumping. Its really bad right now
             //
-            if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= 100 + 288 && currentVelocity.Y > 0)
+            if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= 400 + 288 && currentVelocity.Y > 0)
             {
                 IsAirborne = false;
                 CurrentVelocity = new Vector2(0, 0);
-                Position = new Vector2(Position.X, 100);
+                Position = new Vector2(Position.X, 400);
                 Sprite.CurrentAnimation = "standing";
             }
         }
@@ -423,7 +437,7 @@ namespace MH4F
         public void Crouch()
         {
             if (!IsCrouching)
-            {
+            {               
                 Sprite.CurrentAnimation = "crouching";
             }
             IsCrouching = true; 
@@ -447,7 +461,15 @@ namespace MH4F
         public void hitEnemy()
         {
             canCancelMove = true;
+            if (directionFacing == Direction.Left)
+            {
+                Sprite.MoveBy(30, 0); 
+            }
+            else
+            {
+                Sprite.MoveBy(-30, 0);
 
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
