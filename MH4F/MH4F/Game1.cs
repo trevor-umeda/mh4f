@@ -226,37 +226,46 @@ namespace MH4F
             
             // Detect Player Collision. Ghetto atm and full of bugs but its a start as a base
             //
-            
-            if((Math.Abs(player1.Sprite.PositionCenter.X - player2.Sprite.PositionCenter.X) < 40))
+          
+            // If the players are close enough, and they are heading in the opposite directions, then we can calculate collision movement
+            //
+            if((Math.Abs(player1.Sprite.PositionCenter.X - player2.Sprite.PositionCenter.X) < 80) )
             {
-                int velocityDiff = Math.Abs(player1.Sprite.CurrentXVelocity + player2.Sprite.CurrentXVelocity);
+                //&& (player1.Sprite.CurrentXVelocity * player2.Sprite.CurrentXVelocity < 0)
+                int velocityDiff = Math.Abs(player1.Sprite.CurrentXVelocity) - Math.Abs(player2.Sprite.CurrentXVelocity);
+                // Case where the velocities are equal towards each other.
+                //
                 if (velocityDiff == 0)
                 {
                     player1.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
                     player2.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
                 }
-                else if (player1.Direction == Direction.Right)
+                if (player1.Direction == Direction.Right)
                 {
-                    if (player1.Sprite.CurrentXVelocity > 0)
+                    if ((Math.Abs(player1.Sprite.CurrentXVelocity) > Math.Abs(player2.Sprite.CurrentXVelocity)) && player1.Sprite.CurrentXVelocity > 0)
                     {                        
-                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);                       
+                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
+                        player1.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
                     }
-                   
-                    if (player2.Sprite.CurrentXVelocity < 0)
+                    else if(player2.Sprite.CurrentXVelocity < 0)
                     {
                         player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
+                        player2.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
                     }
                 }
                 else
                 {
-                    
-                    if (player2.Sprite.CurrentXVelocity > 0)
+                    if ((Math.Abs(player1.Sprite.CurrentXVelocity) > Math.Abs(player2.Sprite.CurrentXVelocity)) && player1.Sprite.CurrentXVelocity < 0)
                     {
-                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
-                    }
-                    if (player1.Sprite.CurrentXVelocity < 0)
-                    {
+                        
                         player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
+                        player1.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
+                    }
+                    else if(player2.Sprite.CurrentXVelocity > 0) 
+                    {
+                       
+                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
+                        player2.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
                     }
                 }
             }
