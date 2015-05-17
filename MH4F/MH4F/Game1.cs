@@ -229,7 +229,8 @@ namespace MH4F
             
             if((Math.Abs(player1.Sprite.PositionCenter.X - player2.Sprite.PositionCenter.X) < 40))
             {
-                if (Math.Abs(player1.Sprite.CurrentXVelocity + player2.Sprite.CurrentXVelocity) == 0)
+                int velocityDiff = Math.Abs(player1.Sprite.CurrentXVelocity + player2.Sprite.CurrentXVelocity);
+                if (velocityDiff == 0)
                 {
                     player1.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
                     player2.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
