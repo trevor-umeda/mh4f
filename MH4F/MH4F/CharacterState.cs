@@ -12,6 +12,8 @@ namespace MH4F
         BACKSTEP,
         CROUCHING,
         AIRBORNE,
-        HIT
+        HIT,
+        BLOCK,
+        KNOCKDOWN
     }
 }

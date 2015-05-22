@@ -10,7 +10,7 @@ namespace MH4F
     public class InputQueue<T> : IEnumerable<T>
     {
         //This will function like a queue. But we want to interate over it and it will be circular
-        private int inputBufferSize = 30;
+        private int inputBufferSize = 20;
         private T[] inputQueue;
      
         private int currentPosition = 0;

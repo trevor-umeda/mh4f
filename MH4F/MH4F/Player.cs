@@ -30,6 +30,8 @@ namespace MH4F
         int collisionBufferX = 0;
         int collisionBufferY = 0;
 
+        readonly private int GROUND_POS_Y = 700;
+
         // Determine the status of the sprite.  An inactive sprite will not be updated but will be drawn.
         bool active = true;
 
@@ -46,8 +48,6 @@ namespace MH4F
 
         // Whether the character is crouching
         bool isCrouching = false;
-
-        bool isAirborne = false;
 
         bool canCancelMove = false;
 
@@ -69,14 +69,14 @@ namespace MH4F
 
         int currentXVelocity = 0;
 
-        public enum CharacterStates : byte
+        public Player(Texture2D texture, int xPosition, int yHeight)
         {
-            Idle,
-            WalkForward,
-            WalkBackward,
-            Guard,
-            Jump
+            sprite = new SpriteAnimation(texture);
+            specialInputManager = new SpecialInputManager();
+            Position = new Vector2(xPosition, GROUND_POS_Y - yHeight);
+            ControlSetting = new ControlSetting();
         }
+
         public SpriteAnimation Sprite
         {
             get { return sprite; }
@@ -174,8 +174,10 @@ namespace MH4F
 
         public bool IsAirborne
         {
-            get { return isAirborne; }
-            set { isAirborne = value; }
+            get {
+                return Y + Sprite.CurrentMoveAnimation.FrameHeight < GROUND_POS_Y - 30; 
+            }
+            
         }
 
         public bool IsCancealable
@@ -261,18 +263,12 @@ namespace MH4F
             SpecialInputManager.registerGroundMove(name, input);
         }
 
-        public void SetMoveProperties(String moveName, int hitstun)
+        public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone)
         {
-            sprite.SetMoveProperties(moveName, hitstun);
+            sprite.SetAttackMoveProperties(moveName, hitstun, blockstun, hitzone);
         }
 
-        public Player(Texture2D texture, int xPosition)
-        {
-            sprite = new SpriteAnimation(texture);
-            specialInputManager = new SpecialInputManager();
-            Position = new Vector2(xPosition, 400);
-            ControlSetting = new ControlSetting();
-        }
+        
 
         public void processBasicMovement(GameTime gameTime, KeyboardState ks)
         {
@@ -343,17 +339,14 @@ namespace MH4F
 
                 }
             }
-            else if (IsAirborne)
-            {
-                Jumping(gameTime);
-            }
-
         }
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
             Sprite.CurrentXVelocity = 0;
-            if (Sprite.CurrentMoveAnimation != null && (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && IsCancealable) || canCancelMove)
+            if (Sprite.CurrentMoveAnimation != null && 
+                ((Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && Sprite.CurrentMoveAnimation.CharacterState != CharacterState.KNOCKDOWN) && IsCancealable) || 
+                canCancelMove)
             {
                 String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);                
                 if (moveName == null)
@@ -381,9 +374,20 @@ namespace MH4F
             if (Sprite.CurrentAnimation == "dash")
             {
                 Dash();
+                // Dashing jump logic?
+                //
+                if (ks.IsKeyDown(controlSetting.Controls["up"]))
+                {
+                    DashJump();
+                }
             }
 
-            //if(Sprite.CurrentMoveAnimation.IsAttack)
+            if (IsAirborne)
+            {
+                AirborneMovement(gameTime);
+            }
+
+
 
            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
            Position += CurrentVelocity * time;
@@ -401,6 +405,16 @@ namespace MH4F
 
            }
 
+            //Logic to keep to handle airborne ness and landing
+            // If bottom of sprite is touching the "floor" then you are landed
+            //
+           if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= GROUND_POS_Y && currentVelocity.Y > 0)
+           {
+               CurrentVelocity = new Vector2(0, 0);
+               Sprite.CurrentAnimation = "standing";
+               Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);
+               
+           }
             prevKeyboardState = Keyboard.GetState();
         }
         public virtual void Backstep()
@@ -417,7 +431,6 @@ namespace MH4F
 
         public virtual void ForwardWalk()
         {
-
             Sprite.CurrentAnimation = "walk";
         }
 
@@ -449,16 +462,25 @@ namespace MH4F
 
         public virtual void Jump()
         {
-            IsAirborne = true;
             CurrentVelocity += InitialJumpVelocity;
             Sprite.CurrentAnimation = "jumpup";
         }
 
-        public virtual void Jumping(GameTime gameTime)
+        public virtual void DashJump()
         {
-            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (Direction == Direction.Right)
+            {
+                CurrentVelocity = new Vector2(jumpHorizontalSpeed * 2, 0);
+            }
+            else if (Direction == Direction.Left)
+            {
+                CurrentVelocity = new Vector2(-jumpHorizontalSpeed * 2, 0);
+            }
+            Jump();
+        }
 
-            CurrentVelocity += gravityModifierV * time;
+        public virtual void Jumping()
+        {
             if (currentVelocity.Y > 0)
             {
                 Sprite.CurrentAnimation = "jumpdown";
@@ -467,15 +489,22 @@ namespace MH4F
             {
                 Sprite.CurrentAnimation = "jumptop";
             }
+        }
 
-            // Code to detect when to stop jumping. Its really bad right now
-            //
-            if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= 400 + 288 && currentVelocity.Y > 0)
+        public virtual void AirborneMovement(GameTime gameTime)
+        {
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            CurrentVelocity += gravityModifierV * time;
+            if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.HIT)
             {
-                IsAirborne = false;
-                CurrentVelocity = new Vector2(0, 0);
-                Position = new Vector2(Position.X, 400);
-                Sprite.CurrentAnimation = "standing";
+                // Is there special animation logic for getting hit in the air?
+                //
+                Console.WriteLine("GETTING HIT IN THE AIR");
+            }
+            else
+            {
+                Jumping();
             }
         }
 
@@ -498,15 +527,81 @@ namespace MH4F
 
         }
 
-        public void hitByEnemy()
+        public void hitByEnemy(KeyboardState keyState, HitInfo hitInfo)
         {
-            Sprite.CurrentAnimation = "hit";
+            //Check if blocked or not
+            //int hitStun, int blockStun, Hitzone hitzone, float? xVel, float? yVel
+            if(isAttackBlocked(keyState, hitInfo.Hitzone))
+            {
+                Sprite.CurrentAnimation = "block";
+                HitAnimation block = (HitAnimation)Sprite.CurrentMoveAnimation;
+                block.HitStunCounter = hitInfo.Blockstun;
+
+            }
+            else
+            {
+                // So many different ways to get hit
+                //
+                Sprite.CurrentAnimation = "hit";
+                // Not sure if this a bad idea memory wise
+                //
+                HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
+                hit.HitStunCounter = hitInfo.Hitstun;
+                if (IsAirborne)
+                {
+                    if (hitInfo.AirXVelocity != null && hitInfo.AirYVelocity != null)
+                    {
+                        if (directionFacing == Direction.Right)
+                        {
+                            CurrentVelocity = new Vector2((float)-hitInfo.AirXVelocity, (float)hitInfo.AirYVelocity);
+                        }
+                        else
+                        {
+                            CurrentVelocity = new Vector2((float)hitInfo.AirXVelocity, (float)hitInfo.AirYVelocity);
+                        }
+                    }
+                }
+                else
+                {
+                    GivePlayerMomentum(5, 4, false);
+                    if (hitInfo.IsHardKnockDown)
+                    {
+                        // Make em HARD DOWN
+                        //
+                        Sprite.CurrentAnimation = "knockdown";
+
+                    }
+                }
+                
+            }
+           
+        }
+
+        private Boolean isAttackBlocked(KeyboardState keyState, Hitzone hitzone)
+        {
+            // Check to see if the right direction is held
+            //
+            if ((directionFacing == Direction.Right && keyState.IsKeyDown(controlSetting.Controls["left"])) ||
+                (directionFacing == Direction.Left && keyState.IsKeyDown(controlSetting.Controls["right"])))
+            {
+                // Check to see if the right zone is held.
+                // Right now just check to see if they have down held or not
+                //
+                if ((hitzone == Hitzone.LOW && keyState.IsKeyDown(controlSetting.Controls["down"])) ||
+                    (hitzone == Hitzone.HIGH && keyState.IsKeyUp(controlSetting.Controls["down"])) ||
+                    hitzone == Hitzone.MID)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else return false;
         }
 
         public void hitEnemy()
         {
             canCancelMove = true;
-            GivePlayerMomentum(5, 4, false);
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

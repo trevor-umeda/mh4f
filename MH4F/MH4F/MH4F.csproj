@@ -93,6 +93,9 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -109,7 +112,11 @@
   <ItemGroup>
     <Compile Include="ControlSetting.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="FrameRateCounter.cs" />
+    <Compile Include="HitAnimation.cs" />
     <Compile Include="Hitbox.cs" />
+    <Compile Include="HitInfo.cs" />
+    <Compile Include="Hitzone.cs" />
     <Compile Include="LongSwordPlayer.cs" />
     <Compile Include="SpecialInputManager.cs" />
     <Compile Include="CharacterState.cs" />
@@ -165,6 +172,9 @@
       <ProductName>Microsoft XNA Framework Redistributable 4.0</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fps.spritefont" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

@@ -11,7 +11,7 @@ namespace MH4F
     class LongSwordPlayer : Player
     {
         
-        public LongSwordPlayer(Texture2D texture, int xPosition) : base ( texture, xPosition)
+        public LongSwordPlayer(Texture2D texture, int xPosition, int yHeight) : base ( texture, xPosition, yHeight)
         {
             
         }

@@ -227,7 +227,15 @@ namespace MH4F
 
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState)
         {
-            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState));
+            if (characterState == CharacterState.HIT || characterState == CharacterState.BLOCK)
+            {
+                animations.Add(Name, new HitAnimation(texture, X, Y, Width, Height, Frames, FrameLength, characterState));
+            }
+            else
+            {
+                animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState));
+            }
+            
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
@@ -251,7 +259,14 @@ namespace MH4F
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames,
            float FrameLength, CharacterState characterState, string NextAnimation)
         {
-            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState, NextAnimation));
+            if (characterState == CharacterState.HIT || characterState == CharacterState.BLOCK)
+            {
+                animations.Add(Name, new HitAnimation(texture, X, Y, Width, Height, Frames, FrameLength, characterState, NextAnimation));
+            }
+            else
+            {
+                animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState, NextAnimation));
+            }
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
@@ -267,10 +282,10 @@ namespace MH4F
             animations[moveName].AddHurtboxInfo(index, hitbox);
         }
 
-        public void SetMoveProperties(String moveName, int hitstun)
+        public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone)
         {
-            animations[moveName].Hitstun = hitstun;
-
+            HitInfo hitInfo = new HitInfo(hitstun, blockstun, hitzone);
+            animations[moveName].HitInfo = hitInfo;
         }
 
         public Move GetAnimationByName(string Name)
@@ -295,6 +310,7 @@ namespace MH4F
 
         public void Update(GameTime gameTime, Direction direction)
         {
+      
             // Don't do anything if the sprite is not animating
             if (bAnimating)
             {
@@ -315,7 +331,6 @@ namespace MH4F
                         return;
                     }
                 }
-
                 // Run the Animation's update method
                 CurrentMoveAnimation.Update(gameTime);
                 Hitbox info = CurrentMoveAnimation.CurrentHitboxInfo;
@@ -367,6 +382,7 @@ namespace MH4F
                 {
                     hurtbox = new Rectangle();
                 }
+                
                 // Check to see if there is a "followup" animation named for this animation
                 if (!String.IsNullOrEmpty(CurrentMoveAnimation.NextAnimation))
                 {

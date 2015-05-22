@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MH4F
+{
+    class HitInfo
+    {
+        // How many approximate frames of hit stun the move puts you in. This is different from untech time in the air i think
+        //
+        private int hitstun = 0;
+
+        // How many approximate frames of blockstun the move puts you in
+        //
+        private int blockstun = 0;
+        
+        // By default, the hitzones of any animation is NONE because it might not be an attack
+        //
+        private Hitzone hitzone = Hitzone.NONE;
+
+        private bool hardKnockDown = false;
+
+        private int groundXMovement = 0;
+        private int groundYMovement = 0;
+
+        private float airXVelocity = 0;
+        private float airYVelocity = 0;
+
+        public HitInfo(int hitstun, int blockstun, Hitzone hitzone)
+        {
+            this.hitstun = hitstun;
+            this.blockstun = blockstun;
+            this.hitzone = hitzone;
+        }
+
+        public int Hitstun
+        {
+            get { return hitstun; }
+            set { hitstun = value; }
+        }
+
+        public int Blockstun
+        {
+            get { return blockstun; }
+            set { blockstun = value; }
+        }
+
+        public Hitzone Hitzone
+        {
+            get { return hitzone; }
+            set { hitzone = value; }
+        }
+
+        public bool IsHardKnockDown
+        {
+            get { return hardKnockDown; }
+            set { hardKnockDown = value; } 
+        }
+
+        public int GroundXMovement
+        {
+            get { return groundXMovement; }
+            set { groundXMovement = value; }
+        }
+
+        public int GroundYMovement
+        {
+            get { return groundYMovement; }
+            set { groundYMovement = value; }
+        }
+
+        public float AirXVelocity
+        {
+            get { return airXVelocity; }
+            set { airXVelocity = value; }
+        }
+
+        public float AirYVelocity
+        {
+            get { return airYVelocity; }
+            set { airYVelocity = value; }
+        }
+    }
+}

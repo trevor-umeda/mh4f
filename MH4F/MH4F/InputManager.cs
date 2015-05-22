@@ -14,8 +14,10 @@ namespace MH4F
         KeyboardState lastKeyboardState;
         private ControlSetting controlSetting;
 
-        String[] DIRECTIONS = {"up","down","left","right" };
-        String[] ATTACKS = { "a", "b" };
+        private Keys[] keysPressed;
+
+        readonly String[] DIRECTIONS = {"up","down","left","right" };
+        readonly String[] ATTACKS = { "a", "b" };
 
         List<MoveInput> groundMoveList;
         List<MoveInput> dashList;
@@ -61,7 +63,7 @@ namespace MH4F
                             moveInput.moveCurrentInputCommandIndex();
                             if (moveInput.CurrentInputCommandIndex >= moveInput.InputCommand.Count)
                             {
-                                
+                               
                                 lastKeyboardState = newKeyboardState;
                                 System.Diagnostics.Debug.WriteLine("Activating " + moveInput.Name);
                                 inputs.Reset();
@@ -107,12 +109,14 @@ namespace MH4F
 
         public bool DetermineButtonPress(KeyboardState presentState)
         {
-            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, Keys.A))
+            //A attack button pressed
+            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, controlSetting.Controls["a"]))
             {
-                System.Diagnostics.Debug.WriteLine("A button pressed");
                 return true;
             }
-            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, Keys.S))
+            // B attack button pressed
+
+            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, controlSetting.Controls["b"]))
             {
                 System.Diagnostics.Debug.WriteLine("B button pressed");
                 return true;
@@ -128,8 +132,7 @@ namespace MH4F
 
         public void enqueueState(KeyboardState state, Dictionary<string, Keys> controls)
         {
-            Keys[] keysDown = state.GetPressedKeys();
-            Keys[] keysPressed = new Keys[state.GetPressedKeys().Length];
+            keysPressed = new Keys[state.GetPressedKeys().Length];
             int counter = 0;
           
             foreach (String attack in ATTACKS)

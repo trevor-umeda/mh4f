@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST.xnb</Output>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\TEST.xnb</Output>
       <Time>2015-04-13T00:32:10.22681-07:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST2.xnb</Output>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\TEST2.xnb</Output>
       <Time>2015-04-13T01:05:05.7368027-07:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\combinedsprite.xnb</Output>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\combinedsprite.xnb</Output>
       <Time>2015-05-13T00:53:59.2978389-07:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\Font.xnb</Output>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\Font.xnb</Output>
       <Time>2015-05-19T00:22:43.5352236-07:00</Time>
     </Item>
     <Item>
@@ -43,46 +43,19 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\testf.xnb</Output>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\testf.xnb</Output>
       <Time>2015-05-19T00:25:49.0708356-07:00</Time>
-    </Item>
-    <Item>
-      <Source>standblock.png</Source>
-      <Name>standblock</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\standblock.xnb</Output>
-      <Time>2015-05-21T23:00:53.527356-07:00</Time>
-    </Item>
-    <Item>
-      <Source>KNOCKDOWN.png</Source>
-      <Name>KNOCKDOWN</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\KNOCKDOWN.xnb</Output>
-      <Time>2015-05-21T23:10:40.3089953-07:00</Time>
-    </Item>
-    <Item>
-      <Source>WAKEUP.png</Source>
-      <Name>WAKEUP</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\WAKEUP.xnb</Output>
-      <Time>2015-05-21T23:55:24.9119862-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>HiDef</TargetProfile>
-      <BuildConfiguration>Debug</BuildConfiguration>
-      <CompressContent>false</CompressContent>
+      <BuildConfiguration>Release</BuildConfiguration>
+      <CompressContent>true</CompressContent>
       <RootDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\</RootDirectory>
       <LoggerRootDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\</OutputDirectory>
+      <IntermediateDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\obj\x86\Release\</IntermediateDirectory>
+      <OutputDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

@@ -1,0 +1,13 @@
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\hurtbox.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\hitbox.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\TEST.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\TEST2.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\combinedsprite.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\MH4F.exe
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\MH4F.pdb
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Release\ResolveAssemblyReference.cache
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Release\MH4F.exe
+C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Release\MH4F.pdb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\Font.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\testf.xnb

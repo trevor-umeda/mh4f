@@ -24,8 +24,18 @@ namespace MH4F
         Texture2D dummyTexture;
         Rectangle testHitbox;
 
+        HitInfo testHitInfo;
+
         int gameWidth = 1024;
         int gameHeight = 720;
+
+        ContentManager content;
+       
+        SpriteFont spriteFont;
+
+        int frameRate = 0;
+        int frameCounter = 0;
+        TimeSpan elapsedTime = TimeSpan.Zero;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,6 +43,8 @@ namespace MH4F
             graphics.PreferredBackBufferHeight = gameHeight;
             graphics.PreferredBackBufferWidth = gameWidth;
             Content.RootDirectory = "Content";
+
+            IsFixedTimeStep = false;
         }
 
         /// <summary>
@@ -57,11 +69,18 @@ namespace MH4F
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            spriteFont = Content.Load<SpriteFont>("testf");
+
             // TODO: use this.Content to load your game content here
             standing = Content.Load<Texture2D>("combinedsprite");
+            Texture2D blocking = Content.Load<Texture2D>("standblock");
+            Texture2D knockdown = Content.Load<Texture2D>("KNOCKDOWN");
+            Texture2D wakeup = Content.Load<Texture2D>("WAKEUP");
+            Texture2D falldown = Content.Load<Texture2D>("FALLDOWN");
+            Texture2D down = Content.Load<Texture2D>("DOWN");
+            Texture2D hitground = Content.Load<Texture2D>("HITGROUND");
 
-
-            player1 = new LongSwordPlayer(standing, 100);
+            player1 = new LongSwordPlayer(standing, 100, 288);
             player1.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
             player1.Sprite.AddAnimation(standing, "backwalk", 0, 288, 244, 288, 7, 0.1f, CharacterState.STANDING);
             player1.Sprite.AddAnimation(standing, "crouching", 0, 576, 176, 288, 2, 0.1f, CharacterState.CROUCHING, "crouchingidle");
@@ -77,15 +96,18 @@ namespace MH4F
             
             player1.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
             player1.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
-            player1.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT);
+            player1.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT, "standing");
+            player1.Sprite.AddAnimation(blocking, "block", 0, 0, 160, 280, 1, 0.1f, CharacterState.HIT,"standing");
+            player1.Sprite.AddAnimation(knockdown, "knockdown", 0, 0, 300, 280, 8, 0.1f, CharacterState.KNOCKDOWN, "wakeup");
 
-            
+            player1.Sprite.AddAnimation(wakeup, "wakeup", 0, 0, 280, 272, 7, 0.1f, CharacterState.KNOCKDOWN, "standing");
+
             player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
             player1.RegisterGroundMove("battack", new List<string> { "B" });
             player1.RegisterGroundMove("aattack", new List<string> { "A" });
 
-            player1.SetMoveProperties("aattack", 5);
-
+            player1.SetAttackMoveProperties("aattack", 3, 2, Hitzone.MID);
+            player1.SetAttackMoveProperties("battack", 5, 10, Hitzone.MID);
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
 
@@ -99,7 +121,7 @@ namespace MH4F
             player1.ControlSetting.setControl("a", Keys.A);
             player1.ControlSetting.setControl("b", Keys.S);
 
-            player2 = new LongSwordPlayer(standing, 600);
+            player2 = new LongSwordPlayer(standing, 600, 288);
             player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
             player2.Sprite.AddAnimation(standing, "backwalk", 0, 288, 244, 288, 7, 0.1f, CharacterState.STANDING);
             player2.Sprite.AddAnimation(standing, "crouching", 0, 576, 176, 288, 2, 0.1f, CharacterState.CROUCHING, "crouchingidle");
@@ -117,10 +139,12 @@ namespace MH4F
             player2.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
             player2.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
             player2.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.04f, CharacterState.HIT, "standing");
+            player2.Sprite.AddAnimation(blocking, "block", 0, 0, 160, 280, 1, 0.1f, CharacterState.HIT, "standing");
+
 
             player2.RegisterGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
-           // player2.registerGroundMove("battack", new List<string> { "S" });
-            //player2.registerGroundMove("aattack", new List<string> { "A" });
+            player2.RegisterGroundMove("battack", new List<string> { "B" });
+            player2.RegisterGroundMove("aattack", new List<string> { "A" });
            
 
             player2.Sprite.CurrentAnimation = "standing";
@@ -193,6 +217,11 @@ namespace MH4F
                 // this will be thrown by OpenStream if gamedata.txt
                 // doesn't exist in the title storage location
             }
+
+            testHitInfo = new HitInfo(100, 20, Hitzone.HIGH);
+            testHitInfo.IsHardKnockDown = true;
+            testHitInfo.AirXVelocity = 80;
+            testHitInfo.AirYVelocity = 800;
         }
 
         /// <summary>
@@ -211,28 +240,27 @@ namespace MH4F
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-           
-            
+              
             // TODO: Add your update logic here
             player1.Update(gameTime, Keyboard.GetState());
 
             player2.Update(gameTime, Keyboard.GetState());
 
-
+            Vector2 player1Center = player1.Sprite.PositionCenter;
+            Vector2 player2Center = player2.Sprite.PositionCenter;
             
             // Detect Player Collision. Ghetto atm and full of bugs but its a start as a base
             //
-          
+
+            int currentPlayer1XVel = Math.Abs(player1.Sprite.CurrentXVelocity);
+            int currentPlayer2XVel = Math.Abs(player2.Sprite.CurrentXVelocity);
+
             // If the players are close enough, and they are heading in the opposite directions, then we can calculate collision movement
             //
-            if((Math.Abs(player1.Sprite.PositionCenter.X - player2.Sprite.PositionCenter.X) < 80) )
+            if((Math.Abs(player1Center.X - player2Center.X) < 80) )
             {
                 //&& (player1.Sprite.CurrentXVelocity * player2.Sprite.CurrentXVelocity < 0)
-                int velocityDiff = Math.Abs(player1.Sprite.CurrentXVelocity) - Math.Abs(player2.Sprite.CurrentXVelocity);
+                int velocityDiff = currentPlayer1XVel - currentPlayer2XVel;
                 // Case where the velocities are equal towards each other.
                 //
                 if (velocityDiff == 0)
@@ -242,7 +270,7 @@ namespace MH4F
                 }
                 if (player1.Direction == Direction.Right)
                 {
-                    if ((Math.Abs(player1.Sprite.CurrentXVelocity) > Math.Abs(player2.Sprite.CurrentXVelocity)) && player1.Sprite.CurrentXVelocity > 0)
+                    if ((currentPlayer1XVel > currentPlayer2XVel) && player1.Sprite.CurrentXVelocity > 0)
                     {                        
                         player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
                         player1.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
@@ -255,7 +283,7 @@ namespace MH4F
                 }
                 else
                 {
-                    if ((Math.Abs(player1.Sprite.CurrentXVelocity) > Math.Abs(player2.Sprite.CurrentXVelocity)) && player1.Sprite.CurrentXVelocity < 0)
+                    if ((currentPlayer1XVel > currentPlayer2XVel) && player1.Sprite.CurrentXVelocity < 0)
                     {
                         
                         player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
@@ -271,7 +299,7 @@ namespace MH4F
             }
             // Check to see which direction the player is facing
             //
-            if (player1.Sprite.PositionCenter.X < player2.Sprite.PositionCenter.X)
+            if (player1Center.X < player2Center.X)
             {
                 player1.Direction = Direction.Right;
                 player2.Direction = Direction.Left;
@@ -308,17 +336,34 @@ namespace MH4F
             //
             if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
             {                
-                player2.hitByEnemy();
+
+                player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
                 player1.hitEnemy();
                 System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
             }
             else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
             {
-                player1.hitByEnemy();
+                player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
                 player2.hitEnemy();
             }
-           
+            else if(Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                Console.WriteLine("Test STuff");
 
+                player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+            }
+            elapsedTime += gameTime.ElapsedGameTime;
+
+            if (elapsedTime > TimeSpan.FromSeconds(1))
+            {
+                elapsedTime -= TimeSpan.FromSeconds(1);
+                frameRate = frameCounter;
+                frameCounter = 0;
+            }
+            if (gameTime.IsRunningSlowly)
+            {
+                Console.WriteLine("iS real slow");
+            }
            // leftBorder.Width += 10;
             base.Update(gameTime);
         }
@@ -329,6 +374,9 @@ namespace MH4F
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            frameCounter++;
+
+            string fps = string.Format("fps: {0}", frameRate);
 
             // Draw the safe area borders.
             Color translucentRed = Color.Red * 0.5f;
@@ -341,6 +389,8 @@ namespace MH4F
             
             player2.Draw(spriteBatch);
             player1.Draw(spriteBatch);
+            spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
+            spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

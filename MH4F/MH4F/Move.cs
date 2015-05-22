@@ -44,13 +44,15 @@ namespace MH4F
         // The number of times this animation has been played
         private int playCount = 0;
 
-        private int hitstun = 0;
+
         // The animation that should be played after this animation
         private string nextAnimation = null;
 
         private bool isDone = false;
 
         private bool isAttack = false;
+
+        private HitInfo hitInfo;
 
         public Texture2D Texture
         {
@@ -65,6 +67,12 @@ namespace MH4F
         {
             get { return frameCount; }
             set { frameCount = value; }
+        }
+
+        public float FrameTimer
+        {
+            get { return frameTimer; }
+            set { frameTimer = value; }
         }
 
         /// 
@@ -117,10 +125,10 @@ namespace MH4F
             set { isAttack = value; }
         }
 
-        public int Hitstun
+        public HitInfo HitInfo
         {
-            get { return hitstun; }
-            set { hitstun = value; }
+            get { return hitInfo; }
+            set { hitInfo = value; } 
         }
 
         public CharacterState CharacterState
@@ -250,7 +258,7 @@ namespace MH4F
             nextAnimation = strNextAnimation;
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -264,12 +272,13 @@ namespace MH4F
                     playCount = (int)MathHelper.Min(playCount + 1, int.MaxValue);
                     IsDone = true;
                 }
+            
             }
         }
 
         object ICloneable.Clone()
         {
-            return new Move(this.t2dTexture, this.rectInitialFrame.X, this.rectInitialFrame.Y,
+            return new HitAnimation(this.t2dTexture, this.rectInitialFrame.X, this.rectInitialFrame.Y,
                                       this.rectInitialFrame.Width, this.rectInitialFrame.Height,
                                       this.frameCount, this.frameLength, this.characterState, nextAnimation);
         }

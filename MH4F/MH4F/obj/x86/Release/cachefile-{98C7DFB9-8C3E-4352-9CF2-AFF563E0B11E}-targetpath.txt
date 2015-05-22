@@ -3,8 +3,3 @@ Content\TEST2.xnb
 Content\combinedsprite.xnb
 Content\Font.xnb
 Content\testf.xnb
-Content\standblock.xnb
-Content\KNOCKDOWN.xnb
-Content\WAKEUP.xnb
-hurtbox.txt
-hitbox.txt
