@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MH4F
 {
-    class Hitbox
+    public class Hitbox
     {
         int xPos;
         int yPos;

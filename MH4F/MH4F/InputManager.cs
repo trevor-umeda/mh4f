@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections;
 namespace MH4F
 {
-    class InputManager
+    public class InputManager
     {
 
         InputQueue<Keys[]> inputs;

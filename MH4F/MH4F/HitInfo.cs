@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MH4F
 {
-    class HitInfo
+    public class HitInfo
     {
         // How many approximate frames of hit stun the move puts you in. This is different from untech time in the air i think
         //

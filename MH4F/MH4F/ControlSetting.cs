@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MH4F
 {
-    class ControlSetting
+    public class ControlSetting
     {
         // Maybe the commands should be enums
         //

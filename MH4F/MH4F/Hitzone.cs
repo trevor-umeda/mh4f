@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MH4F
 {
-    enum Hitzone
+    public enum Hitzone
     {
         HIGH,
         MID,

@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace MH4F
 {
-    class SpecialInputManager
+    public class SpecialInputManager
     {
         private InputManager inputManager;
         private ControlSetting controlSetting;

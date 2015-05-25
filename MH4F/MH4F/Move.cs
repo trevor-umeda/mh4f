@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MH4F
 {
-    class Move : ICloneable
+    public class Move : ICloneable
     {
 
         // The move itself will hold onto its own sprite
@@ -51,6 +51,8 @@ namespace MH4F
         private bool isDone = false;
 
         private bool isAttack = false;
+
+        bool canCancelMove = false;
 
         private HitInfo hitInfo;
 
@@ -125,6 +127,11 @@ namespace MH4F
             set { isAttack = value; }
         }
 
+        public bool CanCancelMove
+        {
+            get { return canCancelMove; }
+            set { canCancelMove = value; }
+        }
         public HitInfo HitInfo
         {
             get { return hitInfo; }

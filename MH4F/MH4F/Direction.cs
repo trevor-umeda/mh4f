@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MH4F
 {
-    enum Direction
+    public enum Direction
     {
         Right,
         Left

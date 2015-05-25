@@ -19,8 +19,8 @@ namespace MH4F
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D standing;
-        Player player1;
-        Player player2;
+         public Player player1;
+        public Player player2;
         Texture2D dummyTexture;
         Rectangle testHitbox;
 
@@ -79,7 +79,7 @@ namespace MH4F
             Texture2D falldown = Content.Load<Texture2D>("FALLDOWN");
             Texture2D down = Content.Load<Texture2D>("DOWN");
             Texture2D hitground = Content.Load<Texture2D>("HITGROUND");
-
+           
             player1 = new LongSwordPlayer(standing, 100, 288);
             player1.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
             player1.Sprite.AddAnimation(standing, "backwalk", 0, 288, 244, 288, 7, 0.1f, CharacterState.STANDING);
@@ -101,6 +101,8 @@ namespace MH4F
             player1.Sprite.AddAnimation(knockdown, "knockdown", 0, 0, 300, 280, 8, 0.1f, CharacterState.KNOCKDOWN, "wakeup");
 
             player1.Sprite.AddAnimation(wakeup, "wakeup", 0, 0, 280, 272, 7, 0.1f, CharacterState.KNOCKDOWN, "standing");
+            player1.Sprite.AddAnimation(falldown, "falldown",0,0, 208, 320, 8, 0.1f, CharacterState.KNOCKDOWN,"standing");
+            player1.Sprite.AddAnimation(hitground, "hitground", 0, 0, 288, 192, 7, 0.1f, CharacterState.KNOCKDOWN, "wakeup");
 
             player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
             player1.RegisterGroundMove("battack", new List<string> { "B" });
@@ -166,62 +168,13 @@ namespace MH4F
             player2.Sprite.dummyTexture = dummyTexture;
             testHitbox = new Rectangle(100, 100, 100, 100);
 
-            // Load hitbox info
-            //
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream("hitbox.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data
-                while (sreader.Peek() >= 0)
-                {
-                    String hitboxInfo = sreader.ReadLine();
-                    Console.WriteLine(hitboxInfo);
-                    String[] sHb = hitboxInfo.Split(';');
-                    Console.WriteLine(sHb[0]);
-                   
-                    player1.Sprite.AddHitbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2],sHb[3],sHb[4],sHb[5]));
-                    player2.Sprite.AddHitbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream("hurtbox.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data
-                while (sreader.Peek() >= 0)
-                {
-                    String hurtboxInfo = sreader.ReadLine();
-                    Console.WriteLine(hurtboxInfo);
-                    String[] sHb = hurtboxInfo.Split(';');
-                    Console.WriteLine(sHb[0]);
-
-                    player1.Sprite.AddHurtbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
-                    player2.Sprite.AddHurtbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
+            loadCharacterData("LongSword", player1);
+            loadCharacterData("LongSword", player2);
 
             testHitInfo = new HitInfo(100, 20, Hitzone.HIGH);
             testHitInfo.IsHardKnockDown = true;
             testHitInfo.AirXVelocity = 80;
-            testHitInfo.AirYVelocity = 800;
+            testHitInfo.AirYVelocity = 100;
         }
 
         /// <summary>
@@ -394,6 +347,103 @@ namespace MH4F
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected void loadCharacterData(String character, Player player)
+        {
+            // Load Sprite Info
+            //
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream(character+"Sprites.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data
+                bool readingAnimations = false;
+                Dictionary<String, Texture2D> spriteTextures = new Dictionary<String, Texture2D>();
+                while (sreader.Peek() >= 0)
+                {
+                    String spriteLine = sreader.ReadLine();
+                    Console.WriteLine(spriteLine);
+                    if (spriteLine == "-SPRITEANIMATIONS-")
+                    {
+                        readingAnimations = true;
+                    }
+                    else if (spriteLine == "-SPRITESHEET-")
+                    {
+                        readingAnimations = false;
+                    }
+                    else if (!readingAnimations)
+                    {
+                        Texture2D test = Content.Load<Texture2D>(spriteLine);
+                        spriteTextures[spriteLine] = test;
+                    }
+                    else
+                    {
+                        String[] sHb = spriteLine.Split(';');
+                        Console.WriteLine("Using " + sHb[0]);
+                    }
+
+
+
+                }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
+
+            // Load hitbox info
+            //
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream(character+"Hitbox.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data
+                while (sreader.Peek() >= 0)
+                {
+                    String hitboxInfo = sreader.ReadLine();
+                    Console.WriteLine(hitboxInfo);
+                    String[] sHb = hitboxInfo.Split(';');
+                    Console.WriteLine(sHb[0]);
+                   
+                    player.Sprite.AddHitbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
+                }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
+
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream(character+"Hurtbox.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data
+                while (sreader.Peek() >= 0)
+                {
+                    String hurtboxInfo = sreader.ReadLine();
+                    Console.WriteLine(hurtboxInfo);
+                    String[] sHb = hurtboxInfo.Split(';');
+                    Console.WriteLine(sHb[0]);                    
+                    player.Sprite.AddHurtbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
+                }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
         }
     }
 }

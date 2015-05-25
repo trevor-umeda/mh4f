@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MH4F
 {
-    class LongSwordPlayer : Player
+    public class LongSwordPlayer : Player
     {
         
         public LongSwordPlayer(Texture2D texture, int xPosition, int yHeight) : base ( texture, xPosition, yHeight)

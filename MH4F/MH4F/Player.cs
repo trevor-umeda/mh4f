@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MH4F
 {
-    abstract class Player
+    public abstract class Player
     {
          // The SpriteAnimation object that holds the graphical and animation data for this object
-        SpriteAnimation sprite;
+        SpriteAnimationManager sprite;
 
         SpecialInputManager specialInputManager;
 
@@ -48,9 +48,7 @@ namespace MH4F
 
         // Whether the character is crouching
         bool isCrouching = false;
-
-        bool canCancelMove = false;
-
+       
         Vector2 currentVelocity = new Vector2(0, 0);
 
         bool isInInterruptableAnimation = false;
@@ -71,13 +69,13 @@ namespace MH4F
 
         public Player(Texture2D texture, int xPosition, int yHeight)
         {
-            sprite = new SpriteAnimation(texture);
+            sprite = new SpriteAnimationManager(texture);
             specialInputManager = new SpecialInputManager();
             Position = new Vector2(xPosition, GROUND_POS_Y - yHeight);
             ControlSetting = new ControlSetting();
         }
 
-        public SpriteAnimation Sprite
+        public SpriteAnimationManager Sprite
         {
             get { return sprite; }
         }
@@ -176,8 +174,7 @@ namespace MH4F
         {
             get {
                 return Y + Sprite.CurrentMoveAnimation.FrameHeight < GROUND_POS_Y - 30; 
-            }
-            
+            }            
         }
 
         public bool IsCancealable
@@ -211,8 +208,8 @@ namespace MH4F
 
         public bool HasHitOpponent
         {
-            get { return canCancelMove; }
-
+            get { return Sprite.CurrentMoveAnimation.CanCancelMove; }
+            set { Sprite.CurrentMoveAnimation.CanCancelMove = value; }
         }
 
         public int MomentumCounter
@@ -346,7 +343,7 @@ namespace MH4F
             Sprite.CurrentXVelocity = 0;
             if (Sprite.CurrentMoveAnimation != null && 
                 ((Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && Sprite.CurrentMoveAnimation.CharacterState != CharacterState.KNOCKDOWN) && IsCancealable) || 
-                canCancelMove)
+                HasHitOpponent)
             {
                 String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);                
                 if (moveName == null)
@@ -356,7 +353,7 @@ namespace MH4F
                 else
                 {
                     UnCrouch();
-                    canCancelMove = false;
+                    HasHitOpponent = false;
                     Sprite.CurrentAnimation = moveName;
                 }
 
@@ -411,9 +408,18 @@ namespace MH4F
            if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= GROUND_POS_Y && currentVelocity.Y > 0)
            {
                CurrentVelocity = new Vector2(0, 0);
-               Sprite.CurrentAnimation = "standing";
-               Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);
-               
+              
+               if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState)
+               {
+                   Sprite.CurrentAnimation = "hitground";
+
+               }
+               else
+               {
+                   Sprite.CurrentAnimation = "standing";
+
+               }
+               Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);               
            }
             prevKeyboardState = Keyboard.GetState();
         }
@@ -496,7 +502,7 @@ namespace MH4F
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             CurrentVelocity += gravityModifierV * time;
-            if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.HIT)
+            if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.HIT || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.KNOCKDOWN)
             {
                 // Is there special animation logic for getting hit in the air?
                 //
@@ -549,6 +555,7 @@ namespace MH4F
                 hit.HitStunCounter = hitInfo.Hitstun;
                 if (IsAirborne)
                 {
+                    Sprite.CurrentAnimation = "falldown";
                     if (hitInfo.AirXVelocity != null && hitInfo.AirYVelocity != null)
                     {
                         if (directionFacing == Direction.Right)
@@ -600,8 +607,7 @@ namespace MH4F
 
         public void hitEnemy()
         {
-            canCancelMove = true;
-            
+            HasHitOpponent = true;           
         }
 
         public void Draw(SpriteBatch spriteBatch)

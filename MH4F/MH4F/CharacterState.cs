@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MH4F
 {
-    enum CharacterState
+    public enum CharacterState
     {
         STANDING,
         DASHING,

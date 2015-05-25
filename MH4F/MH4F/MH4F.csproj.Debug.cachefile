@@ -1,10 +1,14 @@
 Content\TEST.xnb
 Content\TEST2.xnb
 Content\combinedsprite.xnb
-Content\Font.xnb
-Content\testf.xnb
 Content\standblock.xnb
 Content\KNOCKDOWN.xnb
 Content\WAKEUP.xnb
+Content\FALLDOWN.xnb
+Content\Font.xnb
+Content\testf.xnb
+Content\DOWN.xnb
+Content\HITGROUND.xnb
 hurtbox.txt
 hitbox.txt
+LongSwordSprites.txt
