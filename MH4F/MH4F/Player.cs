@@ -67,6 +67,9 @@ namespace MH4F
 
         int currentXVelocity = 0;
 
+        int airJumpLimit = 1;
+        int timesJumped = 0;
+
         public Player(Texture2D texture, int xPosition, int yHeight)
         {
             sprite = new SpriteAnimationManager(texture);
@@ -179,7 +182,8 @@ namespace MH4F
 
         public bool IsCancealable
         {
-            get { return Sprite.CurrentMoveAnimation != null && 
+            get { return Sprite.CurrentMoveAnimation != null &&
+                (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && Sprite.CurrentMoveAnimation.CharacterState != CharacterState.KNOCKDOWN) &&
                 (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone ||
                 !Sprite.CurrentMoveAnimation.IsAttack); }
         }
@@ -273,8 +277,7 @@ namespace MH4F
             //
             if (Sprite.CurrentMoveAnimation == null || 
                 Sprite.CurrentMoveAnimation.CharacterState != CharacterState.AIRBORNE)
-            {
-               
+            {               
                 if (IsCancealable)
                 {
                     
@@ -322,8 +325,7 @@ namespace MH4F
                             else
                             {
                                 Jump();
-                            }
-                        
+                            }                        
                         }
                     }
                 }
@@ -336,14 +338,33 @@ namespace MH4F
 
                 }
             }
+            else if (Sprite.CurrentMoveAnimation == null ||
+                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
+            {
+                if (IsCancealable && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
+                {
+                    timesJumped++;
+                    if (ks.IsKeyDown(controlSetting.Controls["right"]))
+                    {
+                        AirJump(Direction.Right);
+                    }
+                    else if (ks.IsKeyDown(controlSetting.Controls["left"]))
+                    {
+                        AirJump(Direction.Left);
+                    }
+                    else
+                    {
+                        AirJump();
+                    }
+                }
+            }
         }
 
         public void Update(GameTime gameTime, KeyboardState ks)
         {
             Sprite.CurrentXVelocity = 0;
             if (Sprite.CurrentMoveAnimation != null && 
-                ((Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && Sprite.CurrentMoveAnimation.CharacterState != CharacterState.KNOCKDOWN) && IsCancealable) || 
-                HasHitOpponent)
+                IsCancealable || HasHitOpponent)
             {
                 String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);                
                 if (moveName == null)
@@ -382,9 +403,21 @@ namespace MH4F
             if (IsAirborne)
             {
                 AirborneMovement(gameTime);
+                if (Sprite.CurrentAnimation == "backstep")
+                {
+                    Backstep();
+                }
+                if (Sprite.CurrentAnimation == "dash")
+                {
+                    Dash();
+                    // Dashing jump logic?
+                    //
+                    if (ks.IsKeyDown(controlSetting.Controls["up"]))
+                    {
+                        DashJump();
+                    }
+                }
             }
-
-
 
            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
            Position += CurrentVelocity * time;
@@ -408,7 +441,11 @@ namespace MH4F
            if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= GROUND_POS_Y && currentVelocity.Y > 0)
            {
                CurrentVelocity = new Vector2(0, 0);
-              
+               
+               // On ground land, make sure we reset how many times we've jumped
+               //
+               timesJumped = 0;
+
                if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState)
                {
                    Sprite.CurrentAnimation = "hitground";
@@ -470,6 +507,27 @@ namespace MH4F
         {
             CurrentVelocity += InitialJumpVelocity;
             Sprite.CurrentAnimation = "jumpup";
+        }
+
+        public virtual void AirJump()
+        {
+            //Lazy atm
+            float temp = CurrentVelocity.X;
+            CurrentVelocity = new Vector2(temp,InitialJumpVelocity.Y);
+            Sprite.CurrentAnimation = "jumpup";
+        }
+
+        public virtual void AirJump(Direction directionJumped)
+        {
+            if (directionJumped == Direction.Right)
+            {
+                CurrentVelocity = new Vector2(JumpHorizontalSpeed, 0);
+            }
+            else if (directionJumped == Direction.Left)
+            {
+                CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 0);
+            }
+            AirJump();
         }
 
         public virtual void DashJump()

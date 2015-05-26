@@ -9,6 +9,6 @@ Content\Font.xnb
 Content\testf.xnb
 Content\DOWN.xnb
 Content\HITGROUND.xnb
-hurtbox.txt
-hitbox.txt
+LongSwordHurtbox.txt
+LongSwordHitbox.txt
 LongSwordSprites.txt

@@ -54,7 +54,10 @@ namespace MH4F
             {
                 returnMove = inputManager.checkGroundMoves(direction, newKeyboardState);
             }
-
+            else
+            {
+                returnMove = inputManager.checkAirMoves(direction, newKeyboardState);
+            }
             return returnMove; 
         }
         public void registerGroundMove(String name, List<String> input)

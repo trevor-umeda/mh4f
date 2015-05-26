@@ -107,6 +107,12 @@ namespace MH4F
             return null;
         }
 
+        public String checkAirMoves(Direction direction, KeyboardState newKeyboardState)
+        {
+            lastKeyboardState = newKeyboardState;
+            return null;
+        }
+
         public bool DetermineButtonPress(KeyboardState presentState)
         {
             //A attack button pressed

@@ -381,6 +381,8 @@ namespace MH4F
                     {
                         String[] sHb = spriteLine.Split(';');
                         Console.WriteLine("Using " + sHb[0]);
+                        CharacterState moveState;
+                        Enum.TryParse(sHb[8], true, out moveState);
                     }
 
 
