@@ -20,6 +20,7 @@ namespace MH4F
         readonly String[] ATTACKS = { "a", "b" };
 
         List<MoveInput> groundMoveList;
+        List<MoveInput> airMoveList;
         List<MoveInput> dashList;
         public KeyboardState LastKeyboardState
         {
@@ -34,13 +35,11 @@ namespace MH4F
             // TODO: this is a terrible place to put these. find a better spot
             //
             dashList.Add(new MoveInput("backstep", new List<string> { "4", "5", "4" }));
-            dashList.Add(new MoveInput("dash", new List<string> { "6", "5", "6" }));
-           
+            dashList.Add(new MoveInput("dash", new List<string> { "6", "5", "6" }));           
         }
 
-        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState)
+        public String checkMoves(Direction direction, KeyboardState newKeyboardState, List<MoveInput> moveList)
         {
-          
             //inputs.Enqueue(newKeyboardState);
             enqueueState(newKeyboardState, controlSetting.Controls);
             // on a button press determine if a special move was inputted.
@@ -48,22 +47,22 @@ namespace MH4F
             if (DetermineButtonPress(newKeyboardState))
             {
 
-                foreach (MoveInput moveInput in groundMoveList)
+                foreach (MoveInput moveInput in moveList)
                 {
                     moveInput.resetCurrentInputCommandIndex();
                 }
-                
+
                 foreach (Keys[] keyboardState in inputs)
                 {
-                    foreach (MoveInput moveInput in groundMoveList)
+                    foreach (MoveInput moveInput in moveList)
                     {
                         if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState, direction, controlSetting.Controls))
                         {
-                           
+
                             moveInput.moveCurrentInputCommandIndex();
                             if (moveInput.CurrentInputCommandIndex >= moveInput.InputCommand.Count)
                             {
-                               
+
                                 lastKeyboardState = newKeyboardState;
                                 System.Diagnostics.Debug.WriteLine("Activating " + moveInput.Name);
                                 inputs.Reset();
@@ -83,7 +82,7 @@ namespace MH4F
                 {
                     dashInput.resetCurrentInputCommandIndex();
                 }
-                
+
                 foreach (Keys[] keyboardState in inputs.GetReverseEnumerator)
                 {
                     foreach (MoveInput dash in dashList)
@@ -107,10 +106,14 @@ namespace MH4F
             return null;
         }
 
+        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState)
+        {
+            return checkMoves(direction, newKeyboardState, groundMoveList);
+        }
+
         public String checkAirMoves(Direction direction, KeyboardState newKeyboardState)
         {
-            lastKeyboardState = newKeyboardState;
-            return null;
+            return checkMoves(direction, newKeyboardState, airMoveList);
         }
 
         public bool DetermineButtonPress(KeyboardState presentState)

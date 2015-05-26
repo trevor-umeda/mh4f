@@ -8,7 +8,7 @@ namespace MH4F
 {
     // Has the input of a special move
     //
-    class MoveInput
+    public class MoveInput
     {
         List<String> inputCommand;
 

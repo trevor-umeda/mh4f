@@ -383,26 +383,10 @@ namespace MH4F
            // If dashing adjust velocity
            //
 
-            // Parse the special inputs here
+            // Parse the ground special inputs here
             //
-            if (Sprite.CurrentAnimation == "backstep")
+            if (!IsAirborne)
             {
-                Backstep();
-            }
-            if (Sprite.CurrentAnimation == "dash")
-            {
-                Dash();
-                // Dashing jump logic?
-                //
-                if (ks.IsKeyDown(controlSetting.Controls["up"]))
-                {
-                    DashJump();
-                }
-            }
-
-            if (IsAirborne)
-            {
-                AirborneMovement(gameTime);
                 if (Sprite.CurrentAnimation == "backstep")
                 {
                     Backstep();
@@ -417,6 +401,22 @@ namespace MH4F
                         DashJump();
                     }
                 }
+            }
+            
+            if (IsAirborne)
+            {
+                if (Sprite.CurrentAnimation == "backstep")
+                {
+                    AirBackdash();
+                }
+                else if (Sprite.CurrentAnimation == "dash")
+                {
+                    AirDash();               
+                }
+                else
+                {
+                    AirborneMovement(gameTime);
+                }                
             }
 
            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -467,6 +467,17 @@ namespace MH4F
         {
             
         }
+
+        public virtual void AirBackdash()
+        {
+
+        }
+
+        public virtual void AirDash()
+        {
+
+        }
+
         public virtual void BackWalk()
         {
             Sprite.CurrentAnimation = "backwalk";

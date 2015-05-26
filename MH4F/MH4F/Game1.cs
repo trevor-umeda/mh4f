@@ -91,7 +91,7 @@ namespace MH4F
             player1.Sprite.AddAnimation(standing, "jumpdown", 0, 2048, 136, 380, 2, 0.1f, CharacterState.AIRBORNE);
             player1.Sprite.AddAnimation(standing, "jumptop", 0, 2428, 192, 280, 11, 0.1f, CharacterState.AIRBORNE);
             //player1.Sprite.AddAnimation(standing, "rightdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
-            player1.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.05f, CharacterState.STANDING, true, "standing");
+            player1.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.05f, CharacterState.STANDING, true);
             player1.Sprite.AddAnimation(standing, "battack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
             
             player1.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
@@ -171,10 +171,10 @@ namespace MH4F
             loadCharacterData("LongSword", player1);
             loadCharacterData("LongSword", player2);
 
-            testHitInfo = new HitInfo(100, 20, Hitzone.HIGH);
+            testHitInfo = new HitInfo(300, 20, Hitzone.HIGH);
             testHitInfo.IsHardKnockDown = true;
             testHitInfo.AirXVelocity = 80;
-            testHitInfo.AirYVelocity = 100;
+            testHitInfo.AirYVelocity = -100;
         }
 
         /// <summary>
@@ -381,8 +381,11 @@ namespace MH4F
                     {
                         String[] sHb = spriteLine.Split(';');
                         Console.WriteLine("Using " + sHb[0]);
+                        //player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);                       
                         CharacterState moveState;
                         Enum.TryParse(sHb[8], true, out moveState);
+                        //player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
+                          // int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState);
                     }
 
 
