@@ -5,10 +5,10 @@ Content\standblock.xnb
 Content\KNOCKDOWN.xnb
 Content\WAKEUP.xnb
 Content\FALLDOWN.xnb
-Content\Font.xnb
-Content\testf.xnb
 Content\DOWN.xnb
 Content\HITGROUND.xnb
+Content\Font.xnb
+Content\testf.xnb
 LongSwordHurtbox.txt
 LongSwordHitbox.txt
 LongSwordSprites.txt

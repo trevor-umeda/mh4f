@@ -384,8 +384,8 @@ namespace MH4F
                         //player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);                       
                         CharacterState moveState;
                         Enum.TryParse(sHb[8], true, out moveState);
-                        //player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
-                          // int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState);
+                        player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
+                           int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState);
                     }
 
 
