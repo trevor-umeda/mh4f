@@ -449,7 +449,6 @@ namespace MH4F
                if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState)
                {
                    Sprite.CurrentAnimation = "hitground";
-
                }
                else
                {
@@ -470,12 +469,16 @@ namespace MH4F
 
         public virtual void AirBackdash()
         {
-
+            CurrentVelocity = new Vector2(0, 0);
+            if (Sprite.isLastFrameOfAnimation())
+            {
+                Console.WriteLine("REACHED THE LAST FRAME");
+            }
         }
 
         public virtual void AirDash()
         {
-
+           
         }
 
         public virtual void BackWalk()
@@ -490,14 +493,7 @@ namespace MH4F
 
         public virtual void Neutral()
         {
-            if (CurrentVelocity.X > 0)
-            {
-                currentVelocity.X -= 1000;
-            }
-            if (CurrentVelocity.X < 0)
-            {
-                currentVelocity.X += 100;
-            }
+           
             Sprite.CurrentAnimation = "standing";
         }
 

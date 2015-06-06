@@ -81,29 +81,7 @@ namespace MH4F
             Texture2D hitground = Content.Load<Texture2D>("HITGROUND");
            
             player1 = new LongSwordPlayer(standing, 100, 288);
-            player1.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
-            player1.Sprite.AddAnimation(standing, "backwalk", 0, 288, 244, 288, 7, 0.1f, CharacterState.STANDING);
-            player1.Sprite.AddAnimation(standing, "crouching", 0, 576, 176, 288, 2, 0.1f, CharacterState.CROUCHING, "crouchingidle");
-            player1.Sprite.AddAnimation(standing, "crouchingidle", 0, 864, 176, 288, 6, 0.1f, CharacterState.CROUCHING);
-            player1.Sprite.AddAnimation(standing, "crouchingup", 0, 1152, 176, 288, 4, 0.1f, CharacterState.CROUCHING);
-            player1.Sprite.AddAnimation(standing, "walk", 0, 1440, 244, 288, 7, 0.1f, CharacterState.STANDING);
-            player1.Sprite.AddAnimation(standing, "jumpup", 0, 1728, 136, 320, 1, 0.1f, CharacterState.AIRBORNE);
-            player1.Sprite.AddAnimation(standing, "jumpdown", 0, 2048, 136, 380, 2, 0.1f, CharacterState.AIRBORNE);
-            player1.Sprite.AddAnimation(standing, "jumptop", 0, 2428, 192, 280, 11, 0.1f, CharacterState.AIRBORNE);
-            //player1.Sprite.AddAnimation(standing, "rightdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
-            player1.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.05f, CharacterState.STANDING, true);
-            player1.Sprite.AddAnimation(standing, "battack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
-            
-            player1.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
-            player1.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
-            player1.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.055f, CharacterState.HIT, "standing");
-            player1.Sprite.AddAnimation(blocking, "block", 0, 0, 160, 280, 1, 0.1f, CharacterState.HIT,"standing");
-            player1.Sprite.AddAnimation(knockdown, "knockdown", 0, 0, 300, 280, 8, 0.1f, CharacterState.KNOCKDOWN, "wakeup");
-
-            player1.Sprite.AddAnimation(wakeup, "wakeup", 0, 0, 280, 272, 7, 0.1f, CharacterState.KNOCKDOWN, "standing");
-            player1.Sprite.AddAnimation(falldown, "falldown",0,0, 208, 320, 8, 0.1f, CharacterState.KNOCKDOWN,"standing");
-            player1.Sprite.AddAnimation(hitground, "hitground", 0, 0, 288, 192, 7, 0.1f, CharacterState.KNOCKDOWN, "wakeup");
-
+            loadCharacterData("LongSword", player1);
             player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
             player1.RegisterGroundMove("battack", new List<string> { "B" });
             player1.RegisterGroundMove("aattack", new List<string> { "A" });
@@ -123,26 +101,10 @@ namespace MH4F
             player1.ControlSetting.setControl("a", Keys.A);
             player1.ControlSetting.setControl("b", Keys.S);
 
-            player2 = new LongSwordPlayer(standing, 600, 288);
-            player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);
-            player2.Sprite.AddAnimation(standing, "backwalk", 0, 288, 244, 288, 7, 0.1f, CharacterState.STANDING);
-            player2.Sprite.AddAnimation(standing, "crouching", 0, 576, 176, 288, 2, 0.1f, CharacterState.CROUCHING, "crouchingidle");
-            player2.Sprite.AddAnimation(standing, "crouchingidle", 0, 864, 176, 288, 6, 0.1f, CharacterState.CROUCHING);
-            player2.Sprite.AddAnimation(standing, "crouchingup", 0, 1152, 176, 288, 4, 0.1f, CharacterState.CROUCHING);
-            player2.Sprite.AddAnimation(standing, "walk", 0, 1440, 244, 288, 7, 0.1f, CharacterState.STANDING);
-            player2.Sprite.AddAnimation(standing, "jumpup", 0, 1728, 136, 320, 1, 0.1f, CharacterState.AIRBORNE);
-            player2.Sprite.AddAnimation(standing, "jumpdown", 0, 2048, 136, 380, 2, 0.1f, CharacterState.AIRBORNE);
-            player2.Sprite.AddAnimation(standing, "jumptop", 0, 2428, 192, 280, 11, 0.1f, CharacterState.AIRBORNE);
-            //player1.Sprite.AddAnimation(standing, "rightdash", 0, 1440, 244, 288, 7, 0.1f, CharacterState.DASHING);
-            player2.Sprite.AddAnimation(standing, "aattack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
-            player2.Sprite.AddAnimation(standing, "battack", 0, 2708, 264, 280, 9, 0.044f, CharacterState.STANDING, true);
-            // For now an "attack" until i work out cancelable frames and moves
-            //
-            player2.Sprite.AddAnimation(standing, "backstep", 0, 2988, 240, 280, 7, 0.05f, CharacterState.BACKSTEP, true);
-            player2.Sprite.AddAnimation(standing, "dash", 0, 3268, 320, 280, 13, 0.055f, CharacterState.DASHING);
-            player2.Sprite.AddAnimation(standing, "hit", 0, 3548, 260, 300, 11, 0.04f, CharacterState.HIT, "standing");
-            player2.Sprite.AddAnimation(blocking, "block", 0, 0, 160, 280, 1, 0.1f, CharacterState.HIT, "standing");
 
+            player2 = new LongSwordPlayer(standing, 600, 288);
+
+            loadCharacterData("LongSword", player2);
 
             player2.RegisterGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
             player2.RegisterGroundMove("battack", new List<string> { "B" });
@@ -167,9 +129,6 @@ namespace MH4F
             player1.Sprite.dummyTexture = dummyTexture;
             player2.Sprite.dummyTexture = dummyTexture;
             testHitbox = new Rectangle(100, 100, 100, 100);
-
-            loadCharacterData("LongSword", player1);
-            loadCharacterData("LongSword", player2);
 
             testHitInfo = new HitInfo(300, 20, Hitzone.HIGH);
             testHitInfo.IsHardKnockDown = true;
@@ -384,8 +343,28 @@ namespace MH4F
                         //player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);                       
                         CharacterState moveState;
                         Enum.TryParse(sHb[8], true, out moveState);
-                        player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
+                        if (sHb.Length >= 10)
+                        {
+                            // Hacky way to add moves
+                            //
+                            if (sHb[9] == "true")
+                            {
+                                player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
+                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState, true);
+                            }
+                            else
+                            {
+                                player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
+                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState, sHb[9]);
+                            }
+                            
+                        }
+                        else
+                        {
+                           player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
                            int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState);
+                        }
+                        
                     }
 
 

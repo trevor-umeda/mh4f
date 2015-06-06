@@ -28,6 +28,20 @@ namespace MH4F
             }
         }
 
+        public override void AirBackdash()
+        {
+            base.AirBackdash();
+            int backStepVel = 8;
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(backStepVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(-backStepVel, 0);
+            }
+        }
+
         public override void Dash()
         {
             int dashVel = 4;

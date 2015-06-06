@@ -265,6 +265,11 @@ namespace MH4F
             nextAnimation = strNextAnimation;
         }
 
+        public Boolean isLastFrameOfAnimation()
+        {
+            return currentFrame == frameCount - 1;
+        }
+
         public virtual void Update(GameTime gameTime)
         {
             frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;

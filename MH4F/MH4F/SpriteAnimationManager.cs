@@ -319,6 +319,11 @@ namespace MH4F
             }
         }
 
+        public Boolean isLastFrameOfAnimation()
+        {
+            return CurrentMoveAnimation.isLastFrameOfAnimation();
+        }
+
         public void MoveBy(int x, int y)
         {
             v2LastPosition = v2Position;
