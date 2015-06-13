@@ -130,8 +130,9 @@ namespace MH4F
             player2.Sprite.dummyTexture = dummyTexture;
             testHitbox = new Rectangle(100, 100, 100, 100);
 
-            testHitInfo = new HitInfo(300, 20, Hitzone.HIGH);
-            testHitInfo.IsHardKnockDown = true;
+            testHitInfo = new HitInfo(3, 20, Hitzone.HIGH);
+            testHitInfo.IsHardKnockDown = false;
+            testHitInfo.AirUntechTime = 30;
             testHitInfo.AirXVelocity = 80;
             testHitInfo.AirYVelocity = -100;
         }

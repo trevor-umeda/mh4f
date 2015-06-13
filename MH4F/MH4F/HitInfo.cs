@@ -19,6 +19,10 @@ namespace MH4F
         //
         private Hitzone hitzone = Hitzone.NONE;
 
+        // Air untech time is diff then ground hitstun. This is how long before they untech
+        //
+        private int airUntechTime = 0;
+
         private bool hardKnockDown = false;
 
         private int groundXMovement = 0;
@@ -44,6 +48,12 @@ namespace MH4F
         {
             get { return blockstun; }
             set { blockstun = value; }
+        }
+
+        public int AirUntechTime
+        {
+            get { return airUntechTime; }
+            set { airUntechTime = value; }
         }
 
         public Hitzone Hitzone
@@ -81,5 +91,6 @@ namespace MH4F
             get { return airYVelocity; }
             set { airYVelocity = value; }
         }
+
     }
 }

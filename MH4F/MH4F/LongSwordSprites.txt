@@ -4,6 +4,7 @@ standblock
 KNOCKDOWN
 WAKEUP
 FALLDOWN
+FALLING
 DOWN
 HITGROUND
 -SPRITEANIMATIONS-
@@ -25,5 +26,6 @@ combinedsprite;hit;0;3548;260;300;11;0.055;HIT;standing
 standblock;block;0;0;160;280;1;0.1;HIT,standing
 KNOCKDOWN;knockdown;0;0;300;280;8;0.1;KNOCKDOWN;wakeup
 WAKEUP;wakeup;0;0;280;272;7;0.1;KNOCKDOWN;standing
-FALLDOWN;falldown;0;0;208;320;8;0.1;KNOCKDOWN;standing
+FALLDOWN;falldown;0;0;208;320;8;0.1;AIRBORNEHIT;falling
+FALLING;falling;0;0;160;288;2;0.1;AIRBORNEHIT
 HITGROUND;hitground;0;0;288;192;7;0.1;KNOCKDOWN;wakeup

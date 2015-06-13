@@ -14,6 +14,7 @@ namespace MH4F
         AIRBORNE,
         HIT,
         BLOCK,
-        KNOCKDOWN
+        KNOCKDOWN,
+        AIRBORNEHIT
     }
 }

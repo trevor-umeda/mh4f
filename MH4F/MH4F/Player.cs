@@ -70,6 +70,7 @@ namespace MH4F
         int airJumpLimit = 1;
         int timesJumped = 0;
 
+        int untechTime = 0;
         public Player(Texture2D texture, int xPosition, int yHeight)
         {
             sprite = new SpriteAnimationManager(texture);
@@ -180,10 +181,18 @@ namespace MH4F
             }            
         }
 
+        public bool isGettingHit
+        {
+            get {
+                return (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.HIT || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.KNOCKDOWN ||
+                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNEHIT);
+            }
+        }
+
         public bool IsCancealable
         {
             get { return Sprite.CurrentMoveAnimation != null &&
-                (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT && Sprite.CurrentMoveAnimation.CharacterState != CharacterState.KNOCKDOWN) &&
+                (!isGettingHit) &&
                 (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone ||
                 !Sprite.CurrentMoveAnimation.IsAttack); }
         }
@@ -416,6 +425,17 @@ namespace MH4F
                 else
                 {
                     AirborneMovement(gameTime);
+                  
+                    // Check to see if we can tech here...
+                    //
+                    if (isGettingHit && untechTime <= 0)
+                    {
+                        if(ks.IsKeyDown(controlSetting.Controls["a"]))
+                        {
+                            Console.WriteLine("DID A TECH");
+                            Sprite.CurrentAnimation = "standing";
+                        }
+                    }
                 }                
             }
 
@@ -446,7 +466,8 @@ namespace MH4F
                //
                timesJumped = 0;
 
-               if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState)
+               if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState || 
+                   CharacterState.AIRBORNEHIT == sprite.CurrentMoveAnimation.CharacterState)
                {
                    Sprite.CurrentAnimation = "hitground";
                }
@@ -567,11 +588,13 @@ namespace MH4F
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             CurrentVelocity += gravityModifierV * time;
-            if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.HIT || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.KNOCKDOWN)
+            if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.HIT || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.KNOCKDOWN
+                || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNEHIT)
             {
                 // Is there special animation logic for getting hit in the air?
                 //
                 Console.WriteLine("GETTING HIT IN THE AIR");
+                untechTime--;
             }
             else
             {
@@ -620,6 +643,7 @@ namespace MH4F
                 hit.HitStunCounter = hitInfo.Hitstun;
                 if (IsAirborne)
                 {
+                    untechTime = hitInfo.AirUntechTime;
                     Sprite.CurrentAnimation = "falldown";
                     if (hitInfo.AirXVelocity != null && hitInfo.AirYVelocity != null)
                     {
