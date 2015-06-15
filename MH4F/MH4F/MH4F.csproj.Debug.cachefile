@@ -7,9 +7,9 @@ Content\WAKEUP.xnb
 Content\FALLDOWN.xnb
 Content\DOWN.xnb
 Content\HITGROUND.xnb
+Content\FALLING.xnb
 Content\Font.xnb
 Content\testf.xnb
-Content\FALLING.xnb
 LongSwordHurtbox.txt
 LongSwordHitbox.txt
 LongSwordSprites.txt

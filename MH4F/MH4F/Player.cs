@@ -378,20 +378,31 @@ namespace MH4F
                 String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);                
                 if (moveName == null)
                 {
+                    // Handle basic stuff like moving, jumping and crouching
+                    //
                     processBasicMovement(gameTime, ks);
                 }
                 else
                 {
                     UnCrouch();
                     HasHitOpponent = false;
-                    Sprite.CurrentAnimation = moveName;
+                    // Some janky logic to make sure you aren't air dashing when you shouldn't be
+                    // "
+                    if (moveName != "backstep" && moveName != "dash")
+                    {
+                        Sprite.CurrentAnimation = moveName;
+                    }
+                    else if(timesJumped < 1)
+                    {
+                        Sprite.CurrentAnimation = moveName;
+                        if (IsAirborne)
+                        {
+                            timesJumped++;
+                        }                      
+                    }
                 }
 
-            }
-           
-           // If dashing adjust velocity
-           //
-
+            }  
             // Parse the ground special inputs here
             //
             if (!IsAirborne)
@@ -403,7 +414,7 @@ namespace MH4F
                 if (Sprite.CurrentAnimation == "dash")
                 {
                     Dash();
-                    // Dashing jump logic?
+                    // If dash and they jump, do a dash jump
                     //
                     if (ks.IsKeyDown(controlSetting.Controls["up"]))
                     {
@@ -414,19 +425,23 @@ namespace MH4F
             
             if (IsAirborne)
             {
+                // Do airdash stuff
+                //
                 if (Sprite.CurrentAnimation == "backstep")
-                {
-                    AirBackdash();
+                {                                 
+                    AirBackdash();                    
                 }
                 else if (Sprite.CurrentAnimation == "dash")
-                {
-                    AirDash();               
+                {                    
+                    AirDash();                                        
                 }
                 else
                 {
+                    // If not doing an airdash, do typical jump movement
+                    //
                     AirborneMovement(gameTime);
                   
-                    // Check to see if we can tech here...
+                    // Check to see if we can tech here
                     //
                     if (isGettingHit && untechTime <= 0)
                     {
@@ -438,12 +453,15 @@ namespace MH4F
                     }
                 }                
             }
-
+            // This is basically for jumps as only jump movement is calculated via velocity
+            //
            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
            Position += CurrentVelocity * time;
            
            sprite.Update(gameTime, Direction);
-
+            
+           // Move the player a bit for a small amount of time
+           //
            if (momentumCounter > 0)
            {
                momentumCounter--;
@@ -455,17 +473,21 @@ namespace MH4F
 
            }
 
-            //Logic to keep to handle airborne ness and landing
+            // Logic to handle when they arelanding
             // If bottom of sprite is touching the "floor" then you are landed
             //
            if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= GROUND_POS_Y && currentVelocity.Y > 0)
            {
+               // Stop velocity
+               //
                CurrentVelocity = new Vector2(0, 0);
                
-               // On ground land, make sure we reset how many times we've jumped
+               // Once they land, make sure we reset how many times we've jumped
                //
                timesJumped = 0;
 
+               // If they were getting hit though, they'll hit the ground instead of just landing
+               //
                if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState || 
                    CharacterState.AIRBORNEHIT == sprite.CurrentMoveAnimation.CharacterState)
                {
@@ -476,6 +498,8 @@ namespace MH4F
                    Sprite.CurrentAnimation = "standing";
 
                }
+               // Set their position to be on the ground depending on what animation they are in
+               //
                Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);               
            }
             prevKeyboardState = Keyboard.GetState();
