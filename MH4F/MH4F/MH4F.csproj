@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Camera2d.cs" />
     <Compile Include="ControlSetting.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="FrameRateCounter.cs" />

@@ -32,7 +32,7 @@ namespace MH4F
         ContentManager content;
        
         SpriteFont spriteFont;
-
+        Camera2d cam;
         int frameRate = 0;
         int frameCounter = 0;
         TimeSpan elapsedTime = TimeSpan.Zero;
@@ -66,6 +66,8 @@ namespace MH4F
         /// </summary>
         protected override void LoadContent()
         {
+            cam = new Camera2d();
+            cam.Pos = new Vector2(512.0f, 360.0f);
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -133,8 +135,8 @@ namespace MH4F
             testHitbox = new Rectangle(100, 100, 100, 100);
 
             testHitInfo = new HitInfo(3, 20, Hitzone.HIGH);
-            testHitInfo.IsHardKnockDown = false;
-            testHitInfo.AirUntechTime = 30;
+            testHitInfo.IsHardKnockDown = true;
+            testHitInfo.AirUntechTime = 8000;
             testHitInfo.AirXVelocity = 80;
             testHitInfo.AirYVelocity = -100;
         }
@@ -160,92 +162,10 @@ namespace MH4F
             player1.Update(gameTime, Keyboard.GetState());
 
             player2.Update(gameTime, Keyboard.GetState());
+           
+            adjustPlayerPositioning();            
 
-            Vector2 player1Center = player1.Sprite.PositionCenter;
-            Vector2 player2Center = player2.Sprite.PositionCenter;
-            
-            // Detect Player Collision. Ghetto atm and full of bugs but its a start as a base
-            //
-
-            int currentPlayer1XVel = Math.Abs(player1.Sprite.CurrentXVelocity);
-            int currentPlayer2XVel = Math.Abs(player2.Sprite.CurrentXVelocity);
-
-            // If the players are close enough, and they are heading in the opposite directions, then we can calculate collision movement
-            //
-            if((Math.Abs(player1Center.X - player2Center.X) < 80) )
-            {
-                //&& (player1.Sprite.CurrentXVelocity * player2.Sprite.CurrentXVelocity < 0)
-                int velocityDiff = currentPlayer1XVel - currentPlayer2XVel;
-                // Case where the velocities are equal towards each other.
-                //
-                if (velocityDiff == 0)
-                {
-                    player1.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
-                    player2.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
-                }
-                if (player1.Direction == Direction.Right)
-                {
-                    if ((currentPlayer1XVel > currentPlayer2XVel) && player1.Sprite.CurrentXVelocity > 0)
-                    {                        
-                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
-                        player1.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
-                    }
-                    else if(player2.Sprite.CurrentXVelocity < 0)
-                    {
-                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
-                        player2.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
-                    }
-                }
-                else
-                {
-                    if ((currentPlayer1XVel > currentPlayer2XVel) && player1.Sprite.CurrentXVelocity < 0)
-                    {
-                        
-                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
-                        player1.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
-                    }
-                    else if(player2.Sprite.CurrentXVelocity > 0) 
-                    {
-                       
-                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
-                        player2.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
-                    }
-                }
-            }
-            // Check to see which direction the player is facing
-            //
-            if (player1Center.X < player2Center.X)
-            {
-                player1.Direction = Direction.Right;
-                player2.Direction = Direction.Left;
-            }
-            else
-            {
-                player1.Direction = Direction.Left;
-                player2.Direction = Direction.Right;
-            }
-
-            // Make sure the player doesn't go out of bound
-            //
-            if (player1.X < 0)
-            {
-                player1.X = 0;
-            }
-            if (player1.X + player1.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
-            {
-                player1.X = gameWidth - player1.Sprite.CurrentMoveAnimation.FrameWidth;
-            }
-
-            // Same out of bound checks for player 2
-            //
-            if (player2.X < 0)
-            {
-                player2.X = 0;
-            }
-            if (player2.X + player2.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
-            {
-                player2.X = gameWidth - player2.Sprite.CurrentMoveAnimation.FrameWidth;
-            }
+            keepPlayersInBound();
             
             // Detect player collisions
             //
@@ -266,6 +186,12 @@ namespace MH4F
                 Console.WriteLine("Test STuff");
 
                 player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.O))
+            {
+                cam.Move(new Vector2(1, 0));
+
             }
             elapsedTime += gameTime.ElapsedGameTime;
 
@@ -298,17 +224,116 @@ namespace MH4F
             GraphicsDevice.Clear(Color.CornflowerBlue);
            
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront,
+                        BlendState.AlphaBlend,
+                        null,
+                        null,
+                        null,
+                        null,
+                        cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
+ 
           
             //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
-            
-            player2.Draw(spriteBatch);
             player1.Draw(spriteBatch);
+            player2.Draw(spriteBatch);
+            
             spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
             spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected void adjustPlayerPositioning()
+        {
+            Vector2 player1Center = player1.Sprite.PositionCenter;
+            Vector2 player2Center = player2.Sprite.PositionCenter;
+            // Detect Player Collision. Ghetto atm and full of bugs but its a start as a base
+            //
+
+            int currentPlayer1XVel = Math.Abs(player1.Sprite.CurrentXVelocity);
+            int currentPlayer2XVel = Math.Abs(player2.Sprite.CurrentXVelocity);
+
+            // If the players are close enough, and they are heading in the opposite directions, then we can calculate collision movement
+            //
+            if ((Math.Abs(player1Center.X - player2Center.X) < 80))
+            {
+                //&& (player1.Sprite.CurrentXVelocity * player2.Sprite.CurrentXVelocity < 0)
+                int velocityDiff = currentPlayer1XVel - currentPlayer2XVel;
+                // Case where the velocities are equal towards each other.
+                //
+                if (velocityDiff == 0)
+                {
+                    player1.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
+                    player2.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
+                }
+                if (player1.Direction == Direction.Right)
+                {
+                    if ((currentPlayer1XVel > currentPlayer2XVel) && player1.Sprite.CurrentXVelocity > 0)
+                    {
+                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
+                        player1.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
+                    }
+                    else if (player2.Sprite.CurrentXVelocity < 0)
+                    {
+                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
+                        player2.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
+                    }
+                }
+                else
+                {
+                    if ((currentPlayer1XVel > currentPlayer2XVel) && player1.Sprite.CurrentXVelocity < 0)
+                    {
+
+                        player2.Sprite.MoveBy(player1.Sprite.CurrentXVelocity, 0);
+                        player1.Sprite.MoveBy(-player2.Sprite.CurrentXVelocity, 0);
+                    }
+                    else if (player2.Sprite.CurrentXVelocity > 0)
+                    {
+
+                        player1.Sprite.MoveBy(player2.Sprite.CurrentXVelocity, 0);
+                        player2.Sprite.MoveBy(-player1.Sprite.CurrentXVelocity, 0);
+                    }
+                }
+            }
+            // Check to see which direction the player is facing
+            //
+            if (player1Center.X < player2Center.X)
+            {
+                player1.Direction = Direction.Right;
+                player2.Direction = Direction.Left;
+            }
+            else
+            {
+                player1.Direction = Direction.Left;
+                player2.Direction = Direction.Right;
+            }
+        }
+
+        protected void keepPlayersInBound()
+        {
+            // Make sure the player doesn't go out of bound
+            //
+            if (player1.X < 0)
+            {
+                player1.X = 0;
+            }
+            if (player1.X + player1.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
+            {
+                player1.X = gameWidth - player1.Sprite.CurrentMoveAnimation.FrameWidth;
+            }
+
+            // Same out of bound checks for player 2
+            //
+            if (player2.X < 0)
+            {
+                player2.X = 0;
+            }
+            if (player2.X + player2.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
+            {
+                player2.X = gameWidth - player2.Sprite.CurrentMoveAnimation.FrameWidth;
+            }
         }
 
         protected void loadCharacterData(String character, Player player)
