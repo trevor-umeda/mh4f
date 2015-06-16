@@ -109,6 +109,15 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\FALLING.xnb</Output>
       <Time>2015-06-11T01:22:10.7177663-07:00</Time>
     </Item>
+    <Item>
+      <Source>back_ggxxac_london.png</Source>
+      <Name>back_ggxxac_london</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\back_ggxxac_london.xnb</Output>
+      <Time>2015-06-16T01:25:33.29231-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

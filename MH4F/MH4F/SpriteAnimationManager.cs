@@ -211,9 +211,12 @@ namespace MH4F
                     if (( currentAnimation != value && !animations[value].IsAttack) || animations[value].IsAttack || animations[value].CharacterState == CharacterState.HIT )
                     {
                         int previousHeight = 0;
+                        int previousWidth = 0;
                         if (currentAnimation != null && animations[currentAnimation] != null)
                         {
                             previousHeight = animations[currentAnimation].FrameHeight;
+                            previousWidth = animations[currentAnimation].FrameWidth;
+
                             // By default once a animation changes, make sure defaults are set
                             //
                             animations[currentAnimation].CanCancelMove = false;
@@ -225,7 +228,8 @@ namespace MH4F
                         nextAnimation = animations[currentAnimation].NextAnimation;
                         animations[currentAnimation].IsDone = false;
                         int currentHeight = animations[currentAnimation].FrameHeight;
-
+                        int currentWidth = animations[currentAnimation].FrameWidth;
+                        
                         // Because we render position wise using the top left corner, Sprites with different heights would float off the ground.
                         // What we want is to render starting from the feet
                         //
@@ -233,6 +237,12 @@ namespace MH4F
                         {
                             Y += previousHeight - currentHeight; 
                         }
+
+                        if (previousWidth != 0)
+                        {
+                            X += ( previousWidth / 2) - (currentWidth / 2) ;
+                        }
+
                         
                     }
                 }
@@ -370,6 +380,8 @@ namespace MH4F
                     }
                     else
                     {
+                        // This could potentially be pre calculated for speed
+                        //
                         hitbox.Height = info.Height;
                         hitbox.Width = info.Width;
                         

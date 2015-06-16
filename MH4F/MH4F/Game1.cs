@@ -79,7 +79,9 @@ namespace MH4F
             Texture2D falldown = Content.Load<Texture2D>("FALLDOWN");
             Texture2D down = Content.Load<Texture2D>("DOWN");
             Texture2D hitground = Content.Load<Texture2D>("HITGROUND");
-           
+
+            Texture2D background = Content.Load<Texture2D>("back_ggxxac_london");
+
             player1 = new LongSwordPlayer(standing, 100, 288);
             loadCharacterData("LongSword", player1);
             player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
