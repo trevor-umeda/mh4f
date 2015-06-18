@@ -22,12 +22,16 @@ namespace MH4F
          public Player player1;
         public Player player2;
         Texture2D dummyTexture;
+        Texture2D background;
         Rectangle testHitbox;
-
+        Rectangle mainFrame;
         HitInfo testHitInfo;
 
-        int gameWidth = 1024;
+        int gameWidth = 1512;
         int gameHeight = 720;
+
+        int screenWidth = 1024;
+        int screenHeight = 720;
 
         ContentManager content;
        
@@ -40,8 +44,8 @@ namespace MH4F
         {
             graphics = new GraphicsDeviceManager(this);
 
-            graphics.PreferredBackBufferHeight = gameHeight;
-            graphics.PreferredBackBufferWidth = gameWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+            graphics.PreferredBackBufferWidth = screenWidth;
             Content.RootDirectory = "Content";
 
             IsFixedTimeStep = false;
@@ -66,8 +70,10 @@ namespace MH4F
         /// </summary>
         protected override void LoadContent()
         {
-            cam = new Camera2d();
+            cam = new Camera2d(gameWidth, screenWidth);
             cam.Pos = new Vector2(512.0f, 360.0f);
+            mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -82,7 +88,7 @@ namespace MH4F
             Texture2D down = Content.Load<Texture2D>("DOWN");
             Texture2D hitground = Content.Load<Texture2D>("HITGROUND");
 
-            Texture2D background = Content.Load<Texture2D>("back_ggxxac_london");
+            background = Content.Load<Texture2D>("back_ggxxac_london");
 
             player1 = new LongSwordPlayer(standing, 100, 288);
             loadCharacterData("LongSword", player1);
@@ -206,6 +212,9 @@ namespace MH4F
                 Console.WriteLine("iS real slow");
             }
            // leftBorder.Width += 10;
+
+            adjustCamera();
+
             base.Update(gameTime);
         }
 
@@ -225,7 +234,7 @@ namespace MH4F
            
             // TODO: Add your drawing code here
             //spriteBatch.Begin();
-            spriteBatch.Begin(SpriteSortMode.BackToFront,
+            spriteBatch.Begin(SpriteSortMode.Deferred,
                         BlendState.AlphaBlend,
                         null,
                         null,
@@ -233,16 +242,25 @@ namespace MH4F
                         null,
                         cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
  
-          
+            spriteBatch.Draw(background, mainFrame,Color.White);
             //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
-            player1.Draw(spriteBatch);
             player2.Draw(spriteBatch);
+            player1.Draw(spriteBatch);
+         
             
             spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
             spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
+
+        
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected void adjustCamera()
+        {       
+            int newCamPosition = (player1.CenterX + player2.CenterX) / 2;
+            cam.X = newCamPosition;
         }
 
         protected void adjustPlayerPositioning()
@@ -324,6 +342,16 @@ namespace MH4F
                 player1.X = gameWidth - player1.Sprite.CurrentMoveAnimation.FrameWidth;
             }
 
+            if (player1.X < cam.LeftEdge)
+            {
+                player1.X = cam.LeftEdge;
+            }
+
+            if (player1.X + player1.Sprite.Width > cam.RightEdge)
+            {
+                player1.X = cam.RightEdge - player1.Sprite.Width;
+            }
+
             // Same out of bound checks for player 2
             //
             if (player2.X < 0)
@@ -333,6 +361,14 @@ namespace MH4F
             if (player2.X + player2.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
             {
                 player2.X = gameWidth - player2.Sprite.CurrentMoveAnimation.FrameWidth;
+            }
+            if (player2.X < cam.LeftEdge)
+            {
+                player2.X = cam.LeftEdge;
+            }
+            if (player2.X + player2.Sprite.Width > cam.RightEdge)
+            {
+                player2.X = cam.RightEdge - player2.Sprite.Width;
             }
         }
 

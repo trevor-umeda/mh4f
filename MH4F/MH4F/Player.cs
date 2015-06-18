@@ -126,6 +126,11 @@ namespace MH4F
             set { sprite.Y = value; }
         }
 
+        public int CenterX
+        {
+            get { return sprite.CenterX; }
+        }
+
         public int HorizontalCollisionBuffer
         {
             get { return collisionBufferX; }

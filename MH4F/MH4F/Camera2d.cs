@@ -9,16 +9,22 @@ namespace MH4F
 {
     class Camera2d
     {
-          protected float          _zoom; // Camera Zoom
+        protected float          _zoom; // Camera Zoom
         public Matrix             _transform; // Matrix Transform
         public Vector2          _pos; // Camera Position
         protected float         _rotation; // Camera Rotation
- 
-        public Camera2d()
+        protected int leftSideLimit;
+        protected int rightSideLimit;
+        protected int width;
+
+        public Camera2d(int gameWidth, int screenWidth)
         {
             _zoom = 1.0f;
             _rotation = 0.0f;
             _pos = Vector2.Zero;
+            leftSideLimit = screenWidth / 2;
+            rightSideLimit = gameWidth - (screenWidth / 2);
+            width = screenWidth;
         }
 
         // Sets and gets zoom
@@ -45,6 +51,40 @@ namespace MH4F
             get { return _pos; }
             set { _pos = value; }
         }
+
+        public int X
+        {
+            get { return (int)_pos.X; }
+            set 
+            { 
+                _pos.X = value;
+                if (value < leftSideLimit)
+                {
+                    _pos.X = leftSideLimit;
+                }
+                else if (value > rightSideLimit)
+                {
+                    _pos.X = rightSideLimit;
+                }
+            }
+        }
+
+        public int Y
+        {
+            get { return (int)_pos.Y; }
+            set { _pos.Y = value; }
+        }
+
+        public int LeftEdge
+        {
+            get { return (int)_pos.X - (width / 2); }
+        }
+
+        public int RightEdge
+        {
+            get { return (int)_pos.X + (width / 2); }
+        }
+
         public Matrix getTransformation(GraphicsDevice graphicsDevice)
         {
             _transform =       // Thanks to o KB o for this solution

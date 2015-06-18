@@ -104,12 +104,17 @@ namespace MH4F
             }
         }
 
+        public int CenterX
+        {
+            get { return X + Width / 2; }
+        }
+
         ///
         /// Width (in pixels) of the sprite animation frames
         ///
         public int Width
         {
-            get { return iWidth; }
+            get { return CurrentMoveAnimation.FrameWidth; }
         }
 
         ///
@@ -117,7 +122,7 @@ namespace MH4F
         ///
         public int Height
         {
-            get { return iHeight; }
+            get { return CurrentMoveAnimation.FrameHeight; }
         }
 
         ///
