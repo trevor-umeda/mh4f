@@ -96,10 +96,12 @@ namespace MH4F
             player1.RegisterGroundMove("battack", new List<string> { "B" });
             player1.RegisterGroundMove("aattack", new List<string> { "A" });
 
-            player1.SetAttackMoveProperties("aattack", 3, 2, Hitzone.MID);
-            player1.SetAttackMoveProperties("battack", 5, 10, Hitzone.MID);
+            player1.SetAttackMoveProperties("aattack", 3, 2, Hitzone.MID, 50);
+            player1.SetAttackMoveProperties("battack", 5, 10, Hitzone.MID, 100);
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
+
+            player1.HealthBar = Content.Load<Texture2D>("HealthBar2");
 
             // Set player 1 default controls
             //
@@ -132,6 +134,8 @@ namespace MH4F
             player2.ControlSetting.setControl("up", Keys.I);
             player2.ControlSetting.setControl("a", Keys.F);
             player2.ControlSetting.setControl("b", Keys.G);
+
+            player2.HealthBar = Content.Load<Texture2D>("HealthBar2");
             // Create a 1x1 white texture.
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
 
@@ -192,6 +196,7 @@ namespace MH4F
                 Console.WriteLine("Test STuff");
 
                 player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+                player1.CurrentHealth -= 10;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.O))
@@ -246,14 +251,51 @@ namespace MH4F
             //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
             player2.Draw(spriteBatch);
             player1.Draw(spriteBatch);
-         
+
+            string health = string.Format("Health: {0}", player1.CurrentHealth);
             
             spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
             spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
-
+            spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
         
             spriteBatch.End();
 
+            spriteBatch.Begin();
+            // Player 1 health and special bar
+            //
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
+                       20, (int)(player1.HealthBar.Width * ((double)player1.CurrentHealth / player1.MaxHealth)), 44), new Rectangle(0, 45, player1.HealthBar.Width, 44), Color.Red);
+
+            //Draw the box around the health bar
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
+                  20, player1.HealthBar.Width, 44), new Rectangle(0, 0, player1.HealthBar.Width, 44), Color.White);
+
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
+                       700, (int)(player1.HealthBar.Width * ((double)player1.CurrentHealth / player1.MaxHealth)), 44), new Rectangle(0, 45, player1.HealthBar.Width, 44), Color.Blue);
+
+            //Draw the box around the health bar
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
+                  700, player1.HealthBar.Width, 44), new Rectangle(0, 0, player1.HealthBar.Width, 44), Color.White);
+
+
+            // Player 2 health and special bar
+            //
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
+                  20, (int)(player2.HealthBar.Width * ((double)player2.CurrentHealth / player2.MaxHealth)), 44), new Rectangle(0, 45, player2.HealthBar.Width, 44), Color.Red);
+
+            //Draw the box around the health bar
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
+                  20, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
+
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
+                       700, (int)(player2.HealthBar.Width * ((double)player2.CurrentHealth / player2.MaxHealth)), 44), new Rectangle(0, 45, player2.HealthBar.Width, 44), Color.Blue);
+
+            //Draw the box around the health bar
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
+                  700, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
+            spriteBatch.End();
+
+           
             base.Draw(gameTime);
         }
 

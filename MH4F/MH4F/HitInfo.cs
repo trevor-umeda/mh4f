@@ -7,6 +7,11 @@ namespace MH4F
 {
     public class HitInfo
     {
+
+        // How much damage the attack will do
+        //
+        private int damage = 0;
+
         // How many approximate frames of hit stun the move puts you in. This is different from untech time in the air i think
         //
         private int hitstun = 0;
@@ -36,6 +41,12 @@ namespace MH4F
             this.hitstun = hitstun;
             this.blockstun = blockstun;
             this.hitzone = hitzone;
+        }
+
+        public int Damage
+        {
+            get { return damage; }
+            set { damage = value; }
         }
 
         public int Hitstun

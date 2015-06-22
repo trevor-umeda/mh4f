@@ -119,6 +119,7 @@
     <Compile Include="HitInfo.cs" />
     <Compile Include="Hitzone.cs" />
     <Compile Include="LongSwordPlayer.cs" />
+    <Compile Include="ParticleAnimation.cs" />
     <Compile Include="SpecialInputManager.cs" />
     <Compile Include="CharacterState.cs" />
     <Compile Include="InputManager.cs" />

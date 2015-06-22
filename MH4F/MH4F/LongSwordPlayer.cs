@@ -13,7 +13,8 @@ namespace MH4F
         
         public LongSwordPlayer(Texture2D texture, int xPosition, int yHeight) : base ( texture, xPosition, yHeight)
         {
-            
+            CurrentHealth = 1000;
+            MaxHealth = 1000;
         }
         public override void Backstep()
         {

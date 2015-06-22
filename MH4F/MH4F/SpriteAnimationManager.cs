@@ -316,10 +316,11 @@ namespace MH4F
             animations[moveName].AddHurtboxInfo(index, hitbox);
         }
 
-        public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone)
+        public HitInfo SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone)
         {
             HitInfo hitInfo = new HitInfo(hitstun, blockstun, hitzone);
             animations[moveName].HitInfo = hitInfo;
+            return animations[moveName].HitInfo;
         }
 
         public Move GetAnimationByName(string Name)

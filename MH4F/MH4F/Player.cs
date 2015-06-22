@@ -32,6 +32,18 @@ namespace MH4F
 
         readonly private int GROUND_POS_Y = 700;
 
+        // Health
+        //
+        private int health;
+        private int maxHealth;
+        Texture2D healthBar;
+
+        // Special bar
+        //
+        private int special;
+        private int maxSpecial = 100;
+        Texture2D specialBar;
+
         // Determine the status of the sprite.  An inactive sprite will not be updated but will be drawn.
         bool active = true;
 
@@ -97,6 +109,24 @@ namespace MH4F
                 this.controlSetting = value;
                 specialInputManager.ControlSetting = value;
             }
+        }
+
+        public int CurrentHealth
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
+        public int MaxHealth
+        {
+            get { return maxHealth; }
+            set { maxHealth = value; }
+        }
+
+        public Texture2D HealthBar
+        {
+            get { return healthBar; }
+            set { healthBar = value; }
         }
 
         public Vector2 Position
@@ -278,9 +308,10 @@ namespace MH4F
             SpecialInputManager.registerGroundMove(name, input);
         }
 
-        public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone)
+        public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone, int damage)
         {
-            sprite.SetAttackMoveProperties(moveName, hitstun, blockstun, hitzone);
+           HitInfo hitInfo = sprite.SetAttackMoveProperties(moveName, hitstun, blockstun, hitzone);
+           hitInfo.Damage = damage;
         }
 
         
@@ -666,6 +697,9 @@ namespace MH4F
                 // So many different ways to get hit
                 //
                 Sprite.CurrentAnimation = "hit";
+
+                CurrentHealth -= hitInfo.Damage;
+
                 // Not sure if this a bad idea memory wise
                 //
                 HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
@@ -732,7 +766,7 @@ namespace MH4F
         {
             if (bVisible)
             {
-                sprite.Draw(spriteBatch, 0, 0, Direction);
+                sprite.Draw(spriteBatch, 0, 0, Direction);               
             }
         }
     }
