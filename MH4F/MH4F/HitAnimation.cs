@@ -18,6 +18,7 @@ namespace MH4F
             get { return hitStunCounter; }
             set { this.hitStunCounter = value; }
         }
+
         public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState)
             : base(texture, X, Y, Width, Height, Frames, FrameLength, CharacterState)
         {
@@ -27,6 +28,12 @@ namespace MH4F
             : base(texture, X, Y, Width, Height, Frames, FrameLength, CharacterState, strNextAnimation)
         {
         }
+
+        public void reset()
+        {
+            totalTimePlaying = 0;
+        }
+
         public override void Update(GameTime gameTime)
         {
             FrameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;

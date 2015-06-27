@@ -30,7 +30,7 @@ namespace MH4F
         int collisionBufferX = 0;
         int collisionBufferY = 0;
 
-        readonly private int GROUND_POS_Y = 700;
+        readonly private int GROUND_POS_Y = 675;
 
         // Health
         //
@@ -90,17 +90,7 @@ namespace MH4F
             Position = new Vector2(xPosition, GROUND_POS_Y - yHeight);
             ControlSetting = new ControlSetting();
         }
-
-        public SpriteAnimationManager Sprite
-        {
-            get { return sprite; }
-        }
-
-        public SpecialInputManager SpecialInputManager
-        {
-            get { return specialInputManager; }
-        }
-
+      
         public ControlSetting ControlSetting
         {
             get { return controlSetting; }
@@ -110,105 +100,7 @@ namespace MH4F
                 specialInputManager.ControlSetting = value;
             }
         }
-
-        public int CurrentHealth
-        {
-            get { return health; }
-            set { health = value; }
-        }
-
-        public int MaxHealth
-        {
-            get { return maxHealth; }
-            set { maxHealth = value; }
-        }
-
-        public Texture2D HealthBar
-        {
-            get { return healthBar; }
-            set { healthBar = value; }
-        }
-
-        public Vector2 Position
-        {
-            get { return sprite.Position; }
-            set { sprite.Position = value; }
-        }
-
-        public Direction Direction
-        {
-            get { return directionFacing; }
-            set { directionFacing = value; }
-        }
-
-        public int X
-        {
-            get { return sprite.X; }
-            set { sprite.X = value; }
-        }
-
-        ///
-        /// The Y position of the sprite's upper left corner pixel.
-        ///
-        public int Y
-        {
-            get { return sprite.Y; }
-            set { sprite.Y = value; }
-        }
-
-        public int CenterX
-        {
-            get { return sprite.CenterX; }
-        }
-
-        public int HorizontalCollisionBuffer
-        {
-            get { return collisionBufferX; }
-            set { collisionBufferX = value; }
-        }
-
-        public int VerticalCollisionBuffer
-        {
-            get { return collisionBufferY; }
-            set { collisionBufferY = value; }
-        }
-
-        public bool IsVisible
-        {
-            get { return bVisible; }
-            set { bVisible = value; }
-        }
-
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = value; }
-        }
-
-        public bool IsActive
-        {
-            get { return active; }
-            set { active = value; }
-        }
-
-        public bool IsMoving
-        {
-            get { return movingTowardsTarget; }
-            set { movingTowardsTarget = value; }
-        }
-
-        public bool IsCollidable
-        {
-            get { return bCollidable; }
-            set { bCollidable = value; }
-        }
-
-        public bool IsCrouching
-        {
-            get { return isCrouching; }
-            set { isCrouching = value; }
-        }
-
+       
         public bool IsAirborne
         {
             get {
@@ -232,26 +124,9 @@ namespace MH4F
                 !Sprite.CurrentMoveAnimation.IsAttack); }
         }
 
-        public Vector2 CurrentVelocity
+        public CharacterState CharacterState
         {
-            get { return currentVelocity; }
-            set { currentVelocity = value; }
-        }
-
-        public Vector2 InitialJumpVelocity
-        {
-            get { return initialJumpSpeed; }
-        }
-
-        public float JumpHorizontalSpeed
-        {
-            get { return jumpHorizontalSpeed; }
-        }
-
-        public bool IsInInterruptableAnimation
-        {
-            get { return isInInterruptableAnimation; }
-            set { isInInterruptableAnimation = value; }
+            get { return Sprite.CurrentMoveAnimation.CharacterState; }
         }
 
         public bool HasHitOpponent
@@ -260,18 +135,7 @@ namespace MH4F
             set { Sprite.CurrentMoveAnimation.CanCancelMove = value; }
         }
 
-        public int MomentumCounter
-        {
-            get { return momentumCounter; }
-            set { this.momentumCounter = value; }
-        }
-
-        public int MomentumXMovement
-        {
-            get { return momentumXMovement; }
-            set { this.momentumXMovement = value; }
-        }
-
+       
         public Rectangle BoundingBox
         {
             get { return sprite.BoundingBox; }
@@ -289,6 +153,21 @@ namespace MH4F
             }
         }
 
+        // Methods to set up character
+        //
+        public void RegisterGroundMove(String name, List<String> input)
+        {
+            SpecialInputManager.registerGroundMove(name, input);
+        }
+
+        public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone, int damage)
+        {
+            HitInfo hitInfo = sprite.SetAttackMoveProperties(moveName, hitstun, blockstun, hitzone);
+            hitInfo.Damage = damage;
+        }
+
+        // Methods to modify player movement and such
+        //
         public void GivePlayerMomentum(int timeToGiveMomentum, int amountOfMomentum, bool momentumInDirectionFacing)
         {
             MomentumCounter = timeToGiveMomentum;
@@ -303,18 +182,6 @@ namespace MH4F
             }  
         }
 
-        public void RegisterGroundMove(String name, List<String> input)
-        {
-            SpecialInputManager.registerGroundMove(name, input);
-        }
-
-        public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone, int damage)
-        {
-           HitInfo hitInfo = sprite.SetAttackMoveProperties(moveName, hitstun, blockstun, hitzone);
-           hitInfo.Damage = damage;
-        }
-
-        
 
         public void processBasicMovement(GameTime gameTime, KeyboardState ks)
         {
@@ -553,7 +420,14 @@ namespace MH4F
             CurrentVelocity = new Vector2(0, 0);
             if (Sprite.isLastFrameOfAnimation())
             {
-                Console.WriteLine("REACHED THE LAST FRAME");
+                if (Direction == Direction.Left)
+                {
+                    CurrentVelocity = new Vector2(JumpHorizontalSpeed, 200);
+                }
+                else
+                {
+                    CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 200); ;
+                }
             }
         }
 
@@ -697,13 +571,14 @@ namespace MH4F
                 // So many different ways to get hit
                 //
                 Sprite.CurrentAnimation = "hit";
-
+                Sprite.CurrentMoveAnimation.CurrentFrame = 0;
                 CurrentHealth -= hitInfo.Damage;
 
                 // Not sure if this a bad idea memory wise
                 //
                 HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
                 hit.HitStunCounter = hitInfo.Hitstun;
+                hit.reset();
                 if (IsAirborne)
                 {
                     untechTime = hitInfo.AirUntechTime;
@@ -759,7 +634,17 @@ namespace MH4F
 
         public void hitEnemy()
         {
-            HasHitOpponent = true;           
+            HasHitOpponent = true;
+            giveSpecialMeter(10);
+        }
+
+        public void giveSpecialMeter(int amount)
+        {
+            CurrentSpecial += amount;
+            if (CurrentSpecial > MaxSpecial)
+            {
+                CurrentSpecial = MaxSpecial;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -769,6 +654,168 @@ namespace MH4F
                 sprite.Draw(spriteBatch, 0, 0, Direction);               
             }
         }
+
+        // Boring accessors without special implementations. Keeping them down here just cus of how many there are...
+        //
+        public SpriteAnimationManager Sprite
+        {
+            get { return sprite; }
+        }
+
+        public SpecialInputManager SpecialInputManager
+        {
+            get { return specialInputManager; }
+        }
+        public int CurrentHealth
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
+        public int MaxHealth
+        {
+            get { return maxHealth; }
+            set { maxHealth = value; }
+        }
+
+        public Texture2D HealthBar
+        {
+            get { return healthBar; }
+            set { healthBar = value; }
+        }
+
+        public int CurrentSpecial
+        {
+            get { return special; }
+            set { special = value; }
+        }
+
+        public int MaxSpecial
+        {
+            get { return maxSpecial; }
+            set { maxSpecial = value; }
+        }
+
+        public Texture2D SpecialBar
+        {
+            get { return specialBar; }
+            set { specialBar = value; }
+        }
+
+        public Vector2 Position
+        {
+            get { return sprite.Position; }
+            set { sprite.Position = value; }
+        }
+
+        public Direction Direction
+        {
+            get { return directionFacing; }
+            set { directionFacing = value; }
+        }
+
+        public int X
+        {
+            get { return sprite.X; }
+            set { sprite.X = value; }
+        }
+
+        ///
+        /// The Y position of the sprite's upper left corner pixel.
+        ///
+        public int Y
+        {
+            get { return sprite.Y; }
+            set { sprite.Y = value; }
+        }
+
+        public int CenterX
+        {
+            get { return sprite.CenterX; }
+        }
+
+        public int HorizontalCollisionBuffer
+        {
+            get { return collisionBufferX; }
+            set { collisionBufferX = value; }
+        }
+
+        public int VerticalCollisionBuffer
+        {
+            get { return collisionBufferY; }
+            set { collisionBufferY = value; }
+        }
+
+        public bool IsVisible
+        {
+            get { return bVisible; }
+            set { bVisible = value; }
+        }
+
+        public float Speed
+        {
+            get { return speed; }
+            set { speed = value; }
+        }
+
+        public bool IsActive
+        {
+            get { return active; }
+            set { active = value; }
+        }
+
+        public bool IsMoving
+        {
+            get { return movingTowardsTarget; }
+            set { movingTowardsTarget = value; }
+        }
+
+        public bool IsCollidable
+        {
+            get { return bCollidable; }
+            set { bCollidable = value; }
+        }
+
+        public bool IsCrouching
+        {
+            get { return isCrouching; }
+            set { isCrouching = value; }
+        }
+
+        public Vector2 CurrentVelocity
+        {
+            get { return currentVelocity; }
+            set { currentVelocity = value; }
+        }
+
+        public Vector2 InitialJumpVelocity
+        {
+            get { return initialJumpSpeed; }
+        }
+
+        public float JumpHorizontalSpeed
+        {
+            get { return jumpHorizontalSpeed; }
+        }
+
+        public bool IsInInterruptableAnimation
+        {
+            get { return isInInterruptableAnimation; }
+            set { isInInterruptableAnimation = value; }
+        }
+
+        public int MomentumCounter
+        {
+            get { return momentumCounter; }
+            set { this.momentumCounter = value; }
+        }
+
+        public int MomentumXMovement
+        {
+            get { return momentumXMovement; }
+            set { this.momentumXMovement = value; }
+        }
+
     }
     
 }

@@ -33,6 +33,12 @@ namespace MH4F
         int screenWidth = 1024;
         int screenHeight = 720;
 
+        int healthBarMargin = 0;
+        int healthBarMargin2 = 0;
+
+        int comboNumber = 0;
+        ComboManager comboManager;
+
         ContentManager content;
        
         SpriteFont spriteFont;
@@ -73,7 +79,7 @@ namespace MH4F
             cam = new Camera2d(gameWidth, screenWidth);
             cam.Pos = new Vector2(512.0f, 360.0f);
             mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);
-
+            comboManager = new ComboManager();
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -96,13 +102,14 @@ namespace MH4F
             player1.RegisterGroundMove("battack", new List<string> { "B" });
             player1.RegisterGroundMove("aattack", new List<string> { "A" });
 
-            player1.SetAttackMoveProperties("aattack", 3, 2, Hitzone.MID, 50);
+            player1.SetAttackMoveProperties("aattack", 10, 2, Hitzone.MID, 50);
             player1.SetAttackMoveProperties("battack", 5, 10, Hitzone.MID, 100);
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
 
             player1.HealthBar = Content.Load<Texture2D>("HealthBar2");
 
+            healthBarMargin = ((screenWidth / 2) - player1.HealthBar.Width) / 2;
             // Set player 1 default controls
             //
 
@@ -136,6 +143,8 @@ namespace MH4F
             player2.ControlSetting.setControl("b", Keys.G);
 
             player2.HealthBar = Content.Load<Texture2D>("HealthBar2");
+            healthBarMargin2 = (((screenWidth / 2) - player1.HealthBar.Width) / 2) + (screenWidth / 2);
+
             // Create a 1x1 white texture.
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
 
@@ -180,14 +189,15 @@ namespace MH4F
             // Detect player collisions
             //
             if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
-            {                
-
+            {
+                comboManager.player1LandedHit(player2.CharacterState);                
                 player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
                 player1.hitEnemy();
                 System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
             }
             else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
             {
+                comboManager.player2LandedHit(player1.CharacterState);
                 player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
                 player2.hitEnemy();
             }
@@ -219,7 +229,7 @@ namespace MH4F
            // leftBorder.Width += 10;
 
             adjustCamera();
-
+            comboManager.decrementComboTimer();
             base.Update(gameTime);
         }
 
@@ -263,36 +273,43 @@ namespace MH4F
             spriteBatch.Begin();
             // Player 1 health and special bar
             //
-            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
                        20, (int)(player1.HealthBar.Width * ((double)player1.CurrentHealth / player1.MaxHealth)), 44), new Rectangle(0, 45, player1.HealthBar.Width, 44), Color.Red);
 
             //Draw the box around the health bar
-            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
                   20, player1.HealthBar.Width, 44), new Rectangle(0, 0, player1.HealthBar.Width, 44), Color.White);
 
-            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
-                       700, (int)(player1.HealthBar.Width * ((double)player1.CurrentHealth / player1.MaxHealth)), 44), new Rectangle(0, 45, player1.HealthBar.Width, 44), Color.Blue);
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
+                       675, (int)(player1.HealthBar.Width * ((double)player1.CurrentSpecial / player1.MaxSpecial)), 44), new Rectangle(0, 45, player1.HealthBar.Width, 44), Color.Blue);
 
             //Draw the box around the health bar
-            spriteBatch.Draw(player1.HealthBar, new Rectangle(20,
-                  700, player1.HealthBar.Width, 44), new Rectangle(0, 0, player1.HealthBar.Width, 44), Color.White);
+            spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
+                  675, player1.HealthBar.Width, 44), new Rectangle(0, 0, player1.HealthBar.Width, 44), Color.White);
 
 
             // Player 2 health and special bar
             //
-            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
                   20, (int)(player2.HealthBar.Width * ((double)player2.CurrentHealth / player2.MaxHealth)), 44), new Rectangle(0, 45, player2.HealthBar.Width, 44), Color.Red);
 
             //Draw the box around the health bar
-            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
                   20, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
 
-            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
-                       700, (int)(player2.HealthBar.Width * ((double)player2.CurrentHealth / player2.MaxHealth)), 44), new Rectangle(0, 45, player2.HealthBar.Width, 44), Color.Blue);
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
+                       675, (int)(player2.HealthBar.Width * ((double)player2.CurrentSpecial / player2.MaxSpecial)), 44), new Rectangle(0, 45, player2.HealthBar.Width, 44), Color.Blue);
 
             //Draw the box around the health bar
-            spriteBatch.Draw(player2.HealthBar, new Rectangle(500,
-                  700, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
+            spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
+                  675, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
+
+            if (comboManager.displayCombo())
+            {
+                spriteBatch.DrawString(spriteFont, comboManager.Player1ComboNumber + "", new Vector2(33, 300), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+                spriteBatch.DrawString(spriteFont, comboManager.Player1ComboNumber + "", new Vector2(32, 300), Color.White, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+            }
+            
             spriteBatch.End();
 
            

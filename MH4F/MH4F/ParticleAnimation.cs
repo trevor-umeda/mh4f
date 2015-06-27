@@ -7,16 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MH4F
 {
-    class ParticleAnimation : Move
+    class ParticleAnimation : SpriteAnimation
     {
-        public ParticleAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState)
-            : base(texture, X, Y, Width, Height, Frames, FrameLength, CharacterState)
+        public ParticleAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float frameLength) 
         {
-        }
-
-        public ParticleAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState, String strNextAnimation)
-            : base(texture, X, Y, Width, Height, Frames, FrameLength, CharacterState, strNextAnimation)
-        {
-        } 
+            Texture = texture;
+            RectInitialFrame = new Rectangle(X, Y, Width, Height);
+            FrameCount = Frames;
+            FrameLength = frameLength;
+        }        
     }
 }
