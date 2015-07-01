@@ -10,11 +10,42 @@ namespace MH4F
 {
     public class LongSwordPlayer : Player
     {
-        
+        bool displayShadow {get; set;}
+
         public LongSwordPlayer(Texture2D texture, int xPosition, int yHeight) : base ( texture, xPosition, yHeight)
         {
             CurrentHealth = 1000;
             MaxHealth = 1000;
+            displayShadow = false;
+        }
+
+        public override void cleanUp()
+        {
+            base.cleanUp();
+            if (!Sprite.CurrentMoveAnimation.IsAttack)
+            {
+                displayShadow = false;
+            }
+        }
+
+        public override void performGroundSpecialMove(KeyboardState ks, String moveName)
+        {
+            if (moveName == "fireball")
+            {
+                Fireball();
+            }
+            else
+            {
+                base.performGroundSpecialMove(ks, moveName);
+            }
+        }
+
+        public void Fireball()
+        {
+           
+            displayShadow = true;
+            Dash();
+            
         }
         public override void Backstep()
         {
@@ -83,6 +114,15 @@ namespace MH4F
             {
                 Sprite.MoveBy(dashVel, 0);
             }
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            Sprite.Draw(spriteBatch, 0, 0, Direction);
+            if (displayShadow)
+            {
+                Sprite.shadowDraw(spriteBatch, -9, 0, Direction);
+            }
+           
         }
     }
 }

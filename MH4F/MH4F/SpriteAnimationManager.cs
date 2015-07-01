@@ -316,6 +316,12 @@ namespace MH4F
             animations[moveName].AddHurtboxInfo(index, hitbox);
         }
 
+        public HitInfo SetAttackMoveProperties(String moveName, HitInfo hitInfo)
+        {      
+            animations[moveName].HitInfo = hitInfo;
+            return animations[moveName].HitInfo;
+        }
+
         public HitInfo SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone)
         {
             HitInfo hitInfo = new HitInfo(hitstun, blockstun, hitzone);
@@ -437,6 +443,26 @@ namespace MH4F
                     }
                 }
             }
+        }
+
+        public void shadowDraw(SpriteBatch spriteBatch, int XOffset, int YOffset, Direction direction)
+        {
+            if (CurrentMoveAnimation.CurrentFrame > 2)
+            {
+                if (direction == Direction.Right)
+                {
+                    spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
+                                                   CurrentMoveAnimation.PrevFrameRectangle, colorTint * 0.5f,
+                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
+                }
+                else
+                {
+                    spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
+                                                   CurrentMoveAnimation.PrevFrameRectangle, colorTint * 0.5f,
+                                                   0, v2Center, 1f, SpriteEffects.None, 0);
+                }
+            }
+           
         }
 
         public void Draw(SpriteBatch spriteBatch, int XOffset, int YOffset, Direction direction)

@@ -160,6 +160,11 @@ namespace MH4F
             SpecialInputManager.registerGroundMove(name, input);
         }
 
+        public void SetAttackMoveProperties(String moveName, HitInfo hitInfo)
+        {
+            sprite.SetAttackMoveProperties(moveName, hitInfo);
+        }
+
         public void SetAttackMoveProperties(String moveName, int hitstun, int blockstun, Hitzone hitzone, int damage)
         {
             HitInfo hitInfo = sprite.SetAttackMoveProperties(moveName, hitstun, blockstun, hitzone);
@@ -310,20 +315,7 @@ namespace MH4F
             //
             if (!IsAirborne)
             {
-                if (Sprite.CurrentAnimation == "backstep")
-                {
-                    Backstep();
-                }
-                if (Sprite.CurrentAnimation == "dash")
-                {
-                    Dash();
-                    // If dash and they jump, do a dash jump
-                    //
-                    if (ks.IsKeyDown(controlSetting.Controls["up"]))
-                    {
-                        DashJump();
-                    }
-                }
+                performGroundSpecialMove(ks, Sprite.CurrentAnimation);
             }
             
             if (IsAirborne)
@@ -405,7 +397,7 @@ namespace MH4F
                //
                Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);               
            }
-            prevKeyboardState = Keyboard.GetState();
+           cleanUp();
         }
         public virtual void Backstep()
         {  
@@ -413,6 +405,30 @@ namespace MH4F
         public virtual void Dash()
         {
             
+        }
+
+        public virtual void cleanUp()
+        {
+            prevKeyboardState = Keyboard.GetState();
+        }
+
+        public virtual void performGroundSpecialMove(KeyboardState ks, String moveName)
+        {
+            
+            if (Sprite.CurrentAnimation == "backstep")
+            {
+                Backstep();
+            }
+            if (Sprite.CurrentAnimation == "dash")
+            {
+                Dash();
+                // If dash and they jump, do a dash jump
+                //
+                if (ks.IsKeyDown(controlSetting.Controls["up"]))
+                {
+                    DashJump();
+                }
+            }
         }
 
         public virtual void AirBackdash()
@@ -647,11 +663,11 @@ namespace MH4F
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (bVisible)
             {
-                sprite.Draw(spriteBatch, 0, 0, Direction);               
+                sprite.Draw(spriteBatch, 0, 0, Direction);     
             }
         }
 

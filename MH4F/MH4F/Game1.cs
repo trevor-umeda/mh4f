@@ -102,8 +102,6 @@ namespace MH4F
             player1.RegisterGroundMove("battack", new List<string> { "B" });
             player1.RegisterGroundMove("aattack", new List<string> { "A" });
 
-            player1.SetAttackMoveProperties("aattack", 10, 2, Hitzone.MID, 50);
-            player1.SetAttackMoveProperties("battack", 5, 10, Hitzone.MID, 100);
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
 
@@ -528,7 +526,9 @@ namespace MH4F
                 // this will be thrown by OpenStream if gamedata.txt
                 // doesn't exist in the title storage location
             }
-
+            
+            // Load Hurtbox info
+            //
             try
             {
                 System.IO.Stream stream = TitleContainer.OpenStream(character+"Hurtbox.txt");
@@ -541,6 +541,52 @@ namespace MH4F
                     String[] sHb = hurtboxInfo.Split(';');
                     Console.WriteLine(sHb[0]);                    
                     player.Sprite.AddHurtbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
+                }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
+
+            // Load Move info
+            //
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream(character + "Moves.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data
+                while (sreader.Peek() >= 0)
+                {
+                    String movesInfo = sreader.ReadLine();
+                    if (movesInfo.Contains("- MoveName"))
+                    {
+
+                    }
+                    else
+                    {
+                        Console.WriteLine(movesInfo);
+                        String[] sHb = movesInfo.Split(';');
+                        Console.WriteLine(sHb[0]);
+                        Hitzone hitZone;
+                        Enum.TryParse(sHb[3], true, out hitZone);
+                        Boolean isHardKnockdown = false;
+                        if (sHb[5] == "true")
+                        {
+                            isHardKnockdown = true;
+                        }
+                        HitInfo hitInfo = new HitInfo(int.Parse(sHb[1]), int.Parse(sHb[2]), hitZone);
+                        hitInfo.IsHardKnockDown = isHardKnockdown;
+                        hitInfo.Damage = int.Parse(sHb[4]);
+                        hitInfo.AirUntechTime = int.Parse(sHb[6]);
+                        hitInfo.AirXVelocity = int.Parse(sHb[7]);
+                        hitInfo.AirYVelocity = -int.Parse(sHb[8]);
+
+                        player.SetAttackMoveProperties(sHb[0], hitInfo);
+                    }
                 }
                 Console.WriteLine("File Size: " + stream.Length);
                 stream.Close();

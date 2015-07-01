@@ -122,6 +122,16 @@ namespace MH4F
             }
         }
 
+        public Rectangle PrevFrameRectangle
+        {
+            get
+            {
+                return new Rectangle(
+                    rectInitialFrame.X + (rectInitialFrame.Width * (currentFrame - 2)),
+                    rectInitialFrame.Y, rectInitialFrame.Width, rectInitialFrame.Height);
+            }
+        }
+
         public int PlayCount
         {
             get { return playCount; }

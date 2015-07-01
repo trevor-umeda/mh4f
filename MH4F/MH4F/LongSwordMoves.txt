@@ -1,0 +1,3 @@
+﻿- MoveName , hitstun , blockstun , hitzone , damage , IsHardKnockDown , AirUntechTime, AirXVelocity , AirYVelocity -
+aattack;3;2;MID;50;false;3;5;5
+battack;5;10;MID;100;false;5;7;7
