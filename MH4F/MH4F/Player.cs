@@ -15,6 +15,8 @@ namespace MH4F
 
         SpecialInputManager specialInputManager;
 
+        ComboManager ComboManager { get; set; }
+
         ControlSetting controlSetting;
 
         // The speed at which the sprite will close with it's target
@@ -83,12 +85,13 @@ namespace MH4F
         int timesJumped = 0;
 
         int untechTime = 0;
-        public Player(Texture2D texture, int xPosition, int yHeight)
+        public Player(Texture2D texture, int xPosition, int yHeight, ComboManager comboManager)
         {
             sprite = new SpriteAnimationManager(texture);
             specialInputManager = new SpecialInputManager();
             Position = new Vector2(xPosition, GROUND_POS_Y - yHeight);
             ControlSetting = new ControlSetting();
+            ComboManager = comboManager;
         }
       
         public ControlSetting ControlSetting

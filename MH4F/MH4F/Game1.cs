@@ -45,6 +45,14 @@ namespace MH4F
         Camera2d cam;
         int frameRate = 0;
         int frameCounter = 0;
+
+        // Amount of time (in seconds) to display each frame
+        private float frameLength = 0.016f;
+
+
+        // Amount of time that has passed since we last animated
+        private float frameTimer = 0.0f;
+
         TimeSpan elapsedTime = TimeSpan.Zero;
         public Game1()
         {
@@ -78,13 +86,13 @@ namespace MH4F
         {
             cam = new Camera2d(gameWidth, screenWidth);
             cam.Pos = new Vector2(512.0f, 360.0f);
-            mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);
-            comboManager = new ComboManager();
+            mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);            
+            
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             spriteFont = Content.Load<SpriteFont>("testf");
-
+            comboManager = new ComboManager(spriteFont);
             // TODO: use this.Content to load your game content here
             standing = Content.Load<Texture2D>("combinedsprite");
             Texture2D blocking = Content.Load<Texture2D>("standblock");
@@ -96,7 +104,7 @@ namespace MH4F
 
             background = Content.Load<Texture2D>("back_ggxxac_london");
 
-            player1 = new LongSwordPlayer(standing, 100, 288);
+            player1 = new LongSwordPlayer(standing, 100, 288, comboManager);
             loadCharacterData("LongSword", player1);
             player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
             player1.RegisterGroundMove("battack", new List<string> { "B" });
@@ -119,7 +127,7 @@ namespace MH4F
             player1.ControlSetting.setControl("b", Keys.S);
 
 
-            player2 = new LongSwordPlayer(standing, 600, 288);
+            player2 = new LongSwordPlayer(standing, 600, 288, comboManager);
 
             loadCharacterData("LongSword", player2);
 
@@ -174,61 +182,66 @@ namespace MH4F
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-              
-            // TODO: Add your update logic here
-            player1.Update(gameTime, Keyboard.GetState());
+            frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            player2.Update(gameTime, Keyboard.GetState());
-           
-            adjustPlayerPositioning();            
-
-            keepPlayersInBound();
-            
-            // Detect player collisions
-            //
-            if(player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
+            if (frameTimer > frameLength)
             {
-                comboManager.player1LandedHit(player2.CharacterState);                
-                player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
-                player1.hitEnemy();
-                System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
-            }
-            else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
-            {
-                comboManager.player2LandedHit(player1.CharacterState);
-                player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
-                player2.hitEnemy();
-            }
-            else if(Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                Console.WriteLine("Test STuff");
+                frameTimer = 0.0f;
+                // TODO: Add your update logic here
+                player1.Update(gameTime, Keyboard.GetState());
 
-                player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
-                player1.CurrentHealth -= 10;
-            }
+                player2.Update(gameTime, Keyboard.GetState());
 
-            if (Keyboard.GetState().IsKeyDown(Keys.O))
-            {
-                cam.Move(new Vector2(1, 0));
+                adjustPlayerPositioning();
 
-            }
-            elapsedTime += gameTime.ElapsedGameTime;
+                keepPlayersInBound();
 
-            if (elapsedTime > TimeSpan.FromSeconds(1))
-            {
-                elapsedTime -= TimeSpan.FromSeconds(1);
-                frameRate = frameCounter;
-                frameCounter = 0;
-            }
-            if (gameTime.IsRunningSlowly)
-            {
-                Console.WriteLine("iS real slow");
-            }
-           // leftBorder.Width += 10;
+                // Detect player collisions
+                //
+                if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
+                {
+                    comboManager.player1LandedHit(player2.CharacterState);
+                    player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
+                    player1.hitEnemy();
+                    System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
+                }
+                else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
+                {
+                    comboManager.player2LandedHit(player1.CharacterState);
+                    player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
+                    player2.hitEnemy();
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.P))
+                {
+                    Console.WriteLine("Test STuff");
 
-            adjustCamera();
-            comboManager.decrementComboTimer();
-            base.Update(gameTime);
+                    player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+                    player1.CurrentHealth -= 10;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.O))
+                {
+                    cam.Move(new Vector2(1, 0));
+
+                }
+                elapsedTime += gameTime.ElapsedGameTime;
+
+                if (elapsedTime > TimeSpan.FromSeconds(1))
+                {
+                    elapsedTime -= TimeSpan.FromSeconds(1);
+                    frameRate = frameCounter;
+                    frameCounter = 0;
+                }
+                if (gameTime.IsRunningSlowly)
+                {
+                    Console.WriteLine("iS real slow");
+                }
+                // leftBorder.Width += 10;
+
+                adjustCamera();
+                comboManager.decrementComboTimer();
+                base.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -302,11 +315,8 @@ namespace MH4F
             spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
                   675, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
 
-            if (comboManager.displayCombo())
-            {
-                spriteBatch.DrawString(spriteFont, comboManager.Player1ComboNumber + "", new Vector2(33, 300), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
-                spriteBatch.DrawString(spriteFont, comboManager.Player1ComboNumber + "", new Vector2(32, 300), Color.White, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
-            }
+            comboManager.displayComboMessage(spriteBatch);
+          
             
             spriteBatch.End();
 

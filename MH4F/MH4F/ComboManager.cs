@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 namespace MH4F
 {
-    class ComboManager
+    public class ComboManager
     {
         private int player1ComboNumber = 0;
         private int player2ComboNumber = 0;
@@ -13,9 +14,16 @@ namespace MH4F
         private int TIME_TO_DISPLAY_COMBO = 50;
         private int comboTimer = 0;
 
-        public ComboManager()
-        {
+        ProrationStrategy ProrationStrategy { get; set; }
 
+        SpriteFont spriteFont;
+
+        public ComboManager(SpriteFont SpriteFont)
+        {
+            // By default we'll use a basic one. A better one can be supplied if needed
+            //
+            ProrationStrategy = new BasicProrationStrategy();
+            spriteFont = SpriteFont;
         }
 
         public int Player1ComboNumber
@@ -41,6 +49,23 @@ namespace MH4F
             return (comboTimer > 0);
         }
 
+        public void displayComboMessage(SpriteBatch spriteBatch)
+        {
+            if (displayCombo())
+            {
+                if (player1ComboNumber > 0)
+                {
+                    spriteBatch.DrawString(spriteFont, Player1ComboNumber + "", new Vector2(33, 300), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(spriteFont, Player1ComboNumber + "", new Vector2(32, 300), Color.White, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+                }
+                else if (player2ComboNumber > 0)
+                {
+                    spriteBatch.DrawString(spriteFont, Player2ComboNumber + "", new Vector2(33, 300), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(spriteFont, Player2ComboNumber + "", new Vector2(32, 300), Color.White, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+                }
+            }
+        }
+
         public void decrementComboTimer()
         {
             if (comboTimer > 0)
@@ -53,23 +78,21 @@ namespace MH4F
         {
             // No object reference for integers and I don't wanna anything goofy so have repetition;
             //
-            if (playerNumber == 1)
+            if (hitPlayersState != CharacterState.HIT)
             {
-                if (hitPlayersState != CharacterState.HIT)
-                {
-                    player1ComboNumber = 0;
-                }
+                player1ComboNumber = 0;
+                player2ComboNumber = 0;
+                ProrationStrategy.startCombo();
+            }
+            if (playerNumber == 1)
+            {  
                 if (player1ComboNumber == 0 || hitPlayersState == CharacterState.HIT)
                 {
                     player1ComboNumber++;
                 }
             }
             else
-            {
-                if (hitPlayersState != CharacterState.HIT)
-                {
-                    player2ComboNumber = 0;
-                }
+            {                
                 if (player2ComboNumber == 0 || hitPlayersState == CharacterState.HIT)
                 {
                     player2ComboNumber++;

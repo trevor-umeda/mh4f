@@ -12,7 +12,7 @@ namespace MH4F
     {
         bool displayShadow {get; set;}
 
-        public LongSwordPlayer(Texture2D texture, int xPosition, int yHeight) : base ( texture, xPosition, yHeight)
+        public LongSwordPlayer(Texture2D texture, int xPosition, int yHeight, ComboManager comboManager) : base ( texture, xPosition, yHeight, comboManager)
         {
             CurrentHealth = 1000;
             MaxHealth = 1000;
