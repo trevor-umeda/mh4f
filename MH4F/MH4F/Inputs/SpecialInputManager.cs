@@ -52,7 +52,7 @@ namespace MH4F
             }
             if(characterState != CharacterState.AIRBORNE)
             {
-                returnMove = inputManager.checkGroundMoves(direction, newKeyboardState);
+                returnMove = inputManager.checkGroundMoves(direction, newKeyboardState);                
             }
             else
             {
@@ -64,6 +64,11 @@ namespace MH4F
         {
             // input.Reverse();
             inputManager.registerGroundMove(name, input);
+        }
+
+        public void registerAirMove(String name, List<String> input)
+        {
+            inputManager.registerAirMove(name, input);
         }
     }
 }

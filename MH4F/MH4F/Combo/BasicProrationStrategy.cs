@@ -13,6 +13,8 @@ namespace MH4F
 
         private int comboLength { get; set; }
 
+        // Restart the combo
+        //
         public void startCombo()
         {
             DamageProrationValue = 1;
@@ -29,6 +31,20 @@ namespace MH4F
         {
             return (int)(hitInfo.Hitstun * HitStunProrationValue);
 
+        }
+
+        // Add a hit to the combo. For this basic/naive strategy all we care about is combo length
+        //
+        public void registerHit(HitInfo hitInfo)
+        {
+            comboLength += 1;
+            // Combo cannot go below 20% damage
+            //
+            if (DamageProrationValue > .3)
+            {
+                DamageProrationValue -= .1;
+            }
+            
         }
     }
 }

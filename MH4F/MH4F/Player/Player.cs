@@ -17,6 +17,8 @@ namespace MH4F
 
         ComboManager ComboManager { get; set; }
 
+        ThrowManager ThrowManager { get; set; }
+
         ControlSetting controlSetting;
 
         // The speed at which the sprite will close with it's target
@@ -85,13 +87,14 @@ namespace MH4F
         int timesJumped = 0;
 
         int untechTime = 0;
-        public Player(Texture2D texture, int xPosition, int yHeight, ComboManager comboManager)
+        public Player(Texture2D texture, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
         {
             sprite = new SpriteAnimationManager(texture);
             specialInputManager = new SpecialInputManager();
             Position = new Vector2(xPosition, GROUND_POS_Y - yHeight);
             ControlSetting = new ControlSetting();
             ComboManager = comboManager;
+            ThrowManager = throwManager;
         }
       
         public ControlSetting ControlSetting
@@ -295,6 +298,7 @@ namespace MH4F
                 }
                 else
                 {
+                    Console.WriteLine(moveName);
                     UnCrouch();
                     HasHitOpponent = false;
                     // Some janky logic to make sure you aren't air dashing when you shouldn't be
@@ -591,12 +595,12 @@ namespace MH4F
                 //
                 Sprite.CurrentAnimation = "hit";
                 Sprite.CurrentMoveAnimation.CurrentFrame = 0;
-                CurrentHealth -= hitInfo.Damage;
+                CurrentHealth -= ComboManager.calculateProratedDamage(hitInfo);
 
                 // Not sure if this a bad idea memory wise
                 //
                 HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
-                hit.HitStunCounter = hitInfo.Hitstun;
+                hit.HitStunCounter = ComboManager.calculateProratedHitStun(hitInfo);
                 hit.reset();
                 if (IsAirborne)
                 {
@@ -625,7 +629,7 @@ namespace MH4F
 
                     }
                 }
-                
+                ComboManager.registerHit(hitInfo);
             }
            
         }

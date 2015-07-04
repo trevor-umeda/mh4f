@@ -8,7 +8,7 @@ namespace MH4F
     public interface ProrationStrategy
     {
         void startCombo();
-        void registerHit();
+        void registerHit(HitInfo hitInfo);
         int calculateProratedDamage(HitInfo hitInfo);
         int calculateProratedHitStun(HitInfo hitInfo);
     }

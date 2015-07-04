@@ -17,7 +17,7 @@ namespace MH4F
         private Keys[] keysPressed;
 
         readonly String[] DIRECTIONS = {"up","down","left","right" };
-        readonly String[] ATTACKS = { "a", "b" };
+        readonly String[] ATTACKS = { "a", "b", "c"};
 
         List<MoveInput> groundMoveList;
         List<MoveInput> airMoveList;
@@ -31,6 +31,7 @@ namespace MH4F
             inputs = new InputQueue<Keys[]>();
             lastKeyboardState = new KeyboardState();
             groundMoveList = new List<MoveInput>();
+            airMoveList = new List<MoveInput>();
             dashList = new List<MoveInput>();
             // TODO: this is a terrible place to put these. find a better spot
             //
@@ -88,7 +89,7 @@ namespace MH4F
                     foreach (MoveInput dash in dashList)
                     {
 
-                        if (MoveInput.checkStringInputToKeyInput(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState, direction, controlSetting.Controls))
+                        if (MoveInput.checkStringInputToKeyInputForMovement(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState, direction, controlSetting.Controls))
                         {
                             dash.moveCurrentInputCommandIndex();
                             if (dash.CurrentInputCommandIndex >= dash.InputCommand.Count)
@@ -130,6 +131,13 @@ namespace MH4F
                 System.Diagnostics.Debug.WriteLine("B button pressed");
                 return true;
             }
+
+            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, controlSetting.Controls["c"]))
+            {
+                System.Diagnostics.Debug.WriteLine("C button pressed");
+                return true;
+            }
+
             return false;
         }
 
@@ -137,6 +145,11 @@ namespace MH4F
         {
            // input.Reverse();
             groundMoveList.Add(new MoveInput(name, input));
+        }
+
+        public void registerAirMove(String name, List<String> input)
+        {
+            airMoveList.Add(new MoveInput(name, input));
         }
 
         public void enqueueState(KeyboardState state, Dictionary<string, Keys> controls)

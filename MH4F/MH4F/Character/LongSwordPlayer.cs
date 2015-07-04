@@ -34,6 +34,10 @@ namespace MH4F
             {
                 Fireball();
             }
+            else if (moveName == "backfireball")
+            {
+                BackFireball();
+            }
             else
             {
                 base.performGroundSpecialMove(ks, moveName);
@@ -47,6 +51,13 @@ namespace MH4F
             Dash();
             
         }
+
+        public void BackFireball()
+        {
+            displayShadow = true;
+            Backstep();
+        }
+
         public override void Backstep()
         {
             int backStepVel = 8;

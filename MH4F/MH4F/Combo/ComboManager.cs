@@ -26,6 +26,21 @@ namespace MH4F
             spriteFont = SpriteFont;
         }
 
+        public void registerHit(HitInfo hitInfo)
+        {
+            ProrationStrategy.registerHit(hitInfo);
+        }
+
+        public int calculateProratedDamage(HitInfo hitInfo)
+        {
+            return ProrationStrategy.calculateProratedDamage(hitInfo);
+        }
+
+        public int calculateProratedHitStun(HitInfo hitInfo)
+        {
+            return ProrationStrategy.calculateProratedHitStun(hitInfo);
+        }
+
         public int Player1ComboNumber
         {
             get { return player1ComboNumber; }
