@@ -16,7 +16,7 @@ namespace MH4F
         String ForwardThrowWhiffMove { get; }
         String BackThrowWhiffMove { get; }
 
-        void updateCharacterState(int playerNum, CharacterState characterState);
+        void updateCharacterState(int playerNum, Player player);
         bool isValidThrow(int playerNum);       
     }
 }

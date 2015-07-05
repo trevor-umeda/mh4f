@@ -200,6 +200,10 @@ namespace MH4F
 
                 keepPlayersInBound();
 
+                throwManager.updateCharacterState(1, player1);
+                throwManager.updateCharacterState(2, player2);
+
+
                 // Detect player collisions
                 //
                 if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
@@ -457,11 +461,11 @@ namespace MH4F
                 {
                     String spriteLine = sreader.ReadLine();
                     Console.WriteLine(spriteLine);
-                    if (spriteLine == "-SPRITEANIMATIONS-")
+                    if (spriteLine.Contains("-SPRITEANIMATIONS-"))
                     {
                         readingAnimations = true;
                     }
-                    else if (spriteLine == "-SPRITESHEET-")
+                    else if (spriteLine.Contains("-SPRITESHEET-"))
                     {
                         readingAnimations = false;
                     }
@@ -597,7 +601,27 @@ namespace MH4F
                         hitInfo.AirUntechTime = int.Parse(sHb[6]);
                         hitInfo.AirXVelocity = int.Parse(sHb[7]);
                         hitInfo.AirYVelocity = -int.Parse(sHb[8]);
-
+                        if (sHb.Length > 9)
+                        {
+                            if (sHb[9] == "true")
+                            {
+                                hitInfo.ForceAirborne = true;
+                            }
+                        }
+                        if (sHb.Length > 10)
+                        {
+                            if (sHb[10] == "true")
+                            {
+                                hitInfo.FreezeOpponent = true;
+                            }
+                        }
+                        if (sHb.Length > 11)
+                        {
+                            if (sHb[11] == "true")
+                            {
+                                hitInfo.Unblockable = true;
+                            }
+                        }
                         player.SetAttackMoveProperties(sHb[0], hitInfo);
                     }
                 }

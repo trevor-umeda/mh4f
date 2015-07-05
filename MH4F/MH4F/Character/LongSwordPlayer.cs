@@ -18,6 +18,9 @@ namespace MH4F
             CurrentHealth = 1000;
             MaxHealth = 1000;
             displayShadow = false;
+
+            ThrowRange = 200;
+            
         }
 
         public override void cleanUp()

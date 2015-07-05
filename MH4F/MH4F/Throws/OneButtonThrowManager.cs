@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 namespace MH4F
 {
@@ -17,15 +18,36 @@ namespace MH4F
         private CharacterState player1State;
         private CharacterState player2State;
 
-        public void updateCharacterState(int playerNum, CharacterState characterState)
+        private Vector2 player1Position;
+        private Vector2 player2Position;
+
+        // TODO see if this is different and not a constant
+        //
+        private int player1ThrowRange;
+        private int player2ThrowRange;
+
+        public void updateCharacterState(int playerNum, Player player)
         {
             if (playerNum == 1)
             {
-                player1State = characterState;
+                player1State = player.CharacterState;
+                player1Position = player.Position;
+                // Super hacky way to lazy initialize throw range without modifying contracts
+                // TODO maybe make this less hacky?
+                //
+                if (player1ThrowRange == null || player1ThrowRange == 0)
+                {
+                    player1ThrowRange = player.ThrowRange;
+                }
             }
             else
             {
-                player2State = characterState;
+                player2State = player.CharacterState;
+                player2Position = player.Position;
+                if (player2ThrowRange == null || player2ThrowRange == 0)
+                {
+                    player2ThrowRange = player.ThrowRange;
+                }
             }
         }
 
@@ -68,9 +90,12 @@ namespace MH4F
             //
             if (playerNum == 1)
             {
-
+                if (Math.Abs(player2Position.X - player1Position.X) < player1ThrowRange)
+                {
+                    return true;
+                }
             }
-            return true;
+            return false;
         }
         
         private bool checkPlayerThrowState()

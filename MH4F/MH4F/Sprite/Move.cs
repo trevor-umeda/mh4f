@@ -20,7 +20,7 @@ namespace MH4F
 
         private HitInfo hitInfo;
 
-        private String NextMoveOnHit { get; set; }
+        public String NextMoveOnHit { get; set; }
 
         public Hitbox CurrentHitboxInfo
         {
@@ -58,33 +58,7 @@ namespace MH4F
         {
             hurtboxInfo[index] = hitbox;
         }
-      
-
-        public Move(Rectangle FirstFrame, int Frames)
-        {
-            RectInitialFrame = FirstFrame;
-            FrameCount = Frames;
-            hitboxInfo = new Hitbox[Frames];
-            hurtboxInfo = new Hitbox[Frames];
-        }
-
-        public Move(int X, int Y, int Width, int Height, int Frames)
-        {
-            RectInitialFrame = new Rectangle(X, Y, Width, Height);
-            FrameCount = Frames;
-            hitboxInfo = new Hitbox[Frames];
-            hurtboxInfo = new Hitbox[Frames];
-        }
-
-        public Move(int X, int Y, int Width, int Height, int Frames, float frameLength)
-        {
-            RectInitialFrame = new Rectangle(X, Y, Width, Height);
-            FrameCount = Frames;
-            hitboxInfo = new Hitbox[Frames];
-            hurtboxInfo = new Hitbox[Frames];
-            FrameLength = frameLength;
-        }
-
+             
         public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float frameLength, CharacterState CharacterState)
         {
             Texture = texture;
@@ -119,17 +93,6 @@ namespace MH4F
             characterState = CharacterState;
             IsAttack = IsAnAttack;
             NextAnimation = strNextAnimation;
-        }
-
-        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float frameLength, bool IsAnAttack)
-        {
-            Texture = texture;
-            RectInitialFrame = new Rectangle(X, Y, Width, Height);
-            FrameCount = Frames;
-            hitboxInfo = new Hitbox[Frames];
-            hurtboxInfo = new Hitbox[Frames];
-            FrameLength = frameLength;
-            IsAttack = IsAnAttack;
         }
 
         public Move(Texture2D texture, int X, int Y,

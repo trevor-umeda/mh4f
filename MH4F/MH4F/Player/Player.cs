@@ -19,6 +19,8 @@ namespace MH4F
 
         ThrowManager ThrowManager { get; set; }
 
+        public int ThrowRange { get; set; }
+
         ControlSetting controlSetting;
 
         int PlayerNumber { get; set; }
@@ -170,7 +172,7 @@ namespace MH4F
             SpecialInputManager.registerGroundMove(name, input);
         }
 
-        public void SetUpUniversalAttackMoves()
+        public virtual void SetUpUniversalAttackMoves()
         {
             // TODO see if 6b is universal. if not it complicates things...
             // All these commands are universal so input em here! Is 6B a universal? hmm....
@@ -624,12 +626,11 @@ namespace MH4F
         {
             //Check if blocked or not
             //int hitStun, int blockStun, Hitzone hitzone, float? xVel, float? yVel
-            if(isAttackBlocked(keyState, hitInfo.Hitzone))
+            if(!hitInfo.Unblockable && isAttackBlocked(keyState, hitInfo.Hitzone))
             {
                 Sprite.CurrentAnimation = "block";
                 HitAnimation block = (HitAnimation)Sprite.CurrentMoveAnimation;
                 block.HitStunCounter = hitInfo.Blockstun;
-
             }
             else
             {
@@ -639,38 +640,48 @@ namespace MH4F
                 Sprite.CurrentMoveAnimation.CurrentFrame = 0;
                 CurrentHealth -= ComboManager.calculateProratedDamage(hitInfo);
 
-                // Not sure if this a bad idea memory wise
-                //
-                HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
-                hit.HitStunCounter = ComboManager.calculateProratedHitStun(hitInfo);
-                hit.reset();
-                if (IsAirborne)
+                if (hitInfo.FreezeOpponent)
                 {
-                    untechTime = hitInfo.AirUntechTime;
-                    Sprite.CurrentAnimation = "falldown";
-                    if (hitInfo.AirXVelocity != null && hitInfo.AirYVelocity != null)
-                    {
-                        if (directionFacing == Direction.Right)
-                        {
-                            CurrentVelocity = new Vector2((float)-hitInfo.AirXVelocity, (float)hitInfo.AirYVelocity);
-                        }
-                        else
-                        {
-                            CurrentVelocity = new Vector2((float)hitInfo.AirXVelocity, (float)hitInfo.AirYVelocity);
-                        }
-                    }
+                    Sprite.CurrentAnimation = "freeze";
+
                 }
                 else
                 {
-                    GivePlayerMomentum(5, 4, false);
-                    if (hitInfo.IsHardKnockDown)
+                    // Not sure if this a bad idea memory wise
+                    //
+                    HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
+                    hit.HitStunCounter = ComboManager.calculateProratedHitStun(hitInfo);
+                    hit.reset();
+                    if (IsAirborne || hitInfo.ForceAirborne)
                     {
-                        // Make em HARD DOWN
-                        //
-                        Sprite.CurrentAnimation = "knockdown";
+                        untechTime = hitInfo.AirUntechTime;
+                        Sprite.CurrentAnimation = "falldown";
+                        Position += new Vector2( 0,-100);
+                        if (hitInfo.AirXVelocity != null && hitInfo.AirYVelocity != null)
+                        {
+                            if (directionFacing == Direction.Right)
+                            {
+                                CurrentVelocity = new Vector2((float)-hitInfo.AirXVelocity, (float)hitInfo.AirYVelocity);
+                            }
+                            else
+                            {
+                                CurrentVelocity = new Vector2((float)hitInfo.AirXVelocity, (float)hitInfo.AirYVelocity);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        GivePlayerMomentum(5, 4, false);
+                        if (hitInfo.IsHardKnockDown)
+                        {
+                            // Make em HARD DOWN
+                            //
+                            Sprite.CurrentAnimation = "knockdown";
 
+                        }
                     }
                 }
+               
                 ComboManager.registerHit(hitInfo);
             }
            
@@ -701,6 +712,23 @@ namespace MH4F
         {
             HasHitOpponent = true;
             giveSpecialMeter(10);
+
+            if (Sprite.CurrentAnimation == "forwardthrow")
+            {
+                Sprite.CurrentAnimation = "forwardthrowattack";
+
+            }
+            else if (Sprite.CurrentAnimation == "backthrow")
+            {
+
+            }
+
+            // Maybe we'll use this later. Hardcode this for now
+            //
+            if (Sprite.CurrentMoveAnimation.NextMoveOnHit != null)
+            {
+                sprite.CurrentAnimation = Sprite.CurrentMoveAnimation.NextMoveOnHit;
+            }
         }
 
         public void giveSpecialMeter(int amount)

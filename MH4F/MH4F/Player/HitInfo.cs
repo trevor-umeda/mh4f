@@ -30,6 +30,12 @@ namespace MH4F
 
         private bool hardKnockDown = false;
 
+        private bool freezeOpponent = false;
+
+        private bool unblockable = false;
+
+        private bool forceAirborne = false;
+
         private int groundXMovement = 0;
         private int groundYMovement = 0;
 
@@ -101,6 +107,24 @@ namespace MH4F
         {
             get { return airYVelocity; }
             set { airYVelocity = value; }
+        }
+
+        public bool FreezeOpponent
+        {
+            get { return freezeOpponent; }
+            set { freezeOpponent = value; }
+        }
+
+        public bool Unblockable
+        {
+            get { return unblockable; }
+            set { unblockable = value; }
+        }
+       
+        public bool ForceAirborne
+        {
+            get { return forceAirborne; }
+            set { forceAirborne = value; }
         }
 
     }

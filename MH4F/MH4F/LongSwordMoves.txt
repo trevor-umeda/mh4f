@@ -1,3 +1,6 @@
-﻿- MoveName , hitstun , blockstun , hitzone , damage , IsHardKnockDown , AirUntechTime, AirXVelocity , AirYVelocity -
+﻿- MoveName , hitstun , blockstun , hitzone , damage , IsHardKnockDown , AirUntechTime, AirXVelocity , AirYVelocity , ForceAirborne ,Freeze Move, Unblockable-
 aattack;6;2;MID;50;false;3;5;5
 battack;5;10;MID;100;false;5;7;7
+forwardthrow;5;10;MID;0;false;5;7;7;;true;true
+backthrow;5;10;MID;0;false;5;7;7;;true;true
+forwardthrowattack;5;10;MID;100;false;8000;1000;300;true

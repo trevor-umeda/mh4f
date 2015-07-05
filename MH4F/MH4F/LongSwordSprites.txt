@@ -7,7 +7,7 @@ FALLDOWN
 FALLING
 DOWN
 HITGROUND
--SPRITEANIMATIONS-
+-SPRITEANIMATIONS- Image Name - Name - X Image Start - Y Image Start - Width - Height - Frame Count - Frame Length - Character State - Next Animation - Is Attack
 combinedsprite;standing;0;0;144;288;8;0.1;STANDING
 combinedsprite;backwalk;0;288;244;288;7;0.1;STANDING
 combinedsprite;crouching;0;576;176;288;2;0.1;CROUCHING;crouchingidle
@@ -22,10 +22,14 @@ combinedsprite;aattack;0;2708;264;280;9;0.05;STANDING;true
 combinedsprite;fireball;0;2708;264;280;9;0.05;STANDING;true
 combinedsprite;backfireball;0;2708;264;280;9;0.05;STANDING;true
 combinedsprite;battack;0;2708;264;280;9;0.044;STANDING;true
+combinedsprite;forwardcattack;0;2708;264;280;9;0.044;STANDING;true
 combinedsprite;forwardthrow;0;2708;264;280;1;0.044;STANDING;true
+combinedsprite;forwardthrowattack;0;2708;264;280;9;0.05;STANDING;true
+combinedsprite;backthrow;0;2708;264;280;1;0.044;STANDING;true
 combinedsprite;backstep;0;2988;240;280;7;0.05;BACKSTEP;true
 combinedsprite;dash;0;3268;320;280;13;0.055;DASHING
 combinedsprite;hit;0;3548;260;300;11;0.055;HIT;standing
+combinedsprite;freeze;0;3548;260;300;1;0.055;HIT
 standblock;block;0;0;160;280;1;0.1;HIT,standing
 KNOCKDOWN;knockdown;0;0;300;280;8;0.1;KNOCKDOWN;wakeup
 WAKEUP;wakeup;0;0;280;272;7;0.1;KNOCKDOWN;standing
