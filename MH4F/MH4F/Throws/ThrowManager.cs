@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.Xna.Framework.Input;
 namespace MH4F
 {
-    interface ThrowManager
+    public interface ThrowManager
     {
+        CharacterState Player1State { get; set; }
+        CharacterState Player2State { get; set; }
 
+        String ForwardThrowInput { get; }
+        String BackThrowInput { get; }
+
+        String ForwardThrowWhiffMove { get; }
+        String BackThrowWhiffMove { get; }
+
+        void updateCharacterState(int playerNum, CharacterState characterState);
+        bool isValidThrow(int playerNum);       
     }
 }

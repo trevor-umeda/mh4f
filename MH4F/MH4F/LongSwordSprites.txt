@@ -22,6 +22,7 @@ combinedsprite;aattack;0;2708;264;280;9;0.05;STANDING;true
 combinedsprite;fireball;0;2708;264;280;9;0.05;STANDING;true
 combinedsprite;backfireball;0;2708;264;280;9;0.05;STANDING;true
 combinedsprite;battack;0;2708;264;280;9;0.044;STANDING;true
+combinedsprite;forwardthrow;0;2708;264;280;1;0.044;STANDING;true
 combinedsprite;backstep;0;2988;240;280;7;0.05;BACKSTEP;true
 combinedsprite;dash;0;3268;320;280;13;0.055;DASHING
 combinedsprite;hit;0;3548;260;300;11;0.055;HIT;standing

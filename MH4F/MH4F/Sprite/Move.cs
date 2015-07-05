@@ -20,6 +20,8 @@ namespace MH4F
 
         private HitInfo hitInfo;
 
+        private String NextMoveOnHit { get; set; }
+
         public Hitbox CurrentHitboxInfo
         {
             get { return hitboxInfo[CurrentFrame]; }

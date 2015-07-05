@@ -12,10 +12,10 @@ namespace MH4F
     {
         private InputManager inputManager;
         private ControlSetting controlSetting;
-        
+       
         public SpecialInputManager()
         {
-            inputManager = new InputManager();
+            inputManager = new InputManager();   
         }
 
         public ControlSetting ControlSetting

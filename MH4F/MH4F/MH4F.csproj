@@ -121,7 +121,7 @@
     <Compile Include="Player\Hitbox.cs" />
     <Compile Include="Player\HitInfo.cs" />
     <Compile Include="Player\Hitzone.cs" />
-    <Compile Include="LongSwordPlayer.cs" />
+    <Compile Include="Character\LongSwordPlayer.cs" />
     <Compile Include="Sprite\ParticleAnimation.cs" />
     <Compile Include="Combo\ProrationStrategy.cs" />
     <Compile Include="Inputs\SpecialInputManager.cs" />
@@ -134,8 +134,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Throws\SpriteAnimation.cs" />
-    <Compile Include="Throws\SpriteAnimationManager.cs" />
+    <Compile Include="Sprite\SpriteAnimation.cs" />
+    <Compile Include="Sprite\SpriteAnimationManager.cs" />
     <Compile Include="Throws\ThrowManager.cs" />
     <Compile Include="Throws\TwoButtonThrowManager.cs" />
   </ItemGroup>

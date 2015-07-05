@@ -5,3 +5,4 @@ aattack;6;73;139;88;82
 aattack;4;56;66;88;82
 battack;5;56;66;88;82
 battack;6;73;139;88;82
+forwardthrow;0;72;144;90;288

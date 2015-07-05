@@ -21,6 +21,8 @@ namespace MH4F
 
         ControlSetting controlSetting;
 
+        int PlayerNumber { get; set; }
+
         // The speed at which the sprite will close with it's target
         float speed = 1f;
 
@@ -87,14 +89,16 @@ namespace MH4F
         int timesJumped = 0;
 
         int untechTime = 0;
-        public Player(Texture2D texture, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
+        public Player(Texture2D texture, int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
         {
-            sprite = new SpriteAnimationManager(texture);
-            specialInputManager = new SpecialInputManager();
+            sprite = new SpriteAnimationManager(texture);            
+            PlayerNumber = playerNumber;
             Position = new Vector2(xPosition, GROUND_POS_Y - yHeight);
-            ControlSetting = new ControlSetting();
+            
             ComboManager = comboManager;
             ThrowManager = throwManager;
+            specialInputManager = new SpecialInputManager();
+            ControlSetting = new ControlSetting();
         }
       
         public ControlSetting ControlSetting
@@ -164,6 +168,24 @@ namespace MH4F
         public void RegisterGroundMove(String name, List<String> input)
         {
             SpecialInputManager.registerGroundMove(name, input);
+        }
+
+        public void SetUpUniversalAttackMoves()
+        {
+            // TODO see if 6b is universal. if not it complicates things...
+            // All these commands are universal so input em here! Is 6B a universal? hmm....
+            //
+            RegisterGroundMove("forwardthrow", new List<string> { ThrowManager.ForwardThrowInput });
+            RegisterGroundMove("backthrow", new List<string> { ThrowManager.BackThrowInput });
+            RegisterGroundMove("forwardaattack", new List<string> { "6A" });
+            RegisterGroundMove("forwardbattack", new List<string> { "6B" });
+            RegisterGroundMove("forwardcattack", new List<string> { "6C" });
+            RegisterGroundMove("crouchaattack", new List<string> { "2A" });
+            RegisterGroundMove("crouchbattack", new List<string> { "2B" });
+            RegisterGroundMove("crouchcattack", new List<string> { "2C" });
+            RegisterGroundMove("cattack", new List<string> { "C" });
+            RegisterGroundMove("battack", new List<string> { "B" });
+            RegisterGroundMove("aattack", new List<string> { "A" });
         }
 
         public void SetAttackMoveProperties(String moveName, HitInfo hitInfo)
@@ -298,10 +320,30 @@ namespace MH4F
                 }
                 else
                 {
-                    Console.WriteLine(moveName);
                     UnCrouch();
                     HasHitOpponent = false;
-                    // Some janky logic to make sure you aren't air dashing when you shouldn't be
+                    // Set the current animation to be our special move
+                    //
+
+                    // If we're trying to do a throw, see if we actually can. if not then change it.
+                    //
+                    if (moveName == "forwardthrow" || moveName == "backthrow")
+                    {
+                        if (!ThrowManager.isValidThrow(PlayerNumber))
+                        {
+                            if (moveName == "forwardthrow")
+                            {
+                                moveName = ThrowManager.ForwardThrowWhiffMove;
+                                Console.WriteLine("OOPS WAS NOT A THROW DOING FORWARD C");
+                            }
+                            else
+                            {
+                                moveName = ThrowManager.BackThrowWhiffMove;
+                            }
+                        }
+                    }
+
+                    // Also some janky logic to make sure you aren't air dashing when you shouldn't be
                     // "
                     if (moveName != "backstep" && moveName != "dash")
                     {

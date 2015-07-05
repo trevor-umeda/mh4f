@@ -61,7 +61,7 @@ namespace MH4F
         }
         public Boolean displayCombo()
         {
-            return (comboTimer > 0);
+            return (comboTimer > 0 && (player2ComboNumber > 1 || player1ComboNumber > 1));
         }
 
         public void displayComboMessage(SpriteBatch spriteBatch)

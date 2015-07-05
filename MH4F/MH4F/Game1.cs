@@ -73,9 +73,7 @@ namespace MH4F
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
+        {           
             base.Initialize();
         }
 
@@ -96,8 +94,7 @@ namespace MH4F
             comboManager = new ComboManager(spriteFont);
 
             throwManager = new OneButtonThrowManager();
-
-            // TODO: use this.Content to load your game content here
+       
             standing = Content.Load<Texture2D>("combinedsprite");
             Texture2D blocking = Content.Load<Texture2D>("standblock");
             Texture2D knockdown = Content.Load<Texture2D>("KNOCKDOWN");
@@ -108,7 +105,7 @@ namespace MH4F
 
             background = Content.Load<Texture2D>("back_ggxxac_london");
 
-            player1 = new LongSwordPlayer(standing, 100, 288, comboManager, throwManager);
+            player1 = new LongSwordPlayer(standing, 1, 100, 288, comboManager, throwManager);
             loadCharacterData("LongSword", player1);
                     
             player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
@@ -117,16 +114,7 @@ namespace MH4F
             // A throw can be an activateable move... But for not the calculation of that should be elsewhere
             //
             //player1.RegisterGroundMove("throw", new List<string> { "6C" });
-            player1.RegisterGroundMove("forwardaattack", new List<string> { "6A" });
-            player1.RegisterGroundMove("forwardbattack", new List<string> { "6B" });
-            player1.RegisterGroundMove("forwardcattack", new List<string> { "6C" });
-           // player1.RegisterGroundMove("forwardcattack", new List<string> { "4C" });
-            player1.RegisterGroundMove("crouchaattack", new List<string> { "2A" });
-            player1.RegisterGroundMove("crouchbattack", new List<string> { "2B" });
-            player1.RegisterGroundMove("crouchcattack", new List<string> { "2C" });
-            player1.RegisterGroundMove("cattack", new List<string> { "C" });
-            player1.RegisterGroundMove("battack", new List<string> { "B" });
-            player1.RegisterGroundMove("aattack", new List<string> { "A" });
+            player1.SetUpUniversalAttackMoves();
 
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
@@ -145,15 +133,13 @@ namespace MH4F
             player1.ControlSetting.setControl("b", Keys.S);
             player1.ControlSetting.setControl("c", Keys.D);
 
-            player2 = new LongSwordPlayer(standing, 600, 288, comboManager);
+            player2 = new LongSwordPlayer(standing, 2, 600, 288, comboManager, throwManager);
 
             loadCharacterData("LongSword", player2);
 
             player2.RegisterGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
-            player2.RegisterGroundMove("throw", new List<string> { "6C" });
-            player2.RegisterGroundMove("battack", new List<string> { "B" });
-            player2.RegisterGroundMove("aattack", new List<string> { "A" });
-           
+
+            player2.SetUpUniversalAttackMoves();
 
             player2.Sprite.CurrentAnimation = "standing";
             player2.Direction = Direction.Left;
@@ -205,8 +191,7 @@ namespace MH4F
 
             if (frameTimer > frameLength)
             {
-                frameTimer = 0.0f;
-                // TODO: Add your update logic here
+                frameTimer = 0.0f;             
                 player1.Update(gameTime, Keyboard.GetState());
 
                 player2.Update(gameTime, Keyboard.GetState());
@@ -277,7 +262,6 @@ namespace MH4F
             Color translucentRed = Color.Red * 0.5f;
             GraphicsDevice.Clear(Color.CornflowerBlue);
            
-            // TODO: Add your drawing code here
             //spriteBatch.Begin();
             spriteBatch.Begin(SpriteSortMode.Deferred,
                         BlendState.AlphaBlend,
