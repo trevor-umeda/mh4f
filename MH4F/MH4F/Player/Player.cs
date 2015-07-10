@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework.Audio;
 namespace MH4F
 {
     public abstract class Player
@@ -18,6 +18,8 @@ namespace MH4F
         ComboManager ComboManager { get; set; }
 
         ThrowManager ThrowManager { get; set; }
+
+        SoundManager SoundManager { get; set; }
 
         public int ThrowRange { get; set; }
 
@@ -73,12 +75,23 @@ namespace MH4F
 
         bool isInInterruptableAnimation = false;
 
-        readonly Vector2 gravityModifierV = new Vector2(0, 900f);
 
-        readonly Vector2 initialJumpSpeed = new Vector2(0, -600);
+        //
+        /// <summary>
+        ///  Configuralbe stuffs
+        /// </summary>
+        readonly Vector2 gravityModifierV = new Vector2(0, 1500f);
+
+        readonly Vector2 initialJumpSpeed = new Vector2(0, -800);
 
         readonly float jumpHorizontalSpeed = 200f;
 
+        public int BackAirDashVel { get; set; }
+        public int AirDashVel { get; set; }
+        public int BackStepVel { get; set; }
+        public int DashVel { get; set; }
+        public int BackWalkVel { get; set; }
+        public int WalkVel { get; set; }
         // Some hacky stuff to give a player slight momentum
         //
         int momentumCounter = 0;
@@ -100,6 +113,7 @@ namespace MH4F
             ComboManager = comboManager;
             ThrowManager = throwManager;
             specialInputManager = new SpecialInputManager();
+            SoundManager = new SoundManager();
             ControlSetting = new ControlSetting();
         }
       
@@ -199,6 +213,11 @@ namespace MH4F
         {
             HitInfo hitInfo = sprite.SetAttackMoveProperties(moveName, hitstun, blockstun, hitzone);
             hitInfo.Damage = damage;
+        }
+
+        public void AddSound(SoundEffect sound, String name)
+        {
+            SoundManager.AddSound(sound, name);
         }
 
         // Methods to modify player movement and such
@@ -349,10 +368,12 @@ namespace MH4F
                     // "
                     if (moveName != "backstep" && moveName != "dash")
                     {
+                        
                         Sprite.CurrentAnimation = moveName;
                     }
                     else if(timesJumped < 1)
                     {
+                        SoundManager.PlaySound(moveName);
                         Sprite.CurrentAnimation = moveName;
                         if (IsAirborne)
                         {
@@ -451,11 +472,27 @@ namespace MH4F
            cleanUp();
         }
         public virtual void Backstep()
-        {  
+        {
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(BackAirDashVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(-BackAirDashVel, 0);
+            }
         }
         public virtual void Dash()
         {
-            
+
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(-DashVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(DashVel, 0);
+            }
         }
 
         public virtual void cleanUp()
@@ -483,7 +520,7 @@ namespace MH4F
         }
 
         public virtual void AirBackdash()
-        {
+        {           
             CurrentVelocity = new Vector2(0, 0);
             if (Sprite.isLastFrameOfAnimation())
             {
@@ -496,6 +533,15 @@ namespace MH4F
                     CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 200); ;
                 }
             }
+            
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(BackStepVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(-BackStepVel, 0);
+            }
         }
 
         public virtual void AirDash()
@@ -506,11 +552,27 @@ namespace MH4F
         public virtual void BackWalk()
         {
             Sprite.CurrentAnimation = "backwalk";
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(BackWalkVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(-BackWalkVel, 0);
+            }
         }
 
         public virtual void ForwardWalk()
         {
             Sprite.CurrentAnimation = "walk";
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(-WalkVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(WalkVel, 0);
+            }
         }
 
         public virtual void Neutral()
@@ -712,11 +774,10 @@ namespace MH4F
         {
             HasHitOpponent = true;
             giveSpecialMeter(10);
-
+            SoundManager.PlaySound(Sprite.CurrentAnimation);
             if (Sprite.CurrentAnimation == "forwardthrow")
             {
                 Sprite.CurrentAnimation = "forwardthrowattack";
-
             }
             else if (Sprite.CurrentAnimation == "backthrow")
             {

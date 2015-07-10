@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Combo\BasicProrationStrategy.cs" />
     <Compile Include="Camera2d.cs" />
+    <Compile Include="Sound\SoundManager.cs" />
     <Compile Include="Throws\OneButtonThrowManager.cs" />
     <Compile Include="Combo\ComboManager.cs" />
     <Compile Include="Inputs\ControlSetting.cs" />

@@ -47,6 +47,8 @@ namespace MH4F
         int frameRate = 0;
         int frameCounter = 0;
 
+        private SoundEffect effect;
+
         // Amount of time (in seconds) to display each frame
         private float frameLength = 0.016f;
 
@@ -55,6 +57,7 @@ namespace MH4F
         private float frameTimer = 0.0f;
 
         TimeSpan elapsedTime = TimeSpan.Zero;
+        SoundEffectInstance soundEffectInstance;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -169,6 +172,13 @@ namespace MH4F
             testHitInfo.AirUntechTime = 8000;
             testHitInfo.AirXVelocity = 80;
             testHitInfo.AirYVelocity = -100;
+
+            effect = Content.Load<SoundEffect>("slap_large");
+            player1.AddSound(effect, "aattack");
+            player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
+
+            Song song = Content.Load<Song>("bgm"); 
+            //MediaPlayer.Play(song);
         }
 
         /// <summary>
@@ -189,8 +199,8 @@ namespace MH4F
         {
             frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (frameTimer > frameLength)
-            {
+          //  if (frameTimer > frameLength)
+            //{
                 frameTimer = 0.0f;             
                 player1.Update(gameTime, Keyboard.GetState());
 
@@ -207,7 +217,7 @@ namespace MH4F
                 // Detect player collisions
                 //
                 if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
-                {
+                { 
                     comboManager.player1LandedHit(player2.CharacterState);
                     player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
                     player1.hitEnemy();
@@ -215,6 +225,7 @@ namespace MH4F
                 }
                 else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
                 {
+                
                     comboManager.player2LandedHit(player1.CharacterState);
                     player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
                     player2.hitEnemy();
@@ -226,12 +237,6 @@ namespace MH4F
                     player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
                     player1.CurrentHealth -= 10;
                 }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.O))
-                {
-                    cam.Move(new Vector2(1, 0));
-
-                }
                 elapsedTime += gameTime.ElapsedGameTime;
 
                 if (elapsedTime > TimeSpan.FromSeconds(1))
@@ -240,16 +245,13 @@ namespace MH4F
                     frameRate = frameCounter;
                     frameCounter = 0;
                 }
-                if (gameTime.IsRunningSlowly)
-                {
-                    Console.WriteLine("iS real slow");
-                }
+
                 // leftBorder.Width += 10;
 
                 adjustCamera();
                 comboManager.decrementComboTimer();
                 base.Update(gameTime);
-            }
+            //}
         }
 
         /// <summary>

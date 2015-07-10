@@ -10,17 +10,24 @@ namespace MH4F
 {
     public class LongSwordPlayer : Player
     {
-        bool displayShadow {get; set;}
+        bool DisplayShadow { get;  set;}
 
         public LongSwordPlayer(Texture2D texture, int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager) 
             : base ( texture, playerNumber, xPosition, yHeight, comboManager, throwManager)
         {
             CurrentHealth = 1000;
             MaxHealth = 1000;
-            displayShadow = false;
+            DisplayShadow = false;
 
+            // TODO make these have to be set for every character.
+            //
             ThrowRange = 200;
-            
+            BackAirDashVel = 8;
+            AirDashVel = 8;
+            BackStepVel = 8;
+            DashVel = 8;
+            BackWalkVel = 3;
+            WalkVel = 5;
         }
 
         public override void cleanUp()
@@ -28,7 +35,7 @@ namespace MH4F
             base.cleanUp();
             if (!Sprite.CurrentMoveAnimation.IsAttack)
             {
-                displayShadow = false;
+                DisplayShadow = false;
             }
         }
 
@@ -50,90 +57,42 @@ namespace MH4F
 
         public void Fireball()
         {
-           
-            displayShadow = true;
-            Dash();
-            
+            DisplayShadow = true;
+            Dash();          
         }
 
         public void BackFireball()
         {
-            displayShadow = true;
+            DisplayShadow = true;
             Backstep();
         }
 
         public override void Backstep()
         {
-            int backStepVel = 8;
-            if (Direction == Direction.Left)
-            {
-                Sprite.MoveBy(backStepVel, 0);
-            }
-            else
-            {
-                Sprite.MoveBy(-backStepVel, 0);
-            }
-        }
-
-        public override void AirBackdash()
-        {
-            base.AirBackdash();
-            int backStepVel = 8;
-            if (Direction == Direction.Left)
-            {
-                Sprite.MoveBy(backStepVel, 0);
-            }
-            else
-            {
-                Sprite.MoveBy(-backStepVel, 0);
-            }
+            base.Backstep();
         }
 
         public override void Dash()
         {
-            int dashVel = 4;
-            if (Direction == Direction.Left)
-            {
-                Sprite.MoveBy(-dashVel, 0);
-            }
-            else
-            {
-                Sprite.MoveBy(dashVel, 0);
-            }
+            base.Dash();
 
             GivePlayerMomentum(7, 3, true);      
         }
         public override void BackWalk()
         {
             base.BackWalk();
-            int dashVel = 3;
-            if (Direction == Direction.Left)
-            {
-                Sprite.MoveBy(dashVel, 0);
-            }
-            else
-            {
-                Sprite.MoveBy(-dashVel, 0);
-            }
+            
         }
 
         public override void ForwardWalk()
         {
             base.ForwardWalk();
-            int dashVel = 3;
-            if (Direction == Direction.Left)
-            {
-                Sprite.MoveBy(-dashVel, 0);
-            }
-            else
-            {
-                Sprite.MoveBy(dashVel, 0);
-            }
+            
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             Sprite.Draw(spriteBatch, 0, 0, Direction);
-            if (displayShadow)
+            if (DisplayShadow)
             {
                 Sprite.shadowDraw(spriteBatch, -9, 0, Direction);
             }
