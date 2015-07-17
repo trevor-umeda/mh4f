@@ -22,6 +22,9 @@ namespace MH4F
         List<MoveInput> groundMoveList;
         List<MoveInput> airMoveList;
         List<MoveInput> dashList;
+
+        GatlingTable gatlingTable;
+
         public KeyboardState LastKeyboardState
         {
             get { return lastKeyboardState; }
@@ -33,6 +36,7 @@ namespace MH4F
             groundMoveList = new List<MoveInput>();
             airMoveList = new List<MoveInput>();
             dashList = new List<MoveInput>();
+            gatlingTable = new GatlingTable();
             // TODO: this is a terrible place to put these. find a better spot
             //
             dashList.Add(new MoveInput("backstep", new List<string> { "4", "5", "4" }));
@@ -88,7 +92,6 @@ namespace MH4F
                 {
                     foreach (MoveInput dash in dashList)
                     {
-
                         if (MoveInput.checkStringInputToKeyInputForMovement(dash.InputCommand[dash.CurrentInputCommandIndex], keyboardState, direction, controlSetting.Controls))
                         {
                             dash.moveCurrentInputCommandIndex();
@@ -98,7 +101,6 @@ namespace MH4F
                                 inputs.Reset();
                                 return dash.Name;
                             }
-
                         }
                     }
                 }
@@ -107,14 +109,24 @@ namespace MH4F
             return null;
         }
 
-        public String checkGroundMoves(Direction direction, KeyboardState newKeyboardState)
+        public String checkGroundMoves(Direction direction, String currentMove, KeyboardState newKeyboardState)
         {
-            return checkMoves(direction, newKeyboardState, groundMoveList);
+            List<MoveInput> possibleMoveList = gatlingTable.getPossibleGatlings(currentMove);         
+            if (possibleMoveList == null)
+            {
+                possibleMoveList = groundMoveList;
+            }
+            return checkMoves(direction, newKeyboardState, possibleMoveList);
         }
 
-        public String checkAirMoves(Direction direction, KeyboardState newKeyboardState)
+        public String checkAirMoves(Direction direction, String currentMove, KeyboardState newKeyboardState)
         {
-            return checkMoves(direction, newKeyboardState, airMoveList);
+            List<MoveInput> possibleMoveList = gatlingTable.getPossibleGatlings(currentMove);
+            if (possibleMoveList == null)
+            {
+                possibleMoveList = airMoveList;
+            }
+            return checkMoves(direction, newKeyboardState, possibleMoveList);
         }
 
         public bool DetermineButtonPress(KeyboardState presentState)
@@ -122,6 +134,7 @@ namespace MH4F
             //A attack button pressed
             if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, controlSetting.Controls["a"]))
             {
+                System.Diagnostics.Debug.WriteLine("A button pressed");
                 return true;
             }
             // B attack button pressed
@@ -139,6 +152,11 @@ namespace MH4F
             }
 
             return false;
+        }
+
+        public void registerGatling(String name, List<MoveInput> inputs)
+        {
+            gatlingTable.addGatling(name, inputs);
         }
 
         public void registerGroundMove(String name, List<String> input)
@@ -180,6 +198,12 @@ namespace MH4F
         {
             get { return controlSetting; }
             set { this.controlSetting = value; }
+        }
+
+        public GatlingTable GatlingTable
+        {
+            get { return gatlingTable; }
+            set { this.gatlingTable = value; }
         }
     }
 }

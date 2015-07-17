@@ -21,6 +21,8 @@ namespace MH4F
 
         SoundManager SoundManager { get; set; }
 
+        InputMoveBuffer InputMoveBuffer { get; set; }
+
         public int ThrowRange { get; set; }
 
         ControlSetting controlSetting;
@@ -115,6 +117,7 @@ namespace MH4F
             specialInputManager = new SpecialInputManager();
             SoundManager = new SoundManager();
             ControlSetting = new ControlSetting();
+            InputMoveBuffer = new InputMoveBuffer();
         }
       
         public ControlSetting ControlSetting
@@ -142,7 +145,7 @@ namespace MH4F
             }
         }
 
-        public bool IsCancealable
+        public bool IsCancealableMove
         {
             get { return Sprite.CurrentMoveAnimation != null &&
                 (!isGettingHit) &&
@@ -244,7 +247,7 @@ namespace MH4F
             if (Sprite.CurrentMoveAnimation == null || 
                 Sprite.CurrentMoveAnimation.CharacterState != CharacterState.AIRBORNE)
             {               
-                if (IsCancealable)
+                if (IsCancealableMove)
                 {
                     
                     if (ks.IsKeyDown(controlSetting.Controls["down"]))
@@ -297,7 +300,7 @@ namespace MH4F
                 }
                 if (!ks.IsKeyDown(controlSetting.Controls["right"]) && !ks.IsKeyDown(controlSetting.Controls["left"]) && !ks.IsKeyDown(controlSetting.Controls["down"]) && !ks.IsKeyDown(controlSetting.Controls["up"]) && Sprite.CurrentMoveAnimation != null)
                 {
-                    if (IsCancealable)
+                    if (IsCancealableMove)
                     {
                         Neutral();
                     }
@@ -307,7 +310,7 @@ namespace MH4F
             else if (Sprite.CurrentMoveAnimation == null ||
                 Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
             {
-                if (IsCancealable && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
+                if (IsCancealableMove && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
                 {
                     timesJumped++;
                     if (ks.IsKeyDown(controlSetting.Controls["right"]))
@@ -329,59 +332,78 @@ namespace MH4F
         public void Update(GameTime gameTime, KeyboardState ks)
         {
             Sprite.CurrentXVelocity = 0;
-            if (Sprite.CurrentMoveAnimation != null && 
-                IsCancealable || HasHitOpponent)
+            if (Sprite.CurrentMoveAnimation != null)
             {
-                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, ks);                
-                if (moveName == null)
+                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, Sprite.CurrentAnimation, ks); 
+                if(IsCancealableMove || HasHitOpponent || InputMoveBuffer.getBufferedMove() != null)
                 {
-                    // Handle basic stuff like moving, jumping and crouching
-                    //
-                    processBasicMovement(gameTime, ks);
-                }
-                else
-                {
-                    UnCrouch();
-                    HasHitOpponent = false;
-                    // Set the current animation to be our special move
-                    //
-
-                    // If we're trying to do a throw, see if we actually can. if not then change it.
-                    //
-                    if (moveName == "forwardthrow" || moveName == "backthrow")
+                    if (InputMoveBuffer.getBufferedMove() != null)
                     {
-                        if (!ThrowManager.isValidThrow(PlayerNumber))
+                        Console.WriteLine(InputMoveBuffer.getBufferedMove());
+                    }
+                    if (moveName == null && InputMoveBuffer.getBufferedMove() == null)
+                    {
+                        // Handle basic stuff like moving, jumping and crouching
+                        //
+                        processBasicMovement(gameTime, ks);
+                    }
+                    else
+                    {
+                        UnCrouch();
+                        
+                        // Set the current animation to be our special move
+                        //
+
+                        // If we're trying to do a throw, see if we actually can. if not then change it.
+                        //
+                        if (moveName == "forwardthrow" || moveName == "backthrow")
                         {
-                            if (moveName == "forwardthrow")
+                            if (!ThrowManager.isValidThrow(PlayerNumber))
                             {
-                                moveName = ThrowManager.ForwardThrowWhiffMove;
-                                Console.WriteLine("OOPS WAS NOT A THROW DOING FORWARD C");
-                            }
-                            else
-                            {
-                                moveName = ThrowManager.BackThrowWhiffMove;
+                                if (moveName == "forwardthrow")
+                                {
+                                    moveName = ThrowManager.ForwardThrowWhiffMove;
+                                    Console.WriteLine("OOPS WAS NOT A THROW DOING FORWARD C");
+                                }
+                                else
+                                {
+                                    moveName = ThrowManager.BackThrowWhiffMove;
+                                }
                             }
                         }
-                    }
 
-                    // Also some janky logic to make sure you aren't air dashing when you shouldn't be
-                    // "
-                    if (moveName != "backstep" && moveName != "dash")
-                    {
+                        // Also some janky logic to make sure you aren't air dashing when you shouldn't be
+                        // "
                         
-                        Sprite.CurrentAnimation = moveName;
-                    }
-                    else if(timesJumped < 1)
-                    {
-                        SoundManager.PlaySound(moveName);
-                        Sprite.CurrentAnimation = moveName;
-                        if (IsAirborne)
+                        if ((IsCancealableMove || HasHitOpponent) && InputMoveBuffer.getBufferedMove() != null)
                         {
-                            timesJumped++;
-                        }                      
+                            checkMoveChangeValidity(InputMoveBuffer.getBufferedMove());
+                            InputMoveBuffer.unbufferCurrentMove();
+                        }
+                        else if (moveName != null)
+                        {
+                            if (moveName != "backstep" && moveName != "dash")
+                            {
+                                checkMoveChangeValidity(moveName);
+                            }
+                            else if (timesJumped < 1)
+                            {
+                                SoundManager.PlaySound(moveName);
+                                Sprite.CurrentAnimation = moveName;
+                                if (IsAirborne)
+                                {
+                                    timesJumped++;
+                                }
+                            }
+                        }
+                        
                     }
                 }
-
+                else if(moveName != null && Sprite.CurrentMoveAnimation.IsAttack)
+                {
+                    Console.WriteLine("Queueing up : " + moveName);
+                    InputMoveBuffer.setBufferedMove(moveName);
+                }
             }  
             // Parse the ground special inputs here
             //
@@ -498,6 +520,13 @@ namespace MH4F
         public virtual void cleanUp()
         {
             prevKeyboardState = Keyboard.GetState();
+            InputMoveBuffer.decrementBufferTimer();
+        }
+
+        public virtual void checkMoveChangeValidity(String moveName)
+        {
+            HasHitOpponent = false;
+            Sprite.CurrentAnimation = moveName;
         }
 
         public virtual void performGroundSpecialMove(KeyboardState ks, String moveName)

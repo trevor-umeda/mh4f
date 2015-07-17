@@ -146,6 +146,15 @@
       <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm.wma</Extra>
       <Time>2015-07-07T21:58:23.8893982-07:00</Time>
     </Item>
+    <Item>
+      <Source>airbackdash_h.wav</Source>
+      <Name>airbackdash_h</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\airbackdash_h.xnb</Output>
+      <Time>2015-07-10T00:04:33.4648251-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

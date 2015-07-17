@@ -26,8 +26,7 @@ namespace MH4F
             if(sounds.TryGetValue(name, out soundEffect)) 
             {
                 soundEffect.Play();
-            }
-            
+            }       
         }
     }
 }

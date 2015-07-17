@@ -39,6 +39,11 @@ namespace MH4F
             }
         }
 
+        public override void checkMoveChangeValidity(string moveName)
+        {
+            base.checkMoveChangeValidity(moveName);
+        }
+
         public override void performGroundSpecialMove(KeyboardState ks, String moveName)
         {
             if (moveName == "fireball")

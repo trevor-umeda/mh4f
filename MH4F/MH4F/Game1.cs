@@ -179,6 +179,13 @@ namespace MH4F
 
             Song song = Content.Load<Song>("bgm"); 
             //MediaPlayer.Play(song);
+
+            List<MoveInput> moveInputs = new List<MoveInput>();
+            moveInputs.Add(new MoveInput("fireball", new List<string> { "2", "3", "6", "A" }));
+            moveInputs.Add(new MoveInput("backfireball", new List<string> { "2", "1", "4", "A" }));
+            moveInputs.Add(new MoveInput("battack", new List<string> { "B" }));
+            //player1.SpecialInputManager.registerGatling("aattack", moveInputs);
+
         }
 
         /// <summary>

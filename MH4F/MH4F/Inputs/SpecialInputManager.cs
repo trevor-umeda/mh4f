@@ -28,7 +28,7 @@ namespace MH4F
             }
         }
 
-        public String checkMoves(CharacterState characterState, Direction direction, KeyboardState newKeyboardState)
+        public String checkMoves(CharacterState characterState, Direction direction, String currentMove, KeyboardState newKeyboardState)
         {
             Dictionary<String, Keys> controls = controlSetting.Controls;
             String returnMove = null;
@@ -52,13 +52,18 @@ namespace MH4F
             }
             if(characterState != CharacterState.AIRBORNE)
             {
-                returnMove = inputManager.checkGroundMoves(direction, newKeyboardState);                
+                returnMove = inputManager.checkGroundMoves(direction, currentMove, newKeyboardState);                
             }
             else
             {
-                returnMove = inputManager.checkAirMoves(direction, newKeyboardState);
+                returnMove = inputManager.checkAirMoves(direction, currentMove, newKeyboardState);
             }
             return returnMove; 
+        }
+
+        public void registerGatling(String name, List<MoveInput> inputs)
+        {
+            inputManager.registerGatling(name, inputs);
         }
         public void registerGroundMove(String name, List<String> input)
         {
