@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\TEST.xnb</Output>
-      <Time>2015-04-30T17:09:33.6052411-07:00</Time>
+      <Time>2015-05-16T17:13:03.8211192-07:00</Time>
     </Item>
     <Item>
       <Source>TEST2.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\TEST2.xnb</Output>
-      <Time>2015-04-30T17:09:33.6052411-07:00</Time>
+      <Time>2015-05-16T17:13:03.8221193-07:00</Time>
     </Item>
     <Item>
       <Source>combinedsprite.png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\combinedsprite.xnb</Output>
-      <Time>2015-05-15T23:24:49.6070471-07:00</Time>
+      <Time>2015-05-16T17:13:03.8371201-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -66,7 +66,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2015-04-30T16:56:32.7065801-07:00</Value>
+        <Value>2015-05-16T21:12:30.4838453-07:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
