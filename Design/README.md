@@ -7,6 +7,7 @@ This is architectural design rather than gameplay design
 * [Control Scheme](https://github.com/trevor-umeda/mh4f/tree/master/Design/controlSettings.md)
 * [Hitboxes](https://github.com/trevor-umeda/mh4f/tree/master/Design/hitboxes.md)
 * [Attacking](https://github.com/trevor-umeda/mh4f/tree/master/Design/attacking.md)
+* [Needed Animations](https://github.com/trevor-umeda/mh4f/tree/master/Design/animations.md)
 * 
 ### List of Done ( or at least partially ) ###
 Chances are these aren't completely done as I refactor and improve etc.
@@ -19,13 +20,15 @@ Chances are these aren't completely done as I refactor and improve etc.
 - Special Attacks
 - Dashing
 - Hitboxes/Hurtboxes
+- Hitstun/blockstun
+- Move Canceling
+- Health/Special bar
+- Camera
+- Combo/Proration
 
 ### Long List Of TODO ###
 This will get added to as I think of stuff
 
-- Hitstun/blockstun
-- Move Canceling
-- Lowering Health
 - Supers and meter
 - Implement character X ( long list of characters)
 - Win/Lose

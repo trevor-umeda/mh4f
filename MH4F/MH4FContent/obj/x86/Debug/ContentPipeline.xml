@@ -7,8 +7,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
       <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\TEST.xnb</Output>
       <Time>2015-05-16T17:13:03.8211192-07:00</Time>
+=======
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST.xnb</Output>
+      <Time>2015-04-13T00:32:10.22681-07:00</Time>
+>>>>>>> 9b782ac37db325e01cbe233932a753a2310cb847
     </Item>
     <Item>
       <Source>TEST2.png</Source>
@@ -16,8 +21,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
       <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\TEST2.xnb</Output>
       <Time>2015-05-16T17:13:03.8221193-07:00</Time>
+=======
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\TEST2.xnb</Output>
+      <Time>2015-04-13T01:05:05.7368027-07:00</Time>
+>>>>>>> 9b782ac37db325e01cbe233932a753a2310cb847
     </Item>
     <Item>
       <Source>combinedsprite.png</Source>
@@ -25,8 +35,140 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
       <Output>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\combinedsprite.xnb</Output>
       <Time>2015-05-16T17:13:03.8371201-07:00</Time>
+=======
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\combinedsprite.xnb</Output>
+      <Time>2015-05-13T00:53:59.2978389-07:00</Time>
+    </Item>
+    <Item>
+      <Source>standblock.png</Source>
+      <Name>standblock</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\standblock.xnb</Output>
+      <Time>2015-05-21T23:00:53.527356-07:00</Time>
+    </Item>
+    <Item>
+      <Source>KNOCKDOWN.png</Source>
+      <Name>KNOCKDOWN</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\KNOCKDOWN.xnb</Output>
+      <Time>2015-05-21T23:10:40.3089953-07:00</Time>
+    </Item>
+    <Item>
+      <Source>WAKEUP.png</Source>
+      <Name>WAKEUP</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\WAKEUP.xnb</Output>
+      <Time>2015-05-21T23:55:24.9119862-07:00</Time>
+    </Item>
+    <Item>
+      <Source>FALLDOWN.png</Source>
+      <Name>FALLDOWN</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\FALLDOWN.xnb</Output>
+      <Time>2015-05-22T00:48:56.6945229-07:00</Time>
+    </Item>
+    <Item>
+      <Source>DOWN.png</Source>
+      <Name>DOWN</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\DOWN.xnb</Output>
+      <Time>2015-05-22T00:49:16.6811422-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HITGROUND.png</Source>
+      <Name>HITGROUND</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HITGROUND.xnb</Output>
+      <Time>2015-05-22T00:49:06.7308342-07:00</Time>
+    </Item>
+    <Item>
+      <Source>FALLING.png</Source>
+      <Name>FALLING</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\FALLING.xnb</Output>
+      <Time>2015-06-11T01:22:10.7177663-07:00</Time>
+    </Item>
+    <Item>
+      <Source>back_ggxxac_london.png</Source>
+      <Name>back_ggxxac_london</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\back_ggxxac_london.xnb</Output>
+      <Time>2015-06-16T01:25:33.29231-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HealthBar2.png</Source>
+      <Name>HealthBar2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HealthBar2.xnb</Output>
+      <Time>2015-06-21T21:43:06.3579224-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Font.spritefont</Source>
+      <Name>Font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\Font.xnb</Output>
+      <Time>2015-05-19T00:22:43.5352236-07:00</Time>
+    </Item>
+    <Item>
+      <Source>testf.spritefont</Source>
+      <Name>testf</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\testf.xnb</Output>
+      <Time>2015-05-19T00:25:49.0708356-07:00</Time>
+    </Item>
+    <Item>
+      <Source>slap_large.wav</Source>
+      <Name>slap_large</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\slap_large.xnb</Output>
+      <Time>2015-07-07T21:48:02.452854-07:00</Time>
+    </Item>
+    <Item>
+      <Source>bgm.mp3</Source>
+      <Name>bgm</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm.xnb</Output>
+      <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm.wma</Extra>
+      <Time>2015-07-07T21:58:23.8893982-07:00</Time>
+    </Item>
+    <Item>
+      <Source>airbackdash_h.wav</Source>
+      <Name>airbackdash_h</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\airbackdash_h.xnb</Output>
+      <Time>2015-07-10T00:04:33.4648251-07:00</Time>
+>>>>>>> 9b782ac37db325e01cbe233932a753a2310cb847
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -34,10 +176,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\src\mh4f\MH4F\MH4FContent\</RootDirectory>
-      <LoggerRootDirectory>C:\src\mh4f\MH4F\MH4F\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\src\mh4f\MH4F\MH4FContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\</RootDirectory>
+      <LoggerRootDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -66,7 +208,11 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+<<<<<<< HEAD
         <Value>2015-05-16T21:12:30.4838453-07:00</Value>
+=======
+        <Value>2014-05-07T00:49:07.3795257-07:00</Value>
+>>>>>>> 9b782ac37db325e01cbe233932a753a2310cb847
       </Assembly>
     </Assemblies>
   </Asset>
