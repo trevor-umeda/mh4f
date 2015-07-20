@@ -109,15 +109,17 @@ namespace MH4F
             background = Content.Load<Texture2D>("back_ggxxac_london");
 
             player1 = new LongSwordPlayer(standing, 1, 100, 288, comboManager, throwManager);
+            player1.RegisterGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
+            player1.RegisterGroundMove("backfireball", new List<string> { "2", "1", "4", "A" });
+            
+            player1.SetUpUniversalAttackMoves();
             loadCharacterData("LongSword", player1);
                     
-            player1.RegisterGroundMove("fireball",new List<string>{"2","3","6","A"});
-            player1.RegisterGroundMove("backfireball", new List<string> { "2", "1", "4", "A" });
             
             // A throw can be an activateable move... But for not the calculation of that should be elsewhere
             //
             //player1.RegisterGroundMove("throw", new List<string> { "6C" });
-            player1.SetUpUniversalAttackMoves();
+            
 
             player1.Sprite.CurrentAnimation = "standing";
             player1.Direction = Direction.Right;
@@ -178,14 +180,7 @@ namespace MH4F
             player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
 
             Song song = Content.Load<Song>("bgm"); 
-            //MediaPlayer.Play(song);
-
-            List<MoveInput> moveInputs = new List<MoveInput>();
-            moveInputs.Add(new MoveInput("fireball", new List<string> { "2", "3", "6", "A" }));
-            moveInputs.Add(new MoveInput("backfireball", new List<string> { "2", "1", "4", "A" }));
-            moveInputs.Add(new MoveInput("battack", new List<string> { "B" }));
-            //player1.SpecialInputManager.registerGatling("aattack", moveInputs);
-
+            //MediaPlayer.Play(song)    
         }
 
         /// <summary>
@@ -634,6 +629,110 @@ namespace MH4F
                         player.SetAttackMoveProperties(sHb[0], hitInfo);
                     }
                 }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
+
+            // Load Generic Move Input data
+            //
+            Dictionary<String, MoveInput> moveInputList = new Dictionary<String, MoveInput>();;
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream("UniversalInputs.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data           
+                while (sreader.Peek() >= 0)
+                {
+                    String movesInfo = sreader.ReadLine();
+                   
+                    Console.WriteLine(movesInfo);
+                    String[] moves = movesInfo.Split(' ');
+                    moveInputList.Add(moves[0], new MoveInput(moves[0], new List<String> { moves[1] }));                   
+                        //player.SetAttackMoveProperties(sHb[0], hitInfo);
+                    
+                }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
+
+            // Load character specific input move data
+            //
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream(character + "MoveInputs.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data           
+                while (sreader.Peek() >= 0)
+                {
+                    String movesInfo = sreader.ReadLine();
+
+                    Console.WriteLine(movesInfo);
+                    String[] moves = movesInfo.Split(' ');
+                    String[] inputs = moves[1].Split(';');
+                    List<String> inputList = new List<String>(inputs);
+                    moveInputList.Add(moves[0], new MoveInput(moves[0], inputList));
+                    //player.SetAttackMoveProperties(sHb[0], hitInfo);
+
+                }
+                Console.WriteLine("File Size: " + stream.Length);
+                stream.Close();
+            }
+
+            catch (System.IO.FileNotFoundException)
+            {
+                // this will be thrown by OpenStream if gamedata.txt
+                // doesn't exist in the title storage location
+            }
+
+            // Load Gatling
+            //
+            try
+            {
+                System.IO.Stream stream = TitleContainer.OpenStream(character + "Gatling.txt");
+                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
+                // use StreamReader.ReadLine or other methods to read the file data
+                int lineNumber = 0;
+                List<String> moves = new List<String>(); ;
+                while (sreader.Peek() >= 0)
+                {
+                    String movesInfo = sreader.ReadLine();
+                    if (lineNumber == 0)
+                    {
+                        Console.WriteLine(movesInfo);
+                         moves = new List<String>(movesInfo.Split('|'));
+                    }
+                    else
+                    {
+                        Console.WriteLine(movesInfo);
+                        String[] sHb = movesInfo.Split('|');
+                        List<MoveInput> moveInputs = new List<MoveInput>();
+                        for (int i = 0; i < moves.Count; i++)
+                        {
+                            if(sHb[i].Trim().Equals("x"))
+                            {                                
+                               moveInputs.Add(moveInputList[moves[i].Trim()]);
+                            }
+                            Console.WriteLine("Use " + moves[i].Trim() + " is " + sHb[i].Trim());
+                        }                                                
+                        player.SpecialInputManager.registerGatling(sHb[0].Trim(), moveInputs);
+                    
+                       
+                    }
+                    lineNumber++;
+                }
+               
                 Console.WriteLine("File Size: " + stream.Length);
                 stream.Close();
             }
