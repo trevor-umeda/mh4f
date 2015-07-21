@@ -1,4 +1,6 @@
 ﻿-SPRITESHEET-
+KORRA
+walktest2
 combinedsprite
 standblock
 KNOCKDOWN
@@ -9,11 +11,11 @@ DOWN
 HITGROUND
 -SPRITEANIMATIONS- Image Name - Name - X Image Start - Y Image Start - Width - Height - Frame Count - Frame Length - Character State - Next Animation - Is Attack
 combinedsprite;standing;0;0;144;288;8;0.1;STANDING
-combinedsprite;backwalk;0;288;244;288;7;0.1;STANDING
+walktest2;backwalk;0;0;238;323;10;0.1;STANDING
 combinedsprite;crouching;0;576;176;288;2;0.1;CROUCHING;crouchingidle
 combinedsprite;crouchingidle;0;864;176;288;6;0.1;CROUCHING
 combinedsprite;crouchingup;0;1152;176;288;4;0.1;CROUCHING
-combinedsprite;walk;0;1440;244;288;7;0.1;STANDING
+walktest2;walk;0;0;217;300;10;0.01;STANDING
 combinedsprite;jumpup;0;1728;136;320;1;0.1;AIRBORNE
 combinedsprite;jumpdown;0;2048;136;380;2;0.1;AIRBORNE
 combinedsprite;jumptop;0;2428;192;280;11;0.1;AIRBORNE

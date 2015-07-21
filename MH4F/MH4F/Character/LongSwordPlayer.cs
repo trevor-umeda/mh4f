@@ -27,7 +27,7 @@ namespace MH4F
             BackStepVel = 8;
             DashVel = 8;
             BackWalkVel = 3;
-            WalkVel = 5;
+            WalkVel = 2;
         }
 
         public override void cleanUp()

@@ -10,11 +10,14 @@ Content\HITGROUND.xnb
 Content\FALLING.xnb
 Content\back_ggxxac_london.xnb
 Content\HealthBar2.xnb
+Content\testwalk.xnb
 Content\Font.xnb
 Content\testf.xnb
 Content\slap_large.xnb
-Content\bgm.xnb
 Content\airbackdash_h.xnb
+Content\bgm.xnb
+Content\walktest2.xnb
+Content\KORRA.xnb
 Content\bgm.wma
 Content\slap_large.wav
 Content\bgm.mp3
@@ -28,7 +31,10 @@ Content\DOWN.png
 Content\HITGROUND.png
 Content\FALLING.png
 Content\back_ggxxac_london.png
+LongSwordGatling.txt
 LongSwordHurtbox.txt
 LongSwordHitbox.txt
+LongSwordMoveInputs.txt
 LongSwordMoves.txt
 LongSwordSprites.txt
+UniversalInputs.txt

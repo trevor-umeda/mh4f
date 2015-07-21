@@ -1,0 +1,9 @@
+﻿forwardaattack 6A
+forwardbattack 6B
+forwardcattack 6C
+crouchaattack 2A
+crouchbattack 2B
+crouchcattack 2C
+cattack C
+battack B
+aattack A
