@@ -54,6 +54,8 @@ namespace MH4F
 
         int currentXVelocity;
 
+        bool showHitboxes = false;
+
         ///
         /// Vector2 representing the position of the sprite's upper left
         /// corner pixel.
@@ -217,6 +219,8 @@ namespace MH4F
                     {
                         int previousHeight = 0;
                         int previousWidth = 0;
+                        // Before changing animations, we need to take care of some stuff
+                        //
                         if (currentAnimation != null && animations[currentAnimation] != null)
                         {
                             previousHeight = animations[currentAnimation].FrameHeight;
@@ -224,7 +228,7 @@ namespace MH4F
 
                             // By default once a animation changes, make sure defaults are set
                             //
-                            animations[currentAnimation].CanCancelMove = false;
+                            animations[currentAnimation].HasHitOpponent = false;
                         }
                             
                         currentAnimation = value;
@@ -472,21 +476,25 @@ namespace MH4F
                 if (direction == Direction.Right)
                 {
                     spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
-                                                   CurrentMoveAnimation.FrameRectangle, colorTint,
-                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
+                                                    CurrentMoveAnimation.FrameRectangle, colorTint,
+                                                    0, v2Center, 1f, SpriteEffects.None, 0); 
                 }
                 else
                 {
+                    
                     spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
                                                    CurrentMoveAnimation.FrameRectangle, colorTint,
-                                                   0, v2Center, 1f, SpriteEffects.None, 0);
+                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
                 }
 
-                Color translucentRed = Color.Red * 0.5f;
-                spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
+                if (showHitboxes)
+                {              
+                    Color translucentRed = Color.Red * 0.5f;
+                    spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
 
-                Color translucentBlue = Color.Blue * 0.5f;
-                spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
+                    Color translucentBlue = Color.Blue * 0.5f;
+                    spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
+                }
             }                
         }
     }

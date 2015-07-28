@@ -14,9 +14,13 @@ namespace MH4F
 
         private Hitbox[] hurtboxInfo;
 
+        // TODO move this out to a seperate object problly
+        //
+        private Boolean[] resetHitInfo;
+
         private CharacterState characterState;
 
-        bool canCancelMove = false;
+        bool hasHitOpponent = false;
 
         private HitInfo hitInfo;
 
@@ -32,10 +36,10 @@ namespace MH4F
             get { return hurtboxInfo[CurrentFrame]; }
         }
 
-        public bool CanCancelMove
+        public bool HasHitOpponent
         {
-            get { return canCancelMove; }
-            set { canCancelMove = value; }
+            get { return hasHitOpponent; }
+            set { hasHitOpponent = value; }
         }
         public HitInfo HitInfo
         {
@@ -58,6 +62,11 @@ namespace MH4F
         {
             hurtboxInfo[index] = hitbox;
         }
+
+        public void AddResetInfo(int index, bool reset)
+        {
+            resetHitInfo[index] = reset;
+        }
              
         public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float frameLength, CharacterState CharacterState)
         {
@@ -66,6 +75,7 @@ namespace MH4F
             FrameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
             hurtboxInfo = new Hitbox[Frames];
+            resetHitInfo = new Boolean[Frames];
             FrameLength = frameLength;
             characterState = CharacterState;
         }
@@ -77,6 +87,7 @@ namespace MH4F
             FrameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
             hurtboxInfo = new Hitbox[Frames];
+            resetHitInfo = new Boolean[Frames];
             FrameLength = frameLength;
             characterState = CharacterState;
             IsAttack = IsAnAttack;
@@ -89,6 +100,7 @@ namespace MH4F
             FrameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
             hurtboxInfo = new Hitbox[Frames];
+            resetHitInfo = new Boolean[Frames];
             FrameLength = frameLength;
             characterState = CharacterState;
             IsAttack = IsAnAttack;
@@ -104,6 +116,7 @@ namespace MH4F
             FrameCount = Frames;
             hitboxInfo = new Hitbox[Frames];
             hurtboxInfo = new Hitbox[Frames];
+            resetHitInfo = new Boolean[Frames];
             FrameLength = frameLength;
             characterState = CharacterState;
             NextAnimation = strNextAnimation;
@@ -117,7 +130,10 @@ namespace MH4F
             {
                 FrameTimer = 0.0f;
                 CurrentFrame = (CurrentFrame + 1) % FrameCount;
-
+                if(resetHitInfo[CurrentFrame])
+                {
+                    HasHitOpponent = false;
+                }
                 if (CurrentFrame == 0)
                 {
                     PlayCount = (int)MathHelper.Min(PlayCount + 1, int.MaxValue);

@@ -182,6 +182,24 @@
       <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm.wma</Extra>
       <Time>2015-07-07T21:58:23.8893982-07:00</Time>
     </Item>
+    <Item>
+      <Source>STAND2.png</Source>
+      <Name>STAND2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\STAND2.xnb</Output>
+      <Time>2015-07-21T01:03:09.5969368-07:00</Time>
+    </Item>
+    <Item>
+      <Source>WALKREVISED3.png</Source>
+      <Name>WALKREVISED3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\WALKREVISED3.xnb</Output>
+      <Time>2015-07-21T01:03:32.6992581-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

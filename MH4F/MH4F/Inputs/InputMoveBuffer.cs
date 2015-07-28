@@ -7,7 +7,7 @@ namespace MH4F
 {
     public class InputMoveBuffer
     {
-        readonly public int bufferTime = 10; 
+        readonly public int bufferTime = 5; 
         public int bufferTimer = 0;
         public String bufferedMove;
 
