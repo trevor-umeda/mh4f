@@ -374,8 +374,8 @@ namespace MH4F
                             }
                         }
 
-                        // Also some janky logic to make sure you aren't air dashing when you shouldn't be
-                        // "
+                        // If we're in hitstop, queue up the move.
+                        //
                         if (inHitstop)
                         {
                             if (moveName != null)
@@ -384,14 +384,20 @@ namespace MH4F
                                 InputMoveBuffer.setBufferedMove(moveName);
                             }
                         }
+                        // If we're not in hitstop then we're free to perform things
+                        //
                         else
                         {
+                            // If its appropriate and we have a move queued up then it takes priority
+                            //
                             if ((IsCancealableMove || HasHitOpponent) && InputMoveBuffer.getBufferedMove() != null)
                             {
                                 Console.WriteLine("Unbuffering Move");
                                 checkMoveChangeValidity(InputMoveBuffer.getBufferedMove());
                                 InputMoveBuffer.unbufferCurrentMove();
                             }
+                            // Otherwise perform the current move
+                            //
                             else if (moveName != null)
                             {
                                 if (moveName != "backstep" && moveName != "dash")
@@ -416,6 +422,8 @@ namespace MH4F
                         }                                
                     }
                 }
+                // If we've input a move but cant cancel it, then put it in our buffer
+                //
                 else if(moveName != null && Sprite.CurrentMoveAnimation.IsAttack)
                 {
                     Console.WriteLine("Queueing up : " + moveName);
@@ -512,7 +520,7 @@ namespace MH4F
                }
                cleanUp();
            }
-           
+            prevKeyboardState = Keyboard.GetState();
         }
         public virtual void Backstep()
         {
@@ -540,7 +548,7 @@ namespace MH4F
 
         public virtual void cleanUp()
         {
-            prevKeyboardState = Keyboard.GetState();
+            
             InputMoveBuffer.decrementBufferTimer();
         }
 
@@ -735,7 +743,7 @@ namespace MH4F
 
         }
 
-        public void hitByEnemy(KeyboardState keyState, HitInfo hitInfo)
+        public virtual void hitByEnemy(KeyboardState keyState, HitInfo hitInfo)
         {
             //Check if blocked or not
             //int hitStun, int blockStun, Hitzone hitzone, float? xVel, float? yVel
@@ -821,7 +829,7 @@ namespace MH4F
             else return false;
         }
 
-        public void hitEnemy()
+        public virtual void hitEnemy()
         {
             HasHitOpponent = true;
             giveSpecialMeter(10);

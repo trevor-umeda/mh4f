@@ -11,6 +11,7 @@ namespace MH4F
     public class LongSwordPlayer : Player
     {
         bool DisplayShadow { get;  set;}
+        int SwordLevel { get; set; }
 
         public LongSwordPlayer(Texture2D texture, int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager) 
             : base ( texture, playerNumber, xPosition, yHeight, comboManager, throwManager)
@@ -18,7 +19,7 @@ namespace MH4F
             CurrentHealth = 1000;
             MaxHealth = 1000;
             DisplayShadow = false;
-
+            SwordLevel = 1;
             // TODO make these have to be set for every character.
             //
             ThrowRange = 200;

@@ -180,7 +180,8 @@ namespace MH4F
             effect = Content.Load<SoundEffect>("slap_large");
             player1.AddSound(effect, "aattack");
             player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
-
+            player1.Sprite.AddResetInfo("aattack", 4);
+            player1.Sprite.AddResetInfo("aattack", 6);
             Song song = Content.Load<Song>("bgm"); 
             //MediaPlayer.Play(song)    
         }
@@ -228,12 +229,11 @@ namespace MH4F
                     throwManager.updateCharacterState(1, player1);
                     throwManager.updateCharacterState(2, player2);
 
-
                     // Detect player collisions
                     //
                     if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
                     {
-                        hitstop = 5;
+                        hitstop = 7;
                         comboManager.player1LandedHit(player2.CharacterState);
                         player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
                         player1.hitEnemy();

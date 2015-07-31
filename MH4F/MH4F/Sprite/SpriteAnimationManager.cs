@@ -310,6 +310,11 @@ namespace MH4F
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
 
+        public void AddResetInfo(String moveName, int index)
+        {
+            animations[moveName].AddResetInfo(index, true);
+        }
+
         public void AddHitbox(String moveName, int index, Hitbox hitbox)
         {
             animations[moveName].AddHitboxInfo(index, hitbox);
@@ -476,15 +481,14 @@ namespace MH4F
                 if (direction == Direction.Right)
                 {
                     spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
-                                                    CurrentMoveAnimation.FrameRectangle, colorTint,
-                                                    0, v2Center, 1f, SpriteEffects.None, 0); 
+                                                   CurrentMoveAnimation.FrameRectangle, colorTint,
+                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
                 }
                 else
                 {
-                    
                     spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
-                                                   CurrentMoveAnimation.FrameRectangle, colorTint,
-                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
+                                                    CurrentMoveAnimation.FrameRectangle, colorTint,
+                                                    0, v2Center, 1f, SpriteEffects.None, 0); 
                 }
 
                 if (showHitboxes)
