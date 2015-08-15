@@ -104,15 +104,15 @@ namespace MH4F
             {               
                 return true;
             }
-            
-            if ( KeyboardDown(keyboardState, controls["right"]) && ((direction == Direction.Right && input == "6") || (direction == Direction.Left && input =="4")))
-            {
-                return true;
-            }
             if (KeyboardDown(keyboardState, controls["right"]) && KeyboardDown(keyboardState, controls["down"]) && ((direction == Direction.Right && input == "3") || (direction == Direction.Left && input == "1")))
             {
                 return true;
             }
+            if ( KeyboardDown(keyboardState, controls["right"]) && ((direction == Direction.Right && input == "6") || (direction == Direction.Left && input =="4")))
+            {
+                return true;
+            }
+            
             if (KeyboardDown(keyboardState ,controls["left"]) && KeyboardDown(keyboardState, controls["down"]) && ((direction == Direction.Right && input == "1") || (direction == Direction.Left && input == "3")))
             {
                 return true;

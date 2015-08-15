@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
@@ -49,7 +51,7 @@ namespace MH4F
         private int health;
         private int maxHealth;
         Texture2D healthBar;
-
+        private int healthBarMargin;
         // Special bar
         //
         private int special;
@@ -106,12 +108,14 @@ namespace MH4F
         int timesJumped = 0;
 
         int untechTime = 0;
-        public Player(Texture2D texture, int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
+
+        Vector2 startingPosition;
+        public Player(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
         {
-            sprite = new SpriteAnimationManager(texture);            
+            sprite = new SpriteAnimationManager();            
             PlayerNumber = playerNumber;
             Position = new Vector2(xPosition, GROUND_POS_Y - yHeight-200);
-            
+            startingPosition = new Vector2(xPosition, GROUND_POS_Y - yHeight - 200);
             ComboManager = comboManager;
             ThrowManager = throwManager;
             specialInputManager = new SpecialInputManager();
@@ -150,6 +154,7 @@ namespace MH4F
             get { return Sprite.CurrentMoveAnimation != null &&
                 (!isGettingHit) &&
                 (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone ||
+                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.DASHING ||
                 !Sprite.CurrentMoveAnimation.IsAttack); }
         }
 
@@ -196,7 +201,7 @@ namespace MH4F
             //
             RegisterGroundMove("forwardthrow", new List<string> { ThrowManager.ForwardThrowInput });
             RegisterGroundMove("backthrow", new List<string> { ThrowManager.BackThrowInput });
-            RegisterGroundMove("forwardaattack", new List<string> { "6A" });
+           // RegisterGroundMove("forwardaattack", new List<string> { "6A" });
             RegisterGroundMove("forwardbattack", new List<string> { "6B" });
             RegisterGroundMove("forwardcattack", new List<string> { "6C" });
             RegisterGroundMove("crouchaattack", new List<string> { "2A" });
@@ -331,7 +336,9 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks, Boolean inHitstop)
         {
+           
             Sprite.CurrentXVelocity = 0;
+    
             if (Sprite.CurrentMoveAnimation != null)
             {
                 String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, Sprite.CurrentAnimation, ks); 
@@ -424,7 +431,7 @@ namespace MH4F
                 }
                 // If we've input a move but cant cancel it, then put it in our buffer
                 //
-                else if(moveName != null && Sprite.CurrentMoveAnimation.IsAttack)
+                else if(moveName != null && Sprite.CurrentMoveAnimation.IsAttack && moveName != "backstep")
                 {
                     Console.WriteLine("Queueing up : " + moveName);
                     InputMoveBuffer.setBufferedMove(moveName);
@@ -438,7 +445,6 @@ namespace MH4F
                 {
                     performGroundSpecialMove(ks, Sprite.CurrentAnimation);
                 }
-            
                 if (IsAirborne)
                 {
                     // Do airdash stuff
@@ -519,7 +525,7 @@ namespace MH4F
                    Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);               
                }
                cleanUp();
-           }
+           }   
             prevKeyboardState = Keyboard.GetState();
         }
         public virtual void Backstep()
@@ -548,12 +554,13 @@ namespace MH4F
 
         public virtual void cleanUp()
         {
-            
             InputMoveBuffer.decrementBufferTimer();
         }
 
         public virtual void checkMoveChangeValidity(String moveName)
         {
+            // Sub class must overwrite this... and perform this base to actually switch moves;
+            //
             Console.WriteLine("Changing moves to " + moveName);
             HasHitOpponent = false;
             Sprite.CurrentAnimation = moveName;
@@ -636,7 +643,6 @@ namespace MH4F
 
         public virtual void Neutral()
         {
-           
             Sprite.CurrentAnimation = "standing";
         }
 
@@ -726,11 +732,12 @@ namespace MH4F
 
         public void Crouch()
         {
+
             if (!IsCrouching)
             {               
                 Sprite.CurrentAnimation = "crouching";
             }
-            IsCrouching = true; 
+            IsCrouching = true;
         }
 
         public void UnCrouch()
@@ -832,6 +839,8 @@ namespace MH4F
         public virtual void hitEnemy()
         {
             HasHitOpponent = true;
+            // TODO make sure to configure this
+            //
             giveSpecialMeter(10);
             SoundManager.PlaySound(Sprite.CurrentAnimation);
             if (Sprite.CurrentAnimation == "forwardthrow")
@@ -864,8 +873,41 @@ namespace MH4F
         {
             if (bVisible)
             {
-                sprite.Draw(spriteBatch, 0, 0, Direction);     
+               
+                sprite.Draw(spriteBatch, 0, 0, Direction);
+               
             }
+        }
+
+        public virtual void DrawGauges(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
+                        20, (int)(HealthBar.Width * ((double)CurrentHealth / MaxHealth)), 44), new Rectangle(0, 45, HealthBar.Width, 44), Color.Red);
+
+            //Draw the box around the health bar
+            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
+                    20, HealthBar.Width, 44), new Rectangle(0, 0, HealthBar.Width, 44), Color.White);
+
+            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
+                        675, (int)(HealthBar.Width * ((double)CurrentSpecial / MaxSpecial)), 44), new Rectangle(0, 45, HealthBar.Width, 44), Color.Blue);
+
+            //Draw the box around the health bar
+            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
+                    675, HealthBar.Width, 44), new Rectangle(0, 0, HealthBar.Width, 44), Color.White);
+
+        }
+
+        public virtual void setUpGauges(ContentManager content, int healthBar)
+        {
+            healthBarMargin = healthBar;
+        }
+
+        public virtual void resetRound()
+        {
+            CurrentHealth = MaxHealth;
+            CurrentSpecial = 0;
+            Position = startingPosition;
+
         }
 
         // Boring accessors without special implementations. Keeping them down here just cus of how many there are...

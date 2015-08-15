@@ -32,9 +32,10 @@ namespace MH4F
         {
             Dictionary<String, Keys> controls = controlSetting.Controls;
             String returnMove = null;
+            inputManager.enqueueState(newKeyboardState, controlSetting.Controls);
             if(!inputManager.DetermineButtonPress(newKeyboardState))
             {
-            
+                
                 if (characterState == CharacterState.DASHING && newKeyboardState.IsKeyDown(controls["right"]))
                 {
                     if (direction != Direction.Left)

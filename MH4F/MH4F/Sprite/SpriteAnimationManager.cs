@@ -9,8 +9,7 @@ namespace MH4F
 {
     public class SpriteAnimationManager
     {
-         // The texture that holds the images for this sprite
-        Texture2D t2dTexture;
+ 
         public Texture2D dummyTexture ;
 
         // True if animations are being played
@@ -144,14 +143,6 @@ namespace MH4F
             get { return new Rectangle(X, Y, iWidth, iHeight); }
         }
 
-        ///
-        /// The texture associated with this sprite.  All FrameAnimations will be
-        /// relative to this texture.
-        ///
-        public Texture2D Texture
-        {
-            get { return t2dTexture; }
-        }
 
         public Rectangle Hitbox
         {
@@ -216,7 +207,7 @@ namespace MH4F
                 if (animations.ContainsKey(value))
                 {
                     if (( currentAnimation != value && !animations[value].IsAttack) || animations[value].IsAttack || animations[value].CharacterState == CharacterState.HIT )
-                    {
+                    {                    
                         int previousHeight = 0;
                         int previousWidth = 0;
                         // Before changing animations, we need to take care of some stuff
@@ -251,16 +242,15 @@ namespace MH4F
                         {
                             X += ( previousWidth / 2) - (currentWidth / 2) ;
                         }
-
-                        
+                    
                     }
                 }
             }
         }
 
-        public SpriteAnimationManager(Texture2D Texture)
+        public SpriteAnimationManager()
         {
-            t2dTexture = Texture;
+      
         }
 
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState)

@@ -17,7 +17,7 @@ namespace MH4F
         private Keys[] keysPressed;
 
         readonly String[] DIRECTIONS = {"up","down","left","right" };
-        readonly String[] ATTACKS = { "a", "b", "c"};
+        readonly String[] ATTACKS = { "a", "b", "c", "d"};
 
         List<MoveInput> groundMoveList;
         List<MoveInput> airMoveList;
@@ -45,31 +45,43 @@ namespace MH4F
 
         public String checkMoves(Direction direction, KeyboardState newKeyboardState, List<MoveInput> moveList)
         {
-            //inputs.Enqueue(newKeyboardState);
-            enqueueState(newKeyboardState, controlSetting.Controls);
+            // First enqueue the current state into our input queue
+            //
+           // enqueueState(newKeyboardState, controlSetting.Controls);
             // on a button press determine if a special move was inputted.
             //
             if (DetermineButtonPress(newKeyboardState))
             {
-
+                // Reset our command index for every special move
+                //
                 foreach (MoveInput moveInput in moveList)
                 {
                     moveInput.resetCurrentInputCommandIndex();
                 }
-
+                // Iterate through the input queue
+                //
                 foreach (Keys[] keyboardState in inputs)
                 {
+                    // For every command
+                    //
                     foreach (MoveInput moveInput in moveList)
                     {
+                        // check to see if a pressed key in the current input state matches a necessary move input
+                        //
                         if (MoveInput.checkStringInputToKeyInput(moveInput.InputCommand[moveInput.CurrentInputCommandIndex], keyboardState, direction, controlSetting.Controls))
                         {
-
+                            // Move up our command index for that move
+                            //
                             moveInput.moveCurrentInputCommandIndex();
+                            // If our command index for a move is greater than how many inputs it needs, we must have input it
+                            //
                             if (moveInput.CurrentInputCommandIndex >= moveInput.InputCommand.Count)
                             {
 
                                 lastKeyboardState = newKeyboardState;
                                 System.Diagnostics.Debug.WriteLine("Activating " + moveInput.Name);
+                                // Clear up our input queue
+                                //
                                 inputs.Reset();
                                 return moveInput.Name;
                             }
@@ -77,7 +89,7 @@ namespace MH4F
                     }
                 }
             }
-            // Otherwise this is a movement special input
+            // Otherwise this is a movement special input like a dash
             //
             else
             {
@@ -98,7 +110,7 @@ namespace MH4F
                             if (dash.CurrentInputCommandIndex >= dash.InputCommand.Count)
                             {
                                 System.Diagnostics.Debug.WriteLine(dash.Name);
-                                inputs.Reset();
+                              //  inputs.Reset();
                                 return dash.Name;
                             }
                         }
@@ -111,6 +123,8 @@ namespace MH4F
 
         public String checkGroundMoves(Direction direction, String currentMove, KeyboardState newKeyboardState)
         {
+            // Check to see if we have a gatling table for the move. otherwise just have everything
+            //
             List<MoveInput> possibleMoveList = gatlingTable.getPossibleGatlings(currentMove);         
             if (possibleMoveList == null)
             {
@@ -121,6 +135,8 @@ namespace MH4F
 
         public String checkAirMoves(Direction direction, String currentMove, KeyboardState newKeyboardState)
         {
+            // Check to see if we have a gatling table for the move. otherwise just have everything
+            //
             List<MoveInput> possibleMoveList = gatlingTable.getPossibleGatlings(currentMove);
             if (possibleMoveList == null)
             {
@@ -148,6 +164,12 @@ namespace MH4F
             if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, controlSetting.Controls["c"]))
             {
                 System.Diagnostics.Debug.WriteLine("C button pressed");
+                return true;
+            }
+
+            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, controlSetting.Controls["d"]))
+            {
+                System.Diagnostics.Debug.WriteLine("d button pressed");
                 return true;
             }
 
@@ -179,6 +201,7 @@ namespace MH4F
             {
                 if (MoveInput.KeyboardPressed(state, lastKeyboardState, controls[attack]))
                 {
+                    
                     keysPressed[counter] = controls[attack];
                     counter++;
                 }
@@ -187,6 +210,7 @@ namespace MH4F
             {
                 if (state.IsKeyDown(controls[direction]))
                 {
+                    Console.WriteLine(controls[direction] + " " + counter);
                     keysPressed[counter] = controls[direction];
                     counter++;
                 }

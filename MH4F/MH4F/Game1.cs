@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 
 namespace MH4F
 {
@@ -33,13 +34,11 @@ namespace MH4F
         int screenWidth = 1024;
         int screenHeight = 720;
 
-        int healthBarMargin = 0;
-        int healthBarMargin2 = 0;
-
         int comboNumber = 0;
         ComboManager comboManager;
         ThrowManager throwManager;
 
+        RoundManager roundManager;
         ContentManager content;
        
         SpriteFont spriteFont;
@@ -90,7 +89,7 @@ namespace MH4F
         {
             cam = new Camera2d(gameWidth, screenWidth);
             cam.Pos = new Vector2(512.0f, 360.0f);
-            mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);            
+            mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);
             
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -99,36 +98,24 @@ namespace MH4F
             comboManager = new ComboManager(spriteFont);
 
             throwManager = new OneButtonThrowManager();
-       
-            standing = Content.Load<Texture2D>("combinedsprite");
-            Texture2D blocking = Content.Load<Texture2D>("standblock");
-            Texture2D knockdown = Content.Load<Texture2D>("KNOCKDOWN");
-            Texture2D wakeup = Content.Load<Texture2D>("WAKEUP");
-            Texture2D falldown = Content.Load<Texture2D>("FALLDOWN");
-            Texture2D down = Content.Load<Texture2D>("DOWN");
-            Texture2D hitground = Content.Load<Texture2D>("HITGROUND");
 
             background = Content.Load<Texture2D>("back_ggxxac_london");
-
-            player1 = new LongSwordPlayer(standing, 1, 100, 288, comboManager, throwManager);
-            player1.RegisterGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
-            player1.RegisterGroundMove("backfireball", new List<string> { "2", "1", "4", "A" });
-            
+            LongSwordFactory playerFactory = new LongSwordFactory();
+            //player1 = new LongSwordPlayer(1, 100, 288, comboManager, throwManager);
+            player1 = playerFactory.createCharacter(Content, 1, 100, 288, comboManager, throwManager);
+           
             player1.SetUpUniversalAttackMoves();
-            loadCharacterData("LongSword", player1);
-                    
+            
+            player1.HealthBar = Content.Load<Texture2D>("HealthBar2");
+            int healthBarMargin = ((screenWidth / 2) - player1.HealthBar.Width) / 2;
+            player1.setUpGauges(Content, healthBarMargin);        
             
             // A throw can be an activateable move... But for not the calculation of that should be elsewhere
             //
-            //player1.RegisterGroundMove("throw", new List<string> { "6C" });
-            
-
-            player1.Sprite.CurrentAnimation = "standing";
+           
             player1.Direction = Direction.Right;
 
-            player1.HealthBar = Content.Load<Texture2D>("HealthBar2");
-
-            healthBarMargin = ((screenWidth / 2) - player1.HealthBar.Width) / 2;
+  
             // Set player 1 default controls
             //
 
@@ -139,16 +126,16 @@ namespace MH4F
             player1.ControlSetting.setControl("a", Keys.A);
             player1.ControlSetting.setControl("b", Keys.S);
             player1.ControlSetting.setControl("c", Keys.D);
+            player1.ControlSetting.setControl("d", Keys.Z);
+            //player2 = new LongSwordPlayer(2, 600, 288, comboManager, throwManager);
 
-            player2 = new LongSwordPlayer(standing, 2, 600, 288, comboManager, throwManager);
+            player2 = playerFactory.createCharacter(Content, 2, 600, 288, comboManager, throwManager);
 
-            loadCharacterData("LongSword", player2);
-
-            player2.RegisterGroundMove("fireball", new List<string> { "2", "3", "6", "A" });
-
+           
             player2.SetUpUniversalAttackMoves();
-
-            player2.Sprite.CurrentAnimation = "standing";
+            int healthBarMargin2 = (((screenWidth / 2) - player1.HealthBar.Width) / 2) + (screenWidth / 2);
+            player2.setUpGauges(Content, healthBarMargin2);  
+            
             player2.Direction = Direction.Left;
 
             // Setting player 2 default controls
@@ -160,8 +147,9 @@ namespace MH4F
             player2.ControlSetting.setControl("a", Keys.F);
             player2.ControlSetting.setControl("b", Keys.G);
             player2.ControlSetting.setControl("c", Keys.H);
+            player2.ControlSetting.setControl("d", Keys.V);
             player2.HealthBar = Content.Load<Texture2D>("HealthBar2");
-            healthBarMargin2 = (((screenWidth / 2) - player1.HealthBar.Width) / 2) + (screenWidth / 2);
+            
 
             // Create a 1x1 white texture.
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -184,6 +172,8 @@ namespace MH4F
             player1.Sprite.AddResetInfo("aattack", 6);
             Song song = Content.Load<Song>("bgm"); 
             //MediaPlayer.Play(song)    
+
+            roundManager = new RoundManager(player1, player2);
         }
 
         /// <summary>
@@ -238,6 +228,10 @@ namespace MH4F
                         player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
                         player1.hitEnemy();
                         System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
+                        if (player2.CurrentHealth <= 0)
+                        {
+                            roundManager.roundEnd(1);
+                        }
                     }
                     else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
                     {
@@ -245,6 +239,10 @@ namespace MH4F
                         comboManager.player2LandedHit(player1.CharacterState);
                         player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
                         player2.hitEnemy();
+                        if (player1.CurrentHealth <= 0)
+                        {
+                            roundManager.roundEnd(2);
+                        }
                     }
                     else if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
@@ -266,6 +264,13 @@ namespace MH4F
 
                     adjustCamera();
                     comboManager.decrementComboTimer();
+
+                    roundManager.decrementTimer(gameTime);
+                    if (roundManager.isTimeOut())
+                    {
+                        roundManager.timeOut();                 
+                    }
+
                     base.Update(gameTime);
                 }
                 else
@@ -284,76 +289,45 @@ namespace MH4F
             frameCounter++;
 
             string fps = string.Format("fps: {0}", frameRate);
+            // Draw the safe area borders.
+            Color translucentRed = Color.Red * 0.5f;
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-          
+            //spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred,
+                        BlendState.AlphaBlend,
+                        null,
+                        null,
+                        null,
+                        null,
+                        cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
 
-                // Draw the safe area borders.
-                Color translucentRed = Color.Red * 0.5f;
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Draw(background, mainFrame, Color.White);
+            //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
+            player2.Draw(spriteBatch);
 
-                //spriteBatch.Begin();
-                spriteBatch.Begin(SpriteSortMode.Deferred,
-                            BlendState.AlphaBlend,
-                            null,
-                            null,
-                            null,
-                            null,
-                            cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
+            player1.Draw(spriteBatch);
+            
+            string health = string.Format("Health: {0}", player1.CurrentHealth);
 
-                spriteBatch.Draw(background, mainFrame, Color.White);
-                //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
-                player2.Draw(spriteBatch);
-                player1.Draw(spriteBatch);
+            spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
+            spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
+            spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
+            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
+            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
+            spriteBatch.End();
 
-                string health = string.Format("Health: {0}", player1.CurrentHealth);
+            spriteBatch.Begin();
 
-                spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
-                spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
-                spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
-
-                spriteBatch.End();
-
-                spriteBatch.Begin();
-                // Player 1 health and special bar
-                //
-                spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
-                           20, (int)(player1.HealthBar.Width * ((double)player1.CurrentHealth / player1.MaxHealth)), 44), new Rectangle(0, 45, player1.HealthBar.Width, 44), Color.Red);
-
-                //Draw the box around the health bar
-                spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
-                      20, player1.HealthBar.Width, 44), new Rectangle(0, 0, player1.HealthBar.Width, 44), Color.White);
-
-                spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
-                           675, (int)(player1.HealthBar.Width * ((double)player1.CurrentSpecial / player1.MaxSpecial)), 44), new Rectangle(0, 45, player1.HealthBar.Width, 44), Color.Blue);
-
-                //Draw the box around the health bar
-                spriteBatch.Draw(player1.HealthBar, new Rectangle(healthBarMargin,
-                      675, player1.HealthBar.Width, 44), new Rectangle(0, 0, player1.HealthBar.Width, 44), Color.White);
+            comboManager.displayComboMessage(spriteBatch);
+            
+            
+            player1.DrawGauges(spriteBatch);
+            player2.DrawGauges(spriteBatch);
+            spriteBatch.End();
 
 
-                // Player 2 health and special bar
-                //
-                spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
-                      20, (int)(player2.HealthBar.Width * ((double)player2.CurrentHealth / player2.MaxHealth)), 44), new Rectangle(0, 45, player2.HealthBar.Width, 44), Color.Red);
-
-                //Draw the box around the health bar
-                spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
-                      20, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
-
-                spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
-                           675, (int)(player2.HealthBar.Width * ((double)player2.CurrentSpecial / player2.MaxSpecial)), 44), new Rectangle(0, 45, player2.HealthBar.Width, 44), Color.Blue);
-
-                //Draw the box around the health bar
-                spriteBatch.Draw(player2.HealthBar, new Rectangle(healthBarMargin2,
-                      675, player2.HealthBar.Width, 44), new Rectangle(0, 0, player2.HealthBar.Width, 44), Color.White);
-
-                comboManager.displayComboMessage(spriteBatch);
-
-
-                spriteBatch.End();
-
-
-                base.Draw(gameTime);
+            base.Draw(gameTime);
            
         }
 
@@ -472,298 +446,6 @@ namespace MH4F
             }
         }
 
-        protected void loadCharacterData(String character, Player player)
-        {
-            // Load Sprite Info
-            //
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream(character+"Sprites.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data
-                bool readingAnimations = false;
-                Dictionary<String, Texture2D> spriteTextures = new Dictionary<String, Texture2D>();
-                while (sreader.Peek() >= 0)
-                {
-                    String spriteLine = sreader.ReadLine();
-                    Console.WriteLine(spriteLine);
-                    if (spriteLine.Contains("-SPRITEANIMATIONS-"))
-                    {
-                        readingAnimations = true;
-                    }
-                    else if (spriteLine.Contains("-SPRITESHEET-"))
-                    {
-                        readingAnimations = false;
-                    }
-                    else if (!readingAnimations)
-                    {
-                        Texture2D test = Content.Load<Texture2D>(spriteLine);
-                        spriteTextures[spriteLine] = test;
-                    }
-                    else
-                    {
-                        String[] sHb = spriteLine.Split(';');
-                        Console.WriteLine("Using " + sHb[0]);
-                        //player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);                       
-                        CharacterState moveState;
-                        Enum.TryParse(sHb[8], true, out moveState);
-                        if (sHb.Length >= 10)
-                        {
-                            // Hacky way to add moves
-                            //
-                            if (sHb[9] == "true")
-                            {
-                                player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
-                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState, true);
-                            }
-                            else
-                            {
-                                player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
-                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState, sHb[9]);
-                            }
-                            
-                        }
-                        else
-                        {
-                           player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
-                           int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState);
-                        }
-                        
-                    }
-
-
-
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-
-            // Load hitbox info
-            //
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream(character+"Hitbox.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data
-                while (sreader.Peek() >= 0)
-                {
-                    String hitboxInfo = sreader.ReadLine();
-                    Console.WriteLine(hitboxInfo);
-                    String[] sHb = hitboxInfo.Split(';');
-                    Console.WriteLine(sHb[0]);
-                   
-                    player.Sprite.AddHitbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-            
-            // Load Hurtbox info
-            //
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream(character+"Hurtbox.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data
-                while (sreader.Peek() >= 0)
-                {
-                    String hurtboxInfo = sreader.ReadLine();
-                    Console.WriteLine(hurtboxInfo);
-                    String[] sHb = hurtboxInfo.Split(';');
-                    Console.WriteLine(sHb[0]);                    
-                    player.Sprite.AddHurtbox(sHb[0], Convert.ToInt32(sHb[1]), new Hitbox(sHb[2], sHb[3], sHb[4], sHb[5]));
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-
-            // Load Move info
-            //
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream(character + "Moves.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data
-                while (sreader.Peek() >= 0)
-                {
-                    String movesInfo = sreader.ReadLine();
-                    if (movesInfo.Contains("- MoveName"))
-                    {
-
-                    }
-                    else
-                    {
-                        Console.WriteLine(movesInfo);
-                        String[] sHb = movesInfo.Split(';');
-                        Console.WriteLine(sHb[0]);
-                        Hitzone hitZone;
-                        Enum.TryParse(sHb[3], true, out hitZone);
-                        Boolean isHardKnockdown = false;
-                        if (sHb[5] == "true")
-                        {
-                            isHardKnockdown = true;
-                        }
-                        HitInfo hitInfo = new HitInfo(int.Parse(sHb[1]), int.Parse(sHb[2]), hitZone);
-                        hitInfo.IsHardKnockDown = isHardKnockdown;
-                        hitInfo.Damage = int.Parse(sHb[4]);
-                        hitInfo.AirUntechTime = int.Parse(sHb[6]);
-                        hitInfo.AirXVelocity = int.Parse(sHb[7]);
-                        hitInfo.AirYVelocity = -int.Parse(sHb[8]);
-                        if (sHb.Length > 9)
-                        {
-                            if (sHb[9] == "true")
-                            {
-                                hitInfo.ForceAirborne = true;
-                            }
-                        }
-                        if (sHb.Length > 10)
-                        {
-                            if (sHb[10] == "true")
-                            {
-                                hitInfo.FreezeOpponent = true;
-                            }
-                        }
-                        if (sHb.Length > 11)
-                        {
-                            if (sHb[11] == "true")
-                            {
-                                hitInfo.Unblockable = true;
-                            }
-                        }
-                        player.SetAttackMoveProperties(sHb[0], hitInfo);
-                    }
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-
-            // Load Generic Move Input data
-            //
-            Dictionary<String, MoveInput> moveInputList = new Dictionary<String, MoveInput>();;
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream("UniversalInputs.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data           
-                while (sreader.Peek() >= 0)
-                {
-                    String movesInfo = sreader.ReadLine();
-                   
-                    Console.WriteLine(movesInfo);
-                    String[] moves = movesInfo.Split(' ');
-                    moveInputList.Add(moves[0], new MoveInput(moves[0], new List<String> { moves[1] }));                   
-                        //player.SetAttackMoveProperties(sHb[0], hitInfo);
-                    
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-
-            // Load character specific input move data
-            //
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream(character + "MoveInputs.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data           
-                while (sreader.Peek() >= 0)
-                {
-                    String movesInfo = sreader.ReadLine();
-
-                    Console.WriteLine(movesInfo);
-                    String[] moves = movesInfo.Split(' ');
-                    String[] inputs = moves[1].Split(';');
-                    List<String> inputList = new List<String>(inputs);
-                    moveInputList.Add(moves[0], new MoveInput(moves[0], inputList));
-                    //player.SetAttackMoveProperties(sHb[0], hitInfo);
-
-                }
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-
-            // Load Gatling
-            //
-            try
-            {
-                System.IO.Stream stream = TitleContainer.OpenStream(character + "Gatling.txt");
-                System.IO.StreamReader sreader = new System.IO.StreamReader(stream);
-                // use StreamReader.ReadLine or other methods to read the file data
-                int lineNumber = 0;
-                List<String> moves = new List<String>(); ;
-                while (sreader.Peek() >= 0)
-                {
-                    String movesInfo = sreader.ReadLine();
-                    if (lineNumber == 0)
-                    {
-                        Console.WriteLine(movesInfo);
-                         moves = new List<String>(movesInfo.Split('|'));
-                    }
-                    else
-                    {
-                        Console.WriteLine(movesInfo);
-                        String[] sHb = movesInfo.Split('|');
-                        List<MoveInput> moveInputs = new List<MoveInput>();
-                        for (int i = 0; i < moves.Count; i++)
-                        {
-                            if(sHb[i].Trim().Equals("x"))
-                            {                                
-                               moveInputs.Add(moveInputList[moves[i].Trim()]);
-                            }
-                            Console.WriteLine("Use " + moves[i].Trim() + " is " + sHb[i].Trim());
-                        }                                                
-                        player.SpecialInputManager.registerGatling(sHb[0].Trim(), moveInputs);
-                    
-                       
-                    }
-                    lineNumber++;
-                }
-               
-                Console.WriteLine("File Size: " + stream.Length);
-                stream.Close();
-            }
-
-            catch (System.IO.FileNotFoundException)
-            {
-                // this will be thrown by OpenStream if gamedata.txt
-                // doesn't exist in the title storage location
-            }
-        }
+        
     }
 }

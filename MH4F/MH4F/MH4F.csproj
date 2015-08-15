@@ -110,10 +110,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Character\AbstractCharacterFactory.cs" />
+    <Compile Include="Character\LongSwordFactory.cs" />
     <Compile Include="Combo\BasicProrationStrategy.cs" />
     <Compile Include="Camera2d.cs" />
     <Compile Include="Inputs\GatlingTable.cs" />
     <Compile Include="Inputs\InputMoveBuffer.cs" />
+    <Compile Include="RoundManager.cs" />
     <Compile Include="Sound\SoundManager.cs" />
     <Compile Include="Throws\OneButtonThrowManager.cs" />
     <Compile Include="Combo\ComboManager.cs" />

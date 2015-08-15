@@ -1,2 +1,3 @@
-﻿fireball 2;3;6;A
+﻿supera 2;3;6;2;3;A
+fireball 2;3;6;A
 backfireball 2;1;4;A
