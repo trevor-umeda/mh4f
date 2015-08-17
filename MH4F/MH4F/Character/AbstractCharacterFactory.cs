@@ -45,27 +45,27 @@ namespace MH4F
                         Console.WriteLine("Using " + sHb[0]);
                         //player2.Sprite.AddAnimation(standing, "standing", 0, 0, 144, 288, 8, 0.1f, CharacterState.STANDING);                       
                         CharacterState moveState;
-                        Enum.TryParse(sHb[8], true, out moveState);
-                        if (sHb.Length >= 10)
+                        Enum.TryParse(sHb[9], true, out moveState);
+                        if (sHb.Length >= 11)
                         {
                             // Hacky way to add moves
                             //
-                            if (sHb[9] == "true")
+                            if (sHb[10] == "true")
                             {
                                 player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
-                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState, true);
+                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), int.Parse(sHb[7]), float.Parse(sHb[8]), moveState, true);
                             }
                             else
                             {
                                 player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
-                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState, sHb[9]);
+                                                          int.Parse(sHb[5]), int.Parse(sHb[6]), int.Parse(sHb[7]), float.Parse(sHb[8]), moveState, sHb[10]);
                             }
 
                         }
                         else
                         {
                             player.Sprite.AddAnimation(spriteTextures[sHb[0]], sHb[1], int.Parse(sHb[2]), int.Parse(sHb[3]), int.Parse(sHb[4]),
-                            int.Parse(sHb[5]), int.Parse(sHb[6]), float.Parse(sHb[7]), moveState);
+                            int.Parse(sHb[5]), int.Parse(sHb[6]), int.Parse(sHb[7]), float.Parse(sHb[8]), moveState);
                         }
 
                     }

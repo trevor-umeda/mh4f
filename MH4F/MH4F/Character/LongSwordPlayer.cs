@@ -41,6 +41,8 @@ namespace MH4F
 
             SwordGaugeGains.Add("aattack", 20);
             MoveCosts.Add("battack", 10);
+            Sprite.BoundingBoxHeight = 288;
+            Sprite.BoundingBoxWidth = 90;
 
             rekkaLevel = 1;
 

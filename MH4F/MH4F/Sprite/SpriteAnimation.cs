@@ -13,10 +13,11 @@ namespace MH4F
          // The sprite itself will hold onto its own sprite
         private Texture2D t2dTexture;
 
-         // The first frame of the Animation.  We will calculate other
-        // frames on the fly based on this frame.
+       
         private Rectangle rectInitialFrame;
 
+        private int rows = 1;
+        private int columns;
 
         // Number of frames in the Animation
         private int frameCount = 1;
@@ -97,6 +98,12 @@ namespace MH4F
             get { return rectInitialFrame.Height; }
         }
 
+        public int Columns
+        {
+            get { return columns; }
+            set { columns = value; }
+        }
+
         public bool IsDone
         {
             get { return isDone; }
@@ -108,6 +115,7 @@ namespace MH4F
             get { return isAttack; }
             set { isAttack = value; }
         }
+
         /// 
         /// The rectangle associated with the current
         /// animation frame.
@@ -117,8 +125,8 @@ namespace MH4F
             get
             {
                 return new Rectangle(
-                    rectInitialFrame.X + (rectInitialFrame.Width * currentFrame),
-                    rectInitialFrame.Y, rectInitialFrame.Width, rectInitialFrame.Height);
+                    rectInitialFrame.X + (rectInitialFrame.Width * (currentFrame % columns)),
+                    rectInitialFrame.Y + (rectInitialFrame.Height * (currentFrame / columns)), rectInitialFrame.Width, rectInitialFrame.Height);
             }
         }
 

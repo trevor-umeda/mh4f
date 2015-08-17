@@ -19,6 +19,10 @@ namespace MH4F
 
         Rectangle hurtbox;
 
+        int boundingBoxHeight;
+        int boundingBoxWidth;
+        Rectangle boundingBox;
+
         // If set to anything other than Color.White, will colorize
         // the sprite with that color.
         Color colorTint = Color.White;
@@ -53,7 +57,7 @@ namespace MH4F
 
         int currentXVelocity;
 
-        bool showHitboxes = false;
+        bool showHitboxes = true;
 
         ///
         /// Vector2 representing the position of the sprite's upper left
@@ -140,10 +144,19 @@ namespace MH4F
         ///
         public Rectangle BoundingBox
         {
-            get { return new Rectangle(X, Y, iWidth, iHeight); }
+            get { return boundingBox; }
+            set { boundingBox = value; }
         }
-
-
+        public int BoundingBoxWidth
+        {
+            get { return boundingBoxWidth; }
+            set { boundingBoxWidth = value; }
+        }
+        public int BoundingBoxHeight
+        {
+            get { return boundingBoxHeight; }
+            set { boundingBoxHeight = value; }
+        }
         public Rectangle Hitbox
         {
             get { return hitbox; }
@@ -253,15 +266,15 @@ namespace MH4F
 
         }
 
-        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState)
+        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, int columns, float FrameLength, CharacterState characterState)
         {
             if (characterState == CharacterState.HIT || characterState == CharacterState.BLOCK)
             {
-                animations.Add(Name, new HitAnimation(texture, X, Y, Width, Height, Frames, FrameLength, characterState));
+                animations.Add(Name, new HitAnimation(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState));
             }
             else
             {
-                animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState));
+                animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState));
             }
 
             iWidth = Width;
@@ -269,31 +282,32 @@ namespace MH4F
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
 
-        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState, bool isAnAttack)
+        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, int columns, float FrameLength, CharacterState characterState, bool isAnAttack)
         {
-            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState, isAnAttack));
+            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, isAnAttack));
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
-        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState, bool isAnAttack, String NextAnmation)
+
+        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, int columns, float FrameLength, CharacterState characterState, bool isAnAttack, String NextAnmation)
         {
-            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState, isAnAttack, NextAnmation));
+            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, isAnAttack, NextAnmation));
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
 
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames,
-           float FrameLength, CharacterState characterState, string NextAnimation)
+           int columns, float FrameLength, CharacterState characterState, string NextAnimation)
         {
             if (characterState == CharacterState.HIT || characterState == CharacterState.BLOCK)
             {
-                animations.Add(Name, new HitAnimation(texture, X, Y, Width, Height, Frames, FrameLength, characterState, NextAnimation));
+                animations.Add(Name, new HitAnimation(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, NextAnimation));
             }
             else
             {
-                animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState, NextAnimation));
+                animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, NextAnimation));
             }
             iWidth = Width;
             iHeight = Height;
@@ -351,6 +365,11 @@ namespace MH4F
             v2Position.X += x;
             v2Position.Y += y;
             currentXVelocity += x;
+        }
+
+        public void setXByBoundingBox(int boundingBoxX)
+        {       
+            X = boundingBoxX + boundingBoxWidth / 2 - Width / 2;
         }
 
         public void Update(GameTime gameTime, Direction direction)
@@ -440,6 +459,22 @@ namespace MH4F
                     hurtbox = new Rectangle();
                 }
 
+                // Calculate where our bounding box is. Calculating this every cycle hopefully doesn't add too much overhead
+                //
+                if (BoundingBoxHeight != null)
+                {
+       
+                    boundingBox.Height = boundingBoxHeight;
+                    boundingBox.Width = boundingBoxWidth;
+
+                    boundingBox.X = CenterX - boundingBoxWidth/2;
+                    boundingBox.Y = (int)v2Position.Y + Height -  boundingBoxHeight;
+                }
+                else
+                {
+                    boundingBox = new Rectangle();
+                }
+
                 // Check to see if there is a "followup" animation named for this animation
                 //
                 if (!String.IsNullOrEmpty(CurrentMoveAnimation.NextAnimation))
@@ -500,6 +535,9 @@ namespace MH4F
 
                     Color translucentBlue = Color.Blue * 0.5f;
                     spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
+
+                    Color DarkBlue = Color.Blue * 0.7f;
+                    spriteBatch.Draw(dummyTexture, boundingBox, translucentBlue);
                 }
             }
         }

@@ -110,7 +110,7 @@ namespace MH4F
                             if (dash.CurrentInputCommandIndex >= dash.InputCommand.Count)
                             {
                                 System.Diagnostics.Debug.WriteLine(dash.Name);
-                              //  inputs.Reset();
+                                //inputs.Reset();
                                 return dash.Name;
                             }
                         }
@@ -209,8 +209,7 @@ namespace MH4F
             foreach(String direction in DIRECTIONS)
             {
                 if (state.IsKeyDown(controls[direction]))
-                {
-                    Console.WriteLine(controls[direction] + " " + counter);
+                { 
                     keysPressed[counter] = controls[direction];
                     counter++;
                 }

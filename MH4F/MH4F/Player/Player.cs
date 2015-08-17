@@ -346,11 +346,11 @@ namespace MH4F
             //
             if (Sprite.CurrentMoveAnimation != null)
             {
-                determineCurrentMove(ks, inHitstop);
+                determineCurrentMove(gameTime, ks, inHitstop);
             }
             if (!inHitstop)
             {
-              handlePerformCurrentMove(ks);
+              handlePerformCurrentMove(gameTime, ks);
                 // This is basically for jumps as only jump movement is calculated via velocity
                 //
                float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -364,7 +364,7 @@ namespace MH4F
             prevKeyboardState = Keyboard.GetState();
         }
 
-        public void determineCurrentMove(KeyboardState ks, Boolean inHitstop)
+        public void determineCurrentMove(GameTime gameTime, KeyboardState ks, Boolean inHitstop)
         {
           String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, Sprite.CurrentAnimation, ks);
           // See if we are in a state to change moves
@@ -463,7 +463,7 @@ namespace MH4F
           }
         }
 
-        public void handlePerformCurrentMove(KeyboardState ks)
+        public void handlePerformCurrentMove(GameTime gameTime, KeyboardState ks)
         {
           // Parse the ground special inputs here
           //

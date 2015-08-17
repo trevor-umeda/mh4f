@@ -313,12 +313,12 @@ namespace MH4F
             spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
             spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
             spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
-            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
-            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
+          
             spriteBatch.End();
 
             spriteBatch.Begin();
-
+            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
+            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
             comboManager.displayComboMessage(spriteBatch);
             
             
@@ -407,40 +407,41 @@ namespace MH4F
         {
             // Make sure the player doesn't go out of bound
             //
-            if (player1.X < 0)
+            if (player1.Sprite.BoundingBox.X < 0)
             {
-                player1.X = 0;
+                player1.Sprite.setXByBoundingBox(0);
             }
-            if (player1.X + player1.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
+            if (player1.Sprite.BoundingBox.X + player1.Sprite.BoundingBox.Width > gameWidth)
             {
-                player1.X = gameWidth - player1.Sprite.CurrentMoveAnimation.FrameWidth;
-            }
-
-            if (player1.X < cam.LeftEdge)
-            {
-                player1.X = cam.LeftEdge;
+                player1.Sprite.setXByBoundingBox(gameWidth - player1.Sprite.BoundingBox.Width); 
             }
 
-            if (player1.X + player1.Sprite.Width > cam.RightEdge)
+            if (player1.Sprite.BoundingBox.X < cam.LeftEdge)
             {
-                player1.X = cam.RightEdge - player1.Sprite.Width;
+                player1.Sprite.setXByBoundingBox(cam.LeftEdge);         
+            }
+
+            if (player1.Sprite.BoundingBox.X + player1.Sprite.BoundingBox.Width > cam.RightEdge)
+            {
+                player1.Sprite.setXByBoundingBox(cam.RightEdge - player1.Sprite.BoundingBox.Width);
+   
             }
 
             // Same out of bound checks for player 2
             //
-            if (player2.X < 0)
+            if (player2.Sprite.BoundingBox.X < 0)
             {
                 player2.X = 0;
             }
-            if (player2.X + player2.Sprite.CurrentMoveAnimation.FrameWidth > gameWidth)
+            if (player2.Sprite.BoundingBox.X + player2.Sprite.BoundingBox.Width > gameWidth)
             {
                 player2.X = gameWidth - player2.Sprite.CurrentMoveAnimation.FrameWidth;
             }
-            if (player2.X < cam.LeftEdge)
+            if (player2.Sprite.BoundingBox.X < cam.LeftEdge)
             {
                 player2.X = cam.LeftEdge;
             }
-            if (player2.X + player2.Sprite.Width > cam.RightEdge)
+            if (player2.Sprite.BoundingBox.X + player2.Sprite.BoundingBox.Width > cam.RightEdge)
             {
                 player2.X = cam.RightEdge - player2.Sprite.Width;
             }

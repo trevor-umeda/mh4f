@@ -67,8 +67,8 @@ namespace MH4F
         {
             resetHitInfo[index] = reset;
         }
-             
-        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float frameLength, CharacterState CharacterState)
+
+        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState)
         {
             Texture = texture;
             RectInitialFrame = new Rectangle(X, Y, Width, Height);
@@ -78,9 +78,10 @@ namespace MH4F
             resetHitInfo = new Boolean[Frames];
             FrameLength = frameLength;
             characterState = CharacterState;
+            Columns = columns;
         }
 
-        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float frameLength, CharacterState CharacterState, bool IsAnAttack)
+        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState, bool IsAnAttack)
         {
             Texture = texture;
             RectInitialFrame = new Rectangle(X, Y, Width, Height);
@@ -91,9 +92,10 @@ namespace MH4F
             FrameLength = frameLength;
             characterState = CharacterState;
             IsAttack = IsAnAttack;
+            Columns = columns;
         }
 
-        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float frameLength, CharacterState CharacterState, bool IsAnAttack, String strNextAnimation)
+        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState, bool IsAnAttack, String strNextAnimation)
         {
             Texture = texture;
             RectInitialFrame = new Rectangle(X, Y, Width, Height);
@@ -105,10 +107,11 @@ namespace MH4F
             characterState = CharacterState;
             IsAttack = IsAnAttack;
             NextAnimation = strNextAnimation;
+            Columns = columns;
         }
 
         public Move(Texture2D texture, int X, int Y,
-            int Width, int Height, int Frames,
+            int Width, int Height, int Frames, int columns, 
             float frameLength, CharacterState CharacterState, string strNextAnimation)
         {
             Texture = texture;
@@ -120,6 +123,7 @@ namespace MH4F
             FrameLength = frameLength;
             characterState = CharacterState;
             NextAnimation = strNextAnimation;
+            Columns = columns;
         }
 
         public override void Update(GameTime gameTime)
@@ -147,7 +151,7 @@ namespace MH4F
         {
             return new HitAnimation(Texture, this.RectInitialFrame.X, this.RectInitialFrame.Y,
                                       this.RectInitialFrame.Width, this.RectInitialFrame.Height,
-                                      FrameCount, this.FrameLength, this.characterState, NextAnimation);
+                                      FrameCount, this.Columns, this.FrameLength, this.characterState, NextAnimation);
         }
     }
     

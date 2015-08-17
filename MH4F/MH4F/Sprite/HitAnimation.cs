@@ -19,13 +19,13 @@ namespace MH4F
             set { this.hitStunCounter = value; }
         }
 
-        public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState)
-            : base(texture, X, Y, Width, Height, Frames, FrameLength, CharacterState)
+        public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int Columns, float FrameLength, CharacterState CharacterState)
+            : base(texture, X, Y, Width, Height, Frames, Columns, FrameLength, CharacterState)
         {
         }
 
-        public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState CharacterState, String strNextAnimation)
-            : base(texture, X, Y, Width, Height, Frames, FrameLength, CharacterState, strNextAnimation)
+        public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int Columns, float FrameLength, CharacterState CharacterState, String strNextAnimation)
+            : base(texture, X, Y, Width, Height, Frames, Columns, FrameLength, CharacterState, strNextAnimation)
         {
         }
 
