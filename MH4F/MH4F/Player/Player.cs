@@ -74,7 +74,7 @@ namespace MH4F
 
         // Whether the character is crouching
         bool isCrouching = false;
-       
+
         Vector2 currentVelocity = new Vector2(0, 0);
 
         bool isInInterruptableAnimation = false;
@@ -112,7 +112,7 @@ namespace MH4F
         Vector2 startingPosition;
         public Player(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
         {
-            sprite = new SpriteAnimationManager();            
+            sprite = new SpriteAnimationManager();
             PlayerNumber = playerNumber;
             Position = new Vector2(xPosition, GROUND_POS_Y - yHeight-200);
             startingPosition = new Vector2(xPosition, GROUND_POS_Y - yHeight - 200);
@@ -123,7 +123,7 @@ namespace MH4F
             ControlSetting = new ControlSetting();
             InputMoveBuffer = new InputMoveBuffer();
         }
-      
+
         public ControlSetting ControlSetting
         {
             get { return controlSetting; }
@@ -133,12 +133,12 @@ namespace MH4F
                 specialInputManager.ControlSetting = value;
             }
         }
-       
+
         public bool IsAirborne
         {
             get {
-                return Y + Sprite.CurrentMoveAnimation.FrameHeight < GROUND_POS_Y - 30; 
-            }            
+                return Y + Sprite.CurrentMoveAnimation.FrameHeight < GROUND_POS_Y - 30;
+            }
         }
 
         public bool isGettingHit
@@ -149,13 +149,16 @@ namespace MH4F
             }
         }
 
+        // Are we in a move that we can cancel
+        //
         public bool IsCancealableMove
         {
             get { return Sprite.CurrentMoveAnimation != null &&
-                (!isGettingHit) &&
-                (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone ||
-                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.DASHING ||
-                !Sprite.CurrentMoveAnimation.IsAttack); }
+                (!isGettingHit) && // If we aren't getting hit
+                (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone || // or if the move is done
+                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.DASHING || // or if the current move is dashing
+                !Sprite.CurrentMoveAnimation.IsAttack);  // or if the  move is not an attack
+              }
         }
 
         public CharacterState CharacterState
@@ -169,7 +172,7 @@ namespace MH4F
             set { Sprite.CurrentMoveAnimation.HasHitOpponent = value; }
         }
 
-       
+
         public Rectangle BoundingBox
         {
             get { return sprite.BoundingBox; }
@@ -241,29 +244,29 @@ namespace MH4F
             else
             {
                 MomentumXMovement = momentumValue;
-            }  
+            }
         }
 
 
         public void processBasicMovement(GameTime gameTime, KeyboardState ks)
         {
-            // I dislike having this in the player class, but atm it fits really well. 
+            // I dislike having this in the player class, but atm it fits really well.
             //
-            if (Sprite.CurrentMoveAnimation == null || 
+            if (Sprite.CurrentMoveAnimation == null ||
                 Sprite.CurrentMoveAnimation.CharacterState != CharacterState.AIRBORNE)
-            {               
+            {
                 if (IsCancealableMove)
                 {
-                    
+
                     if (ks.IsKeyDown(controlSetting.Controls["down"]))
                     {
-                      
+
                         Crouch();
                     }
                     else
                     {
                         UnCrouch();
-                    
+
                         if (ks.IsKeyDown(controlSetting.Controls["right"]))
                         {
                             if (Direction == Direction.Right)
@@ -279,12 +282,12 @@ namespace MH4F
                         {
                             if (Direction == Direction.Right)
                             {
-                                BackWalk(); 
+                                BackWalk();
                             }
                             else
                             {
-                                ForwardWalk();    
-                            }            
+                                ForwardWalk();
+                            }
                         }
                         if (ks.IsKeyDown(controlSetting.Controls["up"]))
                         {
@@ -299,7 +302,7 @@ namespace MH4F
                             else
                             {
                                 Jump();
-                            }                        
+                            }
                         }
                     }
                 }
@@ -336,198 +339,216 @@ namespace MH4F
 
         public void Update(GameTime gameTime, KeyboardState ks, Boolean inHitstop)
         {
-           
+
             Sprite.CurrentXVelocity = 0;
-    
+
+            // Might not be necessary
+            //
             if (Sprite.CurrentMoveAnimation != null)
             {
-                String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, Sprite.CurrentAnimation, ks); 
-                if(IsCancealableMove || // Are we doing an action that can be canceled
-                    HasHitOpponent || // We can also cancel a move if we hit an opponent
-                    InputMoveBuffer.getBufferedMove() != null)
-                {
-                    if (InputMoveBuffer.getBufferedMove() != null)
-                    {
-                        Console.WriteLine(InputMoveBuffer.getBufferedMove());
-                    }
-                    if (moveName == null && InputMoveBuffer.getBufferedMove() == null)
-                    {
-                        // Handle basic stuff like moving, jumping and crouching
-                        //
-                        processBasicMovement(gameTime, ks);
-                    }
-                    else
-                    {
-                        UnCrouch();
-                        
-                        // Set the current animation to be our special move
-                        //
-
-                        // If we're trying to do a throw, see if we actually can. if not then change it.
-                        //
-                        if (moveName == "forwardthrow" || moveName == "backthrow")
-                        {
-                            if (!ThrowManager.isValidThrow(PlayerNumber))
-                            {
-                                if (moveName == "forwardthrow")
-                                {
-                                    moveName = ThrowManager.ForwardThrowWhiffMove;
-                                    Console.WriteLine("OOPS WAS NOT A THROW DOING FORWARD C");
-                                }
-                                else
-                                {
-                                    moveName = ThrowManager.BackThrowWhiffMove;
-                                }
-                            }
-                        }
-
-                        // If we're in hitstop, queue up the move.
-                        //
-                        if (inHitstop)
-                        {
-                            if (moveName != null)
-                            {
-                                Console.WriteLine("Queueing up : " + moveName);
-                                InputMoveBuffer.setBufferedMove(moveName);
-                            }
-                        }
-                        // If we're not in hitstop then we're free to perform things
-                        //
-                        else
-                        {
-                            // If its appropriate and we have a move queued up then it takes priority
-                            //
-                            if ((IsCancealableMove || HasHitOpponent) && InputMoveBuffer.getBufferedMove() != null)
-                            {
-                                Console.WriteLine("Unbuffering Move");
-                                checkMoveChangeValidity(InputMoveBuffer.getBufferedMove());
-                                InputMoveBuffer.unbufferCurrentMove();
-                            }
-                            // Otherwise perform the current move
-                            //
-                            else if (moveName != null)
-                            {
-                                if (moveName != "backstep" && moveName != "dash")
-                                {
-                                    checkMoveChangeValidity(moveName);
-                                }
-                                else if (timesJumped < 1)
-                                {
-                                    // Doing an airdash or back step
-                                    //
-                                    SoundManager.PlaySound(moveName);
-                                    Sprite.CurrentAnimation = moveName;
-
-                                    // If we're in the air when we do it, note we jumped up
-                                    //
-                                    if (IsAirborne)
-                                    {
-                                        timesJumped++;
-                                    }
-                                }
-                            }
-                        }                                
-                    }
-                }
-                // If we've input a move but cant cancel it, then put it in our buffer
-                //
-                else if(moveName != null && Sprite.CurrentMoveAnimation.IsAttack && moveName != "backstep")
-                {
-                    Console.WriteLine("Queueing up : " + moveName);
-                    InputMoveBuffer.setBufferedMove(moveName);
-                }
+                determineCurrentMove(ks, inHitstop);
             }
             if (!inHitstop)
             {
-                // Parse the ground special inputs here
-                //
-                if (!IsAirborne)
-                {
-                    performGroundSpecialMove(ks, Sprite.CurrentAnimation);
-                }
-                if (IsAirborne)
-                {
-                    // Do airdash stuff
-                    //
-                    if (Sprite.CurrentAnimation == "backstep")
-                    {                                 
-                        AirBackdash();                    
-                    }
-                    else if (Sprite.CurrentAnimation == "dash")
-                    {                    
-                        AirDash();                                        
-                    }
-                    else
-                    {
-                        // If not doing an airdash, do typical jump movement
-                        //
-                        AirborneMovement(gameTime);
-                  
-                        // Check to see if we can tech here
-                        //
-                        if (isGettingHit && untechTime <= 0)
-                        {
-                            if(ks.IsKeyDown(controlSetting.Controls["a"]))
-                            {
-                                Console.WriteLine("DID A TECH");
-                                Sprite.CurrentAnimation = "standing";
-                            }
-                        }
-                    }                
-                }
+              handlePerformCurrentMove(ks);
                 // This is basically for jumps as only jump movement is calculated via velocity
                 //
                float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
                Position += CurrentVelocity * time;
-           
+
                sprite.Update(gameTime, Direction);
-      
-               // Move the player a bit for a small amount of time
-               //
-               if (momentumCounter > 0)
-               {
-                   momentumCounter--;
-                   sprite.MoveBy(momentumXMovement, 0);
-               }
-               if (momentumCounter == 0)
-               {
-                   momentumXMovement = 0;
 
-               }
-
-                // Logic to handle when they arelanding
-                // If bottom of sprite is touching the "floor" then you are landed
-                //
-               if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= GROUND_POS_Y && currentVelocity.Y > 0)
-               {
-                   // Stop velocity
-                   //
-                   CurrentVelocity = new Vector2(0, 0);
-               
-                   // Once they land, make sure we reset how many times we've jumped
-                   //
-                   timesJumped = 0;
-
-                   // If they were getting hit though, they'll hit the ground instead of just landing
-                   //
-                   if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState || 
-                       CharacterState.AIRBORNEHIT == sprite.CurrentMoveAnimation.CharacterState)
-                   {
-                       Sprite.CurrentAnimation = "hitground";
-                   }
-                   else
-                   {
-                       Sprite.CurrentAnimation = "standing";
-
-                   }
-                   // Set their position to be on the ground depending on what animation they are in
-                   //
-                   Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);               
-               }
+               handleExtraMovement();
                cleanUp();
-           }   
+           }
             prevKeyboardState = Keyboard.GetState();
         }
+
+        public void determineCurrentMove(KeyboardState ks, Boolean inHitstop)
+        {
+          String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, Sprite.CurrentAnimation, ks);
+          // See if we are in a state to change moves
+          //
+          if(IsCancealableMove || // Are we doing an action that can be canceled
+              HasHitOpponent || // We can also cancel a move if we hit an opponent
+              InputMoveBuffer.getBufferedMove() != null)
+          {
+              if (moveName == null && InputMoveBuffer.getBufferedMove() == null)
+              {
+                  // Handle basic stuff like moving, jumping and crouching
+                  //
+                  processBasicMovement(gameTime, ks);
+              }
+              else
+              {
+                  UnCrouch();
+
+                  // If we're trying to do a throw, see if we actually can. if not then change it.
+                  //
+                  if (moveName == "forwardthrow" || moveName == "backthrow")
+                  {
+                    // Have the throw manager see if the throw is valid
+                    //
+                      if (!ThrowManager.isValidThrow(PlayerNumber))
+                      {
+                          // If its not then have the move perform a throw whiff move
+                          // This can work for either 1 button or 2 button
+                          //
+                          if (moveName == "forwardthrow")
+                          {
+                              moveName = ThrowManager.ForwardThrowWhiffMove;
+                              Console.WriteLine("OOPS WAS NOT A THROW DOING FORWARD C");
+                          }
+                          else
+                          {
+                              moveName = ThrowManager.BackThrowWhiffMove;
+                          }
+                      }
+                  }
+
+                  // If we're in hitstop, queue up the move.
+                  //
+                  if (inHitstop)
+                  {
+                      if (moveName != null)
+                      {
+                          Console.WriteLine("Queueing up : " + moveName);
+                          InputMoveBuffer.setBufferedMove(moveName);
+                      }
+                  }
+                  // If we're not in hitstop then we're free to perform things
+                  //
+                  else
+                  {
+                      // If its appropriate and we have a move queued up then it takes priority
+                      //
+                      if ((IsCancealableMove || HasHitOpponent) && InputMoveBuffer.getBufferedMove() != null)
+                      {
+                          Console.WriteLine("Unbuffering Move");
+                          checkMoveChangeValidity(InputMoveBuffer.getBufferedMove());
+                          InputMoveBuffer.unbufferCurrentMove();
+                      }
+                      // Otherwise perform the current move
+                      //
+                      else if (moveName != null)
+                      {
+                          if (moveName != "backstep" && moveName != "dash")
+                          {
+                              checkMoveChangeValidity(moveName);
+                          }
+                          else if (timesJumped < 1)
+                          {
+                              // Doing an airdash or back step
+                              //
+                              SoundManager.PlaySound(moveName);
+                              Sprite.CurrentAnimation = moveName;
+
+                              // If we're in the air when we do it, note we jumped up
+                              //
+                              if (IsAirborne)
+                              {
+                                  timesJumped++;
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+          // If we've input a move but cant cancel it, then put it in our buffer
+          //
+          else if(moveName != null && Sprite.CurrentMoveAnimation.IsAttack && moveName != "backstep")
+          {
+              Console.WriteLine("Queueing up : " + moveName);
+              InputMoveBuffer.setBufferedMove(moveName);
+          }
+        }
+
+        public void handlePerformCurrentMove(KeyboardState ks)
+        {
+          // Parse the ground special inputs here
+          //
+          if (!IsAirborne)
+          {
+              performGroundSpecialMove(ks, Sprite.CurrentAnimation);
+          }
+          if (IsAirborne)
+          {
+              // Do airdash stuff
+              //
+              if (Sprite.CurrentAnimation == "backstep")
+              {
+                  AirBackdash();
+              }
+              else if (Sprite.CurrentAnimation == "dash")
+              {
+                  AirDash();
+              }
+              else
+              {
+                  // If not doing an airdash, do typical jump movement
+                  //
+                  AirborneMovement(gameTime);
+
+                  // Check to see if we can tech here
+                  //
+                  if (isGettingHit && untechTime <= 0)
+                  {
+                      if(ks.IsKeyDown(controlSetting.Controls["a"]))
+                      {
+                          Console.WriteLine("DID A TECH");
+                          Sprite.CurrentAnimation = "standing";
+                      }
+                  }
+              }
+          }
+        }
+
+        public void handleExtraMovement()
+        {
+          // Move the player a bit for a small amount of time
+          //
+          if (momentumCounter > 0)
+          {
+              momentumCounter--;
+              sprite.MoveBy(momentumXMovement, 0);
+          }
+          if (momentumCounter == 0)
+          {
+              momentumXMovement = 0;
+
+          }
+
+           // Logic to handle when they are landing
+           // If bottom of sprite is touching the "floor" then you are landed
+           //
+          if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= GROUND_POS_Y && currentVelocity.Y > 0)
+          {
+              // Stop velocity
+              //
+              CurrentVelocity = new Vector2(0, 0);
+
+              // Once they land, make sure we reset how many times we've jumped
+              //
+              timesJumped = 0;
+
+              // If they were getting hit though, they'll hit the ground instead of just landing
+              //
+              if (CharacterState.KNOCKDOWN == Sprite.CurrentMoveAnimation.CharacterState ||
+                  CharacterState.AIRBORNEHIT == sprite.CurrentMoveAnimation.CharacterState)
+              {
+                  Sprite.CurrentAnimation = "hitground";
+              }
+              else
+              {
+                  Sprite.CurrentAnimation = "standing";
+
+              }
+              // Set their position to be on the ground depending on what animation they are in
+              //
+              Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);
+          }
+        }
+
         public virtual void Backstep()
         {
             if (Direction == Direction.Left)
@@ -568,7 +589,7 @@ namespace MH4F
 
         public virtual void performGroundSpecialMove(KeyboardState ks, String moveName)
         {
-            
+
             if (Sprite.CurrentAnimation == "backstep")
             {
                 Backstep();
@@ -586,7 +607,7 @@ namespace MH4F
         }
 
         public virtual void AirBackdash()
-        {           
+        {
             CurrentVelocity = new Vector2(0, 0);
             if (Sprite.isLastFrameOfAnimation())
             {
@@ -599,7 +620,7 @@ namespace MH4F
                     CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 200); ;
                 }
             }
-            
+
             if (Direction == Direction.Left)
             {
                 Sprite.MoveBy(BackStepVel, 0);
@@ -612,7 +633,7 @@ namespace MH4F
 
         public virtual void AirDash()
         {
-           
+
         }
 
         public virtual void BackWalk()
@@ -734,7 +755,7 @@ namespace MH4F
         {
 
             if (!IsCrouching)
-            {               
+            {
                 Sprite.CurrentAnimation = "crouching";
             }
             IsCrouching = true;
@@ -809,10 +830,10 @@ namespace MH4F
                         }
                     }
                 }
-               
+
                 ComboManager.registerHit(hitInfo);
             }
-           
+
         }
 
         private Boolean isAttackBlocked(KeyboardState keyState, Hitzone hitzone)
@@ -873,9 +894,9 @@ namespace MH4F
         {
             if (bVisible)
             {
-               
+
                 sprite.Draw(spriteBatch, 0, 0, Direction);
-               
+
             }
         }
 
@@ -1072,5 +1093,5 @@ namespace MH4F
         }
 
     }
-    
+
 }

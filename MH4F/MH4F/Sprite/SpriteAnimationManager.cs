@@ -9,7 +9,7 @@ namespace MH4F
 {
     public class SpriteAnimationManager
     {
- 
+
         public Texture2D dummyTexture ;
 
         // True if animations are being played
@@ -207,7 +207,7 @@ namespace MH4F
                 if (animations.ContainsKey(value))
                 {
                     if (( currentAnimation != value && !animations[value].IsAttack) || animations[value].IsAttack || animations[value].CharacterState == CharacterState.HIT )
-                    {                    
+                    {
                         int previousHeight = 0;
                         int previousWidth = 0;
                         // Before changing animations, we need to take care of some stuff
@@ -221,7 +221,7 @@ namespace MH4F
                             //
                             animations[currentAnimation].HasHitOpponent = false;
                         }
-                            
+
                         currentAnimation = value;
                         animations[currentAnimation].CurrentFrame = 0;
                         animations[currentAnimation].PlayCount = 0;
@@ -229,20 +229,20 @@ namespace MH4F
                         animations[currentAnimation].IsDone = false;
                         int currentHeight = animations[currentAnimation].FrameHeight;
                         int currentWidth = animations[currentAnimation].FrameWidth;
-                        
+
                         // Because we render position wise using the top left corner, Sprites with different heights would float off the ground.
                         // What we want is to render starting from the feet
                         //
                         if (previousHeight != 0)
                         {
-                            Y += previousHeight - currentHeight; 
+                            Y += previousHeight - currentHeight;
                         }
 
                         if (previousWidth != 0)
                         {
                             X += ( previousWidth / 2) - (currentWidth / 2) ;
                         }
-                    
+
                     }
                 }
             }
@@ -250,7 +250,7 @@ namespace MH4F
 
         public SpriteAnimationManager()
         {
-      
+
         }
 
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, float FrameLength, CharacterState characterState)
@@ -263,7 +263,7 @@ namespace MH4F
             {
                 animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, FrameLength, characterState));
             }
-            
+
             iWidth = Width;
             iHeight = Height;
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
@@ -316,7 +316,7 @@ namespace MH4F
         }
 
         public HitInfo SetAttackMoveProperties(String moveName, HitInfo hitInfo)
-        {      
+        {
             animations[moveName].HitInfo = hitInfo;
             return animations[moveName].HitInfo;
         }
@@ -355,7 +355,7 @@ namespace MH4F
 
         public void Update(GameTime gameTime, Direction direction)
         {
-      
+
             // Don't do anything if the sprite is not animating
             if (bAnimating)
             {
@@ -379,36 +379,46 @@ namespace MH4F
                 // Run the Animation's update method
                 CurrentMoveAnimation.Update(gameTime);
                 Hitbox info = CurrentMoveAnimation.CurrentHitboxInfo;
-
+                // Ready hitbox info
+                //
                 if (info != null)
                 {
+                    // If the player is facing left
+                    //
                     if (direction == Direction.Left)
                     {
+                        // Set up the hitbox
+                        //
                         hitbox.Height = info.Height;
                         hitbox.Width = info.Width;
                         hitbox.X = info.XPos - info.Width / 2 + (int)v2Position.X;
                         hitbox.Y = info.YPos - info.Height / 2 + (int)v2Position.Y;
                     }
+                    // If the player is facing right
+                    //
                     else
                     {
                         // This could potentially be pre calculated for speed
                         //
                         hitbox.Height = info.Height;
                         hitbox.Width = info.Width;
-                        
+
                         hitbox.X = (int)v2Position.X + CurrentMoveAnimation.FrameWidth - info.Width/2 - info.XPos;
                         hitbox.Y = info.YPos - info.Height / 2 + (int)v2Position.Y;
-                    }                  
+                    }
                 }
                 else
                 {
-                    hitbox = new Rectangle();         
+                    hitbox = new Rectangle();
                 }
 
                 Hitbox hurtboxInfo = CurrentMoveAnimation.CurrentHurtboxInfo;
-
+                // Set up the hurtbox for the move
+                //
                 if (hurtboxInfo != null)
                 {
+                    // IF the player is facing left
+                    //
                     if (direction == Direction.Left)
                     {
                         hurtbox.Height = hurtboxInfo.Height;
@@ -423,18 +433,20 @@ namespace MH4F
 
                         hurtbox.X = (int)v2Position.X + CurrentMoveAnimation.FrameWidth - hurtboxInfo.Width / 2 - hurtboxInfo.XPos;
                         hurtbox.Y = hurtboxInfo.YPos - hurtboxInfo.Height / 2 + (int)v2Position.Y;
-                    }         
+                    }
                 }
                 else
                 {
                     hurtbox = new Rectangle();
                 }
-                
+
                 // Check to see if there is a "followup" animation named for this animation
+                //
                 if (!String.IsNullOrEmpty(CurrentMoveAnimation.NextAnimation))
                 {
                     // If there is, see if the currently playing animation has
                     // completed a full animation loop
+                    //
                     if (CurrentMoveAnimation.PlayCount > 0)
                     {
                         // If it has, set up the next animation
@@ -461,7 +473,7 @@ namespace MH4F
                                                    0, v2Center, 1f, SpriteEffects.None, 0);
                 }
             }
-           
+
         }
 
         public void Draw(SpriteBatch spriteBatch, int XOffset, int YOffset, Direction direction)
@@ -478,18 +490,18 @@ namespace MH4F
                 {
                     spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
                                                     CurrentMoveAnimation.FrameRectangle, colorTint,
-                                                    0, v2Center, 1f, SpriteEffects.None, 0); 
+                                                    0, v2Center, 1f, SpriteEffects.None, 0);
                 }
 
                 if (showHitboxes)
-                {              
+                {
                     Color translucentRed = Color.Red * 0.5f;
                     spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
 
                     Color translucentBlue = Color.Blue * 0.5f;
                     spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
                 }
-            }                
+            }
         }
     }
 }
