@@ -200,6 +200,15 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\WALKREVISED3.xnb</Output>
       <Time>2015-07-21T01:03:32.6992581-07:00</Time>
     </Item>
+    <Item>
+      <Source>script_punch.png</Source>
+      <Name>script_punch</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\script_punch.xnb</Output>
+      <Time>2015-08-17T23:08:21.4819738-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

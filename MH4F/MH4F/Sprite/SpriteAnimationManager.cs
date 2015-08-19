@@ -518,14 +518,15 @@ namespace MH4F
                 if (direction == Direction.Right)
                 {
                     spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
-                                                   CurrentMoveAnimation.FrameRectangle, colorTint,
-                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
+                                                    CurrentMoveAnimation.FrameRectangle, colorTint,
+                                                    0, v2Center, 1f, SpriteEffects.None, 0);
+                    
                 }
                 else
                 {
                     spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
-                                                    CurrentMoveAnimation.FrameRectangle, colorTint,
-                                                    0, v2Center, 1f, SpriteEffects.None, 0);
+                                                   CurrentMoveAnimation.FrameRectangle, colorTint,
+                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
                 }
 
                 if (showHitboxes)
