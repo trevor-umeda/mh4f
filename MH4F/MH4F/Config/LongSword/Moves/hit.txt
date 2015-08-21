@@ -1,0 +1,11 @@
+name=hit
+sprite=combinedsprite
+XImageStart=0
+YImageStart=3548 
+Width=260
+Height=300
+FrameCount=11
+Columns=11
+FrameLength=0.055
+CharacterState=HIT
+NextAnimation=standing

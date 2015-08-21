@@ -12,8 +12,7 @@ namespace MH4F
         public override Player createCharacter(ContentManager content, int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
         {
             LongSwordPlayer longSwordPlayer = new LongSwordPlayer(playerNumber, xPosition, yHeight, comboManager, throwManager);
-
-            base.loadCharacterData(characterId, longSwordPlayer, content);
+            base.loadCharacterDataConfigs(characterId, longSwordPlayer, content);
             return longSwordPlayer;
         }
     }

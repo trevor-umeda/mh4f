@@ -1,0 +1,10 @@
+name=walk
+sprite=WALKREVISED3
+XImageStart=0
+YImageStart=0
+Width=320
+Height=500
+FrameCount=10
+Columns=10
+FrameLength=0.1
+CharacterState=STANDING

@@ -1,0 +1,10 @@
+name=rightdash
+sprite=combinedsprite
+XImageStart=0
+YImageStart=1440
+Width=244
+Height=288
+FrameCount=7
+Columns=7
+FrameLength=0.1
+CharacterState=DASHING

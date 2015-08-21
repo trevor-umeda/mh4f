@@ -1,0 +1,10 @@
+name=falling
+sprite=FALLING
+XImageStart=0
+YImageStart=0 
+Width=160
+Height=288
+FrameCount=2
+Columns=2
+FrameLength=0.1
+CharacterState=AIRBORNEHIT

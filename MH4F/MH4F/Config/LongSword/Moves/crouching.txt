@@ -1,0 +1,11 @@
+name= crouching
+sprite= combinedsprite
+XImageStart= 0
+YImageStart= 576
+Width=176
+Height= 288
+FrameCount= 2
+Columns= 2
+FrameLength= 0.1
+CharacterState= CROUCHING
+NextAnimation=crouchingidle

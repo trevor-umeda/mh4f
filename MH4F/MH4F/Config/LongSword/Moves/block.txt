@@ -1,0 +1,11 @@
+name=block
+sprite=standblock
+XImageStart=0
+YImageStart=0 
+Width=160
+Height=280
+FrameCount=1
+Columns=1
+FrameLength=0.1
+CharacterState=HIT
+NextAnimation=standing

@@ -18,6 +18,10 @@ namespace MH4F
         //
         private Boolean[] resetHitInfo;
 
+        private int[] frameLengthInfo;
+
+        private int frameLengthTimer;
+
         private CharacterState characterState;
 
         bool hasHitOpponent = false;
@@ -68,6 +72,11 @@ namespace MH4F
             resetHitInfo[index] = reset;
         }
 
+        public void SetFrameLengthInfo(int[] info)
+        {
+            frameLengthInfo = info;
+        }
+
         public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState)
         {
             Texture = texture;
@@ -79,6 +88,8 @@ namespace MH4F
             FrameLength = frameLength;
             characterState = CharacterState;
             Columns = columns;
+            frameLengthInfo = new int[Frames];
+            frameLengthTimer = 0;
         }
 
         public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState, bool IsAnAttack)
@@ -133,16 +144,22 @@ namespace MH4F
             if (FrameTimer > FrameLength)
             {
                 FrameTimer = 0.0f;
-                CurrentFrame = (CurrentFrame + 1) % FrameCount;
-                if(resetHitInfo[CurrentFrame])
+                frameLengthTimer++;
+                if (frameLengthInfo[CurrentFrame] <= 0 ||frameLengthTimer >= frameLengthInfo[CurrentFrame])
                 {
-                    HasHitOpponent = false;
+                    frameLengthTimer = 0;
+                    CurrentFrame = (CurrentFrame + 1) % FrameCount;
+                    if (resetHitInfo[CurrentFrame])
+                    {
+                        HasHitOpponent = false;
+                    }
+                    if (CurrentFrame == 0)
+                    {
+                        PlayCount = (int)MathHelper.Min(PlayCount + 1, int.MaxValue);
+                        IsDone = true;
+                    }
                 }
-                if (CurrentFrame == 0)
-                {
-                    PlayCount = (int)MathHelper.Min(PlayCount + 1, int.MaxValue);
-                    IsDone = true;
-                }
+               
 
             }
         }

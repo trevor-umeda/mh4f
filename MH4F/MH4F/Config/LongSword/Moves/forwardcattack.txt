@@ -1,0 +1,12 @@
+name=forwardcattack
+sprite= combinedsprite
+XImageStart=0
+YImageStart=2708 
+Width=264
+Height=280
+FrameCount=9
+Columns=9
+FrameLength=0.044
+CharacterState=STANDING
+IsAttack=true
+Input=6C

@@ -1,0 +1,10 @@
+name=jumpup
+sprite=combinedsprite
+XImageStart=0
+YImageStart=1728
+Width=136
+Height=320
+FrameCount=1
+Columns=1
+FrameLength=0.1
+CharacterState=AIRBORNE

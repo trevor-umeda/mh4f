@@ -1,0 +1,10 @@
+name=jumpttop
+sprite=combinedsprite
+XImageStart=0
+YImageStart=2428 
+Width=192
+Height=280
+FrameCount=11
+Columns=11
+FrameLength=0.1
+CharacterState=AIRBORNE

@@ -1,0 +1,11 @@
+name=hitground
+sprite= HITGROUND
+XImageStart=0
+YImageStart=0 
+Width=288
+Height=192
+FrameCount=7
+Columns=7
+FrameLength=.01
+CharacterState=KNOCKDOWN
+NextAnimation=wakeup

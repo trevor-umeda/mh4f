@@ -1,0 +1,10 @@
+name=freeze
+sprite=combinedsprite
+XImageStart=0
+YImageStart=3548 
+Width=260
+Height=300
+FrameCount=1
+Columns=1
+FrameLength=0.055
+CharacterState=HIT

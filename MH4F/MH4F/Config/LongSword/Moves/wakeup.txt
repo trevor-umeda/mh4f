@@ -1,0 +1,11 @@
+name=wakeup
+sprite= WAKEUP
+XImageStart=0
+YImageStart= 0
+Width=280
+Height=272
+FrameCount=7
+Columns=7
+FrameLength=0.1
+CharacterState=KNOCKDOWN
+NextAnimation=standing

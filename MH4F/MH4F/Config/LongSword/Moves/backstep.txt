@@ -1,0 +1,11 @@
+name=backstep
+sprite=combinedsprite
+XImageStart=0
+YImageStart= 2988
+Width=240
+Height=280
+FrameCount=7
+Columns=7
+FrameLength=0.05
+CharacterState=BACKSTEP
+IsAttack=true

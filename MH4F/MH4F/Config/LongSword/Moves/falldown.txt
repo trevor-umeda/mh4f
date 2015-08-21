@@ -1,0 +1,11 @@
+name=falldown
+sprite= FALLDOWN
+XImageStart=0
+YImageStart= 0
+Width=208
+Height=320
+FrameCount=8
+Columns=8
+FrameLength=0.1
+CharacterState=AIRBORNEHIT
+NextAnimation=falling

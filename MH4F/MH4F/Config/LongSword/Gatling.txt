@@ -1,0 +1,3 @@
+﻿           | supera  | fireball| backfireball  |aattack | battack
+aattack    | x        |   x     |    x          |    x   |      x
+battack    | x        |   x     |    x          |        |      

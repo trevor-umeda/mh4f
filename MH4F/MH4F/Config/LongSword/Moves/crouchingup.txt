@@ -1,0 +1,10 @@
+name=crouchingup
+sprite= combinedsprite
+XImageStart=0
+YImageStart= 1152
+Width=176
+Height=288
+FrameCount=4
+Columns=4
+FrameLength=0.1
+CharacterState=CROUCHING

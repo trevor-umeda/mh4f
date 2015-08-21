@@ -282,6 +282,11 @@ namespace MH4F
             v2Center = new Vector2(iWidth / 2, iHeight / 2);
         }
 
+        public void AddAnimation(string Name, Move move)
+        {
+            animations.Add(Name, move);
+        }
+
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, int columns, float FrameLength, CharacterState characterState, bool isAnAttack)
         {
             animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, isAnAttack));

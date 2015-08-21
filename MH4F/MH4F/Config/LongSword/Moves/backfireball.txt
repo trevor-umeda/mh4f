@@ -1,0 +1,12 @@
+name= backfireball
+sprite= combinedsprite
+XImageStart=0
+YImageStart= 2708
+Width=264
+Height=280
+FrameCount=9
+Columns=9
+FrameLength=0.05
+CharacterState=STANDING
+IsAttack=true
+Input=2;1;4;A
