@@ -92,51 +92,6 @@ namespace MH4F
             frameLengthTimer = 0;
         }
 
-        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState, bool IsAnAttack)
-        {
-            Texture = texture;
-            RectInitialFrame = new Rectangle(X, Y, Width, Height);
-            FrameCount = Frames;
-            hitboxInfo = new Hitbox[Frames];
-            hurtboxInfo = new Hitbox[Frames];
-            resetHitInfo = new Boolean[Frames];
-            FrameLength = frameLength;
-            characterState = CharacterState;
-            IsAttack = IsAnAttack;
-            Columns = columns;
-        }
-
-        public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState, bool IsAnAttack, String strNextAnimation)
-        {
-            Texture = texture;
-            RectInitialFrame = new Rectangle(X, Y, Width, Height);
-            FrameCount = Frames;
-            hitboxInfo = new Hitbox[Frames];
-            hurtboxInfo = new Hitbox[Frames];
-            resetHitInfo = new Boolean[Frames];
-            FrameLength = frameLength;
-            characterState = CharacterState;
-            IsAttack = IsAnAttack;
-            NextAnimation = strNextAnimation;
-            Columns = columns;
-        }
-
-        public Move(Texture2D texture, int X, int Y,
-            int Width, int Height, int Frames, int columns, 
-            float frameLength, CharacterState CharacterState, string strNextAnimation)
-        {
-            Texture = texture;
-            RectInitialFrame = new Rectangle(X, Y, Width, Height);
-            FrameCount = Frames;
-            hitboxInfo = new Hitbox[Frames];
-            hurtboxInfo = new Hitbox[Frames];
-            resetHitInfo = new Boolean[Frames];
-            FrameLength = frameLength;
-            characterState = CharacterState;
-            NextAnimation = strNextAnimation;
-            Columns = columns;
-        }
-
         public override void Update(GameTime gameTime)
         {
             FrameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -168,7 +123,7 @@ namespace MH4F
         {
             return new HitAnimation(Texture, this.RectInitialFrame.X, this.RectInitialFrame.Y,
                                       this.RectInitialFrame.Width, this.RectInitialFrame.Height,
-                                      FrameCount, this.Columns, this.FrameLength, this.characterState, NextAnimation);
+                                      FrameCount, this.Columns, this.FrameLength, this.characterState);
         }
     }
     

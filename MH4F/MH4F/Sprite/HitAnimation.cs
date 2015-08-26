@@ -24,10 +24,7 @@ namespace MH4F
         {
         }
 
-        public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int Columns, float FrameLength, CharacterState CharacterState, String strNextAnimation)
-            : base(texture, X, Y, Width, Height, Frames, Columns, FrameLength, CharacterState, strNextAnimation)
-        {
-        }
+     
 
         public void reset()
         {

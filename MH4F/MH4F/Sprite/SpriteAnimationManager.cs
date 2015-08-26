@@ -287,37 +287,7 @@ namespace MH4F
             animations.Add(Name, move);
         }
 
-        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, int columns, float FrameLength, CharacterState characterState, bool isAnAttack)
-        {
-            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, isAnAttack));
-            iWidth = Width;
-            iHeight = Height;
-            v2Center = new Vector2(iWidth / 2, iHeight / 2);
-        }
-
-        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, int columns, float FrameLength, CharacterState characterState, bool isAnAttack, String NextAnmation)
-        {
-            animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, isAnAttack, NextAnmation));
-            iWidth = Width;
-            iHeight = Height;
-            v2Center = new Vector2(iWidth / 2, iHeight / 2);
-        }
-
-        public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames,
-           int columns, float FrameLength, CharacterState characterState, string NextAnimation)
-        {
-            if (characterState == CharacterState.HIT || characterState == CharacterState.BLOCK)
-            {
-                animations.Add(Name, new HitAnimation(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, NextAnimation));
-            }
-            else
-            {
-                animations.Add(Name, new Move(texture, X, Y, Width, Height, Frames, columns, FrameLength, characterState, NextAnimation));
-            }
-            iWidth = Width;
-            iHeight = Height;
-            v2Center = new Vector2(iWidth / 2, iHeight / 2);
-        }
+    
 
         public void AddResetInfo(String moveName, int index)
         {
