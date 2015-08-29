@@ -218,6 +218,24 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\new_punch.xnb</Output>
       <Time>2015-08-21T00:49:48.0061775-07:00</Time>
     </Item>
+    <Item>
+      <Source>RUN.png</Source>
+      <Name>RUN</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\RUN.xnb</Output>
+      <Time>2015-08-26T22:41:53.4113631-07:00</Time>
+    </Item>
+    <Item>
+      <Source>neutral.png</Source>
+      <Name>neutral</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\neutral.xnb</Output>
+      <Time>2015-08-27T23:47:42.0370503-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

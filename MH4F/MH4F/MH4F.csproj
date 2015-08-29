@@ -118,6 +118,8 @@
     <Compile Include="Inputs\InputMoveBuffer.cs" />
     <Compile Include="RoundManager.cs" />
     <Compile Include="Sound\SoundManager.cs" />
+    <Compile Include="Supers\BasicSuperManager.cs" />
+    <Compile Include="Supers\SuperManager.cs" />
     <Compile Include="Throws\OneButtonThrowManager.cs" />
     <Compile Include="Combo\ComboManager.cs" />
     <Compile Include="Inputs\ControlSetting.cs" />
@@ -225,6 +227,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\standing.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\supera.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\wakeup.txt">

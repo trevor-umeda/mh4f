@@ -1,10 +1,10 @@
 name=dash
-sprite=combinedsprite
+sprite=RUN
 XImageStart=0
-YImageStart=3268 
-Width=320
-Height=280
-FrameCount=13
-Columns=13
+YImageStart=0
+Width=650
+Height=500
+FrameCount=12
+Columns=4
 FrameLength=0.055
 CharacterState=DASHING

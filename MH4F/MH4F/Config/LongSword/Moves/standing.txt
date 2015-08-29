@@ -1,17 +1,20 @@
 ﻿name= standing
-sprite= STAND2
+sprite= neutral
 XImageStart= 0
 YImageStart= 0
-Width=320
+Width=547
 Height=500
-FrameCount=8
-Columns=8
-FrameLength=0.1
+FrameCount=10
+Columns=5
+FrameLength=0.05
 CharacterState=STANDING
-Hurtbox=[ 0;72;144;90;288
-1;72;144;90;288
-2;72;144;90;288
-3;72;144;90;288
-4;72;144;90;288
-5;72;144;90;288
-6;72;144;90;288 ]
+Hurtbox=[ 0;280;200;90;288
+1;280;200;90;288
+2;280;200;90;288
+3;280;200;90;288
+4;280;200;90;288
+5;280;200;90;288
+6;280;200;90;288
+7;280;200;90;288
+8;280;200;90;288
+9;280;200;90;288 ]

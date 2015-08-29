@@ -67,7 +67,7 @@ namespace MH4F
             }
         }
 
-        public override void checkMoveChangeValidity(string moveName)
+        public override void checkValidityAndChangeMove(string moveName)
         {
             // If we have a designated cost for our move. Make sure we can perform it. 
             //
@@ -80,8 +80,8 @@ namespace MH4F
                 if (SwordGauge - moveCostValue >= 0)
                 {
                     String move = convertRekka(moveName);
-                 
-                    base.checkMoveChangeValidity(moveName);
+
+                    changeMove(moveName);
                     SwordGauge = SwordGauge - moveCostValue;
                 }
                 else
@@ -91,8 +91,17 @@ namespace MH4F
             }  
             else
             {
-                base.checkMoveChangeValidity(moveName);
+                changeMove(moveName);
             }
+        }
+
+        public override void changeMove(string moveName)
+        {
+            if (moveName == "supera")
+            {
+                PerformSuperFreeze();
+            }
+            base.changeMove(moveName);
         }
 
         private String convertRekka(String moveName)
@@ -121,9 +130,16 @@ namespace MH4F
             {
                 Fireball();
             }
+            if (moveName == "supera")
+            {
+                if (Sprite.isLastFrameOfAnimation())
+                {
+                    Console.WriteLine("SPECIAL IS NOW OVER YAY");
+                }
+            }
             else if (moveName == "aattack")
             {
-                
+
             }
             else if (moveName == "rekkaA")
             {
