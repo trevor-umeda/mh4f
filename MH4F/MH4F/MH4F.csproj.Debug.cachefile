@@ -22,6 +22,8 @@ Content\STAND2.xnb
 Content\WALKREVISED3.xnb
 Content\script_punch.xnb
 Content\new_punch.xnb
+Content\RUN.xnb
+Content\neutral.xnb
 Content\bgm.wma
 Content\slap_large.wav
 Content\bgm.mp3
@@ -38,6 +40,8 @@ Content\HITGROUND.png
 Content\FALLING.png
 Content\back_ggxxac_london.png
 Content\script_punch.png
+Content\RUN.png
+Content\neutral.png
 Config\LongSword\Moves\aattack.txt
 Config\LongSword\Moves\backfireball.txt
 Config\LongSword\Moves\backstep.txt
@@ -64,6 +68,7 @@ Config\LongSword\Moves\jumpup.txt
 Config\LongSword\Moves\knockdown.txt
 Config\LongSword\Moves\rightdash.txt
 Config\LongSword\Moves\standing.txt
+Config\LongSword\Moves\supera.txt
 Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt

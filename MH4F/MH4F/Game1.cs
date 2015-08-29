@@ -20,7 +20,7 @@ namespace MH4F
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D standing;
-         public Player player1;
+        public Player player1;
         public Player player2;
         Texture2D dummyTexture;
         Texture2D background;
@@ -37,6 +37,7 @@ namespace MH4F
         int comboNumber = 0;
         ComboManager comboManager;
         ThrowManager throwManager;
+        SuperManager superManager;
 
         RoundManager roundManager;
         ContentManager content;
@@ -98,11 +99,11 @@ namespace MH4F
             comboManager = new ComboManager(spriteFont);
 
             throwManager = new OneButtonThrowManager();
-
+            superManager = new BasicSuperManager();
             background = Content.Load<Texture2D>("back_ggxxac_london");
             LongSwordFactory playerFactory = new LongSwordFactory();
             //player1 = new LongSwordPlayer(1, 100, 288, comboManager, throwManager);
-            player1 = playerFactory.createCharacter(Content, 1, 100, 288, comboManager, throwManager);
+            player1 = playerFactory.createCharacter(Content, 1, 100, 288, comboManager, throwManager, superManager);
            
             player1.SetUpUniversalAttackMoves();
             
@@ -129,7 +130,7 @@ namespace MH4F
             player1.ControlSetting.setControl("d", Keys.Z);
             //player2 = new LongSwordPlayer(2, 600, 288, comboManager, throwManager);
 
-            player2 = playerFactory.createCharacter(Content, 2, 600, 288, comboManager, throwManager);
+            player2 = playerFactory.createCharacter(Content, 2, 600, 288, comboManager, throwManager, superManager);
 
            
             player2.SetUpUniversalAttackMoves();
@@ -198,7 +199,19 @@ namespace MH4F
             //{
                 frameTimer = 0.0f;
 
-                if (hitstop > 0)
+                if (superManager.isInSuperFreeze())
+                {
+                    if (superManager.playerPerformingSuper() == 1)
+                    {
+                        player1.Update(gameTime, Keyboard.GetState(), false);
+                    }
+                    else
+                    {
+                        player2.Update(gameTime, Keyboard.GetState(), false);
+                    }
+                    superManager.decrementTimer();
+                }
+                else if (hitstop > 0)
                 {
                     player1.Update(gameTime, Keyboard.GetState(), true);
 
@@ -301,8 +314,19 @@ namespace MH4F
                         null,
                         null,
                         cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
+            
+            if (superManager.isInSuperFreeze())
+            {
+                Color backgroundTint = Color.Lerp(Color.White, Color.Black, 0.5f);
+                spriteBatch.Draw(background, mainFrame, backgroundTint);
+            }
+            else
+            {
+                spriteBatch.Draw(background, mainFrame, Color.White);
+            }
+            
 
-            spriteBatch.Draw(background, mainFrame, Color.White);
+
             //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
             player2.Draw(spriteBatch);
 
@@ -431,19 +455,19 @@ namespace MH4F
             //
             if (player2.Sprite.BoundingBox.X < 0)
             {
-                player2.X = 0;
+                player2.Sprite.setXByBoundingBox(0);
             }
             if (player2.Sprite.BoundingBox.X + player2.Sprite.BoundingBox.Width > gameWidth)
             {
-                player2.X = gameWidth - player2.Sprite.CurrentMoveAnimation.FrameWidth;
+                player2.Sprite.setXByBoundingBox(gameWidth - player2.Sprite.BoundingBox.Width); 
             }
             if (player2.Sprite.BoundingBox.X < cam.LeftEdge)
             {
-                player2.X = cam.LeftEdge;
+                player2.Sprite.setXByBoundingBox(cam.LeftEdge);   
             }
             if (player2.Sprite.BoundingBox.X + player2.Sprite.BoundingBox.Width > cam.RightEdge)
             {
-                player2.X = cam.RightEdge - player2.Sprite.Width;
+                player2.Sprite.setXByBoundingBox(cam.RightEdge - player2.Sprite.BoundingBox.Width);
             }
         }
 

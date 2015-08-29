@@ -21,6 +21,8 @@ namespace MH4F
 
         ThrowManager ThrowManager { get; set; }
 
+        public SuperManager SuperManager { get; set; }
+
         SoundManager SoundManager { get; set; }
 
         InputMoveBuffer InputMoveBuffer { get; set; }
@@ -425,7 +427,7 @@ namespace MH4F
                       if ((IsCancealableMove || HasHitOpponent) && InputMoveBuffer.getBufferedMove() != null)
                       {
                           Console.WriteLine("Unbuffering Move");
-                          checkMoveChangeValidity(InputMoveBuffer.getBufferedMove());
+                          checkValidityAndChangeMove(InputMoveBuffer.getBufferedMove());
                           InputMoveBuffer.unbufferCurrentMove();
                       }
                       // Otherwise perform the current move
@@ -434,7 +436,7 @@ namespace MH4F
                       {
                           if (moveName != "backstep" && moveName != "dash")
                           {
-                              checkMoveChangeValidity(moveName);
+                              checkValidityAndChangeMove(moveName);
                           }
                           else if (timesJumped < 1)
                           {
@@ -549,6 +551,11 @@ namespace MH4F
           }
         }
 
+        public void PerformSuperFreeze()
+        {
+            SuperManager.performSuper(PlayerNumber);
+        }
+
         public virtual void Backstep()
         {
             if (Direction == Direction.Left)
@@ -578,7 +585,9 @@ namespace MH4F
             InputMoveBuffer.decrementBufferTimer();
         }
 
-        public virtual void checkMoveChangeValidity(String moveName)
+        public abstract void checkValidityAndChangeMove(String moveName);
+
+        public virtual void changeMove(String moveName)
         {
             // Sub class must overwrite this... and perform this base to actually switch moves;
             //
