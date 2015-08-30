@@ -9,6 +9,7 @@ namespace MH4F
     {
         STANDING,
         DASHING,
+        AIRDASH,
         BACKSTEP,
         CROUCHING,
         AIRBORNE,

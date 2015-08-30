@@ -443,12 +443,19 @@ namespace MH4F
                               // Doing an airdash or back step
                               //
                               SoundManager.PlaySound(moveName);
-                              Sprite.CurrentAnimation = moveName;
 
+                              Sprite.CurrentAnimation = moveName;
+                             
                               // If we're in the air when we do it, note we jumped up
                               //
                               if (IsAirborne)
                               {
+                                  if (Sprite.CurrentAnimation == "dash")
+                                  {
+                                      Sprite.CurrentAnimation = "airdashstart";
+                                      Console.WriteLine("Dashing in the air");
+                                  }
+                                  
                                   timesJumped++;
                               }
                           }
@@ -481,8 +488,9 @@ namespace MH4F
               {
                   AirBackdash();
               }
-              else if (Sprite.CurrentAnimation == "dash")
+              else if (Sprite.CurrentAnimation == "airdash" || Sprite.CurrentAnimation == "airdashstart")
               {
+                  Console.WriteLine("DASHING IN THE AIR");
                   AirDash();
               }
               else
@@ -642,7 +650,29 @@ namespace MH4F
 
         public virtual void AirDash()
         {
+            CurrentVelocity = new Vector2(0, 0);
+     
+            if (Sprite.isLastFrameOfAnimation())
+            {
 
+                if (Direction == Direction.Left)
+                {
+                    CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 200);
+                }
+                else
+                {
+                    CurrentVelocity = new Vector2(JumpHorizontalSpeed, 200); ;
+                }
+            }
+
+            if (Direction == Direction.Left)
+            {
+                Sprite.MoveBy(-AirDashVel, 0);
+            }
+            else
+            {
+                Sprite.MoveBy(AirDashVel, 0);
+            }
         }
 
         public virtual void BackWalk()

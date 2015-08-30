@@ -152,7 +152,7 @@ namespace MH4F
             set { nextAnimation = value; }
         }
        
-        public Boolean isLastFrameOfAnimation()
+        public virtual Boolean isLastFrameOfAnimation()
         {
             return currentFrame == frameCount - 1;
         }

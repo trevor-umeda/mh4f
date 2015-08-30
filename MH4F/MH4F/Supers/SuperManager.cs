@@ -10,8 +10,10 @@ namespace MH4F
         
         void drawSuperEffects();
         Boolean isInSuperFreeze();
+        Boolean isInSuper();
         void performSuper(int player);
+        void endSuper();
         int playerPerformingSuper();
-        void decrementTimer();
+        void processSuper(); 
     }
 }

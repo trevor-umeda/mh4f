@@ -183,6 +183,11 @@ namespace MH4F
                 newMove.NextAnimation = (String)moveInfo["NextAnimation"];
             }
 
+            if (moveInfo.ContainsKey("LoopCount"))
+            {
+                newMove.LoopCount= int.Parse((String)moveInfo["LoopCount"]);
+            }
+
             if (moveInfo.ContainsKey("FrameLengthInfo"))
             {
                 String framelengthString = (String)moveInfo["FrameLengthInfo"];

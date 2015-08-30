@@ -50,7 +50,7 @@ namespace MH4F
             //
             ThrowRange = 200;
             BackAirDashVel = 8;
-            AirDashVel = 8;
+            AirDashVel = 13;
             BackStepVel = 8;
             DashVel = 8;
             BackWalkVel = 3;
@@ -134,6 +134,7 @@ namespace MH4F
             {
                 if (Sprite.isLastFrameOfAnimation())
                 {
+                    SuperManager.endSuper();
                     Console.WriteLine("SPECIAL IS NOW OVER YAY");
                 }
             }

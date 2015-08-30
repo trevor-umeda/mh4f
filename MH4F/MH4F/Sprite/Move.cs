@@ -22,6 +22,8 @@ namespace MH4F
 
         private int frameLengthTimer;
 
+        private int loopCount;
+
         private CharacterState characterState;
 
         bool hasHitOpponent = false;
@@ -49,6 +51,12 @@ namespace MH4F
         {
             get { return hitInfo; }
             set { hitInfo = value; } 
+        }
+
+        public int LoopCount
+        {
+            get { return loopCount; }
+            set { loopCount = value; }
         }
 
         public CharacterState CharacterState
@@ -90,8 +98,12 @@ namespace MH4F
             Columns = columns;
             frameLengthInfo = new int[Frames];
             frameLengthTimer = 0;
+            loopCount = 1;
         }
-
+        public override Boolean isLastFrameOfAnimation()
+        {
+            return (CurrentFrame == FrameCount - 1 && PlayCount == loopCount - 1);
+        }
         public override void Update(GameTime gameTime)
         {
             FrameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -111,7 +123,11 @@ namespace MH4F
                     if (CurrentFrame == 0)
                     {
                         PlayCount = (int)MathHelper.Min(PlayCount + 1, int.MaxValue);
-                        IsDone = true;
+                        if (PlayCount >= loopCount)
+                        {
+                            IsDone = true;
+                        }
+                       
                     }
                 }
                

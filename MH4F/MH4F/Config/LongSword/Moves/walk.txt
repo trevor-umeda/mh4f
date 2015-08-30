@@ -1,10 +1,10 @@
 name=walk
-sprite=WALKREVISED3
+sprite=6WALK
 XImageStart=0
 YImageStart=0
-Width=320
+Width=500
 Height=500
-FrameCount=10
-Columns=10
+FrameCount=15
+Columns=8
 FrameLength=0.1
 CharacterState=STANDING

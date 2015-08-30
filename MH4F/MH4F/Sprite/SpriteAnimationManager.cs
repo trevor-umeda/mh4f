@@ -219,7 +219,11 @@ namespace MH4F
             {
                 if (animations.ContainsKey(value))
                 {
-                    if (( currentAnimation != value && !animations[value].IsAttack) || animations[value].IsAttack || animations[value].CharacterState == CharacterState.HIT )
+                    //Change animation only if
+                    if (( currentAnimation != value && !animations[value].IsAttack) // The animation is different from the current and the new animation is not an attack
+                        || animations[value].IsAttack // The new animation IS an attack
+                        || animations[value].CharacterState == CharacterState.HIT //The new animation is the new character is getting hit
+                        )
                     {
                         int previousHeight = 0;
                         int previousWidth = 0;
@@ -236,6 +240,7 @@ namespace MH4F
                         }
 
                         currentAnimation = value;
+      
                         animations[currentAnimation].CurrentFrame = 0;
                         animations[currentAnimation].PlayCount = 0;
                         nextAnimation = animations[currentAnimation].NextAnimation;

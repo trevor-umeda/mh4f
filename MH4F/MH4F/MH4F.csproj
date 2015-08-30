@@ -172,6 +172,9 @@
     <Content Include="Config\LongSword\Moves\block.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\LongSword\Moves\airdashstart.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Moves\crouching.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -223,7 +226,7 @@
     <Content Include="Config\LongSword\Moves\knockdown.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\LongSword\Moves\rightdash.txt">
+    <Content Include="Config\LongSword\Moves\airdash.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\standing.txt">

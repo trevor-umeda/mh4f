@@ -1,10 +1,10 @@
 name= crouchingidle
-sprite= combinedsprite
+sprite= CROUCH2
 XImageStart= 0 
-YImageStart= 864
-Width= 176
-Height= 288
-FrameCount= 6
-Columns=6
+YImageStart= 0
+Width= 750
+Height= 500
+FrameCount= 12
+Columns=4
 FrameLength= 0.1
 CharacterState=CROUCHING

@@ -99,7 +99,7 @@ namespace MH4F
             comboManager = new ComboManager(spriteFont);
 
             throwManager = new OneButtonThrowManager();
-            superManager = new BasicSuperManager();
+            superManager = new BasicSuperManager(cam);
             background = Content.Load<Texture2D>("back_ggxxac_london");
             LongSwordFactory playerFactory = new LongSwordFactory();
             //player1 = new LongSwordPlayer(1, 100, 288, comboManager, throwManager);
@@ -209,7 +209,7 @@ namespace MH4F
                     {
                         player2.Update(gameTime, Keyboard.GetState(), false);
                     }
-                    superManager.decrementTimer();
+                    superManager.processSuper();
                 }
                 else if (hitstop > 0)
                 {
@@ -314,8 +314,14 @@ namespace MH4F
                         null,
                         null,
                         cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
-            
+
             if (superManager.isInSuperFreeze())
+            {
+                Color backgroundTint = Color.Lerp(Color.White, Color.Yellow, 0.5f);
+                spriteBatch.Draw(background, mainFrame, backgroundTint);
+
+            }
+            else if (superManager.isInSuper())
             {
                 Color backgroundTint = Color.Lerp(Color.White, Color.Black, 0.5f);
                 spriteBatch.Draw(background, mainFrame, backgroundTint);
