@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace MH4F
 {
@@ -11,9 +12,9 @@ namespace MH4F
         void drawSuperEffects();
         Boolean isInSuperFreeze();
         Boolean isInSuper();
-        void performSuper(int player);
+        void performSuper(int player, Vector2 position);
         void endSuper();
         int playerPerformingSuper();
-        void processSuper(); 
+        void processSuperFreeze(); 
     }
 }

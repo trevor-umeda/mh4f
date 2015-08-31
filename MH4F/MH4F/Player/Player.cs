@@ -561,7 +561,8 @@ namespace MH4F
 
         public void PerformSuperFreeze()
         {
-            SuperManager.performSuper(PlayerNumber);
+
+            SuperManager.performSuper(PlayerNumber, Sprite.PositionCenter);
         }
 
         public virtual void Backstep()

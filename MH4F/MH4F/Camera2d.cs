@@ -13,17 +13,28 @@ namespace MH4F
         public Matrix transform; // Matrix Transform
         public Vector2 position; // Camera Position
         protected float rotation; // Camera Rotation
-        protected int leftSideLimit;
-        protected int rightSideLimit;
+        protected float leftSideLimit;
+        protected float rightSideLimit;
+        protected float bottomSideLimit;
         protected int width;
 
-        public Camera2d(int gameWidth, int screenWidth)
+        protected int gameWidth;
+        protected int gameHeight;
+        protected int screenWidth;
+        protected int screenHeight;
+
+        public Camera2d(int gameWidth, int screenWidth, int gameHeight, int screenHeight)
         {
             zoom = 1.0f;
             rotation = 0.0f;
             position = Vector2.Zero;
-            leftSideLimit = screenWidth / 2;
-            rightSideLimit = gameWidth - (screenWidth / 2);
+
+            this.gameWidth = gameWidth;
+            this.gameHeight = gameHeight;            
+            this.screenWidth = screenWidth;
+            this.screenHeight = screenHeight;
+
+            computeLimits();
             width = screenWidth;
         }
 
@@ -31,7 +42,13 @@ namespace MH4F
         public float Zoom
         {
             get { return zoom; }
-            set { zoom = value; if (zoom < 0.1f) zoom = 0.1f; } // Negative zoom will flip image
+            set { zoom = value;
+                if (zoom < 0.1f)
+                {
+                 zoom = 0.1f;
+                }
+                computeLimits();
+            } // Negative zoom will flip image
         }
 
         public float Rotation
@@ -42,15 +59,42 @@ namespace MH4F
 
         // Auxiliary function to move the camera
         public void Move(Vector2 amount)
-        {
+        {      
             position += amount;
+            adjustForLimits();
         }
 
         public void ZoomIn(float amount)
         {
             zoom += amount;
-
+            computeLimits();
+            adjustForLimits();
         }
+
+        private void computeLimits()
+        {
+          
+            leftSideLimit = (float)screenWidth * .5f / zoom;
+            rightSideLimit = gameWidth - (float)screenWidth * .5f / zoom;
+            bottomSideLimit = gameHeight - (float)screenHeight * .5f / zoom;
+        }
+
+        private void adjustForLimits()
+        {
+            if (position.X < leftSideLimit)
+            {
+                position.X = leftSideLimit;
+            }
+            else if (position.X > rightSideLimit)
+            {
+                position.X = rightSideLimit;
+            }
+            if (position.Y > bottomSideLimit)
+            {
+                position.Y = bottomSideLimit;
+            }
+        }
+
         // Get set position
         public Vector2 Pos
         {
@@ -64,21 +108,18 @@ namespace MH4F
             set 
             { 
                 position.X = value;
-                if (value < leftSideLimit)
-                {
-                    position.X = leftSideLimit;
-                }
-                else if (value > rightSideLimit)
-                {
-                    position.X = rightSideLimit;
-                }
+                adjustForLimits();
             }
         }
 
         public int Y
         {
             get { return (int)position.Y; }
-            set { position.Y = value; }
+            set
+            {
+                position.Y = value;
+                adjustForLimits();
+            }
         }
 
         public int LeftEdge

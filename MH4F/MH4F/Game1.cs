@@ -88,7 +88,7 @@ namespace MH4F
         /// </summary>
         protected override void LoadContent()
         {
-            cam = new Camera2d(gameWidth, screenWidth);
+            cam = new Camera2d(gameWidth, screenWidth, gameHeight, screenHeight);
             cam.Pos = new Vector2(512.0f, 360.0f);
             mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);
             
@@ -209,7 +209,8 @@ namespace MH4F
                     {
                         player2.Update(gameTime, Keyboard.GetState(), false);
                     }
-                    superManager.processSuper();
+                    
+                    superManager.processSuperFreeze();
                 }
                 else if (hitstop > 0)
                 {
@@ -223,8 +224,10 @@ namespace MH4F
 
                     player2.Update(gameTime, Keyboard.GetState(), false);
                 }
-                if (hitstop == 0)
+               
+                if (hitstop == 0 && !superManager.isInSuperFreeze())
                 {
+                    
                     adjustPlayerPositioning();
 
                     keepPlayersInBound();
@@ -260,9 +263,13 @@ namespace MH4F
                     else if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
                         Console.WriteLine("Test STuff");
-
-                        player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+                        cam.Zoom = 1.2f;
+                    //    player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
                         player1.CurrentHealth -= 10;
+                    }
+                    else if (Keyboard.GetState().IsKeyDown(Keys.O))
+                    {
+                        cam.Y += 3;
                     }
                     elapsedTime += gameTime.ElapsedGameTime;
 
@@ -288,7 +295,12 @@ namespace MH4F
                 }
                 else
                 {
+                    
                     hitstop--;
+                    if (hitstop < 0)
+                    {
+                        hitstop = 0;
+                    }
                 }
             //}
         }
@@ -314,7 +326,12 @@ namespace MH4F
                         null,
                         null,
                         cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
-
+            Rectangle test = new Rectangle();
+            test.Height = 100;
+            test.Width = screenWidth;
+            test.X = 0;
+            test.Y = 600;
+            
             if (superManager.isInSuperFreeze())
             {
                 Color backgroundTint = Color.Lerp(Color.White, Color.Yellow, 0.5f);
@@ -330,10 +347,10 @@ namespace MH4F
             {
                 spriteBatch.Draw(background, mainFrame, Color.White);
             }
-            
 
 
-            //spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
+            spriteBatch.Draw(dummyTexture, test, translucentRed);
+            spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
             player2.Draw(spriteBatch);
 
             player1.Draw(spriteBatch);
@@ -362,7 +379,7 @@ namespace MH4F
         }
 
         protected void adjustCamera()
-        {       
+        {  
             int newCamPosition = (player1.CenterX + player2.CenterX) / 2;
             cam.X = newCamPosition;
         }

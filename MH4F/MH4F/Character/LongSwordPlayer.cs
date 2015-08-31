@@ -99,6 +99,7 @@ namespace MH4F
         {
             if (moveName == "supera")
             {
+
                 PerformSuperFreeze();
             }
             base.changeMove(moveName);
