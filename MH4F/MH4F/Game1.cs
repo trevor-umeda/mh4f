@@ -90,7 +90,7 @@ namespace MH4F
         {
             cam = new Camera2d(gameWidth, screenWidth, gameHeight, screenHeight);
             cam.Pos = new Vector2(512.0f, 360.0f);
-            mainFrame = new Rectangle(0, 0, gameWidth, gameHeight);
+            mainFrame = new Rectangle(-450, 0, 2400, gameHeight);
             
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -349,8 +349,8 @@ namespace MH4F
             }
 
 
-            spriteBatch.Draw(dummyTexture, test, translucentRed);
-            spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
+        //    spriteBatch.Draw(dummyTexture, test, translucentRed);
+         //   spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
             player2.Draw(spriteBatch);
 
             player1.Draw(spriteBatch);

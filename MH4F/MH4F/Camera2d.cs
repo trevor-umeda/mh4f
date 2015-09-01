@@ -22,6 +22,7 @@ namespace MH4F
         protected int gameHeight;
         protected int screenWidth;
         protected int screenHeight;
+ 
 
         public Camera2d(int gameWidth, int screenWidth, int gameHeight, int screenHeight)
         {
@@ -36,6 +37,7 @@ namespace MH4F
 
             computeLimits();
             width = screenWidth;
+            
         }
 
         // Sets and gets zoom
@@ -61,22 +63,30 @@ namespace MH4F
         public void Move(Vector2 amount)
         {      
             position += amount;
-            adjustForLimits();
+            adjustForHeightLimits();
         }
 
         public void ZoomIn(float amount)
         {
             zoom += amount;
             computeLimits();
-            adjustForLimits();
+            adjustForHeightLimits();
         }
 
         private void computeLimits()
         {
           
-            leftSideLimit = (float)screenWidth * .5f / zoom;
-            rightSideLimit = gameWidth - (float)screenWidth * .5f / zoom;
+            leftSideLimit = (float)screenWidth * .5f;
+            rightSideLimit = gameWidth - (float)screenWidth * .5f;
             bottomSideLimit = gameHeight - (float)screenHeight * .5f / zoom;
+        }
+
+        private void adjustForHeightLimits()
+        {
+            if (position.Y > bottomSideLimit)
+            {
+                position.Y = bottomSideLimit;
+            }
         }
 
         private void adjustForLimits()
