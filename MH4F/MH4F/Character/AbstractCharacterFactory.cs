@@ -11,7 +11,8 @@ namespace MH4F
 {
     abstract class AbstractCharacterFactory
     {
-        public abstract Player createCharacter(ContentManager content,int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager, SuperManager superManager);
+        public abstract Player createCharacter(ContentManager content,int playerNumber, int xPosition, int yHeight, 
+            ComboManager comboManager, ThrowManager throwManager, SuperManager superManager, ProjectileManager projectileManager);
 
         protected void loadCharacterDataConfigs(String character, Player player, ContentManager content)
         {

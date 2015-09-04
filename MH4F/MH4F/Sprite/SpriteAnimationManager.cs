@@ -382,29 +382,7 @@ namespace MH4F
                 //
                 if (info != null)
                 {
-                    // If the player is facing left
-                    //
-                    if (direction == Direction.Left)
-                    {
-                        // Set up the hitbox
-                        //
-                        hitbox.Height = info.Height;
-                        hitbox.Width = info.Width;
-                        hitbox.X = info.XPos - info.Width / 2 + (int)v2Position.X;
-                        hitbox.Y = info.YPos - info.Height / 2 + (int)v2Position.Y;
-                    }
-                    // If the player is facing right
-                    //
-                    else
-                    {
-                        // This could potentially be pre calculated for speed
-                        //
-                        hitbox.Height = info.Height;
-                        hitbox.Width = info.Width;
-
-                        hitbox.X = (int)v2Position.X + CurrentMoveAnimation.FrameWidth - info.Width/2 - info.XPos;
-                        hitbox.Y = info.YPos - info.Height / 2 + (int)v2Position.Y;
-                    }
+                    hitbox = info.getHitboxRectangle(hurtbox, direction, v2Position, CurrentMoveAnimation.FrameWidth);
                 }
                 else
                 {
@@ -416,23 +394,7 @@ namespace MH4F
                 //
                 if (hurtboxInfo != null)
                 {
-                    // IF the player is facing left
-                    //
-                    if (direction == Direction.Left)
-                    {
-                        hurtbox.Height = hurtboxInfo.Height;
-                        hurtbox.Width = hurtboxInfo.Width;
-                        hurtbox.X = hurtboxInfo.XPos - hurtboxInfo.Width / 2 + (int)v2Position.X;
-                        hurtbox.Y = hurtboxInfo.YPos - hurtboxInfo.Height / 2 + (int)v2Position.Y;
-                    }
-                    else
-                    {
-                        hurtbox.Height = hurtboxInfo.Height;
-                        hurtbox.Width = hurtboxInfo.Width;
-
-                        hurtbox.X = (int)v2Position.X + CurrentMoveAnimation.FrameWidth - hurtboxInfo.Width / 2 - hurtboxInfo.XPos;
-                        hurtbox.Y = hurtboxInfo.YPos - hurtboxInfo.Height / 2 + (int)v2Position.Y;
-                    }
+                    hurtbox = hurtboxInfo.getHitboxRectangle(hurtbox, direction, v2Position, CurrentMoveAnimation.FrameWidth);
                 }
                 else
                 {

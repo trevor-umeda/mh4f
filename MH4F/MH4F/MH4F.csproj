@@ -116,8 +116,10 @@
     <Compile Include="Camera2d.cs" />
     <Compile Include="Inputs\GatlingTable.cs" />
     <Compile Include="Inputs\InputMoveBuffer.cs" />
+    <Compile Include="Particles\ProjectileManager.cs" />
     <Compile Include="RoundManager.cs" />
     <Compile Include="Sound\SoundManager.cs" />
+    <Compile Include="Sprite\ProjectileAnimation.cs" />
     <Compile Include="Supers\BasicSuperManager.cs" />
     <Compile Include="Supers\SuperManager.cs" />
     <Compile Include="Throws\OneButtonThrowManager.cs" />

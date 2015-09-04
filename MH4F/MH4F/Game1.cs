@@ -38,6 +38,7 @@ namespace MH4F
         ComboManager comboManager;
         ThrowManager throwManager;
         SuperManager superManager;
+        ProjectileManager projectileManager;
 
         RoundManager roundManager;
         ContentManager content;
@@ -103,7 +104,7 @@ namespace MH4F
             background = Content.Load<Texture2D>("back_ggxxac_london");
             LongSwordFactory playerFactory = new LongSwordFactory();
             //player1 = new LongSwordPlayer(1, 100, 288, comboManager, throwManager);
-            player1 = playerFactory.createCharacter(Content, 1, 100, 288, comboManager, throwManager, superManager);
+            player1 = playerFactory.createCharacter(Content, 1, 100, 288, comboManager, throwManager, superManager, projectileManager);
            
             player1.SetUpUniversalAttackMoves();
             
@@ -130,7 +131,7 @@ namespace MH4F
             player1.ControlSetting.setControl("d", Keys.Z);
             //player2 = new LongSwordPlayer(2, 600, 288, comboManager, throwManager);
 
-            player2 = playerFactory.createCharacter(Content, 2, 600, 288, comboManager, throwManager, superManager);
+            player2 = playerFactory.createCharacter(Content, 2, 600, 288, comboManager, throwManager, superManager, projectileManager);
 
            
             player2.SetUpUniversalAttackMoves();

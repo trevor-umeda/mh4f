@@ -23,6 +23,8 @@ namespace MH4F
 
         public SuperManager SuperManager { get; set; }
 
+        public ProjectileManager ProjectileManager { get; set; }
+
         SoundManager SoundManager { get; set; }
 
         InputMoveBuffer InputMoveBuffer { get; set; }

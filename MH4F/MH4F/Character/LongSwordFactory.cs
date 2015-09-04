@@ -9,10 +9,14 @@ namespace MH4F
     class LongSwordFactory : AbstractCharacterFactory
     {
         private String characterId = "LongSword";
-        public override Player createCharacter(ContentManager content, int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager, SuperManager superManager)
+        // TODO replace this cus we have to call it for every character, when alot of it is duplicate code
+        //
+        public override Player createCharacter(ContentManager content, int playerNumber, int xPosition, int yHeight, 
+            ComboManager comboManager, ThrowManager throwManager, SuperManager superManager, ProjectileManager projectileManager)
         {
             LongSwordPlayer longSwordPlayer = new LongSwordPlayer(playerNumber, xPosition, yHeight, comboManager, throwManager);
             longSwordPlayer.SuperManager = superManager;
+            longSwordPlayer.ProjectileManager = projectileManager;
             base.loadCharacterDataConfigs(characterId, longSwordPlayer, content);
             return longSwordPlayer;
         }
