@@ -1,0 +1,21 @@
+﻿name= aattack
+sprite=projectile
+XImageStart= 0
+YImageStart= 0
+Width= 512
+Height=256
+FrameCount= 2
+Columns= 1
+FrameLength= 0.1
+IsProjectile=true
+Hitbox=[0;57;64;88;82
+1;56;66;88;82]
+Hitstun= 6
+Blockstun= 2 
+Hitzone= MID
+Damage= 50
+TimerLength=300
+IsHardKnockDown= false
+AirUntechTime= 3
+AirXVelocity= 5
+AirYVelocity= 5

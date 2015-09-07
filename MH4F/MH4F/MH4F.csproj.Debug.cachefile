@@ -28,11 +28,19 @@ Content\testf.xnb
 Content\slap_large.xnb
 Content\airbackdash_h.xnb
 Content\bgm.xnb
+Content\bgm\20.xnb
+Content\bgm\25.xnb
+Content\projectile.xnb
 Content\bgm.wma
+Content\bgm\20.wma
+Content\bgm\25.wma
 Content\slap_large.wav
 Content\bgm.mp3
 Content\STAND2.png
 Content\WALKREVISED3.png
+Content\bgm\20.mp3
+Content\bgm\25.mp3
+Content\projectile.png
 Content\TEST.png
 Content\TEST2.png
 Content\combinedsprite.png
@@ -80,6 +88,7 @@ Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
 Config\LongSword\Gatling.txt
+Config\LongSword\Particles\projectile.txt
 LongSwordGatling.txt
 LongSwordHurtbox.txt
 LongSwordHitbox.txt

@@ -7,6 +7,7 @@ namespace MH4F
 {
     public enum CharacterState
     {
+        NONE,
         STANDING,
         DASHING,
         AIRDASH,

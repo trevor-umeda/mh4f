@@ -32,6 +32,18 @@ namespace MH4F
 
         public String NextMoveOnHit { get; set; }
 
+        public Hitbox[] HitBoxInfo
+        {
+            get
+            {
+                return hitboxInfo;
+            }
+            set
+            {
+                hitboxInfo = value;
+            }
+        }
+
         public Hitbox CurrentHitboxInfo
         {
             get { return hitboxInfo[CurrentFrame]; }

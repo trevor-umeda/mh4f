@@ -28,12 +28,6 @@ namespace MH4F
         Rectangle mainFrame;
         HitInfo testHitInfo;
 
-        int gameWidth = 1512;
-        int gameHeight = 720;
-
-        int screenWidth = 1024;
-        int screenHeight = 720;
-
         int comboNumber = 0;
         ComboManager comboManager;
         ThrowManager throwManager;
@@ -65,8 +59,8 @@ namespace MH4F
         {
             graphics = new GraphicsDeviceManager(this);
 
-            graphics.PreferredBackBufferHeight = screenHeight;
-            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = Config.Instance.ScreenHeight;
+            graphics.PreferredBackBufferWidth = Config.Instance.ScreenWidth;
             Content.RootDirectory = "Content";
 
             IsFixedTimeStep = false;
@@ -89,9 +83,9 @@ namespace MH4F
         /// </summary>
         protected override void LoadContent()
         {
-            cam = new Camera2d(gameWidth, screenWidth, gameHeight, screenHeight);
+            cam = new Camera2d(Config.Instance.GameWidth, Config.Instance.ScreenWidth, Config.Instance.GameHeight, Config.Instance.ScreenHeight);
             cam.Pos = new Vector2(512.0f, 360.0f);
-            mainFrame = new Rectangle(-450, 0, 2400, gameHeight);
+            mainFrame = new Rectangle(-450, 0, 2400, Config.Instance.GameHeight);
             
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -99,24 +93,18 @@ namespace MH4F
             spriteFont = Content.Load<SpriteFont>("testf");
             comboManager = new ComboManager(spriteFont);
 
+            BGMManager bgmManager = new BGMManager(Content);
+
+            projectileManager = new ProjectileManager();
             throwManager = new OneButtonThrowManager();
             superManager = new BasicSuperManager(cam);
             background = Content.Load<Texture2D>("back_ggxxac_london");
-            LongSwordFactory playerFactory = new LongSwordFactory();
-            //player1 = new LongSwordPlayer(1, 100, 288, comboManager, throwManager);
-            player1 = playerFactory.createCharacter(Content, 1, 100, 288, comboManager, throwManager, superManager, projectileManager);
-           
-            player1.SetUpUniversalAttackMoves();
-            
-            player1.HealthBar = Content.Load<Texture2D>("HealthBar2");
-            int healthBarMargin = ((screenWidth / 2) - player1.HealthBar.Width) / 2;
-            player1.setUpGauges(Content, healthBarMargin);        
-            
-            // A throw can be an activateable move... But for not the calculation of that should be elsewhere
-            //
-           
-            player1.Direction = Direction.Right;
 
+            String player1CharacterId = "LongSword";
+            String player2CharacterId = "LongSword";
+
+            PlayerFactory playerFactory = new PlayerFactory();    
+            player1 = playerFactory.createCharacter(player1CharacterId, Content, 1, comboManager, throwManager, superManager, projectileManager);
   
             // Set player 1 default controls
             //
@@ -129,16 +117,8 @@ namespace MH4F
             player1.ControlSetting.setControl("b", Keys.S);
             player1.ControlSetting.setControl("c", Keys.D);
             player1.ControlSetting.setControl("d", Keys.Z);
-            //player2 = new LongSwordPlayer(2, 600, 288, comboManager, throwManager);
 
-            player2 = playerFactory.createCharacter(Content, 2, 600, 288, comboManager, throwManager, superManager, projectileManager);
-
-           
-            player2.SetUpUniversalAttackMoves();
-            int healthBarMargin2 = (((screenWidth / 2) - player1.HealthBar.Width) / 2) + (screenWidth / 2);
-            player2.setUpGauges(Content, healthBarMargin2);  
-            
-            player2.Direction = Direction.Left;
+            player2 = playerFactory.createCharacter(player2CharacterId, Content, 2, comboManager, throwManager, superManager, projectileManager);
 
             // Setting player 2 default controls
             //
@@ -150,9 +130,7 @@ namespace MH4F
             player2.ControlSetting.setControl("b", Keys.G);
             player2.ControlSetting.setControl("c", Keys.H);
             player2.ControlSetting.setControl("d", Keys.V);
-            player2.HealthBar = Content.Load<Texture2D>("HealthBar2");
             
-
             // Create a 1x1 white texture.
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
 
@@ -172,8 +150,10 @@ namespace MH4F
             player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
             player1.Sprite.AddResetInfo("aattack", 4);
             player1.Sprite.AddResetInfo("aattack", 6);
-            Song song = Content.Load<Song>("bgm"); 
-            //MediaPlayer.Play(song)    
+            
+            
+            MediaPlayer.Play(bgmManager.getRandomBGM());
+            MediaPlayer.Volume = 0.4f;
 
             roundManager = new RoundManager(player1, player2);
         }
@@ -213,96 +193,100 @@ namespace MH4F
                     
                     superManager.processSuperFreeze();
                 }
-                else if (hitstop > 0)
-                {
-                    player1.Update(gameTime, Keyboard.GetState(), true);
-
-                    player2.Update(gameTime, Keyboard.GetState(), true);
-                }
-                else
-                {
-                    player1.Update(gameTime, Keyboard.GetState(), false);
-
-                    player2.Update(gameTime, Keyboard.GetState(), false);
-                }
-               
-                if (hitstop == 0 && !superManager.isInSuperFreeze())
-                {
-                    
-                    adjustPlayerPositioning();
-
-                    keepPlayersInBound();
-
-                    throwManager.updateCharacterState(1, player1);
-                    throwManager.updateCharacterState(2, player2);
-
-                    // Detect player collisions
-                    //
-                    if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
+                else {
+                    projectileManager.updateProjectileList(gameTime);
+                    if (hitstop > 0)
                     {
-                        hitstop = 7;
-                        comboManager.player1LandedHit(player2.CharacterState);
-                        player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
-                        player1.hitEnemy();
-                        System.Diagnostics.Debug.WriteLine("We ahve collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
-                        if (player2.CurrentHealth <= 0)
+                        player1.Update(gameTime, Keyboard.GetState(), true);
+
+                        player2.Update(gameTime, Keyboard.GetState(), true);
+                    }
+                    else
+                    {
+                        player1.Update(gameTime, Keyboard.GetState(), false);
+
+                        player2.Update(gameTime, Keyboard.GetState(), false);
+                    }
+
+                    if (hitstop == 0 && !superManager.isInSuperFreeze())
+                    {
+
+                        adjustPlayerPositioning();
+
+                        keepPlayersInBound();
+
+                        throwManager.updateCharacterState(1, player1);
+                        throwManager.updateCharacterState(2, player2);
+
+                        // Detect player collisions
+                        //
+                        if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
                         {
-                            roundManager.roundEnd(1);
+                            hitstop = 7;
+                            comboManager.player1LandedHit(player2.CharacterState);
+                            player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
+                            player1.hitEnemy();
+                            System.Diagnostics.Debug.WriteLine("We have collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
+                            if (player2.CurrentHealth <= 0)
+                            {
+                                roundManager.roundEnd(1);
+                            }
+                        }
+                        else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
+                        {
+
+                            comboManager.player2LandedHit(player1.CharacterState);
+                            player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
+                            player2.hitEnemy();
+                            if (player1.CurrentHealth <= 0)
+                            {
+                                roundManager.roundEnd(2);
+                            }
+                        }
+                        else if (Keyboard.GetState().IsKeyDown(Keys.P))
+                        {
+                            Console.WriteLine("Test STuff");
+                            cam.Zoom = 1.2f;
+                            //    player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+                            player1.CurrentHealth -= 10;
+                        }
+                        else if (Keyboard.GetState().IsKeyDown(Keys.O))
+                        {
+                            cam.Y += 3;
+                        }
+                        elapsedTime += gameTime.ElapsedGameTime;
+
+                        if (elapsedTime > TimeSpan.FromSeconds(1))
+                        {
+                            elapsedTime -= TimeSpan.FromSeconds(1);
+                            frameRate = frameCounter;
+                            frameCounter = 0;
+                        }
+
+                        // leftBorder.Width += 10;
+
+                        adjustCamera();
+                        comboManager.decrementComboTimer();
+
+                        roundManager.decrementTimer(gameTime);
+                        if (roundManager.isTimeOut())
+                        {
+                            roundManager.timeOut();
+                        }
+
+                        base.Update(gameTime);
+                    }
+                    else
+                    {
+
+                        hitstop--;
+                        if (hitstop < 0)
+                        {
+                            hitstop = 0;
                         }
                     }
-                    else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
-                    {
-
-                        comboManager.player2LandedHit(player1.CharacterState);
-                        player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
-                        player2.hitEnemy();
-                        if (player1.CurrentHealth <= 0)
-                        {
-                            roundManager.roundEnd(2);
-                        }
-                    }
-                    else if (Keyboard.GetState().IsKeyDown(Keys.P))
-                    {
-                        Console.WriteLine("Test STuff");
-                        cam.Zoom = 1.2f;
-                    //    player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
-                        player1.CurrentHealth -= 10;
-                    }
-                    else if (Keyboard.GetState().IsKeyDown(Keys.O))
-                    {
-                        cam.Y += 3;
-                    }
-                    elapsedTime += gameTime.ElapsedGameTime;
-
-                    if (elapsedTime > TimeSpan.FromSeconds(1))
-                    {
-                        elapsedTime -= TimeSpan.FromSeconds(1);
-                        frameRate = frameCounter;
-                        frameCounter = 0;
-                    }
-
-                    // leftBorder.Width += 10;
-
-                    adjustCamera();
-                    comboManager.decrementComboTimer();
-
-                    roundManager.decrementTimer(gameTime);
-                    if (roundManager.isTimeOut())
-                    {
-                        roundManager.timeOut();                 
-                    }
-
-                    base.Update(gameTime);
                 }
-                else
-                {
-                    
-                    hitstop--;
-                    if (hitstop < 0)
-                    {
-                        hitstop = 0;
-                    }
-                }
+                
             //}
         }
 
@@ -327,11 +311,6 @@ namespace MH4F
                         null,
                         null,
                         cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
-            Rectangle test = new Rectangle();
-            test.Height = 100;
-            test.Width = screenWidth;
-            test.X = 0;
-            test.Y = 600;
             
             if (superManager.isInSuperFreeze())
             {
@@ -355,7 +334,9 @@ namespace MH4F
             player2.Draw(spriteBatch);
 
             player1.Draw(spriteBatch);
-            
+
+            projectileManager.drawAllProjectiles(spriteBatch);
+
             string health = string.Format("Health: {0}", player1.CurrentHealth);
 
             spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
@@ -459,9 +440,9 @@ namespace MH4F
             {
                 player1.Sprite.setXByBoundingBox(0);
             }
-            if (player1.Sprite.BoundingBox.X + player1.Sprite.BoundingBox.Width > gameWidth)
+            if (player1.Sprite.BoundingBox.X + player1.Sprite.BoundingBox.Width > Config.Instance.GameWidth)
             {
-                player1.Sprite.setXByBoundingBox(gameWidth - player1.Sprite.BoundingBox.Width); 
+                player1.Sprite.setXByBoundingBox(Config.Instance.GameWidth - player1.Sprite.BoundingBox.Width); 
             }
 
             if (player1.Sprite.BoundingBox.X < cam.LeftEdge)
@@ -481,9 +462,9 @@ namespace MH4F
             {
                 player2.Sprite.setXByBoundingBox(0);
             }
-            if (player2.Sprite.BoundingBox.X + player2.Sprite.BoundingBox.Width > gameWidth)
+            if (player2.Sprite.BoundingBox.X + player2.Sprite.BoundingBox.Width > Config.Instance.GameWidth)
             {
-                player2.Sprite.setXByBoundingBox(gameWidth - player2.Sprite.BoundingBox.Width); 
+                player2.Sprite.setXByBoundingBox(Config.Instance.GameWidth - player2.Sprite.BoundingBox.Width); 
             }
             if (player2.Sprite.BoundingBox.X < cam.LeftEdge)
             {

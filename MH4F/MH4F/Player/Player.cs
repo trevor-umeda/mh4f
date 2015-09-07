@@ -932,6 +932,19 @@ namespace MH4F
             }
         }
 
+        // Projectile stuff?!
+        //
+
+        public virtual void AddProjectile(ProjectileAnimation projectileAnimation)
+        {
+
+        }
+
+        public virtual void ShootProjectile(ProjectileAnimation projectileAnimation)
+        {
+            ProjectileManager.createProjectile(projectileAnimation);
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (bVisible)

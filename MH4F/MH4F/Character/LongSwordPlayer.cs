@@ -18,6 +18,10 @@ namespace MH4F
         int MaxSwordGauge = 100;
         int rekkaLevel;
 
+        // TODO Make it so they can have multiple projectiles...
+        //
+        ProjectileAnimation Projectile { get; set; }
+
         Dictionary<String, int> SwordGaugeGains { get; set; }
         Dictionary<String, int> MoveCosts { get; set; }
 
@@ -55,6 +59,9 @@ namespace MH4F
             DashVel = 8;
             BackWalkVel = 3;
             WalkVel = 4;
+
+//            projectile = new ProjectileAnimation(texture, X, Y, Width, Height, Frames, columns, frameLength, characterState, timeLength, direction);
+
         }
 
         public override void cleanUp()
@@ -171,7 +178,11 @@ namespace MH4F
         public void BackFireball()
         {
             DisplayShadow = true;
-            Backstep();
+            ProjectileAnimation clonedProjectile = Projectile.Clone();
+            clonedProjectile.Direction = Direction;
+
+            ProjectileManager.createProjectile(clonedProjectile);
+            Console.WriteLine("DOING BACK FIREBALL");
         }
 
         public override void Backstep()
@@ -211,6 +222,12 @@ namespace MH4F
             base.hitEnemy();
         }
 
+        public override void AddProjectile(ProjectileAnimation projectileAnimation)
+        {
+            base.AddProjectile(projectileAnimation);
+            Projectile = projectileAnimation;
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             Sprite.Draw(spriteBatch, 0, 0, Direction);
@@ -245,5 +262,6 @@ namespace MH4F
             base.resetRound();
             SwordGauge = 0;
         }
+
     }
 }
