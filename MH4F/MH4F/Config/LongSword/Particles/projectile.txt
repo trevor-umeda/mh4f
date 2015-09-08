@@ -8,8 +8,8 @@ FrameCount= 2
 Columns= 1
 FrameLength= 0.1
 IsProjectile=true
-Hitbox=[0;256;128;512;256
-1;256;128;512;256]
+Hitbox=[0;256;128;400;150
+1;256;128;400;150]
 NumOfHits = 3
 Hitstun= 6
 Blockstun= 2 
