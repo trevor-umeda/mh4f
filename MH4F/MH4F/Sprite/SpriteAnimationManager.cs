@@ -11,6 +11,13 @@ namespace MH4F
     {
 
         public Texture2D dummyTexture ;
+        public Texture2D DummyTexture
+        {
+            get
+            {
+                return dummyTexture;
+            }
+        }
 
         // True if animations are being played
         bool bAnimating = true;

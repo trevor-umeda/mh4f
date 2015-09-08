@@ -33,7 +33,7 @@ namespace MH4F
 
         ControlSetting controlSetting;
 
-        int PlayerNumber { get; set; }
+        public int PlayerNumber { get; set; }
 
         // The speed at which the sprite will close with it's target
         float speed = 1f;
@@ -821,6 +821,7 @@ namespace MH4F
             {
                 Sprite.CurrentAnimation = "block";
                 HitAnimation block = (HitAnimation)Sprite.CurrentMoveAnimation;
+                Console.WriteLine("DID A BLOCK!");
                 block.HitStunCounter = hitInfo.Blockstun;
             }
             else
@@ -921,6 +922,12 @@ namespace MH4F
             {
                 sprite.CurrentAnimation = Sprite.CurrentMoveAnimation.NextMoveOnHit;
             }
+        }
+
+        public virtual void hitEnemyWithProjectile()
+        {
+            giveSpecialMeter(10);
+            SoundManager.PlaySound(Sprite.CurrentAnimation);
         }
 
         public void giveSpecialMeter(int amount)
@@ -1141,6 +1148,8 @@ namespace MH4F
             set { this.momentumCounter = value; }
         }
 
+        public Boolean IsCastingProjectile { get; set; }
+       
         public int MomentumXMovement
         {
             get { return momentumXMovement; }

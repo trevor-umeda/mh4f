@@ -15,6 +15,7 @@ namespace MH4F
         private int gameWidth;
         private int gameHeight;
 
+
         public int ScreenWidth
         {
             get { return screenWidth; }
@@ -34,6 +35,7 @@ namespace MH4F
         {
             get { return gameHeight; }
         }
+
         private Config() 
         {
             gameWidth = 1512;

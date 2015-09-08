@@ -178,6 +178,9 @@
     <Content Include="Config\LongSword\Moves\airdashstart.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\LongSword\Moves\cattack.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Moves\crouching.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

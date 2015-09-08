@@ -102,8 +102,13 @@ namespace MH4F
 
             String player1CharacterId = "LongSword";
             String player2CharacterId = "LongSword";
+           
+            dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
 
-            PlayerFactory playerFactory = new PlayerFactory();    
+            dummyTexture.SetData(new Color[] { Color.White });
+
+            PlayerFactory playerFactory = new PlayerFactory();
+            playerFactory.DummyTexture = dummyTexture;
             player1 = playerFactory.createCharacter(player1CharacterId, Content, 1, comboManager, throwManager, superManager, projectileManager);
   
             // Set player 1 default controls
@@ -131,12 +136,7 @@ namespace MH4F
             player2.ControlSetting.setControl("c", Keys.H);
             player2.ControlSetting.setControl("d", Keys.V);
             
-            // Create a 1x1 white texture.
-            dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
-
-            dummyTexture.SetData(new Color[] { Color.White });
-            player1.Sprite.dummyTexture = dummyTexture;
-            player2.Sprite.dummyTexture = dummyTexture;
+   
             testHitbox = new Rectangle(100, 100, 100, 100);
 
             testHitInfo = new HitInfo(3, 20, Hitzone.HIGH);
@@ -242,7 +242,7 @@ namespace MH4F
                             {
                                 roundManager.roundEnd(2);
                             }
-                        }
+                        }                        
                         else if (Keyboard.GetState().IsKeyDown(Keys.P))
                         {
                             Console.WriteLine("Test STuff");
@@ -254,6 +254,7 @@ namespace MH4F
                         {
                             cam.Y += 3;
                         }
+                        projectileManager.checkHitOnPlayers(player1, player2, comboManager, roundManager, Keyboard.GetState());
                         elapsedTime += gameTime.ElapsedGameTime;
 
                         if (elapsedTime > TimeSpan.FromSeconds(1))

@@ -13,7 +13,9 @@ namespace MH4F
     {
         int player1XPosition = 100;
         int player2XPosition = 600;
-        int playerYHeight = 288;        
+        int playerYHeight = 288;
+
+        public Texture2D DummyTexture { get; set; }
 
         public Player createCharacter(String CharacterId, ContentManager content, int playerNumber,
             ComboManager comboManager, ThrowManager throwManager, SuperManager superManager, ProjectileManager projectileManager)
@@ -47,7 +49,7 @@ namespace MH4F
             }
             player.SuperManager = superManager;
             player.ProjectileManager = projectileManager;
-          
+            player.Sprite.dummyTexture = DummyTexture;
 
             player.HealthBar = healthBar;
             player.Direction = direction;
@@ -56,6 +58,7 @@ namespace MH4F
             loadCharacterDataConfigs(CharacterId, player, content);
             loadParticles(CharacterId, player, content);
             player.SetUpUniversalAttackMoves();
+           
             return player;
         }
 
@@ -239,6 +242,16 @@ namespace MH4F
             Hitzone hitZone;
             //int test = (int)moveInfo["Blockstun"];
 
+            if (moveInfo.ContainsKey("XSpeed"))
+            {
+                newMove.XSpeed = int.Parse((String)moveInfo["XSpeed"]);
+            }
+
+            if (moveInfo.ContainsKey("YSpeed"))
+            {
+                newMove.YSpeed = int.Parse((String)moveInfo["YSpeed"]);
+            }
+
             if(moveInfo.ContainsKey("Hitzone")&& moveInfo.ContainsKey("Hitstun") && moveInfo.ContainsKey("Blockstun")){
                 Enum.TryParse((String)moveInfo["Hitzone"], true, out hitZone);
                 HitInfo hitMoveInfo = new HitInfo(int.Parse((String)moveInfo["Hitstun"]), int.Parse((String)moveInfo["Blockstun"]), hitZone);
@@ -247,7 +260,7 @@ namespace MH4F
                 hitMoveInfo.AirUntechTime = int.Parse((String)moveInfo["AirUntechTime"]);
                 hitMoveInfo.AirYVelocity = int.Parse((String)moveInfo["AirYVelocity"]);
                 hitMoveInfo.AirXVelocity = int.Parse((String)moveInfo["AirXVelocity"]);
-
+                newMove.NumOfHits = int.Parse((String)moveInfo["NumOfHits"]);
                 if (moveInfo.ContainsKey("ForceAirborne"))
                 {
                     hitMoveInfo.ForceAirborne = Boolean.Parse((String)moveInfo["ForceAirborne"]);
@@ -382,6 +395,11 @@ namespace MH4F
                     hitMoveInfo.Unblockable = Boolean.Parse((String)moveInfo["Unblockable"]);
                 }
                 newMove.HitInfo = hitMoveInfo;
+            }
+
+            if (moveInfo.ContainsKey("ProjectileCreationFrame"))
+            {
+                newMove.ProjectileCreationFrame = int.Parse((String)moveInfo["ProjectileCreationFrame"]);
             }
 
             if (moveInfo.ContainsKey("Input"))

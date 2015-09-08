@@ -150,6 +150,23 @@ namespace MH4F
             {
 
             }
+            else if (moveName == "cattack")
+            {
+                // This seems kinda clumsy to perform every c attack. Maybe we should keep a reference the the projectile instead of cloning it.
+                //
+                List<ProjectileAnimation> projectiles = ProjectileManager.Projectiles;
+                for (int i = projectiles.Count - 1; i >= 0; i--)
+                {
+                    if (projectiles[i].PlayerNumber == PlayerNumber)
+                    {
+                        if (Sprite.Hitbox.Intersects(projectiles[i].Hitbox))
+                        {
+
+                            projectiles[i].XSpeed = 10;
+                        }
+                    }
+                }
+            }
             else if (moveName == "rekkaA")
             {
             }
@@ -178,11 +195,24 @@ namespace MH4F
         public void BackFireball()
         {
             DisplayShadow = true;
-            ProjectileAnimation clonedProjectile = Projectile.Clone();
-            clonedProjectile.Direction = Direction;
-
-            ProjectileManager.createProjectile(clonedProjectile);
-            Console.WriteLine("DOING BACK FIREBALL");
+            if (Sprite.CurrentMoveAnimation.CurrentFrame == Sprite.CurrentMoveAnimation.ProjectileCreationFrame)
+            {
+                if(IsCastingProjectile == false)
+                {
+                    Console.WriteLine("Creating a fireball!");
+                    ProjectileAnimation clonedProjectile = Projectile.Clone();
+                    clonedProjectile.Direction = Direction;
+                    clonedProjectile.Position = Sprite.Position;
+                    clonedProjectile.PlayerNumber = PlayerNumber;
+                    ProjectileManager.createProjectile(clonedProjectile);
+                    Console.WriteLine("DOING BACK FIREBALL");
+                    IsCastingProjectile = true;
+                }              
+            }
+            else
+            {
+                IsCastingProjectile = false;
+            }
         }
 
         public override void Backstep()
@@ -226,6 +256,7 @@ namespace MH4F
         {
             base.AddProjectile(projectileAnimation);
             Projectile = projectileAnimation;
+            Projectile.DummyTexture = Sprite.DummyTexture;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

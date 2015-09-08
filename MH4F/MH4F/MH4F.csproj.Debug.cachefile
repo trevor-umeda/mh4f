@@ -88,6 +88,7 @@ Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
 Config\LongSword\Gatling.txt
+Config\LongSword\Moves\cattack.txt
 Config\LongSword\Particles\projectile.txt
 LongSwordGatling.txt
 LongSwordHurtbox.txt

@@ -28,6 +28,8 @@ namespace MH4F
 
         bool hasHitOpponent = false;
 
+        private int projectileCreationFrame = -1;
+            
         private HitInfo hitInfo;
 
         public String NextMoveOnHit { get; set; }
@@ -75,6 +77,12 @@ namespace MH4F
         {
             get { return characterState; }
             set { characterState = value; }
+        }
+
+        public int ProjectileCreationFrame
+        {
+            get { return projectileCreationFrame; }
+            set { projectileCreationFrame = value; }
         }
 
         public void AddHitboxInfo(int index, Hitbox hitbox)
