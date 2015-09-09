@@ -1,23 +1,26 @@
-﻿name= projectile
-sprite=projectile
+﻿name= morph
+sprite=projectile3
 XImageStart= 0
 YImageStart= 0
-Width= 512
+Width= 256
 Height=256
-FrameCount= 2
-Columns= 1
+FrameCount= 4
+Columns= 2
 FrameLength= 0.1
 IsProjectile=true
-Hitbox=[0;256;128;400;150
-1;256;128;400;150]
-NumOfHits = 3
+Hitbox=[0;64;64;128;128
+1;64;64;128;128
+2;64;64;128;128
+3;64;64;128;128]
+NumOfHits = 2
 Hitstun= 6
 Blockstun= 2 
 Hitzone= MID
 Damage= 50
 TimerLength=300
-XSpeed=10
+XSpeed=5
 YSpeed=0
+NextAnimation=projectile
 IsHardKnockDown= false
 AirUntechTime= 3
 AirXVelocity= 5

@@ -11,4 +11,5 @@ FrameLengthInfo=3,2,1,3,3,5,5
 CharacterState=STANDING
 IsAttack=true
 ProjectileCreationFrame=3
+BackupMove=aattack
 Input=2;1;4;A

@@ -20,7 +20,7 @@ namespace MH4F
 
         // TODO Make it so they can have multiple projectiles...
         //
-        ProjectileAnimation Projectile { get; set; }
+        Projectile Projectile { get; set; }
 
         Dictionary<String, int> SwordGaugeGains { get; set; }
         Dictionary<String, int> MoveCosts { get; set; }
@@ -45,6 +45,7 @@ namespace MH4F
 
             SwordGaugeGains.Add("aattack", 20);
             MoveCosts.Add("battack", 10);
+            MoveCosts.Add("backfireball", 25);
             Sprite.BoundingBoxHeight = 288;
             Sprite.BoundingBoxWidth = 90;
 
@@ -86,16 +87,33 @@ namespace MH4F
             {
                 if (SwordGauge - moveCostValue >= 0)
                 {
-                    String move = convertRekka(moveName);
+                    //String move = convertRekka(moveName);
+                    if (moveName == "backfireball")
+                    {
+                        if (!ProjectileManager.containsPlayerProjectile(PlayerNumber))
+                        {
+                            changeMove(moveName);
+                        }
+                        else
+                        {
+                            changeMove(determineBackupMove(moveName));
+                        }
 
-                    changeMove(moveName);
+                    }
+                    else
+                    {
+                        changeMove(moveName);
+                    }
+                   
                     SwordGauge = SwordGauge - moveCostValue;
                 }
                 else
                 {
+                    changeMove(determineBackupMove(moveName));
                     Console.WriteLine("Couldn't perform move cus not enough gauge");
                 }
-            }  
+            }
+           
             else
             {
                 changeMove(moveName);
@@ -106,7 +124,6 @@ namespace MH4F
         {
             if (moveName == "supera")
             {
-
                 PerformSuperFreeze();
             }
             base.changeMove(moveName);
@@ -154,15 +171,14 @@ namespace MH4F
             {
                 // This seems kinda clumsy to perform every c attack. Maybe we should keep a reference the the projectile instead of cloning it.
                 //
-                List<ProjectileAnimation> projectiles = ProjectileManager.Projectiles;
+                List<Projectile> projectiles = ProjectileManager.Projectiles;
                 for (int i = projectiles.Count - 1; i >= 0; i--)
                 {
                     if (projectiles[i].PlayerNumber == PlayerNumber)
                     {
                         if (Sprite.Hitbox.Intersects(projectiles[i].Hitbox))
                         {
-
-                            projectiles[i].XSpeed = 10;
+                            projectiles[i].CurrentAnimation = "morph";
                         }
                     }
                 }
@@ -200,11 +216,15 @@ namespace MH4F
                 if(IsCastingProjectile == false)
                 {
                     Console.WriteLine("Creating a fireball!");
-                    ProjectileAnimation clonedProjectile = Projectile.Clone();
+
+                    Projectile clonedProjectile = Projectile;
+                    clonedProjectile.CurrentAnimation = "staticprojectile"; 
                     clonedProjectile.Direction = Direction;
-                    clonedProjectile.Position = Sprite.Position;
+                    clonedProjectile.Y = Sprite.Y + 50;
+                    clonedProjectile.X = Sprite.X + Sprite.Width/2 + 70;
                     clonedProjectile.PlayerNumber = PlayerNumber;
                     ProjectileManager.createProjectile(clonedProjectile);
+
                     Console.WriteLine("DOING BACK FIREBALL");
                     IsCastingProjectile = true;
                 }              
@@ -252,10 +272,14 @@ namespace MH4F
             base.hitEnemy();
         }
 
-        public override void AddProjectile(ProjectileAnimation projectileAnimation)
+        public override void AddProjectile(String name, ProjectileAnimation projectileAnimation)
         {
-            base.AddProjectile(projectileAnimation);
-            Projectile = projectileAnimation;
+            base.AddProjectile(name, projectileAnimation);
+            if (Projectile == null)
+            {
+                Projectile = new Projectile();
+            }
+            Projectile.AddProjectile(name, projectileAnimation);
             Projectile.DummyTexture = Sprite.DummyTexture;
         }
 

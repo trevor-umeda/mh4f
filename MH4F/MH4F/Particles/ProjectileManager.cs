@@ -10,9 +10,9 @@ namespace MH4F
 {
     public class ProjectileManager
     {
-        List<ProjectileAnimation> projectiles;
+        List<Projectile> projectiles;
 
-        public List<ProjectileAnimation> Projectiles
+        public List<Projectile> Projectiles
         {
             get
             {
@@ -21,12 +21,12 @@ namespace MH4F
         }
         public ProjectileManager()
         {
-            projectiles = new List<ProjectileAnimation>();
+            projectiles = new List<Projectile>();
         }
 
         // TODO this method signature is kinda long...
         //
-        public void createProjectile(ProjectileAnimation projectileAnimation)
+        public void createProjectile(Projectile projectileAnimation)
         {            
             projectiles.Add(projectileAnimation);
         }
@@ -35,19 +35,19 @@ namespace MH4F
         {
             for (int i = projectiles.Count - 1; i >= 0; i--)
             {
-                ProjectileAnimation projectile = projectiles[i];
+                Projectile projectile = projectiles[i];
                 if (projectile.PlayerNumber == 1 && projectile.Hitbox.Intersects(player2.Sprite.Hurtbox) )
                 {
                     comboManager.player1LandedHit(player2.CharacterState);
-                    player2.hitByEnemy(Keyboard, projectile.HitInfo);
+                    player2.hitByEnemy(Keyboard, projectile.CurrentProjectile.HitInfo);
                     player1.hitEnemy();
                     projectile.hitEnemy();
-                    projectile.NumOfHits--;
+                    
                     if (projectile.NumOfHits <= 0)
                     {
                         projectiles.RemoveAt(i);
                     }
-                    System.Diagnostics.Debug.WriteLine("We have projectile collision at " + projectile.CurrentFrame);
+                    System.Diagnostics.Debug.WriteLine("We have projectile collision at " + projectile.CurrentProjectile.CurrentFrame);
                     if (player2.CurrentHealth <= 0)
                     {
                         roundManager.roundEnd(1);
@@ -57,7 +57,7 @@ namespace MH4F
                 {
 
                     comboManager.player2LandedHit(player1.CharacterState);
-                    player1.hitByEnemy(Keyboard, projectile.HitInfo);
+                    player1.hitByEnemy(Keyboard, projectile.CurrentProjectile.HitInfo);
                     player2.hitEnemy();
                     projectile.hitEnemy();
                     if (projectile.NumOfHits <= 0)
@@ -71,6 +71,18 @@ namespace MH4F
                 } 
             }
           
+        }
+
+        public Boolean containsPlayerProjectile(int playerNumber)
+        {
+            for (int i = projectiles.Count - 1; i >= 0; i--)
+            {               
+                if (projectiles[i].PlayerNumber == playerNumber)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void updateProjectileList(GameTime gameTime)
@@ -91,11 +103,6 @@ namespace MH4F
             for (int i = projectiles.Count - 1; i >= 0; i--)
             {
                 projectiles[i].Draw(spriteBatch);
-
-                if (projectiles[i].Finished)
-                {
-                    projectiles.RemoveAt(i);
-                }
             }
         }
     }

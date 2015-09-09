@@ -34,6 +34,8 @@ namespace MH4F
 
         public String NextMoveOnHit { get; set; }
 
+        public String BackupMove { get; set; }
+
         public Hitbox[] HitBoxInfo
         {
             get

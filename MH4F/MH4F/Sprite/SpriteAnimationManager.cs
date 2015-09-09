@@ -359,6 +359,11 @@ namespace MH4F
             X = boundingBoxX + boundingBoxWidth / 2 - Width / 2;
         }
 
+        public String retrieveBackupMove(String moveName)
+        {
+           return animations[moveName].BackupMove;
+        }
+
         public void Update(GameTime gameTime, Direction direction)
         {
 

@@ -301,6 +301,24 @@
       <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm\25.wma</Extra>
       <Time>2015-09-07T22:53:19.8282416-07:00</Time>
     </Item>
+    <Item>
+      <Source>projectile2.png</Source>
+      <Name>projectile2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\projectile2.xnb</Output>
+      <Time>2015-09-08T20:35:54.0803972-07:00</Time>
+    </Item>
+    <Item>
+      <Source>projectile3.png</Source>
+      <Name>projectile3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\projectile3.xnb</Output>
+      <Time>2015-09-08T21:26:48.3350906-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

@@ -121,6 +121,7 @@
     <Compile Include="Sound\BGMManager.cs" />
     <Compile Include="Sound\SoundManager.cs" />
     <Compile Include="Sprite\ProjectileAnimation.cs" />
+    <Compile Include="Sprite\Projectile.cs" />
     <Compile Include="Supers\BasicSuperManager.cs" />
     <Compile Include="Supers\SuperManager.cs" />
     <Compile Include="Throws\OneButtonThrowManager.cs" />
@@ -247,7 +248,13 @@
     <Content Include="Config\LongSword\Moves\walk.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\LongSword\Particles\morph.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Particles\projectile.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Particles\staticprojectile.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\template.txt" />

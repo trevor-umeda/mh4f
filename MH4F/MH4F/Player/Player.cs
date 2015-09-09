@@ -598,6 +598,11 @@ namespace MH4F
 
         public abstract void checkValidityAndChangeMove(String moveName);
 
+        public String determineBackupMove(String moveName)
+        {
+            return Sprite.retrieveBackupMove(moveName);
+        }
+
         public virtual void changeMove(String moveName)
         {
             // Sub class must overwrite this... and perform this base to actually switch moves;
@@ -942,12 +947,12 @@ namespace MH4F
         // Projectile stuff?!
         //
 
-        public virtual void AddProjectile(ProjectileAnimation projectileAnimation)
+        public virtual void AddProjectile(String name, ProjectileAnimation projectileAnimation)
         {
 
         }
 
-        public virtual void ShootProjectile(ProjectileAnimation projectileAnimation)
+        public virtual void ShootProjectile(Projectile projectileAnimation)
         {
             ProjectileManager.createProjectile(projectileAnimation);
         }

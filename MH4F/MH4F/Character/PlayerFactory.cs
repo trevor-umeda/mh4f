@@ -226,7 +226,10 @@ namespace MH4F
 
                 newMove.SetFrameLengthInfo(frameLengthInfo);
             }
-
+            if (moveInfo.ContainsKey("NextAnimation"))
+            {
+                newMove.NextAnimation = (String)moveInfo["NextAnimation"];
+            }
             if (moveInfo.ContainsKey("Hitbox"))
             {
                 List<String> hitInfo = (List<String>)moveInfo["Hitbox"];
@@ -271,7 +274,7 @@ namespace MH4F
                 }
                 newMove.HitInfo = hitMoveInfo;
             }
-            player.AddProjectile(newMove);             
+            player.AddProjectile(name, newMove);             
         }
 
         protected void moveParse(ContentManager content, Player player, Dictionary<String, Object> moveInfo, Dictionary<String, Texture2D> spriteTextures, Dictionary<String, MoveInput> moveInputList)
@@ -328,6 +331,11 @@ namespace MH4F
             if (moveInfo.ContainsKey("NextAnimation"))
             {
                 newMove.NextAnimation = (String)moveInfo["NextAnimation"];
+            }
+
+            if (moveInfo.ContainsKey("BackupMove"))
+            {
+                newMove.BackupMove = (String)moveInfo["BackupMove"];
             }
 
             if (moveInfo.ContainsKey("LoopCount"))

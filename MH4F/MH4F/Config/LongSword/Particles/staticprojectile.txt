@@ -1,22 +1,24 @@
-﻿name= projectile
-sprite=projectile
+﻿name= staticprojectile
+sprite=projectile2
 XImageStart= 0
 YImageStart= 0
-Width= 512
-Height=256
-FrameCount= 2
-Columns= 1
+Width= 128
+Height=128
+FrameCount= 4
+Columns= 2
 FrameLength= 0.1
 IsProjectile=true
-Hitbox=[0;256;128;400;150
-1;256;128;400;150]
-NumOfHits = 3
+Hitbox=[0;64;64;128;128
+1;64;64;128;128
+2;64;64;128;128
+3;64;64;128;128]
+NumOfHits = 1
 Hitstun= 6
 Blockstun= 2 
 Hitzone= MID
 Damage= 50
 TimerLength=300
-XSpeed=10
+XSpeed=0
 YSpeed=0
 IsHardKnockDown= false
 AirUntechTime= 3
