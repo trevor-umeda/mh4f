@@ -36,6 +36,9 @@ Content\bgm\20.xnb
 Content\bgm\20.wma
 Content\bgm\25.xnb
 Content\bgm\25.wma
+Content\5C.xnb
+Content\ascending.xnb
+Content\descending.xnb
 Content\TEST.png
 Content\TEST2.png
 Content\combinedsprite.png
@@ -59,3 +62,6 @@ Content\bgm\20.mp3
 Content\bgm\25.mp3
 Content\projectile.png
 Content\projectile3.png
+Content\5C.png
+Content\ascending.png
+Content\descending.png

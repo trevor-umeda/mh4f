@@ -107,3 +107,9 @@ C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\6WALK.png
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\dash_1.png
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\neutral.png
 C:\src\mh4f\MH4F\MH4F\MH4F\obj\x86\Release\MH4F.csprojResolveAssemblyReference.cache
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\5C.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\5C.png
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\ascending.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\ascending.png
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\descending.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\descending.png

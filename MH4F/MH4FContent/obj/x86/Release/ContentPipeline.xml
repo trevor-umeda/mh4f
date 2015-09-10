@@ -319,6 +319,33 @@
       <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\bgm\25.wma</Extra>
       <Time>2015-09-07T22:53:19.8282416-07:00</Time>
     </Item>
+    <Item>
+      <Source>5C.png</Source>
+      <Name>5C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\5C.xnb</Output>
+      <Time>2015-09-09T23:15:38.1638188-07:00</Time>
+    </Item>
+    <Item>
+      <Source>ascending.png</Source>
+      <Name>ascending</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\ascending.xnb</Output>
+      <Time>2015-09-09T23:22:52.1466412-07:00</Time>
+    </Item>
+    <Item>
+      <Source>descending.png</Source>
+      <Name>descending</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\descending.xnb</Output>
+      <Time>2015-09-09T23:25:24.8253739-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

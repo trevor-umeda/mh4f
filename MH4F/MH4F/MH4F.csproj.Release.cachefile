@@ -33,6 +33,9 @@ Content\projectile2.xnb
 Content\projectile3.xnb
 Content\bgm\20.xnb
 Content\bgm\25.xnb
+Content\5C.xnb
+Content\ascending.xnb
+Content\descending.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -44,6 +47,9 @@ Content\bgm\20.mp3
 Content\bgm\25.mp3
 Content\projectile.png
 Content\projectile3.png
+Content\5C.png
+Content\ascending.png
+Content\descending.png
 Content\TEST.png
 Content\TEST2.png
 Content\combinedsprite.png
@@ -59,6 +65,7 @@ Content\RUN.png
 Content\6WALK.png
 Content\dash_1.png
 Content\neutral.png
+Config\LongSword\Gatling.txt
 Config\LongSword\Moves\aattack.txt
 Config\LongSword\Moves\backfireball.txt
 Config\LongSword\Moves\backstep.txt
@@ -90,7 +97,6 @@ Config\LongSword\Moves\supera.txt
 Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
-Config\LongSword\Gatling.txt
 Config\LongSword\Moves\cattack.txt
 Config\LongSword\Particles\morph.txt
 Config\LongSword\Particles\projectile.txt

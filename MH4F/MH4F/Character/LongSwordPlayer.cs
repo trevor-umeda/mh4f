@@ -171,16 +171,13 @@ namespace MH4F
             {
                 // This seems kinda clumsy to perform every c attack. Maybe we should keep a reference the the projectile instead of cloning it.
                 //
-                List<Projectile> projectiles = ProjectileManager.Projectiles;
+                List<Projectile> projectiles = ProjectileManager.getPlayerProjectiles(PlayerNumber);
                 for (int i = projectiles.Count - 1; i >= 0; i--)
                 {
-                    if (projectiles[i].PlayerNumber == PlayerNumber)
+                    if (Sprite.Hitbox.Intersects(projectiles[i].Hitbox))
                     {
-                        if (Sprite.Hitbox.Intersects(projectiles[i].Hitbox))
-                        {
-                            projectiles[i].CurrentAnimation = "morph";
-                        }
-                    }
+                        projectiles[i].CurrentAnimation = "morph";
+                    }         
                 }
             }
             else if (moveName == "rekkaA")

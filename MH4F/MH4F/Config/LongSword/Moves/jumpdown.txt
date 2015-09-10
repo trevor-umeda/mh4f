@@ -1,10 +1,10 @@
 name=jumpdown
-sprite=combinedsprite
+sprite=descending
 XImageStart=0
-YImageStart=2048
-Width=136
-Height=380
-FrameCount=2
-Columns=2
+YImageStart=0
+Width=500
+Height=500
+FrameCount=4
+Columns=4
 FrameLength=0.1
 CharacterState=AIRBORNE
