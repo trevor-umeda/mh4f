@@ -125,7 +125,7 @@ namespace MH4F
         {
             // Check to see if we have a gatling table for the move. otherwise just have everything
             //
-            List<MoveInput> possibleMoveList = gatlingTable.getPossibleGatlings(currentMove);         
+            List<MoveInput> possibleMoveList = gatlingTable.getPossibleGatlings(currentMove);
             if (possibleMoveList == null)
             {
                 possibleMoveList = groundMoveList;

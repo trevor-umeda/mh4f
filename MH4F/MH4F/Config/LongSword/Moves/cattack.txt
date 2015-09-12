@@ -2,15 +2,15 @@
 sprite=5C
 XImageStart= 0
 YImageStart= 0
-Width= 813
-Height= 563
+Width= 1084
+Height= 725
 FrameCount= 9
 Columns= 3
 FrameLength= 0.025
 CharacterState= STANDING
 IsAttack= true
-Hitbox=[5;200;200;100;100
-6;200;200;100;100]
+Hitbox=[5;300;300;100;100
+6;300;300;100;100]
 FrameLengthInfo=3,3,2,1,1,4,3,2,2,2
 Hitstun= 6
 Blockstun= 10 
@@ -20,4 +20,4 @@ IsHardKnockDown= false
 AirUntechTime=5
 AirXVelocity= 7
 AirYVelocity= 7
-Input= B
+Input= C

@@ -607,9 +607,14 @@ namespace MH4F
         {
             // Sub class must overwrite this... and perform this base to actually switch moves;
             //
-            Console.WriteLine("Changing moves to " + moveName);
-            HasHitOpponent = false;
-            Sprite.CurrentAnimation = moveName;
+            
+            if (moveName != null)
+            {
+                Console.WriteLine("Changing moves to " + moveName);
+                HasHitOpponent = false;
+                Sprite.CurrentAnimation = moveName;
+            }
+            
         }
 
         public virtual void performGroundSpecialMove(KeyboardState ks, String moveName)

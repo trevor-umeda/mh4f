@@ -341,14 +341,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="5C.png">
-      <Name>5C</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="ascending.png">
       <Name>ascending</Name>
       <Importer>TextureImporter</Importer>
@@ -359,6 +351,14 @@
   <ItemGroup>
     <Compile Include="descending.png">
       <Name>descending</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="5C.png">
+      <Name>5C</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
