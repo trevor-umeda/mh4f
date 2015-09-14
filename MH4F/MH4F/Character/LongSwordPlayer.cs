@@ -204,15 +204,15 @@ namespace MH4F
             }
             else if (moveName == "rekkaC")
             {
-                if (Sprite.CurrentMoveAnimation.CurrentFrame > 3)
+                if (Sprite.CurrentMoveAnimation.CurrentFrame > 3 && Sprite.CurrentMoveAnimation.CurrentFrame < 11)
                 {
                     if (Direction == Direction.Left)
                     {
-                        Sprite.MoveBy(-10, 0);
+                        Sprite.MoveBy(-20, 0);
                     }
                     else
                     {
-                        Sprite.MoveBy(10, 0);
+                        Sprite.MoveBy(20, 0);
                     }
                 }
                

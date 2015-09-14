@@ -24,13 +24,6 @@ Content\dash_1.xnb
 Content\neutral.xnb
 Content\CROUCH2.xnb
 Content\projectile.xnb
-Content\Font.xnb
-Content\testf.xnb
-Content\slap_large.xnb
-Content\airbackdash_h.xnb
-Content\bgm.xnb
-Content\bgm\20.xnb
-Content\bgm\25.xnb
 Content\projectile2.xnb
 Content\projectile3.xnb
 Content\ascending.xnb
@@ -39,6 +32,13 @@ Content\5C.xnb
 Content\REKKATEST3.xnb
 Content\REKKA_PT3.xnb
 Content\REKKA_PT2.xnb
+Content\Font.xnb
+Content\testf.xnb
+Content\slap_large.xnb
+Content\airbackdash_h.xnb
+Content\bgm.xnb
+Content\bgm\20.xnb
+Content\bgm\25.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
