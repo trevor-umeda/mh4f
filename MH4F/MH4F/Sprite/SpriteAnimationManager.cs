@@ -29,6 +29,8 @@ namespace MH4F
         int boundingBoxHeight;
         int boundingBoxWidth;
         Rectangle boundingBox;
+        public Boolean HideBindingBox { get; set; }
+
 
         // If set to anything other than Color.White, will colorize
         // the sprite with that color.
@@ -275,7 +277,7 @@ namespace MH4F
 
         public SpriteAnimationManager()
         {
-
+            HideBindingBox = false;
         }
 
         public void AddAnimation(Texture2D texture, string Name, int X, int Y, int Width, int Height, int Frames, int columns, float FrameLength, CharacterState characterState)
@@ -359,6 +361,7 @@ namespace MH4F
             X = boundingBoxX + boundingBoxWidth / 2 - Width / 2;
         }
 
+       
         public String retrieveBackupMove(String moveName)
         {
            return animations[moveName].BackupMove;
