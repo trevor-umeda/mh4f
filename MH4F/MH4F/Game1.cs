@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
+using System.Threading;
 
 namespace MH4F
 {
@@ -27,6 +28,10 @@ namespace MH4F
         Rectangle testHitbox;
         Rectangle mainFrame;
         HitInfo testHitInfo;
+
+        private GameState gameState;
+        private Thread backgroundThread;
+        private bool isLoading = false;
 
         int comboNumber = 0;
         ComboManager comboManager;
@@ -359,6 +364,12 @@ namespace MH4F
 
             base.Draw(gameTime);
            
+        }
+
+        protected void loadGame()
+        {
+            gameState = GameState.PLAYING;
+            isLoading = false;
         }
 
         protected void adjustCamera()

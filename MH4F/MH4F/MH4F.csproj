@@ -114,6 +114,7 @@
     <Compile Include="Combo\BasicProrationStrategy.cs" />
     <Compile Include="Camera2d.cs" />
     <Compile Include="Config\Config.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Inputs\GatlingTable.cs" />
     <Compile Include="Inputs\InputMoveBuffer.cs" />
     <Compile Include="Particles\ProjectileManager.cs" />
@@ -182,6 +183,12 @@
     <Content Include="Config\LongSword\Moves\cattack.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\LongSword\Moves\rekkaC.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\rekkaB.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Moves\crouching.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -200,7 +207,7 @@
     <Content Include="Config\LongSword\Moves\falling.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\LongSword\Moves\fireball.txt">
+    <Content Include="Config\LongSword\Moves\rekkaA.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\forwardcattack.txt">

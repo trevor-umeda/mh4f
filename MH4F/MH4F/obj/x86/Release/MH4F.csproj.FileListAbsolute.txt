@@ -59,7 +59,6 @@ C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\crouchingup.tx
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\dash.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\falldown.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\falling.txt
-C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\fireball.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\forwardcattack.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\forwardthrow.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\forwardthrowattack.txt
@@ -113,3 +112,12 @@ C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\ascending.xnb
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\ascending.png
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\descending.xnb
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\descending.png
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKATEST3.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKATEST3.png
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\rekkaC.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\rekkaB.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\rekkaA.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKA_PT3.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKA_PT3.png
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKA_PT2.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKA_PT2.png

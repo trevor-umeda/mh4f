@@ -39,6 +39,9 @@ Content\bgm\25.wma
 Content\5C.xnb
 Content\ascending.xnb
 Content\descending.xnb
+Content\REKKATEST3.xnb
+Content\REKKA_PT3.xnb
+Content\REKKA_PT2.xnb
 Content\TEST.png
 Content\TEST2.png
 Content\combinedsprite.png
@@ -65,3 +68,6 @@ Content\projectile3.png
 Content\ascending.png
 Content\descending.png
 Content\5C.png
+Content\REKKATEST3.png
+Content\REKKA_PT3.png
+Content\REKKA_PT2.png

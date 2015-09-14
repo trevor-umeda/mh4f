@@ -36,6 +36,9 @@ Content\bgm\25.xnb
 Content\5C.xnb
 Content\ascending.xnb
 Content\descending.xnb
+Content\REKKATEST3.xnb
+Content\REKKA_PT3.xnb
+Content\REKKA_PT2.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -50,6 +53,9 @@ Content\projectile3.png
 Content\ascending.png
 Content\descending.png
 Content\5C.png
+Content\REKKATEST3.png
+Content\REKKA_PT3.png
+Content\REKKA_PT2.png
 Content\TEST.png
 Content\TEST2.png
 Content\combinedsprite.png
@@ -74,13 +80,15 @@ Config\LongSword\Moves\backwalk.txt
 Config\LongSword\Moves\battack.txt
 Config\LongSword\Moves\block.txt
 Config\LongSword\Moves\airdashstart.txt
+Config\LongSword\Moves\rekkaC.txt
+Config\LongSword\Moves\rekkaB.txt
 Config\LongSword\Moves\crouching.txt
 Config\LongSword\Moves\crouchingidle.txt
 Config\LongSword\Moves\crouchingup.txt
 Config\LongSword\Moves\dash.txt
 Config\LongSword\Moves\falldown.txt
 Config\LongSword\Moves\falling.txt
-Config\LongSword\Moves\fireball.txt
+Config\LongSword\Moves\rekkaA.txt
 Config\LongSword\Moves\forwardcattack.txt
 Config\LongSword\Moves\forwardthrow.txt
 Config\LongSword\Moves\forwardthrowattack.txt

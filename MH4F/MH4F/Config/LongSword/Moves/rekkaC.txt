@@ -1,0 +1,13 @@
+name= rekkaC
+sprite= REKKA_PT3
+XImageStart=0
+YImageStart= 0
+Width=900
+Height=684
+FrameCount=15
+Columns=3
+FrameLength=0.016
+FrameLengthInfo=1,2,2,3,4,2,2,2,3,6,2,3,3,4,4
+CharacterState=STANDING
+IsAttack=true
+Input=2;3;6;C

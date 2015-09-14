@@ -346,6 +346,33 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\descending.xnb</Output>
       <Time>2015-09-09T23:25:24.8253739-07:00</Time>
     </Item>
+    <Item>
+      <Source>REKKATEST3.png</Source>
+      <Name>REKKATEST3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKATEST3.xnb</Output>
+      <Time>2015-09-13T23:15:49.1361608-07:00</Time>
+    </Item>
+    <Item>
+      <Source>REKKA_PT3.png</Source>
+      <Name>REKKA_PT3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKA_PT3.xnb</Output>
+      <Time>2015-09-14T00:26:06.5723844-07:00</Time>
+    </Item>
+    <Item>
+      <Source>REKKA_PT2.png</Source>
+      <Name>REKKA_PT2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\REKKA_PT2.xnb</Output>
+      <Time>2015-09-14T00:33:59.9064575-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

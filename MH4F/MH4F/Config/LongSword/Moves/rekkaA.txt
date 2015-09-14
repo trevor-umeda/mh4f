@@ -1,0 +1,13 @@
+name= rekka
+sprite= REKKATEST3
+XImageStart=0
+YImageStart= 0
+Width=750
+Height=500
+FrameCount=23
+Columns=5
+FrameLength=0.016
+FrameLengthInfo=3,3,2,1,1,1,1,1,1,1,1,1,2,2,2,2,1,2,2,1,1,1,1
+CharacterState=STANDING
+IsAttack=true
+Input=2;3;6;A

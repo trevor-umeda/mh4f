@@ -180,14 +180,38 @@ namespace MH4F
                     }         
                 }
             }
-            else if (moveName == "rekkaA")
+            else if (moveName == "rekka")
             {
+                if (Direction == Direction.Left)
+                {
+                    Sprite.MoveBy(-5, 0);
+                }
+                else
+                {
+                    Sprite.MoveBy(5, 0);
+                }
             }
             else if (moveName == "rekkaB")
             {
+                if (Direction == Direction.Left)
+                {
+                    Sprite.MoveBy(-5, 0);
+                }
+                else
+                {
+                    Sprite.MoveBy(5, 0);
+                }
             }
             else if (moveName == "rekkaC")
             {
+                if (Direction == Direction.Left)
+                {
+                    Sprite.MoveBy(-5, 0);
+                }
+                else
+                {
+                    Sprite.MoveBy(5, 0);
+                }
             }
             else if (moveName == "backfireball")
             {
