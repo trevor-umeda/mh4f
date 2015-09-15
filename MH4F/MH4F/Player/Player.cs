@@ -126,6 +126,7 @@ namespace MH4F
             SoundManager = new SoundManager();
             ControlSetting = new ControlSetting();
             InputMoveBuffer = new InputMoveBuffer();
+            IsPhysical = true;
         }
 
         public ControlSetting ControlSetting
@@ -1166,6 +1167,9 @@ namespace MH4F
             set { this.momentumXMovement = value; }
         }
 
+
+        public bool IsPhysical {get;set;}
+     
     }
 
 }

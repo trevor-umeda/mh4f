@@ -390,7 +390,7 @@ namespace MH4F
 
             // If the players are close enough, and they are heading in the opposite directions, then we can calculate collision movement
             //
-            if ((Math.Abs(player1Center.X - player2Center.X) < 80))
+            if ((Math.Abs(player1Center.X - player2Center.X) < 80) && player1.IsPhysical && player2.IsPhysical)
             {
                 //&& (player1.Sprite.CurrentXVelocity * player2.Sprite.CurrentXVelocity < 0)
                 int velocityDiff = currentPlayer1XVel - currentPlayer2XVel;
@@ -434,13 +434,28 @@ namespace MH4F
             //
             if (player1Center.X < player2Center.X)
             {
-                player1.Direction = Direction.Right;
-                player2.Direction = Direction.Left;
+                if (player1.IsPhysical)
+                {
+                    player1.Direction = Direction.Right;
+                }
+                if (player2.IsPhysical)
+                {
+                    player2.Direction = Direction.Left;
+                }
+                
             }
             else
             {
-                player1.Direction = Direction.Left;
-                player2.Direction = Direction.Right;
+                if (player1.IsPhysical)
+                {
+                    player1.Direction = Direction.Left;
+                }
+                
+                if(player2.IsPhysical)
+                {
+                    player2.Direction = Direction.Right;
+                }
+               
             }
         }
 

@@ -1,3 +1,5 @@
 ﻿           | supera  | rekka    |rekkaB| rekkaC | backfireball  | aattack | battack | cattack
+rekka     |         |          |  x   |        |               |         |         |
+rekkaB     |         |          |      |    x   |               |         |         |
 aattack    | x       |    x     |      |        |    x          |    x    |      x  |    x
 battack    | x       |    x     |      |        |    x          |         |         |

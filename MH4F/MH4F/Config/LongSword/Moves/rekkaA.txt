@@ -1,13 +1,24 @@
 name= rekka
-sprite= REKKATEST3
+sprite= REKKA1
 XImageStart=0
 YImageStart= 0
-Width=750
-Height=500
-FrameCount=23
-Columns=5
+Width=900
+Height=684
+FrameCount=10
+Columns=4
 FrameLength=0.016
-FrameLengthInfo=3,3,2,1,1,1,1,1,1,1,1,1,2,2,2,2,1,2,2,1,1,1,1
+FrameLengthInfo=3,2,1,1,3,4,2,2,2,3
 CharacterState=STANDING
+Hitbox=[4;280;300;194;111
+5;270;300;194;111
+6;260;300;194;111]
+Hitstun= 6
+Blockstun= 2 
+Hitzone= MID
+Damage= 50
+IsHardKnockDown= false
+AirUntechTime= 3
+AirXVelocity= 5
+AirYVelocity= 5
 IsAttack=true
 Input=2;3;6;A

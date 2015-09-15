@@ -204,8 +204,9 @@ namespace MH4F
             }
             else if (moveName == "rekkaC")
             {
-                if (Sprite.CurrentMoveAnimation.CurrentFrame > 3 && Sprite.CurrentMoveAnimation.CurrentFrame < 11)
+                if (Sprite.CurrentMoveAnimation.CurrentFrame > 4 && Sprite.CurrentMoveAnimation.CurrentFrame < 8)
                 {
+                    IsPhysical = false;
                     if (Direction == Direction.Left)
                     {
                         Sprite.MoveBy(-20, 0);
@@ -214,8 +215,12 @@ namespace MH4F
                     {
                         Sprite.MoveBy(20, 0);
                     }
+                    GivePlayerMomentum(7, 3, true);    
                 }
-               
+                else
+                {
+                    IsPhysical = true;
+                }
             }
             else if (moveName == "backfireball")
             {
