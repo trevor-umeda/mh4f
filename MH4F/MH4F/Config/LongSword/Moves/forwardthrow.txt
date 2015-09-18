@@ -6,10 +6,11 @@ Width=264
 Height=280
 FrameCount=1
 Columns=1
-FrameLength=0.044
+FrameLength=0.6
 CharacterState=STANDING
 IsAttack=true
-Hitbox=[0;72;144;90;288]
+Hitbox=[
+0;0;0;300;288]
 Hitstun= 6
 Blockstun= 10 
 Hitzone= MID

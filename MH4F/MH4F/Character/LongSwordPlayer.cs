@@ -27,7 +27,7 @@ namespace MH4F
 
         Texture2D SwordGaugeBar { get; set; }
         int swordGaugeBarMargin;
-
+        int[] test;
         public LongSwordPlayer(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager) 
             : base ( playerNumber, xPosition, yHeight, comboManager, throwManager)
         {
@@ -60,7 +60,7 @@ namespace MH4F
             DashVel = 8;
             BackWalkVel = 3;
             WalkVel = 4;
-
+            test = new int[]{0, 0, 0, 0, 6, 6, 20, 30, 16, 14, 4,3,0,0};
 //            projectile = new ProjectileAnimation(texture, X, Y, Width, Height, Frames, columns, frameLength, characterState, timeLength, direction);
 
         }
@@ -193,13 +193,16 @@ namespace MH4F
             }
             else if (moveName == "rekkaB")
             {
-                if (Direction == Direction.Left)
+                 if (Sprite.CurrentMoveAnimation.CurrentFrame > 3 && Sprite.CurrentMoveAnimation.CurrentFrame < 11)
                 {
-                    Sprite.MoveBy(-5, 0);
-                }
-                else
-                {
-                    Sprite.MoveBy(5, 0);
+                    if (Direction == Direction.Left)
+                    {
+                        Sprite.MoveBy(-20, 0);
+                    }
+                    else
+                    {
+                        Sprite.MoveBy(20, 0);
+                    }
                 }
             }
             else if (moveName == "rekkaC")
@@ -209,11 +212,11 @@ namespace MH4F
                     IsPhysical = false;
                     if (Direction == Direction.Left)
                     {
-                        Sprite.MoveBy(-20, 0);
+                        Sprite.MoveBy(-test[Sprite.CurrentMoveAnimation.CurrentFrame], 0);
                     }
                     else
                     {
-                        Sprite.MoveBy(20, 0);
+                        Sprite.MoveBy(test[Sprite.CurrentMoveAnimation.CurrentFrame], 0);
                     }
                     GivePlayerMomentum(7, 3, true);    
                 }

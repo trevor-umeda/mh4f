@@ -195,7 +195,7 @@ namespace MH4F
         protected void particleParse(ContentManager content, Player player, Dictionary<String, Object> moveInfo, Dictionary<String, Texture2D> spriteTextures)
         {
             String name = (String)moveInfo["name"];
-
+ 
             Texture2D texture = null;
             if(!spriteTextures.TryGetValue((String)moveInfo["sprite"], out texture)) 
             {
@@ -281,7 +281,10 @@ namespace MH4F
         {
 
             String name = (String)moveInfo["name"];
-
+            if (name == "forwardthrow")
+            {
+                Console.WriteLine("TEST");
+            }
             Texture2D texture = null;
             if(!spriteTextures.TryGetValue((String)moveInfo["sprite"], out texture)) 
             {
@@ -360,8 +363,12 @@ namespace MH4F
                 {
                     String[] hitBoxData = hitBox.Split(';');
                     // Console.WriteLine(int.Parse(hurtBoxData[0]));
-                    newMove.AddHitboxInfo(int.Parse(hitBoxData[0]),
-                        new Hitbox(hitBoxData[1], hitBoxData[2], hitBoxData[3], hitBoxData[4]));
+                    if (hitBoxData.Count() > 1)
+                    {
+                        newMove.AddHitboxInfo(int.Parse(hitBoxData[0]),
+                                              new Hitbox(hitBoxData[1], hitBoxData[2], hitBoxData[3], hitBoxData[4]));
+                    }
+                  
                 }
             }
 
