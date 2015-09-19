@@ -105,6 +105,7 @@ Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
 Config\LongSword\Moves\cattack.txt
+Config\LongSword\Moves\specialcommand.txt
 Config\LongSword\Particles\morph.txt
 Config\LongSword\Particles\projectile.txt
 Config\LongSword\Particles\staticprojectile.txt

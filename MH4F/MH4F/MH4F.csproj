@@ -243,6 +243,9 @@
     <Content Include="Config\LongSword\Moves\airdash.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\LongSword\Moves\specialcommand.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Moves\standing.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

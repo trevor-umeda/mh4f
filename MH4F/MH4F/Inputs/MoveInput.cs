@@ -57,6 +57,10 @@ namespace MH4F
             // Check all types of command inputs to see if there is a match Maybe not very efficient here Try to do as much shortcutting
             // To determine priority and also make checks fast
             //
+            if(input == "BC"&& KeyboardDown(keyboardState, controls["c"]) && KeyboardDown(keyboardState, controls["b"]))
+            {
+                return true;
+            }
             if (input == "4C" && KeyboardDown(keyboardState, controls["c"]) &&
                 ((KeyboardDown(keyboardState, controls["left"]) && direction == Direction.Right) || KeyboardDown(keyboardState, controls["right"]) && direction == Direction.Left))
             {

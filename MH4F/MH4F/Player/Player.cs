@@ -210,6 +210,7 @@ namespace MH4F
             RegisterGroundMove("forwardthrow", new List<string> { ThrowManager.ForwardThrowInput });
             RegisterGroundMove("backthrow", new List<string> { ThrowManager.BackThrowInput });
            // RegisterGroundMove("forwardaattack", new List<string> { "6A" });
+            RegisterGroundMove("specialcommand", new List<string> { "BC" });
             RegisterGroundMove("forwardbattack", new List<string> { "6B" });
             RegisterGroundMove("forwardcattack", new List<string> { "6C" });
             RegisterGroundMove("crouchaattack", new List<string> { "2A" });

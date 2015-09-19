@@ -60,7 +60,7 @@ namespace MH4F
             DashVel = 8;
             BackWalkVel = 3;
             WalkVel = 4;
-            test = new int[]{0, 0, 0, 0, 6, 6, 20, 30, 16, 14, 4,3,0,0};
+            test = new int[]{0, 0, 0, 0, 6, 6, 20, 27, 30, 14, 4,3,0,0};
 //            projectile = new ProjectileAnimation(texture, X, Y, Width, Height, Frames, columns, frameLength, characterState, timeLength, direction);
 
         }
@@ -219,6 +219,26 @@ namespace MH4F
                         Sprite.MoveBy(test[Sprite.CurrentMoveAnimation.CurrentFrame], 0);
                     }
                     GivePlayerMomentum(7, 3, true);    
+                }
+                else
+                {
+                    IsPhysical = true;
+                }
+            }
+            else if (moveName == "specialcommand")
+            {
+                if (Sprite.CurrentMoveAnimation.CurrentFrame > 4 && Sprite.CurrentMoveAnimation.CurrentFrame < 8)
+                {
+                    IsPhysical = false;
+                    if (Direction == Direction.Left)
+                    {
+                        Sprite.MoveBy(test[Sprite.CurrentMoveAnimation.CurrentFrame], 0);
+                    }
+                    else
+                    {
+                        Sprite.MoveBy(-test[Sprite.CurrentMoveAnimation.CurrentFrame], 0);
+                    }
+                    GivePlayerMomentum(7, 3, true);
                 }
                 else
                 {
