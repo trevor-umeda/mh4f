@@ -291,6 +291,15 @@ namespace MH4F
             // Draw the safe area borders.
             Color translucentRed = Color.Red * 0.5f;
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            if (gameState == GameState.PLAYERSELECT)
+            {
+
+
+            }
+            if (gameState == GameState.LOADING)
+            {
+
+            }
             if (gameState == GameState.PLAYING)
             {
                 //spriteBatch.Begin();
