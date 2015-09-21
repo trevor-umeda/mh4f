@@ -26,9 +26,29 @@ namespace MH4F
             height = 2;
         }
 
-        public void moveCharacterSelection(KeyboardState key)
+        public void moveCharacterSelection(KeyboardState key, Dictionary<string, Keys> controls)
         {
-           
+            if (key.IsKeyDown(controls["right"]))
+            {
+                player1Selection.X = (player1Selection.X + 1) % width;
+            }
+            if (key.IsKeyDown(controls["left"]))
+            {
+                player1Selection.X = (player1Selection.X - 1) % width;
+            }
+            if (key.IsKeyDown(controls["up"]))
+            {
+                player1Selection.Y = (player1Selection.Y - 1) % height;
+            }
+            if (key.IsKeyDown(controls["down"]))
+            {
+                player1Selection.Y = (player1Selection.Y + 1) % height;
+            }
+        }
+
+        public String selectCharacter()
+        {
+            return characterSelection[(int)player1Selection.X, (int)player1Selection.Y].CharacterId;
         }
     }
 }

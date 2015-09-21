@@ -13,5 +13,7 @@ namespace MH4F
         {
             characterId = character;
         }
+
+        public String CharacterId { get { return characterId; } }
     }
 }
