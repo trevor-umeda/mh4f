@@ -10,6 +10,7 @@ FrameLength=0.016
 FrameLengthInfo=3,5,5,1,1,2,3,12,5,4,4,4,3
 CharacterState=STANDING
 IsAttack=true
+XMovement=0,0,0,0,6,6,20,27,30,14,4,3,0,0
 Hitbox=[6;500;450;228;48
 7;500;450;228;48
 8;500;450;228;48

@@ -356,6 +356,16 @@ namespace MH4F
                 newMove.SetFrameLengthInfo(frameLengthInfo);
             }
 
+            if (moveInfo.ContainsKey("XMovement"))
+            {
+                String xMovementString = (String)moveInfo["XMovement"];
+                List<String> xMovementList = new List<String>(xMovementString.Split(','));
+                List<int> xMovementIntList = xMovementList.ConvertAll(s => Int32.Parse(s));
+                int[] xMovementInfo = xMovementIntList.ToArray();
+
+                newMove.SetXMovementInfo(xMovementInfo);
+            }
+
             if (moveInfo.ContainsKey("Hitbox"))
             {
                 List<String> hitInfo = (List<String>)moveInfo["Hitbox"];

@@ -29,6 +29,9 @@ namespace MH4F
         Rectangle mainFrame;
         HitInfo testHitInfo;
 
+        String player1CharacterId; 
+        String player2CharacterId; 
+
         private GameState gameState;
         private Thread backgroundThread;
         private bool isLoading = false;
@@ -105,42 +108,13 @@ namespace MH4F
             superManager = new BasicSuperManager(cam);
             background = Content.Load<Texture2D>("back_ggxxac_london");
 
-            String player1CharacterId = "LongSword";
-            String player2CharacterId = "LongSword";
+            player1CharacterId = "LongSword";
+            player2CharacterId = "LongSword";
            
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
 
             dummyTexture.SetData(new Color[] { Color.White });
-
-            PlayerFactory playerFactory = new PlayerFactory();
-            playerFactory.DummyTexture = dummyTexture;
-            player1 = playerFactory.createCharacter(player1CharacterId, Content, 1, comboManager, throwManager, superManager, projectileManager);
-  
-            // Set player 1 default controls
-            //
-
-            player1.ControlSetting.setControl("down", Keys.Down);
-            player1.ControlSetting.setControl("right", Keys.Right);
-            player1.ControlSetting.setControl("left", Keys.Left);
-            player1.ControlSetting.setControl("up", Keys.Up);
-            player1.ControlSetting.setControl("a", Keys.A);
-            player1.ControlSetting.setControl("b", Keys.S);
-            player1.ControlSetting.setControl("c", Keys.D);
-            player1.ControlSetting.setControl("d", Keys.Z);
-
-            player2 = playerFactory.createCharacter(player2CharacterId, Content, 2, comboManager, throwManager, superManager, projectileManager);
-
-            // Setting player 2 default controls
-            //
-            player2.ControlSetting.setControl("down", Keys.K);
-            player2.ControlSetting.setControl("right", Keys.L);
-            player2.ControlSetting.setControl("left", Keys.J);
-            player2.ControlSetting.setControl("up", Keys.I);
-            player2.ControlSetting.setControl("a", Keys.F);
-            player2.ControlSetting.setControl("b", Keys.G);
-            player2.ControlSetting.setControl("c", Keys.H);
-            player2.ControlSetting.setControl("d", Keys.V);
-            
+                        
    
             testHitbox = new Rectangle(100, 100, 100, 100);
 
@@ -151,11 +125,7 @@ namespace MH4F
             testHitInfo.AirYVelocity = -100;
 
             effect = Content.Load<SoundEffect>("slap_large");
-            player1.AddSound(effect, "aattack");
-            player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
-            player1.Sprite.AddResetInfo("aattack", 4);
-            player1.Sprite.AddResetInfo("aattack", 6);
-            
+            gameState = GameState.LOADING;
             
             MediaPlayer.Play(bgmManager.getRandomBGM());
             MediaPlayer.Volume = 0.4f;
@@ -179,10 +149,21 @@ namespace MH4F
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-          //  if (frameTimer > frameLength)
-            //{
+            if (gameState == GameState.LOADING && !isLoading) //isLoading bool is to prevent the LoadGame method from being called 60 times a seconds
+            {      
+                backgroundThread = new Thread(LoadGame);
+                isLoading = true;
+
+                //start backgroundthread
+                backgroundThread.Start();
+            }
+            else
+            {
+                frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                //  if (frameTimer > frameLength)
+                //{
                 frameTimer = 0.0f;
 
                 if (superManager.isInSuperFreeze())
@@ -195,10 +176,11 @@ namespace MH4F
                     {
                         player2.Update(gameTime, Keyboard.GetState(), false);
                     }
-                    
+
                     superManager.processSuperFreeze();
                 }
-                else {
+                else if (gameState == GameState.PLAYING)
+                {
                     projectileManager.updateProjectileList(gameTime);
                     if (hitstop > 0)
                     {
@@ -247,7 +229,7 @@ namespace MH4F
                             {
                                 roundManager.roundEnd(2);
                             }
-                        }                        
+                        }
                         else if (Keyboard.GetState().IsKeyDown(Keys.P))
                         {
                             Console.WriteLine("Test STuff");
@@ -292,7 +274,8 @@ namespace MH4F
                         }
                     }
                 }
-                
+            }
+                            
             //}
         }
 
@@ -308,68 +291,101 @@ namespace MH4F
             // Draw the safe area borders.
             Color translucentRed = Color.Red * 0.5f;
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            //spriteBatch.Begin();
-            spriteBatch.Begin(SpriteSortMode.Deferred,
-                        BlendState.AlphaBlend,
-                        null,
-                        null,
-                        null,
-                        null,
-                        cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
-            
-            if (superManager.isInSuperFreeze())
+            if (gameState == GameState.PLAYING)
             {
-                Color backgroundTint = Color.Lerp(Color.White, Color.Yellow, 0.5f);
-                spriteBatch.Draw(background, mainFrame, backgroundTint);
+                //spriteBatch.Begin();
+                spriteBatch.Begin(SpriteSortMode.Deferred,
+                            BlendState.AlphaBlend,
+                            null,
+                            null,
+                            null,
+                            null,
+                            cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
 
+                if (superManager.isInSuperFreeze())
+                {
+                    Color backgroundTint = Color.Lerp(Color.White, Color.Yellow, 0.5f);
+                    spriteBatch.Draw(background, mainFrame, backgroundTint);
+
+                }
+                else if (superManager.isInSuper())
+                {
+                    Color backgroundTint = Color.Lerp(Color.White, Color.Black, 0.5f);
+                    spriteBatch.Draw(background, mainFrame, backgroundTint);
+                }
+                else
+                {
+                    spriteBatch.Draw(background, mainFrame, Color.White);
+                }
+
+
+                //    spriteBatch.Draw(dummyTexture, test, translucentRed);
+                //   spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
+                player2.Draw(spriteBatch);
+
+                player1.Draw(spriteBatch);
+
+                projectileManager.drawAllProjectiles(spriteBatch);
+
+                string health = string.Format("Health: {0}", player1.CurrentHealth);
+
+                spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
+                spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
+                spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
+
+                spriteBatch.End();
+
+                spriteBatch.Begin();
+                spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
+                spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
+                comboManager.displayComboMessage(spriteBatch);
+
+
+                player1.DrawGauges(spriteBatch);
+                player2.DrawGauges(spriteBatch);
+                spriteBatch.End();
             }
-            else if (superManager.isInSuper())
-            {
-                Color backgroundTint = Color.Lerp(Color.White, Color.Black, 0.5f);
-                spriteBatch.Draw(background, mainFrame, backgroundTint);
-            }
-            else
-            {
-                spriteBatch.Draw(background, mainFrame, Color.White);
-            }
-
-
-        //    spriteBatch.Draw(dummyTexture, test, translucentRed);
-         //   spriteBatch.Draw(dummyTexture, testHitbox, translucentRed);
-            player2.Draw(spriteBatch);
-
-            player1.Draw(spriteBatch);
-
-            projectileManager.drawAllProjectiles(spriteBatch);
-
-            string health = string.Format("Health: {0}", player1.CurrentHealth);
-
-            spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
-            spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
-            spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
-          
-            spriteBatch.End();
-
-            spriteBatch.Begin();
-            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
-            spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
-            comboManager.displayComboMessage(spriteBatch);
-            
-            
-            player1.DrawGauges(spriteBatch);
-            player2.DrawGauges(spriteBatch);
-            spriteBatch.End();
-
-
             base.Draw(gameTime);
-           
         }
 
-        protected void loadGame()
+        protected void LoadGame()
         {
+            PlayerFactory playerFactory = new PlayerFactory();
+            playerFactory.DummyTexture = dummyTexture;
+            player1 = playerFactory.createCharacter(player1CharacterId, Content, 1, comboManager, throwManager, superManager, projectileManager);
+
+            // Set player 1 default controls
+            //
+
+            player1.ControlSetting.setControl("down", Keys.Down);
+            player1.ControlSetting.setControl("right", Keys.Right);
+            player1.ControlSetting.setControl("left", Keys.Left);
+            player1.ControlSetting.setControl("up", Keys.Up);
+            player1.ControlSetting.setControl("a", Keys.A);
+            player1.ControlSetting.setControl("b", Keys.S);
+            player1.ControlSetting.setControl("c", Keys.D);
+            player1.ControlSetting.setControl("d", Keys.Z);
+
+            player2 = playerFactory.createCharacter(player2CharacterId, Content, 2, comboManager, throwManager, superManager, projectileManager);
+
+            // Setting player 2 default controls
+            //
+            player2.ControlSetting.setControl("down", Keys.K);
+            player2.ControlSetting.setControl("right", Keys.L);
+            player2.ControlSetting.setControl("left", Keys.J);
+            player2.ControlSetting.setControl("up", Keys.I);
+            player2.ControlSetting.setControl("a", Keys.F);
+            player2.ControlSetting.setControl("b", Keys.G);
+            player2.ControlSetting.setControl("c", Keys.H);
+            player2.ControlSetting.setControl("d", Keys.V);
+            player1.AddSound(effect, "aattack");
+            player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
+            player1.Sprite.AddResetInfo("aattack", 4);
+            player1.Sprite.AddResetInfo("aattack", 6);
+            
             gameState = GameState.PLAYING;
             isLoading = false;
+
         }
 
         protected void adjustCamera()

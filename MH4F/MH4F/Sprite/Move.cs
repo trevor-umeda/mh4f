@@ -20,6 +20,8 @@ namespace MH4F
 
         private int[] frameLengthInfo;
 
+        private int[] xMovementInfo;
+
         private int frameLengthTimer;
 
         private int loopCount;
@@ -56,6 +58,11 @@ namespace MH4F
         public Hitbox CurrentHurtboxInfo
         {
             get { return hurtboxInfo[CurrentFrame]; }
+        }
+
+        public int CurrentXMovementInfo
+        {
+            get { return xMovementInfo[CurrentFrame]; }
         }
 
         public bool HasHitOpponent
@@ -105,6 +112,11 @@ namespace MH4F
         public void SetFrameLengthInfo(int[] info)
         {
             frameLengthInfo = info;
+        }
+
+        public void SetXMovementInfo(int[] info)
+        {
+            xMovementInfo = info;
         }
 
         public Move(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int columns, float frameLength, CharacterState CharacterState)
