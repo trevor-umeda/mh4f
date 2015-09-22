@@ -32,6 +32,7 @@ Content\5C.xnb
 Content\REKKA_PT3.xnb
 Content\REKKA1.xnb
 Content\REKKA_PT2.xnb
+Content\HIT1.xnb
 Content\Font.xnb
 Content\testf.xnb
 Content\slap_large.xnb
@@ -39,6 +40,10 @@ Content\airbackdash_h.xnb
 Content\bgm.xnb
 Content\bgm\20.xnb
 Content\bgm\25.xnb
+Content\HIT2.xnb
+Content\portraits\lsportrait.xnb
+Content\5A.xnb
+Content\5B.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -55,6 +60,10 @@ Content\descending.png
 Content\5C.png
 Content\REKKA_PT3.png
 Content\REKKA1.png
+Content\HIT1.png
+Content\HIT2.png
+Content\5A.png
+Content\5B.png
 Content\TEST.png
 Content\TEST2.png
 Content\combinedsprite.png
@@ -105,6 +114,7 @@ Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
 Config\LongSword\Moves\cattack.txt
+Config\LongSword\Moves\lowhit.txt
 Config\LongSword\Moves\specialcommand.txt
 Config\LongSword\Particles\morph.txt
 Config\LongSword\Particles\projectile.txt

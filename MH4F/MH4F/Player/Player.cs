@@ -840,7 +840,15 @@ namespace MH4F
             {
                 // So many different ways to get hit
                 //
-                Sprite.CurrentAnimation = "hit";
+                if (hitInfo.Hitzone == Hitzone.LOW)
+                {
+                    Sprite.CurrentAnimation = "lowhit";
+                }
+                else
+                {
+                    Sprite.CurrentAnimation = "hit";
+                }
+              
                 Sprite.CurrentMoveAnimation.CurrentFrame = 0;
                 CurrentHealth -= ComboManager.calculateProratedDamage(hitInfo);
 

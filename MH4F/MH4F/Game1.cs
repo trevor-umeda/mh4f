@@ -20,7 +20,7 @@ namespace MH4F
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D standing;
+        
         public Player player1;
         public Player player2;
         Texture2D dummyTexture;
@@ -30,7 +30,10 @@ namespace MH4F
         HitInfo testHitInfo;
 
         String player1CharacterId; 
-        String player2CharacterId; 
+        String player2CharacterId;
+
+        ControlSetting player1Controls = new ControlSetting();
+        ControlSetting player2Controls = new ControlSetting();
 
         private GameState gameState;
         private Thread backgroundThread;
@@ -51,6 +54,8 @@ namespace MH4F
         int frameCounter = 0;
 
         private SoundEffect effect;
+
+        CharacterSelectList characterSelection;
 
         // Amount of time (in seconds) to display each frame
         private float frameLength = 0.016f;
@@ -125,12 +130,32 @@ namespace MH4F
             testHitInfo.AirYVelocity = -100;
 
             effect = Content.Load<SoundEffect>("slap_large");
-            gameState = GameState.LOADING;
+            
             
             MediaPlayer.Play(bgmManager.getRandomBGM());
             MediaPlayer.Volume = 0.4f;
 
-            roundManager = new RoundManager(player1, player2);
+            player1Controls.setControl("down", Keys.Down);
+            player1Controls.setControl("right", Keys.Right);
+            player1Controls.setControl("left", Keys.Left);
+            player1Controls.setControl("up", Keys.Up);
+            player1Controls.setControl("a", Keys.A);
+            player1Controls.setControl("b", Keys.S);
+            player1Controls.setControl("c", Keys.D);
+            player1Controls.setControl("d", Keys.Z);
+
+            player2Controls.setControl("down", Keys.K);
+            player2Controls.setControl("right", Keys.L);
+            player2Controls.setControl("left", Keys.J);
+            player2Controls.setControl("up", Keys.I);
+            player2Controls.setControl("a", Keys.F);
+            player2Controls.setControl("b", Keys.G);
+            player2Controls.setControl("c", Keys.H);
+            player2Controls.setControl("d", Keys.V);
+
+            characterSelection = new CharacterSelectList(Content);
+            gameState = GameState.LOADING;
+           
         }
 
         /// <summary>
@@ -149,7 +174,10 @@ namespace MH4F
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
+            if (gameState == GameState.PLAYERSELECT)
+            {
+                characterSelection.moveCharacterSelection(Keyboard.GetState(), player1Controls.Controls);
+            }
             if (gameState == GameState.LOADING && !isLoading) //isLoading bool is to prevent the LoadGame method from being called 60 times a seconds
             {      
                 backgroundThread = new Thread(LoadGame);
@@ -158,7 +186,7 @@ namespace MH4F
                 //start backgroundthread
                 backgroundThread.Start();
             }
-            else
+            else if (gameState == GameState.PLAYING)
             {
                 frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -179,7 +207,7 @@ namespace MH4F
 
                     superManager.processSuperFreeze();
                 }
-                else if (gameState == GameState.PLAYING)
+                else
                 {
                     projectileManager.updateProjectileList(gameTime);
                     if (hitstop > 0)
@@ -209,6 +237,8 @@ namespace MH4F
                         //
                         if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
                         {
+                            // TODO make this not hardcoded
+                            //
                             hitstop = 7;
                             comboManager.player1LandedHit(player2.CharacterState);
                             player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
@@ -293,8 +323,15 @@ namespace MH4F
             GraphicsDevice.Clear(Color.CornflowerBlue);
             if (gameState == GameState.PLAYERSELECT)
             {
-
-
+                spriteBatch.Begin(SpriteSortMode.Deferred,
+                            BlendState.AlphaBlend,
+                            null,
+                            null,
+                            null,
+                            null,
+                            cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
+                characterSelection.Draw(spriteBatch);
+                spriteBatch.End();
             }
             if (gameState == GameState.LOADING)
             {
@@ -365,33 +402,21 @@ namespace MH4F
 
             // Set player 1 default controls
             //
-
-            player1.ControlSetting.setControl("down", Keys.Down);
-            player1.ControlSetting.setControl("right", Keys.Right);
-            player1.ControlSetting.setControl("left", Keys.Left);
-            player1.ControlSetting.setControl("up", Keys.Up);
-            player1.ControlSetting.setControl("a", Keys.A);
-            player1.ControlSetting.setControl("b", Keys.S);
-            player1.ControlSetting.setControl("c", Keys.D);
-            player1.ControlSetting.setControl("d", Keys.Z);
-
+            player1.ControlSetting = player1Controls;
+           
             player2 = playerFactory.createCharacter(player2CharacterId, Content, 2, comboManager, throwManager, superManager, projectileManager);
 
             // Setting player 2 default controls
             //
-            player2.ControlSetting.setControl("down", Keys.K);
-            player2.ControlSetting.setControl("right", Keys.L);
-            player2.ControlSetting.setControl("left", Keys.J);
-            player2.ControlSetting.setControl("up", Keys.I);
-            player2.ControlSetting.setControl("a", Keys.F);
-            player2.ControlSetting.setControl("b", Keys.G);
-            player2.ControlSetting.setControl("c", Keys.H);
-            player2.ControlSetting.setControl("d", Keys.V);
+            player2.ControlSetting = player2Controls;
+            
             player1.AddSound(effect, "aattack");
             player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
             player1.Sprite.AddResetInfo("aattack", 4);
             player1.Sprite.AddResetInfo("aattack", 6);
-            
+
+            roundManager = new RoundManager(player1, player2);
+
             gameState = GameState.PLAYING;
             isLoading = false;
 

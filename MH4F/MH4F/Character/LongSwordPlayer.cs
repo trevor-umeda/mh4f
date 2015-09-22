@@ -44,7 +44,7 @@ namespace MH4F
             MoveCosts = new Dictionary<String, int>();
 
             SwordGaugeGains.Add("aattack", 20);
-            MoveCosts.Add("battack", 10);
+           // MoveCosts.Add("battack", 10);
             MoveCosts.Add("backfireball", 25);
             Sprite.BoundingBoxHeight = 288;
             Sprite.BoundingBoxWidth = 90;

@@ -1,12 +1,12 @@
-name=hit
-sprite=HIT1
+﻿name=lowhit
+sprite=HIT2
 XImageStart=0
 YImageStart=0
 Width=547
 Height=500
 FrameCount=9
 Columns=3
-FrameLengthInfo=10,10,10,10,10,10,10,10,10
+FrameLengthInfo=3,3,3,3,3,3,3,3,3
 FrameLength=0.055
 CharacterState=HIT
 NextAnimation=standing

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{621B81BF-2B46-405C-8E96-BE22BE6B79B3}</ProjectGuid>
@@ -110,6 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterSelect\CharacterSelectList.cs" />
+    <Compile Include="CharacterSelect\CharacterSelectNode.cs" />
     <Compile Include="Character\PlayerFactory.cs" />
     <Compile Include="Combo\BasicProrationStrategy.cs" />
     <Compile Include="Camera2d.cs" />
@@ -181,6 +183,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\cattack.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\lowhit.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\rekkaC.txt">

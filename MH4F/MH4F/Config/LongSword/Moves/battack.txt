@@ -1,16 +1,17 @@
 name= battack
-sprite=script_punch
+sprite=5b
 XImageStart= 0
 YImageStart= 0
-Width= 400
+Width= 547
 Height= 500
-FrameCount= 22
-Columns= 10
-FrameLength= 0.048
+FrameCount= 8
+Columns= 2
+FrameLength= 0.016
+FrameLengthInfo=2,2,5,1,7,2,3,2
 CharacterState= STANDING
 IsAttack= true
 Hitbox=[7;57;64;88;82
-8;56;66;88;82]
+6;56;66;88;82]
 Hitstun= 6
 Blockstun= 10 
 Hitzone= MID

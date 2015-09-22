@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MH4F
 {
@@ -15,40 +17,76 @@ namespace MH4F
         private Vector2 player1Selection;
         private Vector2 player2Selection;
 
+        Texture2D blankBox;
+
         private int width;
         private int height;
 
-        public CharacterSelectList()
+        KeyboardState prevState;
+
+        public CharacterSelectList(ContentManager content)
         {
-            characterSelection = new CharacterSelectNode[2, 2];
-            characterSelection[0, 0] = new CharacterSelectNode("LongSword");
+            blankBox = content.Load<Texture2D>("HealthBar2");
+            characterSelection = new CharacterSelectNode[2, 1];
+            characterSelection[0, 0] = new CharacterSelectNode("LongSword", new Vector2(100, 100), content.Load<Texture2D>("portraits/lsportrait"));
+            characterSelection[1, 0] = new CharacterSelectNode("LongSword", new Vector2(700, 100), content.Load<Texture2D>("portraits/lsportrait"));
             width = 2;
-            height = 2;
+            height = 1;
         }
 
         public void moveCharacterSelection(KeyboardState key, Dictionary<string, Keys> controls)
         {
-            if (key.IsKeyDown(controls["right"]))
+            if (key.IsKeyDown(controls["right"]) && prevState.IsKeyUp(controls["right"]))
             {
                 player1Selection.X = (player1Selection.X + 1) % width;
             }
-            if (key.IsKeyDown(controls["left"]))
+            if (key.IsKeyDown(controls["left"]) && prevState.IsKeyUp(controls["left"]))
             {
-                player1Selection.X = (player1Selection.X - 1) % width;
+                if (player1Selection.X == 0)
+                {
+                    player1Selection.X = width - 1;
+                }
+                else
+                {
+                    player1Selection.X = (player1Selection.X - 1) % width;
+                }
+                
             }
-            if (key.IsKeyDown(controls["up"]))
+            if (key.IsKeyDown(controls["up"]) && prevState.IsKeyUp(controls["up"]))
             {
-                player1Selection.Y = (player1Selection.Y - 1) % height;
+                if (player1Selection.Y == 0)
+                {
+                    player1Selection.Y = height - 1;
+                }
+                else
+                {
+                    player1Selection.Y = (player1Selection.Y - 1) % height;
+                }
+               
             }
-            if (key.IsKeyDown(controls["down"]))
+            if (key.IsKeyDown(controls["down"]) && prevState.IsKeyUp(controls["down"]))
             {
                 player1Selection.Y = (player1Selection.Y + 1) % height;
             }
+            prevState = key;
         }
 
         public String selectCharacter()
         {
             return characterSelection[(int)player1Selection.X, (int)player1Selection.Y].CharacterId;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach(CharacterSelectNode node in characterSelection)
+            {
+                if (node != null)
+                {
+                    node.Draw(spriteBatch, blankBox);
+                }
+                spriteBatch.Draw(blankBox, characterSelection[(int)player1Selection.X, (int)player1Selection.Y].DrawRectangle, new Rectangle(0, 0, 467, 44), Color.White);
+            }
+
         }
     }
 }

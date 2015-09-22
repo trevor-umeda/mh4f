@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace MH4F
 {
@@ -9,11 +11,28 @@ namespace MH4F
     {
         private String characterId;
 
-        public CharacterSelectNode(String character)
+        private Texture2D portrait;
+
+        Rectangle drawRect;
+
+        public CharacterSelectNode(String character, Vector2 pos, Texture2D texture)
         {
             characterId = character;
+       
+            portrait = texture;
+            drawRect = new Rectangle((int)pos.X, (int)pos.Y, 137, 137);
         }
 
         public String CharacterId { get { return characterId; } }
+
+        public Rectangle DrawRectangle { get { return drawRect; } }
+
+        public void Draw(SpriteBatch sprite, Texture2D surroundingBox)
+        {
+            
+            sprite.Draw(portrait, drawRect, Color.White);
+            
+       }
+
     }
 }

@@ -13,15 +13,27 @@ namespace MH4F
 
         private int totalTimePlaying = 0;
 
+        private int midpointFrame;
+
+        private int midwayPauseTimer;
+
         public int HitStunCounter
         {
             get { return hitStunCounter; }
-            set { this.hitStunCounter = value; }
+            set 
+            { 
+                this.hitStunCounter = value;
+                if (value > FrameLength)
+                {
+                    midwayPauseTimer = value - (int)FrameCount;
+                }
+            }
         }
 
         public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int Columns, float FrameLength, CharacterState CharacterState)
             : base(texture, X, Y, Width, Height, Frames, Columns, FrameLength, CharacterState)
         {
+            midpointFrame = (int)FrameCount / 2 + 1;
         }
 
      
@@ -38,7 +50,15 @@ namespace MH4F
             if (FrameTimer > FrameLength)
             {
                 FrameTimer = 0.0f;
-                CurrentFrame = (CurrentFrame + 1) % FrameCount;
+               
+                if (midwayPauseTimer > 0 && CurrentFrame == midpointFrame)
+                {
+                    midwayPauseTimer--;
+                }
+                else
+                {
+                    CurrentFrame = (CurrentFrame + 1) % FrameCount;
+                }
                 totalTimePlaying++;
               
                 if (hitStunCounter > 0 && totalTimePlaying >= hitStunCounter)
