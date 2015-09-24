@@ -65,6 +65,11 @@ namespace MH4F
             get { return xMovementInfo[CurrentFrame]; }
         }
 
+        public int CurrentFrameLengthInfo
+        {
+            get { return frameLengthInfo[CurrentFrame]; }
+        }
+
         public bool HasHitOpponent
         {
             get { return hasHitOpponent; }
@@ -80,6 +85,12 @@ namespace MH4F
         {
             get { return loopCount; }
             set { loopCount = value; }
+        }
+
+        public int FrameLengthTimer
+        {
+            get { return frameLengthTimer; }
+            set { frameLengthTimer = value; }
         }
 
         public CharacterState CharacterState

@@ -848,8 +848,8 @@ namespace MH4F
                 {
                     Sprite.CurrentAnimation = "hit";
                 }
-              
-                Sprite.CurrentMoveAnimation.CurrentFrame = 0;
+
+                Sprite.CurrentMoveAnimation.CurrentFrame = Sprite.CurrentMoveAnimation.StartFrame;
                 CurrentHealth -= ComboManager.calculateProratedDamage(hitInfo);
 
                 if (hitInfo.FreezeOpponent)

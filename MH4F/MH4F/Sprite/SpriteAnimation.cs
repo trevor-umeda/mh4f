@@ -42,7 +42,7 @@ namespace MH4F
         private bool isDone = false;
 
         private bool isAttack = false;
-       
+        
         public Texture2D Texture
         {
             get { return t2dTexture; }
@@ -114,6 +114,14 @@ namespace MH4F
         {
             get { return isAttack; }
             set { isAttack = value; }
+        }
+
+        // Temp stuff, should probably get rid of this
+        //
+        public int StartFrame
+        {
+            get;
+            set;
         }
 
         /// 

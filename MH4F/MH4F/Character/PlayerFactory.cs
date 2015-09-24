@@ -356,6 +356,11 @@ namespace MH4F
                 newMove.SetFrameLengthInfo(frameLengthInfo);
             }
 
+            if (moveInfo.ContainsKey("StartFrame"))
+            {
+                newMove.StartFrame = int.Parse((String)moveInfo["StartFrame"]);
+            }
+
             if (moveInfo.ContainsKey("XMovement"))
             {
                 String xMovementString = (String)moveInfo["XMovement"];

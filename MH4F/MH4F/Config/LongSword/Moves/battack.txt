@@ -10,8 +10,8 @@ FrameLength= 0.016
 FrameLengthInfo=2,2,5,1,7,2,3,2
 CharacterState= STANDING
 IsAttack= true
-Hitbox=[7;57;64;88;82
-6;56;66;88;82]
+Hitbox=[
+4;56;66;88;82]
 Hitstun= 6
 Blockstun= 10 
 Hitzone= MID

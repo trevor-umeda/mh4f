@@ -2,4 +2,4 @@
 rekka     |         |          |  x   |        |               |         |         |
 rekkaB     |         |          |      |    x   |               |         |         |
 aattack    | x       |    x     |      |        |    x          |    x    |      x  |    x
-battack    | x       |    x     |      |        |    x          |         |         |
+battack    | x       |    x     |      |        |    x          |         |         |    x

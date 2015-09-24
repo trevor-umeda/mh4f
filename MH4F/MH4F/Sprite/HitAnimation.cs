@@ -13,8 +13,6 @@ namespace MH4F
 
         private int totalTimePlaying = 0;
 
-        private int midpointFrame;
-
         private int midwayPauseTimer;
 
         public int HitStunCounter
@@ -25,7 +23,7 @@ namespace MH4F
                 this.hitStunCounter = value;
                 if (value > FrameLength)
                 {
-                    midwayPauseTimer = value - (int)FrameCount;
+                    midwayPauseTimer = value - ((int)FrameCount - StartFrame);
                 }
             }
         }
@@ -33,7 +31,7 @@ namespace MH4F
         public HitAnimation(Texture2D texture, int X, int Y, int Width, int Height, int Frames, int Columns, float FrameLength, CharacterState CharacterState)
             : base(texture, X, Y, Width, Height, Frames, Columns, FrameLength, CharacterState)
         {
-            midpointFrame = (int)FrameCount / 2 + 1;
+          
         }
 
      
@@ -50,25 +48,32 @@ namespace MH4F
             if (FrameTimer > FrameLength)
             {
                 FrameTimer = 0.0f;
-               
-                if (midwayPauseTimer > 0 && CurrentFrame == midpointFrame)
+                FrameLengthTimer++;
+                if (CurrentFrameLengthInfo <= 0 || FrameLengthTimer >= CurrentFrameLengthInfo)
                 {
-                    midwayPauseTimer--;
-                }
-                else
-                {
-                    CurrentFrame = (CurrentFrame + 1) % FrameCount;
-                }
-                totalTimePlaying++;
-              
-                if (hitStunCounter > 0 && totalTimePlaying >= hitStunCounter)
-                {
-                    CurrentFrame = 0;
-                    IsDone = true;
-                    PlayCount++;
-                    totalTimePlaying = 0;
-                }
+                    FrameLengthTimer = 0;
+                    if (midwayPauseTimer > 0 && CurrentFrame == StartFrame + 1)
+                    {
+                        midwayPauseTimer--;
+                    }
+                    else
+                    {
+                        CurrentFrame = (CurrentFrame + 1) % FrameCount;
+                        while (CurrentFrameLengthInfo <= 0)
+                        {
+                            CurrentFrame = (CurrentFrame + 1) % FrameCount;
+                        }
+                    }
+                    totalTimePlaying++;
 
+                    if (hitStunCounter > 0 && totalTimePlaying >= hitStunCounter)
+                    {
+                        CurrentFrame = StartFrame;
+                        IsDone = true;
+                        PlayCount++;
+                        totalTimePlaying = 0;
+                    }
+                }
             }
             
         }

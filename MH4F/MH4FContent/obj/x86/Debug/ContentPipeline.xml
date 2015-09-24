@@ -418,6 +418,15 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\5B.xnb</Output>
       <Time>2015-09-22T00:10:29.9364993-07:00</Time>
     </Item>
+    <Item>
+      <Source>bg2.jpg</Source>
+      <Name>bg2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bg2.xnb</Output>
+      <Time>2015-09-23T01:42:03.0673608-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

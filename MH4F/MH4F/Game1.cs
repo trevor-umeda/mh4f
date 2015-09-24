@@ -25,6 +25,7 @@ namespace MH4F
         public Player player2;
         Texture2D dummyTexture;
         Texture2D background;
+        Texture2D menuBg;
         Rectangle testHitbox;
         Rectangle mainFrame;
         HitInfo testHitInfo;
@@ -112,9 +113,7 @@ namespace MH4F
             throwManager = new OneButtonThrowManager();
             superManager = new BasicSuperManager(cam);
             background = Content.Load<Texture2D>("back_ggxxac_london");
-
-            player1CharacterId = "LongSword";
-            player2CharacterId = "LongSword";
+            menuBg = Content.Load<Texture2D>("bg2");
            
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
 
@@ -154,7 +153,9 @@ namespace MH4F
             player2Controls.setControl("d", Keys.V);
 
             characterSelection = new CharacterSelectList(Content);
-            gameState = GameState.LOADING;
+            gameState = GameState.PLAYERSELECT;
+            player1CharacterId = "LongSword";
+            player2CharacterId = "LongSword";
            
         }
 
@@ -176,7 +177,13 @@ namespace MH4F
         {
             if (gameState == GameState.PLAYERSELECT)
             {
-                characterSelection.moveCharacterSelection(Keyboard.GetState(), player1Controls.Controls);
+                characterSelection.moveCharacterSelection(Keyboard.GetState(), player1Controls.Controls, player2Controls.Controls);
+                if (characterSelection.selectionLocked())
+                {
+                    player1CharacterId = characterSelection.Player1CharacterId;
+                    player2CharacterId = characterSelection.Player1CharacterId;
+                    gameState = GameState.LOADING;
+                }
             }
             if (gameState == GameState.LOADING && !isLoading) //isLoading bool is to prevent the LoadGame method from being called 60 times a seconds
             {      
@@ -330,12 +337,22 @@ namespace MH4F
                             null,
                             null,
                             cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
+                spriteBatch.Draw(menuBg, mainFrame, Color.White);
                 characterSelection.Draw(spriteBatch);
                 spriteBatch.End();
             }
             if (gameState == GameState.LOADING)
             {
-
+                spriteBatch.Begin(SpriteSortMode.Deferred,
+                            BlendState.AlphaBlend,
+                            null,
+                            null,
+                            null,
+                            null,
+                            cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
+                spriteBatch.Draw(menuBg, mainFrame, Color.White);
+               
+                spriteBatch.End();
             }
             if (gameState == GameState.PLAYING)
             {

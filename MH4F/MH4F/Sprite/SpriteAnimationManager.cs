@@ -247,8 +247,16 @@ namespace MH4F
                         }
 
                         currentAnimation = value;
-      
-                        animations[currentAnimation].CurrentFrame = 0;
+                        if (animations[currentAnimation].StartFrame > 0)
+                        {
+                            animations[currentAnimation].CurrentFrame = animations[currentAnimation].StartFrame;
+                        }
+                        else
+                        {
+                            animations[currentAnimation].CurrentFrame = 0;
+                        }
+                        
+
                         animations[currentAnimation].PlayCount = 0;
                         nextAnimation = animations[currentAnimation].NextAnimation;
                         animations[currentAnimation].IsDone = false;
