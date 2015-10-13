@@ -1,5 +1,5 @@
 ﻿name= cattack
-sprite=5C
+sprite=5C2
 XImageStart= 0
 YImageStart= 0
 Width= 1084

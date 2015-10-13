@@ -23,4 +23,5 @@ IsHardKnockDown= false
 AirUntechTime= 3
 AirXVelocity= 5
 AirYVelocity= 5
+BackupMove=battack
 Input=2;3;6;B

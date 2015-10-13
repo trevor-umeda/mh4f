@@ -45,9 +45,7 @@ namespace MH4F
 
         public String checkMoves(Direction direction, KeyboardState newKeyboardState, List<MoveInput> moveList)
         {
-            // First enqueue the current state into our input queue
-            //
-           // enqueueState(newKeyboardState, controlSetting.Controls);
+          
             // on a button press determine if a special move was inputted.
             //
             if (DetermineButtonPress(newKeyboardState))

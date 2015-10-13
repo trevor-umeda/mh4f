@@ -153,7 +153,7 @@ namespace MH4F
             player2Controls.setControl("d", Keys.V);
 
             characterSelection = new CharacterSelectList(Content);
-            gameState = GameState.PLAYERSELECT;
+            gameState = GameState.LOADING;
             player1CharacterId = "LongSword";
             player2CharacterId = "LongSword";
            

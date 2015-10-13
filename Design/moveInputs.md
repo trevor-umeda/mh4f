@@ -3,6 +3,18 @@
 ### Design Overview ###
 Inputs will be passed in to a pair or collection of objects that will store, manage, and parse inputs. The manager will parse inputs and then return the name of the move done and that is all. It is not up to these classes to determine the validity of the special input, only what was inputted. Several optimizations are in place though to prevent needless checking and parsing
 
+### New Thoughts (10/11/2015) ###
+
+Current solution has ever frame look at the entire queue of inputs.
+
+However for a majority of the time, the inputs have already been checked. It would be much better if we stored results of each iteration, and only do recalculation to 
+
+* A new input is entered
+	* If a move is matched then the queue would have to be altered/reset
+* Stored input is kicked out for being too old. This would have to invalidate or alter whatever moves we've 'cached' in our iteration of the queue.
+
+This could free up alot of calculation time. However its less intuitive and as a result will have room for a lot more bugs
+
 ### Current Solution ###
 The input manager will contain a queue of keyboard states. Its a specially modified one as it only tracks button presses and not held down buttons ( which could be a mistake).
 

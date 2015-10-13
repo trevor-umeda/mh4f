@@ -32,6 +32,8 @@ namespace MH4F
         {
             Dictionary<String, Keys> controls = controlSetting.Controls;
             String returnMove = null;
+            // First enqueue the current state into our input queue
+            //
             inputManager.enqueueState(newKeyboardState, controlSetting.Controls);
             if(!inputManager.DetermineButtonPress(newKeyboardState))
             {

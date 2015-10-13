@@ -46,9 +46,16 @@ namespace MH4F
             SwordGaugeGains.Add("aattack", 20);
            // MoveCosts.Add("battack", 10);
             MoveCosts.Add("backfireball", 25);
+
+            MoveCosts.Add("rekka", 0);
+            MoveCosts.Add("rekkaB", 0);
+            MoveCosts.Add("rekkaC", 0);
+
             Sprite.BoundingBoxHeight = 288;
             Sprite.BoundingBoxWidth = 90;
 
+            // Essentially how many rekkas we've done
+            //
             rekkaLevel = 1;
 
             // TODO make these have to be set for every character.
@@ -80,14 +87,17 @@ namespace MH4F
             //
             int moveCostValue;
             
-            // If its a d move do stuff
+            // If its a move that takes sword gauge, do some move specific checking and action
             //
             if (MoveCosts.TryGetValue(moveName, out moveCostValue))
             {
                 if (SwordGauge - moveCostValue >= 0)
-                {
-                    //String move = convertRekka(moveName);
-                    if (moveName == "backfireball")
+                {  
+                    if (moveName.Contains("rekka"))
+                    {
+                        convertRekka(moveName);
+                    }
+                    else if (moveName == "backfireball")
                     {
                         if (!ProjectileManager.containsPlayerProjectile(PlayerNumber))
                         {
@@ -97,7 +107,6 @@ namespace MH4F
                         {
                             changeMove(determineBackupMove(moveName));
                         }
-
                     }
                     else
                     {
@@ -128,24 +137,20 @@ namespace MH4F
             base.changeMove(moveName);
         }
 
-        private String convertRekka(String moveName)
+        private void convertRekka(String moveName)
         {
-            if (moveName == "rekka")
+            if (rekkaLevel  == 1 && moveName == "rekka" ||
+                rekkaLevel == 2 && moveName == "rekkaB" || 
+                rekkaLevel == 3 && moveName == "rekkaC")
             {
-                if (rekkaLevel == 1)
-                {
-                    return "rekkaA";
-                }
-                else if (rekkaLevel == 2)
-                {
-                    return "rekkaB";
-                }
-                else if (rekkaLevel == 3)
-                {
-                    return "rekkaC";
-                }
+                changeMove(moveName);
+                rekkaLevel++;
             }
-            return moveName;
+            else if (rekkaLevel == 1 &&
+                (moveName == "rekkaB" || moveName == "rekkaC"))
+            {
+                changeMove(determineBackupMove(moveName));
+            }
         }
 
         public override void performGroundSpecialMove(KeyboardState ks, String moveName)
