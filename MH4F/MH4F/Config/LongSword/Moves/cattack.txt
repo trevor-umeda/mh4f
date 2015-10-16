@@ -1,5 +1,5 @@
 ﻿name= cattack
-sprite=5C2
+sprite=5C
 XImageStart= 0
 YImageStart= 0
 Width= 1084
@@ -12,7 +12,7 @@ IsAttack= true
 Hitbox=[5;300;300;100;100
 6;300;300;100;100]
 FrameLengthInfo=3,3,2,1,1,4,3,2,2,2
-Hitstun= 14
+Hitstun= 10
 Blockstun= 10 
 Hitzone= MID
 Damage= 100

@@ -33,13 +33,6 @@ Content\REKKA_PT3.xnb
 Content\REKKA1.xnb
 Content\REKKA_PT2.xnb
 Content\HIT1.xnb
-Content\Font.xnb
-Content\testf.xnb
-Content\slap_large.xnb
-Content\airbackdash_h.xnb
-Content\bgm.xnb
-Content\bgm\20.xnb
-Content\bgm\25.xnb
 Content\HIT2.xnb
 Content\portraits\lsportrait.xnb
 Content\5A.xnb
@@ -48,6 +41,13 @@ Content\bg2.xnb
 Content\5C2.xnb
 Content\JUMP_PT1.xnb
 Content\JUMP_PT2.xnb
+Content\Font.xnb
+Content\testf.xnb
+Content\slap_large.xnb
+Content\airbackdash_h.xnb
+Content\bgm.xnb
+Content\bgm\20.xnb
+Content\bgm\25.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma

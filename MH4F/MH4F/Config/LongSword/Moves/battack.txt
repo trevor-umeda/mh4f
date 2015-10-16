@@ -12,7 +12,7 @@ CharacterState= STANDING
 IsAttack= true
 Hitbox=[
 4;56;66;88;82]
-Hitstun= 6
+Hitstun= 10
 Blockstun= 10 
 Hitzone= MID
 Damage= 100
