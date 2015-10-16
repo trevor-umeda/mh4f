@@ -1,10 +1,10 @@
 name=jumpup
-sprite=ascending
+sprite=JUMP_PT1
 XImageStart=0
 YImageStart=0
-Width=500
+Width=306
 Height=500
-FrameCount=4
-Columns=4
+FrameCount=2
+Columns=2
 FrameLength=0.1
 CharacterState=AIRBORNE

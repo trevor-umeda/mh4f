@@ -436,6 +436,24 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\5C2.xnb</Output>
       <Time>2015-10-10T23:13:33.6794621-07:00</Time>
     </Item>
+    <Item>
+      <Source>JUMP_PT1.png</Source>
+      <Name>JUMP_PT1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\JUMP_PT1.xnb</Output>
+      <Time>2015-10-15T19:26:31.45954-07:00</Time>
+    </Item>
+    <Item>
+      <Source>JUMP_PT2.png</Source>
+      <Name>JUMP_PT2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\JUMP_PT2.xnb</Output>
+      <Time>2015-10-15T19:28:47.1553014-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
