@@ -48,6 +48,8 @@ Content\airbackdash_h.xnb
 Content\bgm.xnb
 Content\bgm\20.xnb
 Content\bgm\25.xnb
+Content\2A_THINSLICE.xnb
+Content\2A_BIGSLICE.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -71,6 +73,8 @@ Content\5B.png
 Content\5C2.png
 Content\JUMP_PT1.png
 Content\JUMP_PT2.png
+Content\2A_THINSLICE.png
+Content\2A_BIGSLICE.png
 Content\TEST.png
 Content\TEST2.png
 Content\combinedsprite.png
@@ -95,6 +99,7 @@ Config\LongSword\Moves\backwalk.txt
 Config\LongSword\Moves\battack.txt
 Config\LongSword\Moves\block.txt
 Config\LongSword\Moves\airdashstart.txt
+Config\LongSword\Moves\2aattack.txt
 Config\LongSword\Moves\rekkaC.txt
 Config\LongSword\Moves\rekkaB.txt
 Config\LongSword\Moves\crouching.txt

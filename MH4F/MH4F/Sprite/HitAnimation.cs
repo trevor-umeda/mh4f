@@ -56,7 +56,7 @@ namespace MH4F
                     {
                         midwayPauseTimer--;
                     }
-                    else
+                    else if(FrameCount != 1)
                     {
                         CurrentFrame = (CurrentFrame + 1) % FrameCount;
                         while (CurrentFrameLengthInfo <= 0)

@@ -16,21 +16,25 @@ namespace MH4F
         public int XPos
         {
             get { return xPos; }
+            set { xPos = value; }
         }
 
         public int YPos
         {
             get { return yPos; }
+            set { yPos = value; }
         }
 
         public int Width
         {
             get { return width; }
+            set { width = value; }
         }
 
         public int Height
         {
             get { return height; }
+            set { height = value; }
         }
 
         public Rectangle getHitboxRectangle(Rectangle hitboxRect, Direction direction, Vector2 position, int frameWidth)

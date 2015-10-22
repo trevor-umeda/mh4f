@@ -167,11 +167,13 @@ namespace MH4F
         public Rectangle Hitbox
         {
             get { return hitbox; }
+            set { hitbox = value; }
         }
 
         public Rectangle Hurtbox
         {
             get { return hurtbox; }
+            set { hurtbox = value; }
         }
 
         ///
@@ -199,6 +201,11 @@ namespace MH4F
         {
             get { return currentXVelocity; }
             set { this.currentXVelocity = value; }
+        }
+
+        public List<string> AnimationsList
+        {
+            get { return new List<string>(animations.Keys); }
         }
 
         ///
@@ -401,10 +408,7 @@ namespace MH4F
                 Hitbox info = CurrentMoveAnimation.CurrentHitboxInfo;
                 // Ready hitbox info
                 //
-                if (CurrentAnimation == "forwardthrow")
-                {
-                    Console.WriteLine("UPDATE THROW");
-                }
+
                 if (info != null)
                 {
                     hitbox = info.getHitboxRectangle(hurtbox, direction, v2Position, CurrentMoveAnimation.FrameWidth);
@@ -451,6 +455,7 @@ namespace MH4F
                     //
                     if (CurrentMoveAnimation.PlayCount > 0)
                     {
+                        Console.WriteLine("SWITCHING TO " + CurrentMoveAnimation.NextAnimation);
                         // If it has, set up the next animation
                         CurrentAnimation = CurrentMoveAnimation.NextAnimation;
                     }
@@ -499,10 +504,10 @@ namespace MH4F
                 if (showHitboxes)
                 {
                     Color translucentRed = Color.Red * 0.5f;
-                    spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
+                    //spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
 
                     Color translucentBlue = Color.Blue * 0.5f;
-                   // spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
+                    spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
 
                     Color DarkBlue = Color.Blue * 0.7f;
                     //spriteBatch.Draw(dummyTexture, boundingBox, translucentBlue);

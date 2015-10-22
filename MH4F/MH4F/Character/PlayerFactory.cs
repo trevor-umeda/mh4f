@@ -331,11 +331,6 @@ namespace MH4F
                 newMove.IsAttack = Boolean.Parse((String)moveInfo["IsAttack"]);
             }
 
-            if (moveInfo.ContainsKey("NextAnimation"))
-            {
-                newMove.NextAnimation = (String)moveInfo["NextAnimation"];
-            }
-
             if (moveInfo.ContainsKey("BackupMove"))
             {
                 newMove.BackupMove = (String)moveInfo["BackupMove"];
@@ -393,10 +388,14 @@ namespace MH4F
                 List<String> hurtInfo = (List<String>)moveInfo["Hurtbox"];
                 foreach (String hurtBox in hurtInfo)
                 {
-                    String[] hurtBoxData = hurtBox.Split(';');
-                   // Console.WriteLine(int.Parse(hurtBoxData[0]));
-                    newMove.AddHurtboxInfo(int.Parse(hurtBoxData[0]),
-                        new Hitbox(hurtBoxData[1], hurtBoxData[2], hurtBoxData[3], hurtBoxData[4]));
+                    if (hurtBox.Length > 0)
+                    {
+                        String[] hurtBoxData = hurtBox.Split(';');
+                        // Console.WriteLine(int.Parse(hurtBoxData[0]));
+                        newMove.AddHurtboxInfo(int.Parse(hurtBoxData[0]),
+                            new Hitbox(hurtBoxData[1], hurtBoxData[2], hurtBoxData[3], hurtBoxData[4]));
+                    }
+                    
                 }
             }
              
@@ -424,9 +423,13 @@ namespace MH4F
                 {
                     hitMoveInfo.Unblockable = Boolean.Parse((String)moveInfo["Unblockable"]);
                 }
+                
                 newMove.HitInfo = hitMoveInfo;
             }
-
+            if (moveInfo.ContainsKey("NextAnimation"))
+            {
+                newMove.NextAnimation = (String)moveInfo["NextAnimation"];
+            }
             if (moveInfo.ContainsKey("ProjectileCreationFrame"))
             {
                 newMove.ProjectileCreationFrame = int.Parse((String)moveInfo["ProjectileCreationFrame"]);

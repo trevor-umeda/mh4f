@@ -9,8 +9,9 @@ Columns= 3
 FrameLength= 0.025
 CharacterState= STANDING
 IsAttack= true
-Hitbox=[5;300;300;100;100
-6;300;300;100;100]
+Hitbox=[4;182;357;286;164
+5;300;546;171;278
+6;334;576;100;188]
 FrameLengthInfo=3,3,2,1,1,4,3,2,2,2
 Hitstun= 10
 Blockstun= 10 

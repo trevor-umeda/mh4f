@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MH4F", "MH4F\MH4F\MH4F.csproj", "{621B81BF-2B46-405C-8E96-BE22BE6B79B3}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MH4FContent", "MH4F\MH4FContent\MH4FContent.contentproj", "{98C7DFB9-8C3E-4352-9CF2-AFF563E0B11E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MH4FContent", "MH4F\MH4FContent\MH4FContent.contentproj", "{98C7DFB9-8C3E-4352-9CF2-AFF563E0B11E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

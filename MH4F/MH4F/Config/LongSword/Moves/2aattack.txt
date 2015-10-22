@@ -1,0 +1,23 @@
+﻿name= 2aattack
+sprite=2A_BIGSLICE
+XImageStart= 0
+YImageStart= 0
+Width= 547
+Height= 500
+FrameCount= 9
+Columns= 3
+FrameLength= 0.020
+FrameLengthInfo=1,1,1,3,1,3,2,2,1
+CharacterState= STANDING
+IsAttack= true
+Hitbox=[4;102;276;148;82
+5;109;261;154;127]
+Hitstun= 3
+Blockstun= 2 
+Hitzone= LOW
+Damage= 50
+IsHardKnockDown= false
+AirUntechTime= 3
+AirXVelocity= 5
+AirYVelocity= 5
+Input= A

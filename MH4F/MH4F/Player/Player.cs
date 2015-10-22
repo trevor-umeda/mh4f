@@ -213,7 +213,7 @@ namespace MH4F
             RegisterGroundMove("specialcommand", new List<string> { "BC" });
             RegisterGroundMove("forwardbattack", new List<string> { "6B" });
             RegisterGroundMove("forwardcattack", new List<string> { "6C" });
-            RegisterGroundMove("crouchaattack", new List<string> { "2A" });
+            RegisterGroundMove("2aattack", new List<string> { "2A" });
             RegisterGroundMove("crouchbattack", new List<string> { "2B" });
             RegisterGroundMove("crouchcattack", new List<string> { "2C" });
             RegisterGroundMove("cattack", new List<string> { "C" });
@@ -976,9 +976,7 @@ namespace MH4F
         {
             if (bVisible)
             {
-
                 sprite.Draw(spriteBatch, 0, 0, Direction);
-
             }
         }
 

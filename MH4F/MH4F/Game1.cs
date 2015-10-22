@@ -131,8 +131,8 @@ namespace MH4F
             effect = Content.Load<SoundEffect>("slap_large");
             
             
-            MediaPlayer.Play(bgmManager.getRandomBGM());
-            MediaPlayer.Volume = 0.4f;
+            //MediaPlayer.Play(bgmManager.getRandomBGM());
+            //MediaPlayer.Volume = 0.4f;
 
             player1Controls.setControl("down", Keys.Down);
             player1Controls.setControl("right", Keys.Right);
@@ -258,7 +258,6 @@ namespace MH4F
                         }
                         else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
                         {
-
                             comboManager.player2LandedHit(player1.CharacterState);
                             player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
                             player2.hitEnemy();
@@ -303,7 +302,7 @@ namespace MH4F
                     }
                     else
                     {
-
+                        
                         hitstop--;
                         if (hitstop < 0)
                         {
@@ -429,8 +428,8 @@ namespace MH4F
             
             player1.AddSound(effect, "aattack");
             player1.AddSound(Content.Load<SoundEffect>("airbackdash_h"), "backstep");
-            player1.Sprite.AddResetInfo("aattack", 4);
-            player1.Sprite.AddResetInfo("aattack", 6);
+            //player1.Sprite.AddResetInfo("aattack", 4);
+          //  player1.Sprite.AddResetInfo("aattack", 6);
 
             roundManager = new RoundManager(player1, player2);
 

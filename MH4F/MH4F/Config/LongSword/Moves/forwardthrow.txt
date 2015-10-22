@@ -21,4 +21,5 @@ AirXVelocity= 7
 AirYVelocity= 7
 FreezeMove=true
 Unblockable=true
+NextAnimation=forwardthrowattack
 Input=6C

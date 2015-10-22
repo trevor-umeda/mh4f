@@ -151,6 +151,7 @@ namespace MH4F
         }
         public override void Update(GameTime gameTime)
         {
+ 
             FrameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (FrameTimer > FrameLength)
