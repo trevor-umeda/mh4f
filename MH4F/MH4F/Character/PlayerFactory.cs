@@ -43,6 +43,10 @@ namespace MH4F
             {
                 player = new LongSwordPlayer(playerNumber, xPosition, playerYHeight, comboManager, throwManager);
             }
+            else if (CharacterId.Equals("HuntingHorn"))
+            {
+                player = new HuntingHornPlayer(playerNumber, xPosition, playerYHeight, comboManager, throwManager);
+            }
             else
             {
                 player = new LongSwordPlayer(playerNumber, xPosition, playerYHeight, comboManager, throwManager);
@@ -69,7 +73,7 @@ namespace MH4F
             foreach (string fileName in files)
             {
                 Dictionary<String, Object> moveInfo = parseMoveInfo(fileName);
-                particleParse(content, player, moveInfo, spriteTextures);
+                particleParse(content, character, player, moveInfo, spriteTextures);
             }
         }
 
@@ -82,7 +86,7 @@ namespace MH4F
             foreach (string fileName in files)
             {
                 Dictionary<String, Object> moveInfo = parseMoveInfo(fileName);
-                moveParse(content, player, moveInfo, spriteTextures, moveInputList);
+                moveParse(content, character, player, moveInfo, spriteTextures, moveInputList);
             }
             try
             {
@@ -192,14 +196,14 @@ namespace MH4F
             return moveInfo;
         }
 
-        protected void particleParse(ContentManager content, Player player, Dictionary<String, Object> moveInfo, Dictionary<String, Texture2D> spriteTextures)
+        protected void particleParse(ContentManager content, String character, Player player, Dictionary<String, Object> moveInfo, Dictionary<String, Texture2D> spriteTextures)
         {
             String name = (String)moveInfo["name"];
  
             Texture2D texture = null;
             if(!spriteTextures.TryGetValue((String)moveInfo["sprite"], out texture)) 
             {
-                texture = content.Load<Texture2D>((String)moveInfo["sprite"]);
+                texture = content.Load<Texture2D>(character + "/" + (String)moveInfo["sprite"]);
                 spriteTextures.Add((String)moveInfo["sprite"], texture);
             }
 
@@ -277,18 +281,15 @@ namespace MH4F
             player.AddProjectile(name, newMove);             
         }
 
-        protected void moveParse(ContentManager content, Player player, Dictionary<String, Object> moveInfo, Dictionary<String, Texture2D> spriteTextures, Dictionary<String, MoveInput> moveInputList)
+        protected void moveParse(ContentManager content, String character, Player player, Dictionary<String, Object> moveInfo, Dictionary<String, Texture2D> spriteTextures, Dictionary<String, MoveInput> moveInputList)
         {
 
             String name = (String)moveInfo["name"];
-            if (name == "forwardthrow")
-            {
-                Console.WriteLine("TEST");
-            }
+
             Texture2D texture = null;
             if(!spriteTextures.TryGetValue((String)moveInfo["sprite"], out texture)) 
             {
-                texture = content.Load<Texture2D>((String)moveInfo["sprite"]);
+                texture = content.Load<Texture2D>(character + "/" +(String)moveInfo["sprite"]);
                 spriteTextures.Add((String)moveInfo["sprite"], texture);
             }
 

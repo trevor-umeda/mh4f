@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TEST.png">
+    <Compile Include="LongSword\TEST.png">
       <Name>TEST</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -65,7 +65,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TEST2.png">
+    <Compile Include="LongSword\TEST2.png">
       <Name>TEST2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -95,7 +95,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="combinedsprite.png">
+    <Compile Include="LongSword\combinedsprite.png">
       <Name>combinedsprite</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -117,7 +117,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="standblock.png">
+    <Compile Include="LongSword\standblock.png">
       <Name>standblock</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -125,7 +125,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KNOCKDOWN.png">
+    <Compile Include="LongSword\KNOCKDOWN.png">
       <Name>KNOCKDOWN</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -133,7 +133,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WAKEUP.png">
+    <Compile Include="LongSword\WAKEUP.png">
       <Name>WAKEUP</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -141,14 +141,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FALLDOWN.png">
+    <Compile Include="LongSword\FALLDOWN.png">
       <Name>FALLDOWN</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DOWN.png">
+    <Compile Include="LongSword\DOWN.png">
       <Name>DOWN</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -156,7 +156,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HITGROUND.png">
+    <Compile Include="LongSword\HITGROUND.png">
       <Name>HITGROUND</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -164,7 +164,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FALLING.png">
+    <Compile Include="LongSword\FALLING.png">
       <Name>FALLING</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -210,28 +210,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="testwalk.png">
+    <Compile Include="LongSword\testwalk.png">
       <Name>testwalk</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KORRA.png">
+    <Compile Include="LongSword\KORRA.png">
       <Name>KORRA</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="walktest2.png">
+    <Compile Include="LongSword\walktest2.png">
       <Name>walktest2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="STAND2.png">
+    <Compile Include="LongSword\STAND2.png">
       <Name>STAND2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -239,7 +239,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WALKREVISED3.png">
+    <Compile Include="LongSword\WALKREVISED3.png">
       <Name>WALKREVISED3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -247,7 +247,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="script_punch.png">
+    <Compile Include="LongSword\script_punch.png">
       <Name>script_punch</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -255,14 +255,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="new_punch.png">
+    <Compile Include="LongSword\new_punch.png">
       <Name>new_punch</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RUN.png">
+    <Compile Include="LongSword\RUN.png">
       <Name>RUN</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -270,24 +270,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="6WALK.png">
+    <Compile Include="LongSword\6WALK.png">
       <Name>6WALK</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="dash3.png">
+    <Compile Include="LongSword\dash3.png">
       <Name>dash3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="dash_1.png">
+    <Compile Include="LongSword\dash_1.png">
       <Name>dash_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="neutral.png">
+    <Compile Include="LongSword\neutral.png">
       <Name>neutral</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -295,7 +295,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CROUCH2.png">
+    <Compile Include="LongSword\CROUCH2.png">
       <Name>CROUCH2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -318,7 +318,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="projectile.png">
+    <Compile Include="LongSword\projectile.png">
       <Name>projectile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -326,14 +326,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="projectile2.png">
+    <Compile Include="LongSword\projectile2.png">
       <Name>projectile2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="projectile3.png">
+    <Compile Include="LongSword\projectile3.png">
       <Name>projectile3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -341,7 +341,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ascending.png">
+    <Compile Include="LongSword\ascending.png">
       <Name>ascending</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -349,7 +349,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="descending.png">
+    <Compile Include="LongSword\descending.png">
       <Name>descending</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -357,7 +357,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="5C.png">
+    <Compile Include="LongSword\5C.png">
       <Name>5C</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -365,7 +365,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="REKKA_PT3.png">
+    <Compile Include="LongSword\REKKA_PT3.png">
       <Name>REKKA_PT3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -373,7 +373,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="REKKA1.png">
+    <Compile Include="LongSword\REKKA1.png">
       <Name>REKKA1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -381,14 +381,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="REKKA_PT2.png">
+    <Compile Include="LongSword\REKKA_PT2.png">
       <Name>REKKA_PT2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HIT1.png">
+    <Compile Include="LongSword\HIT1.png">
       <Name>HIT1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -396,7 +396,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HIT2.png">
+    <Compile Include="LongSword\HIT2.png">
       <Name>HIT2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -411,7 +411,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="5A.png">
+    <Compile Include="LongSword\5A.png">
       <Name>5A</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -419,7 +419,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="5B.png">
+    <Compile Include="LongSword\5B.png">
       <Name>5B</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -434,7 +434,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="5C2.png">
+    <Compile Include="LongSword\5C2.png">
       <Name>5C2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -442,7 +442,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JUMP_PT1.png">
+    <Compile Include="LongSword\JUMP_PT1.png">
       <Name>JUMP_PT1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -450,7 +450,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JUMP_PT2.png">
+    <Compile Include="LongSword\JUMP_PT2.png">
       <Name>JUMP_PT2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -458,7 +458,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="2A_THINSLICE.png">
+    <Compile Include="LongSword\2A_THINSLICE.png">
       <Name>2A_THINSLICE</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -466,11 +466,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="2A_BIGSLICE.png">
+    <Compile Include="LongSword\2A_BIGSLICE.png">
       <Name>2A_BIGSLICE</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HuntingHorn\HH5.png">
+      <Name>HH5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

@@ -28,7 +28,7 @@ namespace MH4F
         {
             zoom = 1.0f;
             rotation = 0.0f;
-            position = Vector2.Zero;
+            position = new Vector2(gameWidth / 2, 360.0f);
 
             this.gameWidth = gameWidth;
             this.gameHeight = gameHeight;            

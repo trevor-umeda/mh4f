@@ -98,7 +98,7 @@ namespace MH4F
         protected override void LoadContent()
         {
             cam = new Camera2d(Config.Instance.GameWidth, Config.Instance.ScreenWidth, Config.Instance.GameHeight, Config.Instance.ScreenHeight);
-            cam.Pos = new Vector2(512.0f, 360.0f);
+            //cam.Pos = new Vector2(Config.Instance.GameWidth/2, 360.0f);
             mainFrame = new Rectangle(-450, 0, 2400, Config.Instance.GameHeight);
             
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -155,7 +155,7 @@ namespace MH4F
             characterSelection = new CharacterSelectList(Content);
             gameState = GameState.LOADING;
             player1CharacterId = "LongSword";
-            player2CharacterId = "LongSword";
+            player2CharacterId = "HuntingHorn";
            
         }
 
@@ -269,13 +269,13 @@ namespace MH4F
                         else if (Keyboard.GetState().IsKeyDown(Keys.P))
                         {
                             Console.WriteLine("Test STuff");
-                            cam.Zoom = 1.2f;
+                   //         cam.Zoom = 1.2f;
                             //    player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
                             player1.CurrentHealth -= 10;
                         }
                         else if (Keyboard.GetState().IsKeyDown(Keys.O))
                         {
-                            cam.Y += 3;
+                            cam.X -= 3;
                         }
                         projectileManager.checkHitOnPlayers(player1, player2, comboManager, roundManager, Keyboard.GetState());
                         elapsedTime += gameTime.ElapsedGameTime;

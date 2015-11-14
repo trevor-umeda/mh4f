@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="CharacterSelect\CharacterSelectList.cs" />
     <Compile Include="CharacterSelect\CharacterSelectNode.cs" />
+    <Compile Include="Character\HuntingHornPlayer.cs" />
     <Compile Include="Character\PlayerFactory.cs" />
     <Compile Include="Combo\BasicProrationStrategy.cs" />
     <Compile Include="Camera2d.cs" />
@@ -156,6 +157,9 @@
     <Compile Include="Throws\TwoButtonThrowManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\HuntingHorn\Moves\standing.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Gatling.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -337,7 +341,9 @@
   <ItemGroup>
     <None Include="fps.spritefont" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Config\HuntingHorn\Particles\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
