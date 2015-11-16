@@ -150,7 +150,7 @@ namespace MH4F
             }
             player.Sprite.CurrentAnimation = "standing";
         }
-        protected Dictionary<String, Object> parseMoveInfo(String fileName)
+        public static Dictionary<String, Object> parseMoveInfo(String fileName)
         {
             //Console.WriteLine(fileName);
             bool parsingList = false;
@@ -355,6 +355,13 @@ namespace MH4F
             if (moveInfo.ContainsKey("StartFrame"))
             {
                 newMove.StartFrame = int.Parse((String)moveInfo["StartFrame"]);
+            }
+
+            if (moveInfo.ContainsKey("HitType"))
+            {
+                HitType hitType;
+                Enum.TryParse((String)moveInfo["HitType"], true, out hitType);
+                newMove.HitType = hitType;
             }
 
             if (moveInfo.ContainsKey("XMovement"))

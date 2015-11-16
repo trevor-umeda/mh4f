@@ -9,6 +9,7 @@ Columns=4
 FrameLength=0.016
 FrameLengthInfo=3,2,1,1,3,4,2,2,2,3
 CharacterState=STANDING
+HitType=SLASH
 Hitbox=[4;280;300;194;111
 5;270;300;194;111
 6;260;300;194;111]

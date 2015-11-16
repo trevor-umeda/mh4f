@@ -145,3 +145,7 @@ C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\RUN.png
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\6WALK.png
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\dash_1.png
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\neutral.png
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\Base\effect\impact.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\punch2_fx.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\slash_fx_1.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\Base\effect\slash.txt

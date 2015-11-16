@@ -28,6 +28,8 @@ namespace MH4F
 
         private CharacterState characterState;
 
+        private HitType hitType;
+
         bool hasHitOpponent = false;
 
         private int projectileCreationFrame = -1;
@@ -97,6 +99,12 @@ namespace MH4F
         {
             get { return characterState; }
             set { characterState = value; }
+        }
+
+        public HitType HitType
+        {
+            get { return hitType; }
+            set { hitType = value; }
         }
 
         public int ProjectileCreationFrame

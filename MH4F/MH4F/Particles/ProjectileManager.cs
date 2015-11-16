@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace MH4F
 {
@@ -12,12 +14,44 @@ namespace MH4F
     {
         List<Projectile> player1Projectiles;
         List<Projectile> player2Projectiles;
-
- 
-        public ProjectileManager()
+        List<ParticleAnimation> particles;
+        ParticleAnimation punchEffect;
+        ParticleAnimation slashEffect;
+        public ProjectileManager(ContentManager content)
         {
             player1Projectiles = new List<Projectile>();
             player2Projectiles = new List<Projectile>();
+            particles = new List<ParticleAnimation>();
+            // Load some universal things
+            //
+   
+            Dictionary<String, Object> moveInfo = PlayerFactory.parseMoveInfo("Config/Base/effect/impact.txt");
+            
+            Texture2D punchTexture = content.Load<Texture2D>((String)moveInfo["sprite"]);
+            punchEffect = new ParticleAnimation(
+                punchTexture,
+                int.Parse((String)moveInfo["XImageStart"]),
+                int.Parse((String)moveInfo["YImageStart"]),
+                int.Parse((String)moveInfo["Width"]),
+                int.Parse((String)moveInfo["Height"]),
+                int.Parse((String)moveInfo["FrameCount"]),
+                int.Parse((String)moveInfo["Columns"]),
+                float.Parse((String)moveInfo["FrameLength"])
+               ); // As a default this is prob fine
+
+            moveInfo = PlayerFactory.parseMoveInfo("Config/Base/effect/slash.txt");
+
+            Texture2D slashTexture = content.Load<Texture2D>((String)moveInfo["sprite"]);
+            slashEffect = new ParticleAnimation(
+                slashTexture,
+                int.Parse((String)moveInfo["XImageStart"]),
+                int.Parse((String)moveInfo["YImageStart"]),
+                int.Parse((String)moveInfo["Width"]),
+                int.Parse((String)moveInfo["Height"]),
+                int.Parse((String)moveInfo["FrameCount"]),
+                int.Parse((String)moveInfo["Columns"]),
+                float.Parse((String)moveInfo["FrameLength"])
+               ); // As a default this is prob fine
         }
 
         public List<Projectile> getPlayerProjectiles(int playerNumber)
@@ -30,6 +64,25 @@ namespace MH4F
             {
                 return player2Projectiles;
             }
+        }
+
+        public void createHitparticle(Rectangle hitSection, HitType hitType)
+        {
+            Vector2 center = new Vector2(hitSection.X + (hitSection.Width/2), hitSection.Y + (hitSection.Height/2));
+
+            if (hitType == HitType.IMPACT)
+            {
+                int xPos = ((int)center.X - punchEffect.FrameHeight / 2);
+                int yPos = (int)center.Y - punchEffect.FrameWidth / 2;
+                particles.Add(punchEffect.NewInstance(xPos, yPos));
+            }
+            else
+            {
+                int xPos = ((int)center.X - slashEffect.FrameHeight / 2);
+                int yPos = (int)center.Y - slashEffect.FrameWidth / 2;
+                particles.Add(slashEffect.NewInstance(xPos, yPos));
+            }
+
         }
 
         public void createProjectile(Projectile projectileAnimation)
@@ -122,6 +175,15 @@ namespace MH4F
                     player2Projectiles.RemoveAt(i);
                 }
             }
+            for (int i = particles.Count - 1; i >= 0; i--)
+            {
+                particles[i].Update(gameTime);
+
+                if (particles[i].Finished)
+                {
+                    particles.RemoveAt(i);
+                }
+            }
         }
 
         public void drawAllProjectiles(SpriteBatch spriteBatch)
@@ -133,6 +195,10 @@ namespace MH4F
             for (int i = player2Projectiles.Count - 1; i >= 0; i--)
             {
                 player2Projectiles[i].Draw(spriteBatch);
+            }
+            for (int i = particles.Count - 1; i >= 0; i--)
+            {
+                particles[i].Draw(spriteBatch);
             }
         }
     }

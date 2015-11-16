@@ -54,6 +54,8 @@ Content\LongSword\JUMP_PT2.xnb
 Content\LongSword\2A_THINSLICE.xnb
 Content\LongSword\2A_BIGSLICE.xnb
 Content\HuntingHorn\HH5.xnb
+Content\punch2_fx.xnb
+Content\slash_fx_1.xnb
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png

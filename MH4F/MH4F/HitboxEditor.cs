@@ -110,7 +110,7 @@ namespace MH4F
 
             BGMManager bgmManager = new BGMManager(Content);
 
-            projectileManager = new ProjectileManager();
+            projectileManager = new ProjectileManager(Content);
             throwManager = new OneButtonThrowManager();
             superManager = new BasicSuperManager(cam);
             background = Content.Load<Texture2D>("back_ggxxac_london");
@@ -170,30 +170,38 @@ namespace MH4F
             {
                 frameTimer = 0.0f;
                 hitbox = player1.Sprite.CurrentMoveAnimation.CurrentHitboxInfo;
+                hurtboxInfo = player1.Sprite.CurrentMoveAnimation.CurrentHurtboxInfo;
                 // Ready hitbox info
                 //
-                if (hitbox != null)
+                if (hitboxType == "HURTBOX")
                 {
-                    player1.Sprite.Hitbox = hitbox.getHitboxRectangle(player1.Sprite.Hitbox, player1.Direction, player1.Sprite.Position, player1.Sprite.CurrentMoveAnimation.FrameWidth);
-                }
-                else
-                {
-                    player1.Sprite.Hitbox = new Rectangle();
-                }
+                    if (hurtboxInfo != null)
+                    {
+                        player1.Sprite.Hurtbox = hurtboxInfo.getHitboxRectangle(player1.Sprite.Hurtbox, player1.Direction, player1.Sprite.Position, player1.Sprite.CurrentMoveAnimation.FrameWidth);
+                    }
+                    else
+                    {
+                        player1.Sprite.Hurtbox = new Rectangle(100, 100, 100, 100);
+                        hurtboxInfo = new Hitbox("100", "100", "100", "100");
+                    }
 
-                hurtboxInfo = player1.Sprite.CurrentMoveAnimation.CurrentHurtboxInfo;
+                }
+                if (hitboxType == "HITBOX")
+                {
+                    if (hitbox != null)
+                    {
+                        player1.Sprite.Hitbox = hitbox.getHitboxRectangle(player1.Sprite.Hitbox, player1.Direction, player1.Sprite.Position, player1.Sprite.CurrentMoveAnimation.FrameWidth);
+                    }
+                    else
+                    {
+                        player1.Sprite.Hitbox = new Rectangle();
+                    }
+
+                }
+               
                 // Set up the hurtbox for the move
                 //
-                if (hurtboxInfo != null)
-                {
-                    player1.Sprite.Hurtbox = hurtboxInfo.getHitboxRectangle(player1.Sprite.Hurtbox, player1.Direction, player1.Sprite.Position, player1.Sprite.CurrentMoveAnimation.FrameWidth);
-                }
-                else
-                {
-                    player1.Sprite.Hurtbox = new Rectangle(100,100,100,100);
-                    hurtboxInfo = new Hitbox("100", "100", "100", "100");
-                }
-
+               
                 if (lastState.IsKeyUp(Keys.Right) && Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
                     player1.Sprite.CurrentMoveAnimation.CurrentFrame++;
@@ -324,7 +332,7 @@ namespace MH4F
 
             projectileManager.drawAllProjectiles(spriteBatch);
 
-            string health = string.Format("Health: {0}", player1.CurrentHealth);
+            string health = string.Format("Move: {0}", player1.Sprite.CurrentAnimation);
 
             spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
             spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);

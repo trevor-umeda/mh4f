@@ -481,6 +481,24 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH5.xnb</Output>
       <Time>2015-11-10T23:48:06.9842987-08:00</Time>
     </Item>
+    <Item>
+      <Source>punch2_fx.png</Source>
+      <Name>punch2_fx</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\punch2_fx.xnb</Output>
+      <Time>2015-11-15T21:50:48.1576659-08:00</Time>
+    </Item>
+    <Item>
+      <Source>slash_fx_1.png</Source>
+      <Name>slash_fx_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\slash_fx_1.xnb</Output>
+      <Time>2015-11-15T21:50:58.6992688-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

@@ -109,7 +109,7 @@ namespace MH4F
 
             BGMManager bgmManager = new BGMManager(Content);
 
-            projectileManager = new ProjectileManager();
+            projectileManager = new ProjectileManager(Content);
             throwManager = new OneButtonThrowManager();
             superManager = new BasicSuperManager(cam);
             background = Content.Load<Texture2D>("back_ggxxac_london");
@@ -155,7 +155,7 @@ namespace MH4F
             characterSelection = new CharacterSelectList(Content);
             gameState = GameState.LOADING;
             player1CharacterId = "LongSword";
-            player2CharacterId = "HuntingHorn";
+            player2CharacterId = "LongSword";
            
         }
 
@@ -246,10 +246,13 @@ namespace MH4F
                         {
                             // TODO make this not hardcoded
                             //
+                            Rectangle test = Rectangle.Intersect(player1.Sprite.Hitbox, player2.Sprite.Hurtbox);
+                         
                             hitstop = 7;
                             comboManager.player1LandedHit(player2.CharacterState);
                             player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
                             player1.hitEnemy();
+                            projectileManager.createHitparticle(test, player1.Sprite.CurrentMoveAnimation.HitType);
                             System.Diagnostics.Debug.WriteLine("We have collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
                             if (player2.CurrentHealth <= 0)
                             {

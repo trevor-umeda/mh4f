@@ -504,7 +504,7 @@ namespace MH4F
                 if (showHitboxes)
                 {
                     Color translucentRed = Color.Red * 0.5f;
-                    //spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
+                    spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
 
                     Color translucentBlue = Color.Blue * 0.5f;
                     spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
