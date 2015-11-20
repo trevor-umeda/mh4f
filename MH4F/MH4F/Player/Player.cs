@@ -48,7 +48,7 @@ namespace MH4F
         int collisionBufferX = 0;
         int collisionBufferY = 0;
 
-        readonly private int GROUND_POS_Y = 725;
+        
 
         // Health
         //
@@ -118,8 +118,8 @@ namespace MH4F
         {
             sprite = new SpriteAnimationManager();
             PlayerNumber = playerNumber;
-            Position = new Vector2(xPosition, GROUND_POS_Y - yHeight-200);
-            startingPosition = new Vector2(xPosition, GROUND_POS_Y - yHeight - 200);
+            Position = new Vector2(xPosition, Config.Instance.GroundYHeight - yHeight);
+            startingPosition = new Vector2(xPosition, Config.Instance.GroundYHeight - yHeight);
             ComboManager = comboManager;
             ThrowManager = throwManager;
             specialInputManager = new SpecialInputManager();
@@ -142,7 +142,7 @@ namespace MH4F
         public bool IsAirborne
         {
             get {
-                return Y + Sprite.CurrentMoveAnimation.FrameHeight < GROUND_POS_Y - 30;
+                return Y + Sprite.CurrentMoveAnimation.FrameHeight < Config.Instance.GroundYHeight - 30;
             }
         }
 
@@ -535,7 +535,7 @@ namespace MH4F
            // Logic to handle when they are landing
            // If bottom of sprite is touching the "floor" then you are landed
            //
-          if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= GROUND_POS_Y && currentVelocity.Y > 0)
+          if (Y + Sprite.CurrentMoveAnimation.FrameHeight >= Config.Instance.GroundYHeight && currentVelocity.Y > 0)
           {
               // Stop velocity
               //
@@ -559,7 +559,7 @@ namespace MH4F
               }
               // Set their position to be on the ground depending on what animation they are in
               //
-              Position = new Vector2(Position.X, GROUND_POS_Y - Sprite.CurrentMoveAnimation.FrameHeight);
+              Position = new Vector2(Position.X, Config.Instance.GroundYHeight - Sprite.CurrentMoveAnimation.FrameHeight);
           }
         }
 

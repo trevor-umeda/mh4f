@@ -20,6 +20,6 @@ Damage= 100
 IsHardKnockDown= false
 AirUntechTime=8000
 AirXVelocity= 1000
-AirYVelocity= 3000
+AirYVelocity= -1000
 ForceAirborne=true
 IsAttack=true

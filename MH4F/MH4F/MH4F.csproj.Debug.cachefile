@@ -51,6 +51,8 @@ Content\LongSword\JUMP_PT2.xnb
 Content\LongSword\2A_THINSLICE.xnb
 Content\LongSword\2A_BIGSLICE.xnb
 Content\HuntingHorn\HH5.xnb
+Content\punch2_fx.xnb
+Content\slash_fx_1.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -127,6 +129,8 @@ Config\LongSword\Moves\supera.txt
 Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
+Config\Base\effect\slash.txt
+Config\Base\effect\impact.txt
 Config\LongSword\Moves\cattack.txt
 Config\LongSword\Moves\lowhit.txt
 Config\LongSword\Moves\specialcommand.txt

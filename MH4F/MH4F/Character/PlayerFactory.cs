@@ -11,9 +11,6 @@ namespace MH4F
 {
     public class PlayerFactory
     {
-        int player1XPosition = 100;
-        int player2XPosition = 600;
-        int playerYHeight = 288;
 
         public Texture2D DummyTexture { get; set; }
 
@@ -28,28 +25,28 @@ namespace MH4F
             Direction direction;
             if (playerNumber == 1)
             {
-                xPosition = player1XPosition;
+                xPosition = Config.Instance.Player1XPosition;
                 healthBarMargin = ((Config.Instance.ScreenWidth / 2) - healthBar.Width) / 2;
                 direction = Direction.Right;
             }
             else
             {
-                xPosition = player2XPosition;
+                xPosition = Config.Instance.Player2XPosition;
                 healthBarMargin = (((Config.Instance.ScreenWidth / 2) - healthBar.Width) / 2) + (Config.Instance.ScreenWidth / 2);
                 direction = Direction.Left;
             }
 
             if (CharacterId.Equals("LongSword"))
             {
-                player = new LongSwordPlayer(playerNumber, xPosition, playerYHeight, comboManager, throwManager);
+                player = new LongSwordPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager);
             }
             else if (CharacterId.Equals("HuntingHorn"))
             {
-                player = new HuntingHornPlayer(playerNumber, xPosition, playerYHeight, comboManager, throwManager);
+                player = new HuntingHornPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager);
             }
             else
             {
-                player = new LongSwordPlayer(playerNumber, xPosition, playerYHeight, comboManager, throwManager);
+                player = new LongSwordPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager);
             }
             player.SuperManager = superManager;
             player.ProjectileManager = projectileManager;

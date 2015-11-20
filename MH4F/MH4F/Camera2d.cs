@@ -148,7 +148,7 @@ namespace MH4F
               Matrix.CreateTranslation(new Vector3(-position.X, -position.Y, 0)) *
                                          Matrix.CreateRotationZ(Rotation) *
                                          Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
-                                         Matrix.CreateTranslation(new Vector3(1024 * 0.5f, 720 * 0.5f, 0));
+                                         Matrix.CreateTranslation(new Vector3(screenWidth * 0.5f, screenHeight * 0.5f, 0));
             return transform;
         }
     }

@@ -9,6 +9,7 @@ Columns= 2
 FrameLength= 0.016
 FrameLengthInfo=2,2,5,1,7,2,3,2
 CharacterState= STANDING
+HitType=IMPACT
 IsAttack= true
 Hitbox=[
 4;121;243;200;108]
