@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MH4F
 {
@@ -21,24 +22,39 @@ namespace MH4F
         int playerNumber;
         bool isInSuperState;
         Camera2d camera;
+
         public BasicSuperManager(Camera2d camera)
         {
-            superFreezeDelayTime = 25;
+            superFreezeDelayTime = 60;
             superFreezeTimer = 0;
-            timeAllowedToZoom = 3;
+            timeAllowedToZoom = 10;
             this.camera = camera;
         }
 
-        public void drawSuperEffects()
+        public void drawSuperEffects(SpriteBatch spriteBatch, Texture2D background, Rectangle mainFrame)
         {
-            throw new NotImplementedException();
+            if (isInSuperFreeze())
+            {
+                Color backgroundTint = Color.Lerp(Color.White, Color.Yellow, 0.5f);
+                spriteBatch.Draw(background, mainFrame, backgroundTint);
+
+            }
+            else if (isInSuper())
+            {
+                Color backgroundTint = Color.Lerp(Color.White, Color.Black, 0.5f);
+                spriteBatch.Draw(background, mainFrame, backgroundTint);
+            }
         }
 
         public void decrementTimer()
         {
             superFreezeTimer--;
         }
+        public bool isDrawingSuperFreeze()
+        {
+            return (isInSuper() || isInSuperFreeze());
 
+        }
         public bool isInSuperFreeze()
         { 
             return superFreezeTimer > 0;
@@ -54,24 +70,30 @@ namespace MH4F
             return playerNumber;
         }
 
-        public void endSuper()
+        public void endSuper(int player)
         {
-            isInSuperState = false;
+            if (player == playerNumber && isInSuperState == true)
+            {
+                isInSuperState = false;
+            }
+            
             camera.Zoom = 1;
         }
         public void processSuperFreeze()
         {
+            // TODO make these based on the move and not hardcoded values
+            //
             if( superFreezeDelayTime - superFreezeTimer <= timeAllowedToZoom)
             {
-                   
                 camera.Move(cameraPositionMovement);
-                camera.ZoomIn(0.1f);
+                camera.ZoomIn(0.01f);
             }
             if (superFreezeTimer < timeAllowedToZoom)
             {
+               
                 camera.Move(-cameraPositionMovement);
                 camera.Y = 360;
-                camera.ZoomIn(-0.1f);   
+                camera.ZoomIn(-0.01f);   
             }
 
             decrementTimer();
@@ -82,6 +104,7 @@ namespace MH4F
             playerNumber = player;
             isInSuperState = true;
             playerZoomInPosition = position;
+            playerZoomInPosition.Y -= 150;
             startingCamPosition = camera.Pos;
 
             cameraPositionMovement = (playerZoomInPosition - startingCamPosition) / timeAllowedToZoom;

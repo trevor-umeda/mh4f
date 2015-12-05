@@ -53,6 +53,18 @@ Content\LongSword\2A_BIGSLICE.xnb
 Content\HuntingHorn\HH5.xnb
 Content\punch2_fx.xnb
 Content\slash_fx_1.xnb
+Content\LongSword\LIARA_SPECIAL_STARTUP.xnb
+Content\LongSword\LIARA_SPECIAL_FOLLOWUP.xnb
+Content\LongSword\LIARA_SPECIAL_SLASH.xnb
+Content\LongSword\LIARA_SPECIAL_ENDING.xnb
+Content\LongSword\HIT_FALL1.xnb
+Content\LongSword\HIT_FALL2.xnb
+Content\LongSword\HIT_FALL3.xnb
+Content\LongSword\HIT_FALL_RECOVER.xnb
+Content\LongSword\liara_blk_high1.xnb
+Content\block.xnb
+Content\LongSword\CROUCH.xnb
+Content\LongSword\super_decal_liara.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -78,6 +90,7 @@ Content\LongSword\JUMP_PT1.png
 Content\LongSword\JUMP_PT2.png
 Content\LongSword\2A_THINSLICE.png
 Content\LongSword\2A_BIGSLICE.png
+Content\LongSword\super_decal_liara.png
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png
@@ -104,6 +117,9 @@ Config\LongSword\Moves\battack.txt
 Config\LongSword\Moves\block.txt
 Config\LongSword\Moves\airdashstart.txt
 Config\LongSword\Moves\2aattack.txt
+Config\LongSword\Moves\superaending.txt
+Config\LongSword\Moves\superaslash.txt
+Config\LongSword\Moves\superafollowup.txt
 Config\LongSword\Moves\rekkaC.txt
 Config\LongSword\Moves\rekkaB.txt
 Config\LongSword\Moves\crouching.txt
@@ -129,8 +145,10 @@ Config\LongSword\Moves\supera.txt
 Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
+Config\Base\effect\block.txt
 Config\Base\effect\slash.txt
 Config\Base\effect\impact.txt
+Config\Base\portraits\LongSword.txt
 Config\LongSword\Moves\cattack.txt
 Config\LongSword\Moves\lowhit.txt
 Config\LongSword\Moves\specialcommand.txt

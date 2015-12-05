@@ -56,6 +56,18 @@ Content\LongSword\2A_BIGSLICE.xnb
 Content\HuntingHorn\HH5.xnb
 Content\punch2_fx.xnb
 Content\slash_fx_1.xnb
+Content\LongSword\LIARA_SPECIAL_STARTUP.xnb
+Content\LongSword\LIARA_SPECIAL_FOLLOWUP.xnb
+Content\LongSword\LIARA_SPECIAL_SLASH.xnb
+Content\LongSword\LIARA_SPECIAL_ENDING.xnb
+Content\LongSword\HIT_FALL1.xnb
+Content\LongSword\HIT_FALL2.xnb
+Content\LongSword\HIT_FALL3.xnb
+Content\LongSword\HIT_FALL_RECOVER.xnb
+Content\LongSword\liara_blk_high1.xnb
+Content\block.xnb
+Content\LongSword\CROUCH.xnb
+Content\LongSword\super_decal_liara.xnb
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png
@@ -93,3 +105,4 @@ Content\LongSword\JUMP_PT1.png
 Content\LongSword\JUMP_PT2.png
 Content\LongSword\2A_THINSLICE.png
 Content\LongSword\2A_BIGSLICE.png
+Content\LongSword\super_decal_liara.png

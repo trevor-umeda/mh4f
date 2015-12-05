@@ -28,8 +28,6 @@ namespace MH4F
 
         private CharacterState characterState;
 
-        private HitType hitType;
-
         bool hasHitOpponent = false;
 
         private int projectileCreationFrame = -1;
@@ -64,7 +62,14 @@ namespace MH4F
 
         public int CurrentXMovementInfo
         {
-            get { return xMovementInfo[CurrentFrame]; }
+            get 
+            {
+                if (xMovementInfo != null )
+                {
+                    return xMovementInfo[CurrentFrame];
+                }
+                else return 0;
+            }
         }
 
         public int CurrentFrameLengthInfo
@@ -99,12 +104,6 @@ namespace MH4F
         {
             get { return characterState; }
             set { characterState = value; }
-        }
-
-        public HitType HitType
-        {
-            get { return hitType; }
-            set { hitType = value; }
         }
 
         public int ProjectileCreationFrame

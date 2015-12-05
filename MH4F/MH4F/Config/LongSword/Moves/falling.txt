@@ -1,10 +1,10 @@
 name=falling
-sprite=FALLING
+sprite=HIT_FALL2
 XImageStart=0
 YImageStart=0 
-Width=160
-Height=288
-FrameCount=2
+Width=625
+Height=625
+FrameCount=3
 Columns=2
 FrameLength=0.1
 CharacterState=AIRBORNEHIT

@@ -66,7 +66,7 @@ namespace MH4F
         Hitbox hitbox;
         Hitbox hurtboxInfo;
 
-        String hitboxType = "HITBOX";
+        String hitboxType = "HURTBOX";
         List<string> animationsList;
         int index = 0;
         KeyboardState lastState;

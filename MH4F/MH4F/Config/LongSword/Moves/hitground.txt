@@ -1,11 +1,11 @@
 name=hitground
-sprite= HITGROUND
+sprite= HIT_FALL3
 XImageStart=0
 YImageStart=0 
-Width=288
-Height=192
-FrameCount=7
-Columns=7
+Width=625
+Height=625
+FrameCount=3
+Columns=2
 FrameLength=.01
 CharacterState=KNOCKDOWN
 NextAnimation=wakeup

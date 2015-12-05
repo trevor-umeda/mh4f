@@ -531,7 +531,14 @@ namespace MH4F
               momentumXMovement = 0;
 
           }
-
+          //if (Direction == Direction.Left)
+          //{
+          //    Sprite.MoveBy(-Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+          //}
+          //else
+          //{
+          //    Sprite.MoveBy(Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+          //}
            // Logic to handle when they are landing
            // If bottom of sprite is touching the "floor" then you are landed
            //
@@ -565,7 +572,6 @@ namespace MH4F
 
         public void PerformSuperFreeze()
         {
-
             SuperManager.performSuper(PlayerNumber, Sprite.PositionCenter);
         }
 
@@ -825,19 +831,22 @@ namespace MH4F
 
         }
 
-        public virtual void hitByEnemy(KeyboardState keyState, HitInfo hitInfo)
+        public virtual void hitByEnemy(KeyboardState keyState, HitInfo hitInfo, Rectangle collisionZone)
         {
             //Check if blocked or not
             //int hitStun, int blockStun, Hitzone hitzone, float? xVel, float? yVel
-            if(!hitInfo.Unblockable && isAttackBlocked(keyState, hitInfo.Hitzone))
+            if(!hitInfo.Unblockable && isAttackBlocked(keyState, hitInfo.Hitzone) )
             {
                 Sprite.CurrentAnimation = "block";
                 HitAnimation block = (HitAnimation)Sprite.CurrentMoveAnimation;
                 Console.WriteLine("DID A BLOCK!");
                 block.HitStunCounter = hitInfo.Blockstun;
+
+                ProjectileManager.createHitparticle(collisionZone, HitType.BLOCK);
             }
             else
             {
+                ProjectileManager.createHitparticle(collisionZone, hitInfo.HitType);
                 // So many different ways to get hit
                 //
                 if (hitInfo.Hitzone == Hitzone.LOW)

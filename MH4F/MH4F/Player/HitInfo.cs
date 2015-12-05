@@ -41,12 +41,18 @@ namespace MH4F
 
         private float airXVelocity = 0;
         private float airYVelocity = 0;
-
+        private HitType hitType;
         public HitInfo(int hitstun, int blockstun, Hitzone hitzone)
         {
             this.hitstun = hitstun;
             this.blockstun = blockstun;
             this.hitzone = hitzone;
+        }
+
+        public HitType HitType
+        {
+            get { return hitType; }
+            set { hitType = value; }
         }
 
         public int Damage

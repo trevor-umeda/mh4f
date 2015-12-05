@@ -8,7 +8,8 @@ namespace MH4F
     public enum HitType
     {
         NONE,
-       IMPACT,
-        SLASH
+        IMPACT,
+        SLASH,
+        BLOCK
     }
 }

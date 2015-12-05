@@ -17,6 +17,9 @@ namespace MH4F
         List<ParticleAnimation> particles;
         ParticleAnimation punchEffect;
         ParticleAnimation slashEffect;
+        ParticleAnimation blockEffect;
+
+        ParticleAnimation portrait;
         public ProjectileManager(ContentManager content)
         {
             player1Projectiles = new List<Projectile>();
@@ -52,6 +55,34 @@ namespace MH4F
                 int.Parse((String)moveInfo["Columns"]),
                 float.Parse((String)moveInfo["FrameLength"])
                ); // As a default this is prob fine
+
+            moveInfo = PlayerFactory.parseMoveInfo("Config/Base/effect/block.txt");
+
+            Texture2D blockTexture = content.Load<Texture2D>((String)moveInfo["sprite"]);
+            blockEffect = new ParticleAnimation(
+                blockTexture,
+                int.Parse((String)moveInfo["XImageStart"]),
+                int.Parse((String)moveInfo["YImageStart"]),
+                int.Parse((String)moveInfo["Width"]),
+                int.Parse((String)moveInfo["Height"]),
+                int.Parse((String)moveInfo["FrameCount"]),
+                int.Parse((String)moveInfo["Columns"]),
+                float.Parse((String)moveInfo["FrameLength"])
+               ); // As a default this is prob fine
+
+            moveInfo = PlayerFactory.parseMoveInfo("Config/Base/portraits/LongSword.txt");
+
+            Texture2D portraitTexture = content.Load<Texture2D>("LongSword/" + (String)moveInfo["sprite"]);
+            portrait = new ParticleAnimation(
+                portraitTexture,
+                int.Parse((String)moveInfo["XImageStart"]),
+                int.Parse((String)moveInfo["YImageStart"]),
+                int.Parse((String)moveInfo["Width"]),
+                int.Parse((String)moveInfo["Height"]),
+                int.Parse((String)moveInfo["FrameCount"]),
+                int.Parse((String)moveInfo["Columns"]),
+                float.Parse((String)moveInfo["FrameLength"])
+               ); // As a default this is prob fine
         }
 
         public List<Projectile> getPlayerProjectiles(int playerNumber)
@@ -75,6 +106,12 @@ namespace MH4F
                 int xPos = ((int)center.X - punchEffect.FrameHeight / 2);
                 int yPos = (int)center.Y - punchEffect.FrameWidth / 2;
                 particles.Add(punchEffect.NewInstance(xPos, yPos));
+            }
+            else if (hitType == HitType.BLOCK)
+            {
+                int xPos = ((int)center.X - blockEffect.FrameHeight / 2);
+                int yPos = (int)center.Y - blockEffect.FrameWidth / 2;
+                particles.Add(blockEffect.NewInstance(xPos, yPos));
             }
             else
             {
@@ -104,8 +141,10 @@ namespace MH4F
                 Projectile projectile = player1Projectiles[i];
                 if (projectile.Hitbox.Intersects(player2.Sprite.Hurtbox) )
                 {
+                    Rectangle collisionZone = Rectangle.Intersect(projectile.Hitbox, player2.Sprite.Hurtbox);
+                         
                     comboManager.player1LandedHit(player2.CharacterState);
-                    player2.hitByEnemy(Keyboard, projectile.CurrentProjectile.HitInfo);
+                    player2.hitByEnemy(Keyboard, projectile.CurrentProjectile.HitInfo, collisionZone);
                     player1.hitEnemy();
                     projectile.hitEnemy();
                     if (projectile.NumOfHits <= 0)
@@ -125,8 +164,9 @@ namespace MH4F
                 Projectile projectile = player2Projectiles[j];
                 if (projectile.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
                 {
+                    Rectangle collisionZone = Rectangle.Intersect(projectile.Hitbox, player1.Sprite.Hurtbox);
                     comboManager.player2LandedHit(player1.CharacterState);
-                    player1.hitByEnemy(Keyboard, projectile.CurrentProjectile.HitInfo);
+                    player1.hitByEnemy(Keyboard, projectile.CurrentProjectile.HitInfo, collisionZone);
                     player2.hitEnemy();
                     projectile.hitEnemy();
                     if (projectile.NumOfHits <= 0)
@@ -185,7 +225,10 @@ namespace MH4F
                 }
             }
         }
-
+        public void drawPortrait(SpriteBatch spriteBatch)
+        {
+            portrait.Draw(spriteBatch);
+        }
         public void drawAllProjectiles(SpriteBatch spriteBatch)
         {
             for (int i = player1Projectiles.Count - 1; i >= 0; i--)

@@ -77,6 +77,7 @@ namespace MH4F
             if (!Sprite.CurrentMoveAnimation.IsAttack)
             {
                 rekkaLevel = 1;
+                SuperManager.endSuper(PlayerNumber);
                 DisplayShadow = false;
             }
         }
@@ -161,10 +162,60 @@ namespace MH4F
             }
             if (moveName == "supera")
             {
+                DisplayShadow = true;
+                if (Direction == Direction.Left)
+                {
+                    Sprite.MoveBy(-Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+                }
+                else
+                {
+                    Sprite.MoveBy(Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+                }
+            }
+            if (moveName == "superaending")
+            {
                 if (Sprite.isLastFrameOfAnimation())
                 {
-                    SuperManager.endSuper();
+                    // Tell the super manager that the special is over
+                    //
+                    SuperManager.endSuper(PlayerNumber);
                     Console.WriteLine("SPECIAL IS NOW OVER YAY");
+                }
+            }
+            else if (moveName == "superafollowup")
+            {
+                if (Direction == Direction.Left)
+                {
+                    Sprite.MoveBy(-Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+                }
+                else
+                {
+                    Sprite.MoveBy(Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+                }
+            }
+            else if (moveName == "superaslash")
+            {
+                if (Sprite.CurrentMoveAnimation.CurrentFrame >= 0 && Sprite.CurrentMoveAnimation.CurrentFrame < 4)
+                {
+                    IsPhysical = false;
+
+                    if (Direction == Direction.Left)
+                    {
+                        Sprite.MoveBy(-Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+                    }
+                    else
+                    {
+                        Sprite.MoveBy(Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
+                    }
+                    GivePlayerMomentum(7, 3, true);
+                }
+                else
+                {
+                    IsPhysical = true;
+                }
+                if (Sprite.isLastFrameOfAnimation() && Sprite.CurrentMoveAnimation.HasHitOpponent)
+                {
+                    Sprite.CurrentAnimation = "superaending";
                 }
             }
             else if (moveName == "aattack")
@@ -181,7 +232,7 @@ namespace MH4F
                     if (Sprite.Hitbox.Intersects(projectiles[i].Hitbox))
                     {
                         projectiles[i].CurrentAnimation = "morph";
-                    }         
+                    }
                 }
             }
             else if (moveName == "rekka")
@@ -197,7 +248,7 @@ namespace MH4F
             }
             else if (moveName == "rekkaB")
             {
-                 if (Sprite.CurrentMoveAnimation.CurrentFrame > 3 && Sprite.CurrentMoveAnimation.CurrentFrame < 11)
+                if (Sprite.CurrentMoveAnimation.CurrentFrame > 3 && Sprite.CurrentMoveAnimation.CurrentFrame < 11)
                 {
                     if (Direction == Direction.Left)
                     {
@@ -222,12 +273,18 @@ namespace MH4F
                     {
                         Sprite.MoveBy(Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
                     }
-                    GivePlayerMomentum(7, 3, true);    
+                    GivePlayerMomentum(7, 3, true);
                 }
                 else
                 {
                     IsPhysical = true;
                 }
+            }
+
+            
+            else if (moveName == "superaending")
+            {
+
             }
             else if (moveName == "specialcommand")
             {

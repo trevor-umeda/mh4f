@@ -354,12 +354,6 @@ namespace MH4F
                 newMove.StartFrame = int.Parse((String)moveInfo["StartFrame"]);
             }
 
-            if (moveInfo.ContainsKey("HitType"))
-            {
-                HitType hitType;
-                Enum.TryParse((String)moveInfo["HitType"], true, out hitType);
-                newMove.HitType = hitType;
-            }
 
             if (moveInfo.ContainsKey("XMovement"))
             {
@@ -428,7 +422,13 @@ namespace MH4F
                 {
                     hitMoveInfo.Unblockable = Boolean.Parse((String)moveInfo["Unblockable"]);
                 }
-                
+
+                if (moveInfo.ContainsKey("HitType"))
+                {
+                    HitType hitType;
+                    Enum.TryParse((String)moveInfo["HitType"], true, out hitType);
+                    hitMoveInfo.HitType = hitType;
+                }
                 newMove.HitInfo = hitMoveInfo;
             }
             if (moveInfo.ContainsKey("NextAnimation"))

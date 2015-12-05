@@ -126,7 +126,7 @@ namespace MH4F
             testHitInfo.IsHardKnockDown = true;
             testHitInfo.AirUntechTime = 8000;
             testHitInfo.AirXVelocity = 80;
-            testHitInfo.AirYVelocity = -100;
+            testHitInfo.AirYVelocity = 2;
 
             effect = Content.Load<SoundEffect>("slap_large");
             
@@ -250,9 +250,9 @@ namespace MH4F
                          
                             hitstop = 7;
                             comboManager.player1LandedHit(player2.CharacterState);
-                            player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo);
+                            player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo, test);
                             player1.hitEnemy();
-                            projectileManager.createHitparticle(test, player1.Sprite.CurrentMoveAnimation.HitType);
+                            
                             System.Diagnostics.Debug.WriteLine("We have collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
                             if (player2.CurrentHealth <= 0)
                             {
@@ -261,8 +261,10 @@ namespace MH4F
                         }
                         else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
                         {
+                            Rectangle test = Rectangle.Intersect(player1.Sprite.Hurtbox, player2.Sprite.Hitbox);
+                         
                             comboManager.player2LandedHit(player1.CharacterState);
-                            player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo);
+                            player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo, test);
                             player2.hitEnemy();
                             if (player1.CurrentHealth <= 0)
                             {
@@ -273,8 +275,12 @@ namespace MH4F
                         {
                             Console.WriteLine("Test STuff");
                    //         cam.Zoom = 1.2f;
-                            //    player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
-                            player1.CurrentHealth -= 10;
+                             // player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+                          //  player1.CurrentHealth -= 10;
+                        }
+                        else if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        {
+                            Exit();
                         }
                         else if (Keyboard.GetState().IsKeyDown(Keys.O))
                         {
@@ -367,16 +373,14 @@ namespace MH4F
                             null,
                             cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
 
-                if (superManager.isInSuperFreeze())
+                if (superManager.isDrawingSuperFreeze())
                 {
-                    Color backgroundTint = Color.Lerp(Color.White, Color.Yellow, 0.5f);
-                    spriteBatch.Draw(background, mainFrame, backgroundTint);
-
-                }
-                else if (superManager.isInSuper())
-                {
-                    Color backgroundTint = Color.Lerp(Color.White, Color.Black, 0.5f);
-                    spriteBatch.Draw(background, mainFrame, backgroundTint);
+                    superManager.drawSuperEffects(spriteBatch, background, mainFrame);
+                    if (superManager.isInSuperFreeze())
+                    {
+                        projectileManager.drawPortrait(spriteBatch);
+                    }
+                   
                 }
                 else
                 {
@@ -401,6 +405,7 @@ namespace MH4F
                 spriteBatch.End();
 
                 spriteBatch.Begin();
+        
                 spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
                 spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
                 comboManager.displayComboMessage(spriteBatch);

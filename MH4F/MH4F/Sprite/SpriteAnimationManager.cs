@@ -445,7 +445,7 @@ namespace MH4F
                 {
                     boundingBox = new Rectangle();
                 }
-
+            
                 // Check to see if there is a "followup" animation named for this animation
                 //
                 if (!String.IsNullOrEmpty(CurrentMoveAnimation.NextAnimation))
@@ -480,7 +480,21 @@ namespace MH4F
                                                    0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
                 }
             }
-
+            if (CurrentMoveAnimation.CurrentFrame > 3)
+            {
+                if (direction == Direction.Right)
+                {
+                    spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
+                                                  CurrentMoveAnimation.TestPrevFrameRectangle, colorTint * 0.5f,
+                                                  0, v2Center, 1f, SpriteEffects.None, 0);
+                }
+                else
+                {
+                    spriteBatch.Draw(CurrentMoveAnimation.Texture, (v2Position + new Vector2(XOffset, YOffset) + v2Center),
+                                                   CurrentMoveAnimation.TestPrevFrameRectangle, colorTint * 0.5f,
+                                                   0, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, int XOffset, int YOffset, Direction direction)
@@ -504,7 +518,7 @@ namespace MH4F
                 if (showHitboxes)
                 {
                     Color translucentRed = Color.Red * 0.5f;
-                    spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
+                   // spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
 
                     Color translucentBlue = Color.Blue * 0.5f;
                     spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);

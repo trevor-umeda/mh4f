@@ -147,7 +147,15 @@ namespace MH4F
                     rectInitialFrame.Y, rectInitialFrame.Width, rectInitialFrame.Height);
             }
         }
-
+        public Rectangle TestPrevFrameRectangle
+        {
+            get
+            {
+                return new Rectangle(
+                    rectInitialFrame.X + (rectInitialFrame.Width * (currentFrame - 3)),
+                    rectInitialFrame.Y, rectInitialFrame.Width, rectInitialFrame.Height);
+            }
+        }
         public int PlayCount
         {
             get { return playCount; }

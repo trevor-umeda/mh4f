@@ -15,7 +15,7 @@ Hitbox=[3;57;135;88;82
 4;99;110;88;82]
 Hitstun= 3
 Blockstun= 2 
-Hitzone= LOW
+Hitzone= MID
 Damage= 50
 IsHardKnockDown= false
 AirUntechTime= 3
