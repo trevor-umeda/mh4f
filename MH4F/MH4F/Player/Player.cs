@@ -266,7 +266,7 @@ namespace MH4F
 
                     if (ks.IsKeyDown(controlSetting.Controls["down"]))
                     {
-
+                        Console.WriteLine("CROUCHING");
                         Crouch();
                     }
                     else
@@ -818,6 +818,10 @@ namespace MH4F
             {
                 Sprite.CurrentAnimation = "crouching";
             }
+            else
+            {
+                Sprite.CurrentAnimation = "crouchingidle";
+            }
             IsCrouching = true;
         }
 
@@ -840,8 +844,9 @@ namespace MH4F
                 Sprite.CurrentAnimation = "block";
                 HitAnimation block = (HitAnimation)Sprite.CurrentMoveAnimation;
                 Console.WriteLine("DID A BLOCK!");
+                block.reset();
                 block.HitStunCounter = hitInfo.Blockstun;
-
+                Console.WriteLine(block.HitStunCounter);
                 ProjectileManager.createHitparticle(collisionZone, HitType.BLOCK);
             }
             else

@@ -99,7 +99,7 @@ namespace MH4F
         {
             cam = new Camera2d(Config.Instance.GameWidth, Config.Instance.ScreenWidth, Config.Instance.GameHeight, Config.Instance.ScreenHeight);
             //cam.Pos = new Vector2(Config.Instance.GameWidth/2, 360.0f);
-            mainFrame = new Rectangle(-450, -50, 3000, Config.Instance.GameHeight);
+            mainFrame = new Rectangle(-450, -200, 3000, Config.Instance.GameHeight);
             
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -112,7 +112,7 @@ namespace MH4F
             projectileManager = new ProjectileManager(Content);
             throwManager = new OneButtonThrowManager();
             superManager = new BasicSuperManager(cam);
-            background = Content.Load<Texture2D>("back_ggxxac_london");
+            background = Content.Load<Texture2D>("background_test");
             menuBg = Content.Load<Texture2D>("bg2");
            
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);

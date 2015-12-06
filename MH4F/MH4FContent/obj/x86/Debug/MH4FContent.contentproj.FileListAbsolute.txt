@@ -1,2 +1,3 @@
 C:\src\mh4f\MH4F\MH4F\MH4FContent\obj\x86\Debug\MH4FContent.contentprojResolveAssemblyReference.cache
 C:\src\mh4f\MH4F\MH4FContent\obj\x86\Debug\MH4FContent.contentprojResolveAssemblyReference.cache
+C:\Users\Frogg\src\mh4f\MH4F\MH4FContent\obj\x86\Debug\MH4FContent.contentprojResolveAssemblyReference.cache

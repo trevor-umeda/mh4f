@@ -2,115 +2,13 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>back_ggxxac_london.png</Source>
-      <Name>back_ggxxac_london</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\back_ggxxac_london.xnb</Output>
-      <Time>2015-06-16T01:25:33.29231-07:00</Time>
-    </Item>
-    <Item>
-      <Source>HealthBar2.png</Source>
-      <Name>HealthBar2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HealthBar2.xnb</Output>
-      <Time>2015-06-21T21:43:06.3579224-07:00</Time>
-    </Item>
-    <Item>
-      <Source>portraits\lsportrait.png</Source>
-      <Name>portraits\lsportrait</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\portraits\lsportrait.xnb</Output>
-      <Time>2015-09-21T23:07:59.2759738-07:00</Time>
-    </Item>
-    <Item>
-      <Source>bg2.jpg</Source>
-      <Name>bg2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bg2.xnb</Output>
-      <Time>2015-09-23T01:42:03.0673608-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Font.spritefont</Source>
-      <Name>Font</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\Font.xnb</Output>
-      <Time>2015-05-19T00:22:43.5352236-07:00</Time>
-    </Item>
-    <Item>
-      <Source>testf.spritefont</Source>
-      <Name>testf</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\testf.xnb</Output>
-      <Time>2015-05-19T00:25:49.0708356-07:00</Time>
-    </Item>
-    <Item>
-      <Source>slap_large.wav</Source>
-      <Name>slap_large</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\slap_large.xnb</Output>
-      <Time>2015-07-07T21:48:02.452854-07:00</Time>
-    </Item>
-    <Item>
-      <Source>airbackdash_h.wav</Source>
-      <Name>airbackdash_h</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\airbackdash_h.xnb</Output>
-      <Time>2015-07-10T00:04:33.4648251-07:00</Time>
-    </Item>
-    <Item>
-      <Source>bgm.mp3</Source>
-      <Name>bgm</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm.xnb</Output>
-      <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm.wma</Extra>
-      <Time>2015-07-07T21:58:23.8893982-07:00</Time>
-    </Item>
-    <Item>
-      <Source>bgm\20.mp3</Source>
-      <Name>bgm\20</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm\20.xnb</Output>
-      <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm\20.wma</Extra>
-      <Time>2015-09-07T22:53:19.7712383-07:00</Time>
-    </Item>
-    <Item>
-      <Source>bgm\25.mp3</Source>
-      <Name>bgm\25</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm\25.xnb</Output>
-      <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm\25.wma</Extra>
-      <Time>2015-09-07T22:53:19.8282416-07:00</Time>
-    </Item>
-    <Item>
       <Source>LongSword\TEST.png</Source>
       <Name>LongSword\TEST</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\TEST.xnb</Output>
-      <Time>2015-04-13T00:32:10.22681-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\TEST.xnb</Output>
+      <Time>2015-12-05T18:39:19.527727-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\TEST2.png</Source>
@@ -118,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\TEST2.xnb</Output>
-      <Time>2015-04-13T01:05:05.7368027-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\TEST2.xnb</Output>
+      <Time>2015-12-05T18:39:19.527727-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\combinedsprite.png</Source>
@@ -127,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\combinedsprite.xnb</Output>
-      <Time>2015-05-13T00:53:59.2978389-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\combinedsprite.xnb</Output>
+      <Time>2015-12-05T18:39:19.5902213-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\standblock.png</Source>
@@ -136,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\standblock.xnb</Output>
-      <Time>2015-05-21T23:00:53.527356-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\standblock.xnb</Output>
+      <Time>2015-12-05T18:39:19.7152375-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\KNOCKDOWN.png</Source>
@@ -145,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\KNOCKDOWN.xnb</Output>
-      <Time>2015-05-21T23:10:40.3089953-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\KNOCKDOWN.xnb</Output>
+      <Time>2015-12-05T18:39:19.2933314-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\WAKEUP.png</Source>
@@ -154,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\WAKEUP.xnb</Output>
-      <Time>2015-05-21T23:55:24.9119862-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\WAKEUP.xnb</Output>
+      <Time>2015-12-05T18:39:19.5433524-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\FALLDOWN.png</Source>
@@ -163,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\FALLDOWN.xnb</Output>
-      <Time>2015-05-22T00:48:56.6945229-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\FALLDOWN.xnb</Output>
+      <Time>2015-12-05T18:39:19.1683336-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\DOWN.png</Source>
@@ -172,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\DOWN.xnb</Output>
-      <Time>2015-05-22T00:49:16.6811422-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\DOWN.xnb</Output>
+      <Time>2015-12-05T18:39:19.1527074-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\HITGROUND.png</Source>
@@ -181,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HITGROUND.xnb</Output>
-      <Time>2015-05-22T00:49:06.7308342-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HITGROUND.xnb</Output>
+      <Time>2015-12-05T18:39:19.2151969-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\FALLING.png</Source>
@@ -190,8 +88,26 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\FALLING.xnb</Output>
-      <Time>2015-06-11T01:22:10.7177663-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\FALLING.xnb</Output>
+      <Time>2015-12-05T18:39:19.1683336-08:00</Time>
+    </Item>
+    <Item>
+      <Source>back_ggxxac_london.png</Source>
+      <Name>back_ggxxac_london</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\back_ggxxac_london.xnb</Output>
+      <Time>2015-12-05T18:39:19.8402319-08:00</Time>
+    </Item>
+    <Item>
+      <Source>HealthBar2.png</Source>
+      <Name>HealthBar2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\HealthBar2.xnb</Output>
+      <Time>2015-12-05T18:39:18.9964429-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\testwalk.png</Source>
@@ -199,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\testwalk.xnb</Output>
-      <Time>2015-07-20T00:56:09.1328819-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\testwalk.xnb</Output>
+      <Time>2015-12-05T18:39:19.7464793-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\KORRA.png</Source>
@@ -208,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\KORRA.xnb</Output>
-      <Time>2015-07-20T00:56:09.116881-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\KORRA.xnb</Output>
+      <Time>2015-12-05T18:39:19.3402148-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\walktest2.png</Source>
@@ -217,8 +133,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\walktest2.xnb</Output>
-      <Time>2015-07-20T00:56:09.1358821-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\walktest2.xnb</Output>
+      <Time>2015-12-05T18:39:19.7621059-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\STAND2.png</Source>
@@ -226,8 +142,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\STAND2.xnb</Output>
-      <Time>2015-07-21T01:03:09.5969368-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\STAND2.xnb</Output>
+      <Time>2015-12-05T18:39:19.527727-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\WALKREVISED3.png</Source>
@@ -235,8 +151,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\WALKREVISED3.xnb</Output>
-      <Time>2015-07-21T01:03:32.6992581-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\WALKREVISED3.xnb</Output>
+      <Time>2015-12-05T18:39:19.5589641-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\script_punch.png</Source>
@@ -244,8 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\script_punch.xnb</Output>
-      <Time>2015-08-17T23:08:21.4819738-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\script_punch.xnb</Output>
+      <Time>2015-12-05T18:39:19.7152375-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\new_punch.png</Source>
@@ -253,8 +169,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\new_punch.xnb</Output>
-      <Time>2015-08-21T00:49:48.0061775-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\new_punch.xnb</Output>
+      <Time>2015-12-05T18:39:19.6683511-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\RUN.png</Source>
@@ -262,8 +178,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\RUN.xnb</Output>
-      <Time>2015-08-26T22:41:53.4113631-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\RUN.xnb</Output>
+      <Time>2015-12-05T18:39:19.5120995-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\6WALK.png</Source>
@@ -271,8 +187,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\6WALK.xnb</Output>
-      <Time>2015-08-30T23:15:59.4628832-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\6WALK.xnb</Output>
+      <Time>2015-12-05T18:39:19.1214463-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\dash3.png</Source>
@@ -280,8 +196,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\dash3.xnb</Output>
-      <Time>2015-08-30T23:15:59.4958851-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\dash3.xnb</Output>
+      <Time>2015-12-05T18:39:19.6058466-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\dash_1.png</Source>
@@ -289,8 +205,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\dash_1.xnb</Output>
-      <Time>2015-08-30T23:15:59.4968852-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\dash_1.xnb</Output>
+      <Time>2015-12-05T18:39:19.6058466-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\neutral.png</Source>
@@ -298,8 +214,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\neutral.xnb</Output>
-      <Time>2015-08-27T23:47:42.0370503-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\neutral.xnb</Output>
+      <Time>2015-12-05T18:39:19.6527399-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\CROUCH2.png</Source>
@@ -307,8 +223,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\CROUCH2.xnb</Output>
-      <Time>2015-08-30T23:15:59.4878846-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\CROUCH2.xnb</Output>
+      <Time>2015-12-05T18:39:19.1527074-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\projectile.png</Source>
@@ -316,8 +232,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\projectile.xnb</Output>
-      <Time>2015-09-07T22:53:19.8682439-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\projectile.xnb</Output>
+      <Time>2015-12-05T18:39:19.6683511-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\projectile2.png</Source>
@@ -325,8 +241,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\projectile2.xnb</Output>
-      <Time>2015-09-08T20:35:54.0803972-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\projectile2.xnb</Output>
+      <Time>2015-12-05T18:39:19.6683511-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\projectile3.png</Source>
@@ -334,8 +250,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\projectile3.xnb</Output>
-      <Time>2015-09-08T21:26:48.3350906-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\projectile3.xnb</Output>
+      <Time>2015-12-05T18:39:19.6839709-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\ascending.png</Source>
@@ -343,8 +259,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\ascending.xnb</Output>
-      <Time>2015-09-09T23:22:52.1466412-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\ascending.xnb</Output>
+      <Time>2015-12-05T18:39:19.5589641-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\descending.png</Source>
@@ -352,8 +268,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\descending.xnb</Output>
-      <Time>2015-09-09T23:25:24.8253739-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\descending.xnb</Output>
+      <Time>2015-12-05T18:39:19.6214737-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\5C.png</Source>
@@ -361,8 +277,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5C.xnb</Output>
-      <Time>2015-09-10T02:00:41.2672439-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5C.xnb</Output>
+      <Time>2015-12-05T18:39:19.0745672-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\REKKA_PT3.png</Source>
@@ -370,8 +286,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\REKKA_PT3.xnb</Output>
-      <Time>2015-09-14T21:06:43.1125622-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\REKKA_PT3.xnb</Output>
+      <Time>2015-12-05T18:39:19.4808385-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\REKKA1.png</Source>
@@ -379,8 +295,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\REKKA1.xnb</Output>
-      <Time>2015-09-14T21:10:43.000283-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\REKKA1.xnb</Output>
+      <Time>2015-12-05T18:39:19.4495822-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\REKKA_PT2.png</Source>
@@ -388,8 +304,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\REKKA_PT2.xnb</Output>
-      <Time>2015-09-14T21:28:16.7175522-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\REKKA_PT2.xnb</Output>
+      <Time>2015-12-05T18:39:19.4652118-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\HIT1.png</Source>
@@ -397,8 +313,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT1.xnb</Output>
-      <Time>2015-09-21T01:13:04.1398856-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT1.xnb</Output>
+      <Time>2015-12-05T18:39:19.1839585-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\HIT2.png</Source>
@@ -406,8 +322,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT2.xnb</Output>
-      <Time>2015-09-21T01:16:31.991774-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT2.xnb</Output>
+      <Time>2015-12-05T18:39:19.2151969-08:00</Time>
+    </Item>
+    <Item>
+      <Source>portraits\lsportrait.png</Source>
+      <Name>portraits\lsportrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\portraits\lsportrait.xnb</Output>
+      <Time>2015-12-05T18:39:20.2777796-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\5A.png</Source>
@@ -415,8 +340,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5A.xnb</Output>
-      <Time>2015-09-22T00:08:29.2235949-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5A.xnb</Output>
+      <Time>2015-12-05T18:39:19.0433122-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\5B.png</Source>
@@ -424,8 +349,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5B.xnb</Output>
-      <Time>2015-09-22T00:10:29.9364993-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5B.xnb</Output>
+      <Time>2015-12-05T18:39:19.0589427-08:00</Time>
+    </Item>
+    <Item>
+      <Source>bg2.jpg</Source>
+      <Name>bg2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\bg2.xnb</Output>
+      <Time>2015-12-05T18:39:19.8558612-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\5C2.png</Source>
@@ -433,8 +367,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5C2.xnb</Output>
-      <Time>2015-10-10T23:13:33.6794621-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5C2.xnb</Output>
+      <Time>2015-12-05T18:39:19.1058201-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\JUMP_PT1.png</Source>
@@ -442,8 +376,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\JUMP_PT1.xnb</Output>
-      <Time>2015-10-15T19:26:31.45954-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\JUMP_PT1.xnb</Output>
+      <Time>2015-12-05T18:39:19.2777142-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\JUMP_PT2.png</Source>
@@ -451,8 +385,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\JUMP_PT2.xnb</Output>
-      <Time>2015-10-15T22:38:43.0751107-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\JUMP_PT2.xnb</Output>
+      <Time>2015-12-05T18:39:19.2933314-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\2A_THINSLICE.png</Source>
@@ -460,8 +394,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\2A_THINSLICE.xnb</Output>
-      <Time>2015-10-20T09:26:15.553461-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\2A_THINSLICE.xnb</Output>
+      <Time>2015-12-05T18:39:19.0276902-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\2A_BIGSLICE.png</Source>
@@ -469,8 +403,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\2A_BIGSLICE.xnb</Output>
-      <Time>2015-10-21T00:26:08.13366-07:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\2A_BIGSLICE.xnb</Output>
+      <Time>2015-12-05T18:39:19.0120597-08:00</Time>
     </Item>
     <Item>
       <Source>HuntingHorn\HH5.png</Source>
@@ -478,8 +412,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH5.xnb</Output>
-      <Time>2015-11-10T23:48:06.9842987-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH5.xnb</Output>
+      <Time>2015-12-05T18:39:18.9964429-08:00</Time>
     </Item>
     <Item>
       <Source>punch2_fx.png</Source>
@@ -487,8 +421,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\punch2_fx.xnb</Output>
-      <Time>2015-11-15T21:50:48.1576659-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\punch2_fx.xnb</Output>
+      <Time>2015-12-05T18:39:20.2777796-08:00</Time>
     </Item>
     <Item>
       <Source>slash_fx_1.png</Source>
@@ -496,8 +430,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\slash_fx_1.xnb</Output>
-      <Time>2015-11-15T21:50:58.6992688-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\slash_fx_1.xnb</Output>
+      <Time>2015-12-05T18:39:20.3246331-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\LIARA_SPECIAL_STARTUP.png</Source>
@@ -505,8 +439,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_STARTUP.xnb</Output>
-      <Time>2015-11-21T02:38:13.6672266-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_STARTUP.xnb</Output>
+      <Time>2015-12-05T18:39:19.4339568-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\LIARA_SPECIAL_FOLLOWUP.png</Source>
@@ -514,8 +448,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_FOLLOWUP.xnb</Output>
-      <Time>2015-11-21T02:41:56.2769591-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_FOLLOWUP.xnb</Output>
+      <Time>2015-12-05T18:39:19.3870807-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\LIARA_SPECIAL_SLASH.png</Source>
@@ -523,8 +457,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_SLASH.xnb</Output>
-      <Time>2015-11-21T02:44:02.6361864-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_SLASH.xnb</Output>
+      <Time>2015-12-05T18:39:19.4027125-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\LIARA_SPECIAL_ENDING.png</Source>
@@ -532,8 +466,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_ENDING.xnb</Output>
-      <Time>2015-11-21T02:44:08.6855324-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\LIARA_SPECIAL_ENDING.xnb</Output>
+      <Time>2015-12-05T18:39:19.3558342-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\HIT_FALL1.png</Source>
@@ -541,8 +475,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL1.xnb</Output>
-      <Time>2015-11-22T11:18:33.4778224-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL1.xnb</Output>
+      <Time>2015-12-05T18:39:19.2308372-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\HIT_FALL2.png</Source>
@@ -550,8 +484,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL2.xnb</Output>
-      <Time>2015-11-22T11:18:33.4788224-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL2.xnb</Output>
+      <Time>2015-12-05T18:39:19.2464545-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\HIT_FALL3.png</Source>
@@ -559,8 +493,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL3.xnb</Output>
-      <Time>2015-11-22T11:18:33.4938233-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL3.xnb</Output>
+      <Time>2015-12-05T18:39:19.2464545-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\HIT_FALL_RECOVER.png</Source>
@@ -568,8 +502,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL_RECOVER.xnb</Output>
-      <Time>2015-11-22T11:18:33.4768223-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\HIT_FALL_RECOVER.xnb</Output>
+      <Time>2015-12-05T18:39:19.2620871-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\liara_blk_high1.png</Source>
@@ -577,8 +511,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\liara_blk_high1.xnb</Output>
-      <Time>2015-11-30T09:20:56.4697056-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\liara_blk_high1.xnb</Output>
+      <Time>2015-12-05T18:39:19.6214737-08:00</Time>
     </Item>
     <Item>
       <Source>block.png</Source>
@@ -586,8 +520,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\block.xnb</Output>
-      <Time>2015-11-30T20:58:02.71603-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\block.xnb</Output>
+      <Time>2015-12-05T18:39:20.1683682-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\CROUCH.png</Source>
@@ -595,8 +529,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\CROUCH.xnb</Output>
-      <Time>2015-12-02T21:45:24.6626986-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\CROUCH.xnb</Output>
+      <Time>2015-12-05T18:39:19.1370709-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\super_decal_liara.png</Source>
@@ -604,8 +538,83 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\super_decal_liara.xnb</Output>
-      <Time>2015-12-03T20:49:53.9717557-08:00</Time>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\LongSword\super_decal_liara.xnb</Output>
+      <Time>2015-12-05T18:39:19.7152375-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Font.spritefont</Source>
+      <Name>Font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\Font.xnb</Output>
+      <Time>2015-12-05T18:39:18.9964429-08:00</Time>
+    </Item>
+    <Item>
+      <Source>testf.spritefont</Source>
+      <Name>testf</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\testf.xnb</Output>
+      <Time>2015-12-05T18:39:20.3246331-08:00</Time>
+    </Item>
+    <Item>
+      <Source>slap_large.wav</Source>
+      <Name>slap_large</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\slap_large.xnb</Output>
+      <Time>2015-12-05T18:39:20.3090017-08:00</Time>
+    </Item>
+    <Item>
+      <Source>airbackdash_h.wav</Source>
+      <Name>airbackdash_h</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\airbackdash_h.xnb</Output>
+      <Time>2015-12-05T18:39:19.793352-08:00</Time>
+    </Item>
+    <Item>
+      <Source>bgm.mp3</Source>
+      <Name>bgm</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\bgm.xnb</Output>
+      <Extra>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\bgm.wma</Extra>
+      <Time>2015-12-05T18:39:19.9808599-08:00</Time>
+    </Item>
+    <Item>
+      <Source>bgm\20.mp3</Source>
+      <Name>bgm\20</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\bgm\20.xnb</Output>
+      <Extra>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\bgm\20.wma</Extra>
+      <Time>2015-12-05T18:39:20.0902431-08:00</Time>
+    </Item>
+    <Item>
+      <Source>bgm\25.mp3</Source>
+      <Name>bgm\25</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\bgm\25.xnb</Output>
+      <Extra>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\bgm\25.wma</Extra>
+      <Time>2015-12-05T18:39:20.152742-08:00</Time>
+    </Item>
+    <Item>
+      <Source>background_test.jpg</Source>
+      <Name>background_test</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\background_test.xnb</Output>
+      <Time>2015-12-06T14:10:54.382635-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -613,39 +622,39 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\</RootDirectory>
-      <LoggerRootDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\src\mh4f\MH4F\MH4F\MH4FContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Frogg\src\mh4f\MH4F\MH4FContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Frogg\src\mh4f\MH4F\MH4F\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Frogg\src\mh4f\MH4F\MH4FContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-07:00</Value>
+        <Value>2010-08-23T13:41:18-07:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T12:41:18-07:00</Value>
+        <Value>2010-08-23T13:41:18-07:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-07:00</Value>
+        <Value>2010-08-23T13:41:18-07:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-07:00</Value>
+        <Value>2010-08-23T13:41:18-07:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-07:00</Value>
+        <Value>2010-08-23T13:41:18-07:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T12:41:18-07:00</Value>
+        <Value>2010-08-23T13:41:18-07:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2014-05-07T00:49:07.3795257-07:00</Value>
+        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2015-12-05T19:12:42.6138361-08:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
