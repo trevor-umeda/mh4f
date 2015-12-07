@@ -1,6 +1,7 @@
 MH4F.suo
-MH4F/MH4F/bin/x86/Debug
-MH4F/MH4F/obj/x86/Debug
-MH4F/MH4F/bin/x86/Release
-MH4F/MH4F/obj/x86/Release
-MH4F/MH4FContent/obj/x86/Debug
+MH4F/MH4F/bin/x86/Debug/*
+MH4F/MH4F/obj/x86/Debug/*
+MH4F/MH4F/bin/x86/Release/*
+MH4F/MH4F/obj/x86/Release/*
+MH4F/MH4FContent/obj/x86/Debug/*
+MH4F/MH4FContent/obj/x86/Release/*
