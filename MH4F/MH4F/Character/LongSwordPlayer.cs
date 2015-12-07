@@ -116,13 +116,17 @@ namespace MH4F
                    
                     SwordGauge = SwordGauge - moveCostValue;
                 }
+            
                 else
                 {
                     changeMove(determineBackupMove(moveName));
                     Console.WriteLine("Couldn't perform move cus not enough gauge");
                 }
             }
-           
+            else if (CurrentSpecial < 50 && moveName == "supera")
+            {
+                changeMove("rekka");
+            }
             else
             {
                 changeMove(moveName);
@@ -134,6 +138,7 @@ namespace MH4F
             if (moveName == "supera")
             {
                 PerformSuperFreeze();
+                CurrentSpecial -= 50;
             }
             base.changeMove(moveName);
         }
