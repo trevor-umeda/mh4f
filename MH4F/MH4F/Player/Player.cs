@@ -1103,6 +1103,10 @@ namespace MH4F
         {
             get { return sprite.CenterX; }
         }
+        public int CenterY
+        {
+            get { return sprite.CenterY; }
+        }
 
         public int HorizontalCollisionBuffer
         {

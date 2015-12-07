@@ -78,7 +78,7 @@ namespace MH4F
           
             leftSideLimit = (float)screenWidth * .5f;
             rightSideLimit = gameWidth - (float)screenWidth * .5f;
-            bottomSideLimit = gameHeight - (float)screenHeight * .5f / zoom;
+            bottomSideLimit = 360 / zoom;
         }
 
         private void adjustForHeightLimits()
@@ -128,6 +128,7 @@ namespace MH4F
             set
             {
                 position.Y = value;
+                adjustForHeightLimits();
                 adjustForLimits();
             }
         }

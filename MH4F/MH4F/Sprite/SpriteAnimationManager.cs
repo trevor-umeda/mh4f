@@ -120,6 +120,10 @@ namespace MH4F
         {
             get { return X + Width / 2; }
         }
+        public int CenterY
+        {
+            get { return Y + Height / 2; }
+        }
 
         ///
         /// Width (in pixels) of the sprite animation frames

@@ -99,7 +99,7 @@ namespace MH4F
         {
             cam = new Camera2d(Config.Instance.GameWidth, Config.Instance.ScreenWidth, Config.Instance.GameHeight, Config.Instance.ScreenHeight);
             //cam.Pos = new Vector2(Config.Instance.GameWidth/2, 360.0f);
-            mainFrame = new Rectangle(-450, -200, 3000, Config.Instance.GameHeight);
+            mainFrame = new Rectangle(-150, -150, 2200, Config.Instance.GameHeight);
             
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -449,7 +449,11 @@ namespace MH4F
         protected void adjustCamera()
         {  
             int newCamPosition = (player1.CenterX + player2.CenterX) / 2;
+
             cam.X = newCamPosition;
+            int yPosition = (player1.CenterY + player2.CenterY) / 2;
+
+            cam.Y = yPosition;
         }
 
         protected void adjustPlayerPositioning()

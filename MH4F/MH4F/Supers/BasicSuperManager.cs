@@ -85,15 +85,15 @@ namespace MH4F
             //
             if( superFreezeDelayTime - superFreezeTimer <= timeAllowedToZoom)
             {
-                camera.Move(cameraPositionMovement);
-                camera.ZoomIn(0.01f);
+                //camera.Move(cameraPositionMovement);
+                //camera.ZoomIn(0.01f);
             }
             if (superFreezeTimer < timeAllowedToZoom)
             {
                
-                camera.Move(-cameraPositionMovement);
-                camera.Y = 360;
-                camera.ZoomIn(-0.01f);   
+                //camera.Move(-cameraPositionMovement);
+                //camera.Y = 360;
+                //camera.ZoomIn(-0.01f);   
             }
 
             decrementTimer();
