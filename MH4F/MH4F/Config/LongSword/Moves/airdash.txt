@@ -9,4 +9,6 @@ Columns=2
 FrameLength=0.1
 CharacterState=AIRDASH
 LoopCount=3
-IsAttack=true
+Hurtbox=[ 0;367;241;331;278
+1;367;241;331;278 ]
+NextAnimation=jumpdown

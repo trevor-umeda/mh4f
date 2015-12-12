@@ -58,6 +58,7 @@ Content\LongSword\liara_blk_high1.xnb
 Content\block.xnb
 Content\LongSword\CROUCH.xnb
 Content\LongSword\super_decal_liara.xnb
+Content\background_test.xnb
 Content\Font.xnb
 Content\testf.xnb
 Content\slap_large.xnb
@@ -65,7 +66,10 @@ Content\airbackdash_h.xnb
 Content\bgm.xnb
 Content\bgm\20.xnb
 Content\bgm\25.xnb
-Content\background_test.xnb
+Content\LongSword\4WALK.xnb
+Content\LongSword\JA.xnb
+Content\LongSword\JB.xnb
+Content\LongSword\JC.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -118,6 +122,10 @@ Config\LongSword\Moves\battack.txt
 Config\LongSword\Moves\block.txt
 Config\LongSword\Moves\airdashstart.txt
 Config\LongSword\Moves\2aattack.txt
+Config\LongSword\Moves\backcattack.txt
+Config\LongSword\Moves\jcattack.txt
+Config\LongSword\Moves\jbattack.txt
+Config\LongSword\Moves\jaattack.txt
 Config\LongSword\Moves\superaending.txt
 Config\LongSword\Moves\superaslash.txt
 Config\LongSword\Moves\superafollowup.txt

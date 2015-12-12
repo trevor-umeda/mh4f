@@ -43,7 +43,9 @@ namespace MH4F
             SwordGaugeGains = new Dictionary<String, int>();
             MoveCosts = new Dictionary<String, int>();
 
-            SwordGaugeGains.Add("aattack", 20);
+            SwordGaugeGains.Add("aattack", 5);
+            SwordGaugeGains.Add("battack", 10);
+            SwordGaugeGains.Add("cattack", 15);
            // MoveCosts.Add("battack", 10);
             MoveCosts.Add("backfireball", 25);
 
@@ -63,7 +65,7 @@ namespace MH4F
             ThrowRange = 200;
             BackAirDashVel = 8;
             AirDashVel = 13;
-            BackStepVel = 8;
+            BackStepVel = 13;
             DashVel = 8;
             BackWalkVel = 3;
             WalkVel = 4;
@@ -339,8 +341,17 @@ namespace MH4F
                     Projectile clonedProjectile = Projectile;
                     clonedProjectile.CurrentAnimation = "staticprojectile"; 
                     clonedProjectile.Direction = Direction;
+                    int mo = Direction == Direction.Right ? 1 : -1;
                     clonedProjectile.Y = Sprite.Y + 50;
-                    clonedProjectile.X = Sprite.X + Sprite.Width/2 + 70;
+                    if (Direction == Direction.Right)
+                    {
+                        clonedProjectile.X = Sprite.X + Sprite.Width - clonedProjectile.CurrentProjectile.FrameWidth / 2 - 70;
+                    }
+                    else
+                    {
+                        clonedProjectile.X = 70 - clonedProjectile.CurrentProjectile.FrameWidth + Sprite.X;
+                    }
+                  
                     clonedProjectile.PlayerNumber = PlayerNumber;
                     ProjectileManager.createProjectile(clonedProjectile);
 

@@ -161,7 +161,7 @@ namespace MH4F
             get { return Sprite.CurrentMoveAnimation != null &&
                 (!isGettingHit) && // If we aren't getting hit
                 (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone || // or if the move is done
-                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.DASHING || // or if the current move is dashing
+                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.DASHING || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRDASH || // or if the current move is dashing
                 !Sprite.CurrentMoveAnimation.IsAttack);  // or if the  move is not an attack
               }
         }
@@ -202,6 +202,11 @@ namespace MH4F
             SpecialInputManager.registerGroundMove(name, input);
         }
 
+        public void RegisterAirMove(String name, List<String> input)
+        {
+            SpecialInputManager.registerAirMove(name, input);
+        }
+
         public virtual void SetUpUniversalAttackMoves()
         {
             // TODO see if 6b is universal. if not it complicates things...
@@ -211,14 +216,18 @@ namespace MH4F
             RegisterGroundMove("backthrow", new List<string> { ThrowManager.BackThrowInput });
            // RegisterGroundMove("forwardaattack", new List<string> { "6A" });
             RegisterGroundMove("specialcommand", new List<string> { "BC" });
-            RegisterGroundMove("forwardbattack", new List<string> { "6B" });
-            RegisterGroundMove("forwardcattack", new List<string> { "6C" });
+         //   RegisterGroundMove("forwardbattack", new List<string> { "6B" });
+           // RegisterGroundMove("forwardcattack", new List<string> { "6C" });
             RegisterGroundMove("2aattack", new List<string> { "2A" });
             RegisterGroundMove("crouchbattack", new List<string> { "2B" });
             RegisterGroundMove("crouchcattack", new List<string> { "2C" });
             RegisterGroundMove("cattack", new List<string> { "C" });
             RegisterGroundMove("battack", new List<string> { "B" });
             RegisterGroundMove("aattack", new List<string> { "A" });
+
+            RegisterAirMove("jaattack", new List<string> { "A" });
+            RegisterAirMove("jbattack", new List<string> { "B" });
+            RegisterAirMove("jcattack", new List<string> { "C" });
         }
 
         public void SetAttackMoveProperties(String moveName, HitInfo hitInfo)
@@ -295,21 +304,21 @@ namespace MH4F
                                 ForwardWalk();
                             }
                         }
-                        if (ks.IsKeyDown(controlSetting.Controls["up"]))
-                        {
-                            if (ks.IsKeyDown(controlSetting.Controls["right"]))
-                            {
-                                Jump(Direction.Right);
-                            }
-                            else if (ks.IsKeyDown(controlSetting.Controls["left"]))
-                            {
-                                Jump(Direction.Left);
-                            }
-                            else
-                            {
-                                Jump();
-                            }
-                        }
+                        //if (ks.IsKeyDown(controlSetting.Controls["up"]))
+                        //{
+                        //    if (ks.IsKeyDown(controlSetting.Controls["right"]))
+                        //    {
+                        //        Jump(Direction.Right);
+                        //    }
+                        //    else if (ks.IsKeyDown(controlSetting.Controls["left"]))
+                        //    {
+                        //        Jump(Direction.Left);
+                        //    }
+                        //    else
+                        //    {
+                        //        Jump();
+                        //    }
+                        //}
                     }
                 }
                 if (!ks.IsKeyDown(controlSetting.Controls["right"]) && !ks.IsKeyDown(controlSetting.Controls["left"]) && !ks.IsKeyDown(controlSetting.Controls["down"]) && !ks.IsKeyDown(controlSetting.Controls["up"]) && Sprite.CurrentMoveAnimation != null)
@@ -324,22 +333,24 @@ namespace MH4F
             else if (Sprite.CurrentMoveAnimation == null ||
                 Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
             {
-                if (IsCancealableMove && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
-                {
-                    timesJumped++;
-                    if (ks.IsKeyDown(controlSetting.Controls["right"]))
-                    {
-                        AirJump(Direction.Right);
-                    }
-                    else if (ks.IsKeyDown(controlSetting.Controls["left"]))
-                    {
-                        AirJump(Direction.Left);
-                    }
-                    else
-                    {
-                        AirJump();
-                    }
-                }
+                //if (IsCancealableMove && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
+                //{
+                    
+                //    timesJumped++;
+                //    Console.WriteLine(timesJumped);
+                //    if (ks.IsKeyDown(controlSetting.Controls["right"]))
+                //    {
+                //        AirJump(Direction.Right);
+                //    }
+                //    else if (ks.IsKeyDown(controlSetting.Controls["left"]))
+                //    {
+                //        AirJump(Direction.Left);
+                //    }
+                //    else
+                //    {
+                //        AirJump();
+                //    }
+                //}
             }
         }
 
@@ -372,7 +383,9 @@ namespace MH4F
 
         public void determineCurrentMove(GameTime gameTime, KeyboardState ks, Boolean inHitstop)
         {
+ 
           String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, Sprite.CurrentAnimation, ks);
+        
           // See if we are in a state to change moves
           //
           if(IsCancealableMove || // Are we doing an action that can be canceled
@@ -385,6 +398,49 @@ namespace MH4F
                   //
                   processBasicMovement(gameTime, ks);
               }
+              else if (moveName == "jumpcancel")
+              {
+                  if (Sprite.CurrentMoveAnimation.CharacterState != CharacterState.AIRBORNE)
+                  {
+                      if ((IsCancealableMove || HasHitOpponent))
+                      {
+                          if (ks.IsKeyDown(controlSetting.Controls["right"]))
+                          {
+                              Jump(Direction.Right);
+                          }
+                          else if (ks.IsKeyDown(controlSetting.Controls["left"]))
+                          {
+                              Jump(Direction.Left);
+                          }
+                          else
+                          {
+                              Jump();
+                          }
+                      }
+                  }
+                  else if (Sprite.CurrentMoveAnimation == null ||
+               Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
+                  {
+                      if ((IsCancealableMove || HasHitOpponent) && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
+                      {
+
+                          timesJumped++;
+                          Console.WriteLine(timesJumped);
+                          if (ks.IsKeyDown(controlSetting.Controls["right"]))
+                          {
+                              AirJump(Direction.Right);
+                          }
+                          else if (ks.IsKeyDown(controlSetting.Controls["left"]))
+                          {
+                              AirJump(Direction.Left);
+                          }
+                          else
+                          {
+                              AirJump();
+                          }
+                      }
+                  }
+              }
               else
               {
                   UnCrouch();
@@ -393,8 +449,8 @@ namespace MH4F
                   //
                   if (moveName == "forwardthrow" || moveName == "backthrow")
                   {
-                    // Have the throw manager see if the throw is valid
-                    //
+                      // Have the throw manager see if the throw is valid
+                      //
                       if (!ThrowManager.isValidThrow(PlayerNumber))
                       {
                           // If its not then have the move perform a throw whiff move
@@ -449,7 +505,7 @@ namespace MH4F
                               SoundManager.PlaySound(moveName);
 
                               Sprite.CurrentAnimation = moveName;
-                             
+
                               // If we're in the air when we do it, note we jumped up
                               //
                               if (IsAirborne)
@@ -457,9 +513,9 @@ namespace MH4F
                                   if (Sprite.CurrentAnimation == "dash")
                                   {
                                       Sprite.CurrentAnimation = "airdashstart";
-                                      Console.WriteLine("Dashing in the air");
+                                      Console.WriteLine(" Start Dashing in the air");
                                   }
-                                  
+
                                   timesJumped++;
                               }
                           }
@@ -480,6 +536,8 @@ namespace MH4F
         {
           // Parse the ground special inputs here
           //
+            
+            
           if (!IsAirborne)
           {
               performGroundSpecialMove(ks, Sprite.CurrentAnimation);
@@ -531,14 +589,7 @@ namespace MH4F
               momentumXMovement = 0;
 
           }
-          //if (Direction == Direction.Left)
-          //{
-          //    Sprite.MoveBy(-Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
-          //}
-          //else
-          //{
-          //    Sprite.MoveBy(Sprite.CurrentMoveAnimation.CurrentXMovementInfo, 0);
-          //}
+  
            // Logic to handle when they are landing
            // If bottom of sprite is touching the "floor" then you are landed
            //
@@ -579,11 +630,11 @@ namespace MH4F
         {
             if (Direction == Direction.Left)
             {
-                Sprite.MoveBy(BackAirDashVel, 0);
+                Sprite.MoveBy(BackStepVel, 0);
             }
             else
             {
-                Sprite.MoveBy(-BackAirDashVel, 0);
+                Sprite.MoveBy(-BackStepVel, 0);
             }
         }
         public virtual void Dash()
@@ -689,10 +740,12 @@ namespace MH4F
             if (Direction == Direction.Left)
             {
                 Sprite.MoveBy(-AirDashVel, 0);
+                CurrentVelocity = new Vector2(-JumpHorizontalSpeed, 0);
             }
             else
             {
                 Sprite.MoveBy(AirDashVel, 0);
+                CurrentVelocity = new Vector2(JumpHorizontalSpeed, 0); ;
             }
         }
 
@@ -782,14 +835,18 @@ namespace MH4F
 
         public virtual void Jumping()
         {
-            if (currentVelocity.Y > 0)
+            if (!Sprite.CurrentMoveAnimation.IsAttack)
             {
-                Sprite.CurrentAnimation = "jumpdown";
+                if (currentVelocity.Y > 0)
+                {
+                    Sprite.CurrentAnimation = "jumpdown";
+                }
+                else if (currentVelocity.Y > -230)
+                {
+                    Sprite.CurrentAnimation = "jumptop";
+                }
             }
-            else if (currentVelocity.Y > -230)
-            {
-                Sprite.CurrentAnimation = "jumptop";
-            }
+           
         }
 
         public virtual void AirborneMovement(GameTime gameTime)
@@ -1019,6 +1076,7 @@ namespace MH4F
 
         public virtual void resetRound()
         {
+            Sprite.CurrentAnimation = "standing";
             CurrentHealth = MaxHealth;
             CurrentSpecial = 0;
             Position = startingPosition;

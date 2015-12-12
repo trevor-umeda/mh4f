@@ -86,6 +86,11 @@ namespace MH4F
             set
             {
                 v2Position.X = value;
+                Hitbox info = CurrentProjectile.CurrentHitboxInfo;
+                if (info != null)
+                {
+                    Hitbox = info.getHitboxRectangle(Hitbox, Direction.Right, v2Position, CurrentProjectile.FrameWidth);
+                }
             }
         }
 
@@ -98,6 +103,11 @@ namespace MH4F
             set
             {
                 v2Position.Y = value;
+                Hitbox info = CurrentProjectile.CurrentHitboxInfo;
+                if (info != null)
+                {
+                    Hitbox = info.getHitboxRectangle(Hitbox, Direction.Right, v2Position, CurrentProjectile.FrameWidth);
+                }
             }
         }
    

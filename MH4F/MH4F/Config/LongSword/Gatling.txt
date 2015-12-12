@@ -1,7 +1,10 @@
-﻿           | supera  | rekka    |rekkaB| rekkaC | backfireball  | aattack | battack | cattack
-rekka      |         |          |  x   |        |               |         |         |
-rekkaB     |         |          |      |    x   |               |         |         |
-rekkaC     |    x    |          |      |        |               |         |         |
-aattack    | x       |    x     |      |        |    x          |    x    |      x  |    x
-battack    | x       |    x     |      |        |    x          |         |         |    x
-cattack    | x       |    x     |      |        |    x          |         |         |    
+﻿           | supera  | rekka    |rekkaB| rekkaC | backfireball  | aattack | battack | cattack | jaattack | jbattack | jcattack
+rekka      |         |          |  x   |        |               |         |         |		  |			 |			|
+rekkaB     |         |          |      |    x   |               |         |         |		  |			 |			|
+rekkaC     |    x    |          |      |        |               |         |         |		  |			 |			|
+aattack    | x       |    x     |      |        |    x          |    x    |      x  |    x	  |			 |			|
+battack    | x       |    x     |      |        |    x          |         |         |    x	  |			 |			|
+cattack    | x       |    x     |      |        |    x          |         |         |    	  |			 |			|
+jaattack   |         |          |      |        |               |         |         |     	  |		x	 |		x	|     x
+jbattack   |         |          |      |        |               |         |         |    	  |			 |			|     x
+jcattack   |         |          |      |        |               |         |         |    	  |			 |			|

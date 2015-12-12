@@ -143,6 +143,16 @@ namespace MH4F
             return checkMoves(direction, newKeyboardState, possibleMoveList);
         }
 
+        public bool DetermineJumpPress(KeyboardState presentState)
+        {
+            if (MoveInput.KeyboardPressed(presentState, lastKeyboardState, controlSetting.Controls["up"]))
+            {
+                Console.WriteLine("Jump Button");
+                return true;
+            }
+            else return false;
+        }
+
         public bool DetermineButtonPress(KeyboardState presentState)
         {
             //A attack button pressed

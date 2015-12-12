@@ -1,4 +1,4 @@
-﻿name= cattack
+name=backcattack
 sprite=5C
 XImageStart= 0
 YImageStart= 0

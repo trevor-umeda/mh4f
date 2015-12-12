@@ -336,3 +336,13 @@ C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\MH4F.pdb
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\obj\x86\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\obj\x86\Release\MH4F.exe
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\obj\x86\Release\MH4F.pdb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\background_test.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\jcattack.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\jbattack.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\jaattack.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\4WALK.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\JA.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\JB.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\JC.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\backcattack.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\BACKDASH.xnb

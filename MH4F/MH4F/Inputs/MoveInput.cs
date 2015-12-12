@@ -112,16 +112,12 @@ namespace MH4F
             {
                 return true;
             }
+
+            if (KeyboardDown(keyboardState, controls["left"]) && KeyboardDown(keyboardState, controls["down"]) && ((direction == Direction.Right && input == "1") || (direction == Direction.Left && input == "3")))
+            {
+                return true;
+            }
             if ( KeyboardDown(keyboardState, controls["right"]) && ((direction == Direction.Right && input == "6") || (direction == Direction.Left && input =="4")))
-            {
-                return true;
-            }
-            
-            if (KeyboardDown(keyboardState ,controls["left"]) && KeyboardDown(keyboardState, controls["down"]) && ((direction == Direction.Right && input == "1") || (direction == Direction.Left && input == "3")))
-            {
-                return true;
-            }
-            if (input == "2" && KeyboardDown(keyboardState, controls["down"]))
             {
                 return true;
             }
@@ -129,6 +125,11 @@ namespace MH4F
             {
                 return true;
             }
+            if (input == "2" && KeyboardDown(keyboardState, controls["down"]) && !KeyboardDown(keyboardState, controls["left"]) && !KeyboardDown(keyboardState, controls["right"]))
+            {
+                return true;
+            }
+         
             if (input == "5" && !KeyboardDown(keyboardState, controls["down"]) && !KeyboardDown(keyboardState, controls["up"]) && !KeyboardDown(keyboardState, controls["right"]) && !KeyboardDown(keyboardState, controls["left"]))
             {
                 return true;

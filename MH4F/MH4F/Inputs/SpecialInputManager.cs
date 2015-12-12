@@ -35,6 +35,12 @@ namespace MH4F
             // First enqueue the current state into our input queue
             //
             inputManager.enqueueState(newKeyboardState, controlSetting.Controls);
+
+            if (inputManager.DetermineJumpPress(newKeyboardState))
+            {
+                Console.WriteLine("JUMP CANCEL");
+                return "jumpcancel";
+            }
             if(!inputManager.DetermineButtonPress(newKeyboardState))
             {
                 
@@ -53,13 +59,17 @@ namespace MH4F
                     }    
                 }
             }
-            if(characterState != CharacterState.AIRBORNE)
+            if(characterState != CharacterState.AIRBORNE && characterState != CharacterState.AIRDASH)
             {
                 returnMove = inputManager.checkGroundMoves(direction, currentMove, newKeyboardState);                
             }
             else
             {
                 returnMove = inputManager.checkAirMoves(direction, currentMove, newKeyboardState);
+                if (characterState == CharacterState.AIRDASH && returnMove == null)
+                {
+                    return "airdash";
+                }
             }
             return returnMove; 
         }

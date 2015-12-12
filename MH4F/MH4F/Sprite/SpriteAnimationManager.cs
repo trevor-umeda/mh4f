@@ -239,7 +239,7 @@ namespace MH4F
                 {
                     //Change animation only if
                     if (( currentAnimation != value && !animations[value].IsAttack) // The animation is different from the current and the new animation is not an attack
-                        || animations[value].IsAttack // The new animation IS an attack
+                        || animations[value].IsAttack  // The new animation IS an attack
                         || animations[value].CharacterState == CharacterState.HIT //The new animation is the new character is getting hit
                         )
                     {
@@ -457,7 +457,7 @@ namespace MH4F
                     // If there is, see if the currently playing animation has
                     // completed a full animation loop
                     //
-                    if (CurrentMoveAnimation.PlayCount > 0)
+                    if (CurrentMoveAnimation.IsDone)
                     {
                         Console.WriteLine("SWITCHING TO " + CurrentMoveAnimation.NextAnimation);
                         // If it has, set up the next animation
@@ -522,10 +522,10 @@ namespace MH4F
                 if (showHitboxes)
                 {
                     Color translucentRed = Color.Red * 0.5f;
-                   // spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
+                    //spriteBatch.Draw(dummyTexture, hitbox, translucentRed);
 
                     Color translucentBlue = Color.Blue * 0.5f;
-                    spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
+                    //spriteBatch.Draw(dummyTexture, hurtbox, translucentBlue);
 
                     Color DarkBlue = Color.Blue * 0.7f;
                     //spriteBatch.Draw(dummyTexture, boundingBox, translucentBlue);

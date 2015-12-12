@@ -1,5 +1,5 @@
 name= backwalk
-sprite= 6WALK
+sprite= 4WALK
 XImageStart=0
 YImageStart= 0
 Width=500

@@ -206,6 +206,18 @@
     <Content Include="Config\LongSword\Moves\2aattack.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\LongSword\Moves\backcattack.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\jcattack.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\jbattack.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\jaattack.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Moves\superaending.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

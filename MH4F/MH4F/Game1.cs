@@ -242,7 +242,7 @@ namespace MH4F
 
                         // Detect player collisions
                         //
-                        if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent)
+                        if (player1.Sprite.Hitbox.Intersects(player2.Sprite.Hurtbox) && !player1.HasHitOpponent && player1.Sprite.CurrentMoveAnimation.HitInfo != null)
                         {
                             // TODO make this not hardcoded
                             //
@@ -259,7 +259,7 @@ namespace MH4F
                                 roundManager.roundEnd(1);
                             }
                         }
-                        else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
+                        else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent && player2.Sprite.CurrentMoveAnimation.HitInfo != null)
                         {
                             Rectangle test = Rectangle.Intersect(player1.Sprite.Hurtbox, player2.Sprite.Hitbox);
                          
