@@ -278,7 +278,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\5C.xnb</Output>
-      <Time>2015-09-10T02:00:41.2672439-07:00</Time>
+      <Time>2015-12-11T19:04:04.4738128-08:00</Time>
     </Item>
     <Item>
       <Source>LongSword\REKKA_PT3.png</Source>
@@ -651,6 +651,15 @@
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\JC.xnb</Output>
       <Time>2015-12-09T21:43:06.3264726-08:00</Time>
+    </Item>
+    <Item>
+      <Source>LongSword\BACKDASH.png</Source>
+      <Name>LongSword\BACKDASH</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\BACKDASH.xnb</Output>
+      <Time>2015-12-11T18:56:12.823836-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

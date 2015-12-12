@@ -9,6 +9,7 @@ Columns= 4
 FrameLength= 0.020
 FrameLengthInfo=2,2,2,2,4,3,3,2
 CharacterState= AIRBORNE
+NextAnimation=jumpdown
 HitType=IMPACT
 IsAttack= true
 Hitbox=[4;130;199;148;82

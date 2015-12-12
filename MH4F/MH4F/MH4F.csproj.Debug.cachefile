@@ -70,6 +70,7 @@ Content\LongSword\4WALK.xnb
 Content\LongSword\JA.xnb
 Content\LongSword\JB.xnb
 Content\LongSword\JC.xnb
+Content\LongSword\BACKDASH.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -83,7 +84,6 @@ Content\LongSword\projectile.png
 Content\LongSword\projectile3.png
 Content\LongSword\ascending.png
 Content\LongSword\descending.png
-Content\LongSword\5C.png
 Content\LongSword\REKKA_PT3.png
 Content\LongSword\REKKA1.png
 Content\LongSword\HIT1.png
@@ -96,6 +96,7 @@ Content\LongSword\JUMP_PT2.png
 Content\LongSword\2A_THINSLICE.png
 Content\LongSword\2A_BIGSLICE.png
 Content\LongSword\super_decal_liara.png
+Content\LongSword\5C.png
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png
