@@ -209,6 +209,12 @@
     <Content Include="Config\LongSword\Moves\backcattack.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\LongSword\Moves\2battack.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\2cattack.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\LongSword\Moves\jcattack.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

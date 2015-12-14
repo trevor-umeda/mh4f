@@ -661,6 +661,24 @@
       <Extra>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\bgm\25.wma</Extra>
       <Time>2015-12-05T18:39:20.152742-08:00</Time>
     </Item>
+    <Item>
+      <Source>LongSword\2B.png</Source>
+      <Name>LongSword\2B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\2B.xnb</Output>
+      <Time>2015-12-13T20:11:59.2822121-08:00</Time>
+    </Item>
+    <Item>
+      <Source>LongSword\2C.png</Source>
+      <Name>LongSword\2C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\2C.xnb</Output>
+      <Time>2015-12-13T20:16:55.361402-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

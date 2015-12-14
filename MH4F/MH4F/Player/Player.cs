@@ -219,6 +219,8 @@ namespace MH4F
          //   RegisterGroundMove("forwardbattack", new List<string> { "6B" });
            // RegisterGroundMove("forwardcattack", new List<string> { "6C" });
             RegisterGroundMove("2aattack", new List<string> { "2A" });
+            RegisterGroundMove("2battack", new List<string> { "2B" });
+            RegisterGroundMove("2cattack", new List<string> { "2C" });
             RegisterGroundMove("crouchbattack", new List<string> { "2B" });
             RegisterGroundMove("crouchcattack", new List<string> { "2C" });
             RegisterGroundMove("cattack", new List<string> { "C" });

@@ -356,3 +356,7 @@ C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\JB.xnb
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\JC.xnb
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\BACKDASH.xnb
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\obj\x86\Release\MH4F.csprojResolveAssemblyReference.cache
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\2battack.txt
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\2B.xnb
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\2cattack.txt
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\2C.xnb

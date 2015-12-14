@@ -409,7 +409,17 @@ namespace MH4F
                 hitMoveInfo.AirUntechTime = int.Parse((String)moveInfo["AirUntechTime"]);
                 hitMoveInfo.AirYVelocity = int.Parse((String)moveInfo["AirYVelocity"]);
                 hitMoveInfo.AirXVelocity = int.Parse((String)moveInfo["AirXVelocity"]);
+                if(moveInfo.ContainsKey("ResetHitInfo"))
+                {
+                    String resetHitInfoString = (String)moveInfo["ResetHitInfo"];
+                    List<String> resetHitInfoList = new List<String>(resetHitInfoString.Split(','));
+                    List<int> resetInfoIntList = resetHitInfoList.ConvertAll(s => Int32.Parse(s));
+                    foreach (int resetSpot in resetInfoIntList)
+                    {
+                        newMove.AddResetInfo(resetSpot, true);
+                    }
 
+                }
                 if (moveInfo.ContainsKey("ForceAirborne"))
                 {
                     hitMoveInfo.ForceAirborne = Boolean.Parse((String)moveInfo["ForceAirborne"]);
