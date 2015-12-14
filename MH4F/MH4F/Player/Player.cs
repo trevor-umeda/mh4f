@@ -381,6 +381,29 @@ namespace MH4F
             prevKeyboardState = Keyboard.GetState();
         }
 
+        public void UpdateWithoutInput(GameTime gameTime)
+        {
+            Sprite.CurrentXVelocity = 0;
+
+            // Might not be necessary
+            //
+            //if (Sprite.CurrentMoveAnimation != null)
+            //{
+            //    determineCurrentMove(gameTime, ks, inHitstop);
+            //}
+           
+            //handlePerformCurrentMove(gameTime, ks);
+            // This is basically for jumps as only jump movement is calculated via velocity
+            //
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Position += CurrentVelocity * time;
+
+            sprite.Update(gameTime, Direction);
+
+            handleExtraMovement();
+            cleanUp();
+        }
+
         public void determineCurrentMove(GameTime gameTime, KeyboardState ks, Boolean inHitstop)
         {
  
@@ -919,10 +942,11 @@ namespace MH4F
                 {
                     Sprite.CurrentAnimation = "hit";
                 }
+            
 
                 Sprite.CurrentMoveAnimation.CurrentFrame = Sprite.CurrentMoveAnimation.StartFrame;
                 CurrentHealth -= ComboManager.calculateProratedDamage(hitInfo);
-
+                
                 if (hitInfo.FreezeOpponent)
                 {
                     Sprite.CurrentAnimation = "freeze";
@@ -935,11 +959,11 @@ namespace MH4F
                     HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
                     hit.HitStunCounter = ComboManager.calculateProratedHitStun(hitInfo);
                     hit.reset();
-                    if (IsAirborne || hitInfo.ForceAirborne)
+                    if (IsAirborne || hitInfo.ForceAirborne || CurrentHealth <= 0)
                     {
                         untechTime = hitInfo.AirUntechTime;
                         Sprite.CurrentAnimation = "falldown";
-                        Position += new Vector2( 0,-100);
+                        Position += new Vector2( 0,-10);
                         if (hitInfo.AirXVelocity != null && hitInfo.AirYVelocity != null)
                         {
                             if (directionFacing == Direction.Right)
@@ -1080,7 +1104,6 @@ namespace MH4F
             CurrentHealth = MaxHealth;
             CurrentSpecial = 0;
             Position = startingPosition;
-
         }
 
         // Boring accessors without special implementations. Keeping them down here just cus of how many there are...

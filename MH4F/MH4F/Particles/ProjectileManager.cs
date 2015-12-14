@@ -97,6 +97,13 @@ namespace MH4F
             }
         }
 
+        public void clearAllProjectiles()
+        {
+            player1Projectiles = new List<Projectile>();
+            player2Projectiles = new List<Projectile>();
+            particles = new List<ParticleAnimation>();
+         
+        }
         public void createHitparticle(Rectangle hitSection, HitType hitType)
         {
             Vector2 center = new Vector2(hitSection.X + (hitSection.Width/2), hitSection.Y + (hitSection.Height/2));

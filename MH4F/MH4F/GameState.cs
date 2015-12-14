@@ -9,6 +9,7 @@ namespace MH4F
     {
         PLAYERSELECT,
         LOADING,
-        PLAYING
+        PLAYING,
+        ROUNDEND
     }
 }

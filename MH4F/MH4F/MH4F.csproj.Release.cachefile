@@ -28,7 +28,6 @@ Content\LongSword\projectile2.xnb
 Content\LongSword\projectile3.xnb
 Content\LongSword\ascending.xnb
 Content\LongSword\descending.xnb
-Content\LongSword\5C.xnb
 Content\LongSword\REKKA_PT3.xnb
 Content\LongSword\REKKA1.xnb
 Content\LongSword\REKKA_PT2.xnb
@@ -59,6 +58,12 @@ Content\block.xnb
 Content\LongSword\CROUCH.xnb
 Content\LongSword\super_decal_liara.xnb
 Content\background_test.xnb
+Content\LongSword\4WALK.xnb
+Content\LongSword\JA.xnb
+Content\LongSword\JB.xnb
+Content\LongSword\JC.xnb
+Content\LongSword\BACKDASH.xnb
+Content\LongSword\5C.xnb
 Content\Font.xnb
 Content\testf.xnb
 Content\slap_large.xnb
@@ -66,11 +71,6 @@ Content\airbackdash_h.xnb
 Content\bgm.xnb
 Content\bgm\20.xnb
 Content\bgm\25.xnb
-Content\LongSword\4WALK.xnb
-Content\LongSword\JA.xnb
-Content\LongSword\JB.xnb
-Content\LongSword\JC.xnb
-Content\LongSword\BACKDASH.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma

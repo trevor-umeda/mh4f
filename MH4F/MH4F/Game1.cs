@@ -193,6 +193,17 @@ namespace MH4F
                 //start backgroundthread
                 backgroundThread.Start();
             }
+            else if (gameState == GameState.ROUNDEND)
+            {
+                player1.Update(gameTime, Keyboard.GetState(), false);
+                player2.Update(gameTime, Keyboard.GetState(), false); 
+                roundManager.handleRoundEnd(projectileManager);
+                if (roundManager.ResetRound == true)
+                {
+                    gameState = GameState.PLAYING;
+                }
+                adjustCamera();
+            }
             else if (gameState == GameState.PLAYING)
             {
                 frameTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -247,36 +258,38 @@ namespace MH4F
                             // TODO make this not hardcoded
                             //
                             Rectangle test = Rectangle.Intersect(player1.Sprite.Hitbox, player2.Sprite.Hurtbox);
-                         
+
                             hitstop = 7;
                             comboManager.player1LandedHit(player2.CharacterState);
                             player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo, test);
                             player1.hitEnemy();
-                            
+
                             System.Diagnostics.Debug.WriteLine("We have collision at " + player1.Sprite.CurrentMoveAnimation.CurrentFrame);
                             if (player2.CurrentHealth <= 0)
                             {
                                 roundManager.roundEnd(1);
+                                gameState = GameState.ROUNDEND;
                             }
                         }
                         else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent && player2.Sprite.CurrentMoveAnimation.HitInfo != null)
                         {
                             Rectangle test = Rectangle.Intersect(player1.Sprite.Hurtbox, player2.Sprite.Hitbox);
-                         
+
                             comboManager.player2LandedHit(player1.CharacterState);
                             player1.hitByEnemy(Keyboard.GetState(), player2.Sprite.CurrentMoveAnimation.HitInfo, test);
                             player2.hitEnemy();
                             if (player1.CurrentHealth <= 0)
                             {
                                 roundManager.roundEnd(2);
+                                gameState = GameState.ROUNDEND;
                             }
                         }
                         else if (Keyboard.GetState().IsKeyDown(Keys.P))
                         {
                             Console.WriteLine("Test STuff");
-                   //         cam.Zoom = 1.2f;
-                             // player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
-                          //  player1.CurrentHealth -= 10;
+                            //         cam.Zoom = 1.2f;
+                            // player1.hitByEnemy(Keyboard.GetState(), testHitInfo);
+                            //  player1.CurrentHealth -= 10;
                         }
                         else if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                         {
@@ -311,7 +324,7 @@ namespace MH4F
                     }
                     else
                     {
-                        
+
                         hitstop--;
                         if (hitstop < 0)
                         {
@@ -362,7 +375,7 @@ namespace MH4F
                
                 spriteBatch.End();
             }
-            if (gameState == GameState.PLAYING)
+            if (gameState == GameState.PLAYING || gameState == GameState.ROUNDEND)
             {
                 //spriteBatch.Begin();
                 spriteBatch.Begin(SpriteSortMode.Deferred,
@@ -372,6 +385,8 @@ namespace MH4F
                             null,
                             null,
                             cam.getTransformation(GraphicsDevice /*Send the variable that has your graphic device here*/));
+
+
 
                 if (superManager.isDrawingSuperFreeze())
                 {
@@ -409,7 +424,8 @@ namespace MH4F
                 spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
                 spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
                 comboManager.displayComboMessage(spriteBatch);
-
+                Color black = Color.Black * roundManager.FadeAmount;
+                spriteBatch.Draw(dummyTexture, mainFrame, black);
 
                 player1.DrawGauges(spriteBatch);
                 player2.DrawGauges(spriteBatch);

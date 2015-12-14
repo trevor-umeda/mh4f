@@ -18,6 +18,10 @@ namespace MH4F
         Player player1;
         Player player2;
         float currentTime;
+
+        int wrapUpTimer;
+        float fadeOutAmount;
+
         public RoundManager(Player player1, Player player2)
         {
             TimeLimit = 99;
@@ -26,21 +30,55 @@ namespace MH4F
             this.player1 = player1;
             this.player2 = player2;
             currentTime = 0f;
+            fadeOutAmount = 0.0f;
         }
 
         public void roundEnd(int playerNumber)
         {
+            ResetRound = false;
             if (playerNumber == 1)
             {
-                Player1RoundWins++;
+                Player1RoundWins++;              
             }
             else
             {
                 Player2RoundWins++;
             }
+            wrapUpTimer = 50;
+        }
+
+        public void handleRoundEnd(ProjectileManager projectileManager)
+        {
+            wrapUpTimer--;
+            if (wrapUpTimer >= 10 && wrapUpTimer <= 20)
+            {     
+                fadeOutAmount = 1.0f - ((wrapUpTimer - 10f)/10f);
+            }
+            else if (wrapUpTimer < 10)
+            {
+                fadeOutAmount = wrapUpTimer / 10f;
+            }
+
+            if (fadeOutAmount == 1.0f) 
+            {
+                reset();
+                projectileManager.clearAllProjectiles();
+            }
+            if (wrapUpTimer <= 0)
+            {
+                ResetRound = true;
+            }
+        }
+
+        public void reset()
+        {
             player1.resetRound();
             player2.resetRound();
             Timer = TimeLimit;
+        }
+        public float FadeAmount
+        {
+            get { return fadeOutAmount; }           
         }
 
         public void decrementTimer(GameTime gameTime)
@@ -63,7 +101,7 @@ namespace MH4F
         {
             return string.Format("{0}", Timer); 
         }
-
+        public Boolean ResetRound { get; set; }
         public Boolean isTimeOut()
         {
             if (Timer <= 0)
