@@ -44,7 +44,7 @@ namespace MH4F
             {
                 Player2RoundWins++;
             }
-            wrapUpTimer = 50;
+            wrapUpTimer = 100;
         }
 
         public void handleRoundEnd(ProjectileManager projectileManager)

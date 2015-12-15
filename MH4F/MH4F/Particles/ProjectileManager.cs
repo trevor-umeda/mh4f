@@ -158,7 +158,7 @@ namespace MH4F
                     {
                         player1Projectiles.RemoveAt(i);
                     }
-                    System.Diagnostics.Debug.WriteLine("We have projectile collision at " + projectile.CurrentProjectile.CurrentFrame);
+                    System.Diagnostics.Debug.WriteLine("We have projectile  1 collision at " + projectile.CurrentProjectile.CurrentFrame);
                     if (player2.CurrentHealth <= 0)
                     {
                         roundManager.roundEnd(1);
@@ -169,7 +169,7 @@ namespace MH4F
             for( int j = player2Projectiles.Count - 1; j >=0; j--)
             {
                 Projectile projectile = player2Projectiles[j];
-                if (projectile.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent)
+                if (projectile.Hitbox.Intersects(player1.Sprite.Hurtbox))
                 {
                     Rectangle collisionZone = Rectangle.Intersect(projectile.Hitbox, player1.Sprite.Hurtbox);
                     comboManager.player2LandedHit(player1.CharacterState);
@@ -180,6 +180,7 @@ namespace MH4F
                     {
                         player2Projectiles.RemoveAt(j);
                     }
+                    System.Diagnostics.Debug.WriteLine("We have projectile collision at " + projectile.CurrentProjectile.CurrentFrame);
                     if (player1.CurrentHealth <= 0)
                     {
                         roundManager.roundEnd(2);

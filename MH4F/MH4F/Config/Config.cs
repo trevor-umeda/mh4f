@@ -49,7 +49,7 @@ namespace MH4F
         private Config() 
         {
             gameWidth = 2000;
-            gameHeight = 900;
+            gameHeight = 1200;
 
             screenWidth = 1300;
             screenHeight = 768;

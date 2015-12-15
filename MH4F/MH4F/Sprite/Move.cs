@@ -175,6 +175,10 @@ namespace MH4F
                     }
                     if (CurrentFrame == 0)
                     {
+                        if (StartFrame != null)
+                        {
+                            CurrentFrame = StartFrame;
+                        }
                         PlayCount = (int)MathHelper.Min(PlayCount + 1, int.MaxValue);
                         if (PlayCount >= loopCount)
                         {

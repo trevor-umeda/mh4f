@@ -7,7 +7,7 @@ Height=540
 FrameCount=17
 Columns=4
 FrameLength=0.016
-FrameLengthInfo=3,3,2,2,2,2,2,1,1,1,1,3,5,3,2,2,3
+FrameLengthInfo=1,1,1,2,2,2,2,1,1,1,1,3,5,3,2,2,3
 CharacterState=STANDING
 HitType=SLASH
 IsAttack=true
@@ -33,7 +33,7 @@ Hurtbox=[ 0;438;270;155;452
 14;438;270;155;452 
 15;438;270;155;452
 16;438;270;155;452 ]
-Hitstun= 6
+Hitstun= 9
 Blockstun= 2 
 Hitzone= MID
 Damage= 50

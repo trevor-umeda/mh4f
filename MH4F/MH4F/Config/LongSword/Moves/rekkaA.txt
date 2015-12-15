@@ -23,7 +23,7 @@ Hurtbox=[ 0;445;399;155;452
 7;445;399;155;452
 8;445;399;155;452
 9;445;399;155;452 ]
-Hitstun= 6
+Hitstun= 8
 Blockstun= 2 
 Hitzone= MID
 Damage= 50

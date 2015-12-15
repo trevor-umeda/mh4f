@@ -661,6 +661,33 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\BACKDASH.xnb</Output>
       <Time>2015-12-11T18:56:12.823836-08:00</Time>
     </Item>
+    <Item>
+      <Source>LongSword\2C.png</Source>
+      <Name>LongSword\2C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\2C.xnb</Output>
+      <Time>2015-12-13T22:49:11.0179511-08:00</Time>
+    </Item>
+    <Item>
+      <Source>LongSword\2B.png</Source>
+      <Name>LongSword\2B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\2B.xnb</Output>
+      <Time>2015-12-13T22:57:38.3999717-08:00</Time>
+    </Item>
+    <Item>
+      <Source>LongSword\2_HIT.png</Source>
+      <Name>LongSword\2_HIT</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\LongSword\2_HIT.xnb</Output>
+      <Time>2015-12-14T19:22:38.1158122-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

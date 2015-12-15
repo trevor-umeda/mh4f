@@ -64,6 +64,8 @@ Content\LongSword\JB.xnb
 Content\LongSword\JC.xnb
 Content\LongSword\BACKDASH.xnb
 Content\LongSword\5C.xnb
+Content\LongSword\2B.xnb
+Content\LongSword\2C.xnb
 Content\Font.xnb
 Content\testf.xnb
 Content\slap_large.xnb
@@ -74,8 +76,6 @@ Content\bgm\20.xnb
 Content\bgm\20.wma
 Content\bgm\25.xnb
 Content\bgm\25.wma
-Content\LongSword\2B.xnb
-Content\LongSword\2C.xnb
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png

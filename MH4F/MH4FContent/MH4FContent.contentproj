@@ -616,6 +616,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LongSword\2C.png">
+      <Name>2C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="LongSword\2B.png">
       <Name>2B</Name>
       <Importer>TextureImporter</Importer>
@@ -623,8 +630,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LongSword\2C.png">
-      <Name>2C</Name>
+    <Compile Include="LongSword\2_HIT.png">
+      <Name>2_HIT</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

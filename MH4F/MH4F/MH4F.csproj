@@ -203,16 +203,25 @@
     <Content Include="Config\LongSword\Moves\cattack.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\LongSword\Moves\2aattack.txt">
+    <Content Include="Config\LongSword\Moves\2battack.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\backcattack.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\LongSword\Moves\2battack.txt">
+    <Content Include="Config\LongSword\Moves\2aattack.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\2cattack.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\crouchhit.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\downed.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\LongSword\Moves\ko.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\LongSword\Moves\jcattack.txt">

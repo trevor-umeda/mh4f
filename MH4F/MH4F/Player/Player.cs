@@ -88,11 +88,11 @@ namespace MH4F
         /// <summary>
         ///  Configuralbe stuffs
         /// </summary>
-        readonly Vector2 gravityModifierV = new Vector2(0, 1500f);
+        readonly Vector2 gravityModifierV = new Vector2(0, 2500f);
 
-        readonly Vector2 initialJumpSpeed = new Vector2(0, -800);
+        readonly Vector2 initialJumpSpeed = new Vector2(0, -1200);
 
-        readonly float jumpHorizontalSpeed = 200f;
+        readonly float jumpHorizontalSpeed = 350f;
 
         public int BackAirDashVel { get; set; }
         public int AirDashVel { get; set; }
@@ -221,8 +221,7 @@ namespace MH4F
             RegisterGroundMove("2aattack", new List<string> { "2A" });
             RegisterGroundMove("2battack", new List<string> { "2B" });
             RegisterGroundMove("2cattack", new List<string> { "2C" });
-            RegisterGroundMove("crouchbattack", new List<string> { "2B" });
-            RegisterGroundMove("crouchcattack", new List<string> { "2C" });
+   
             RegisterGroundMove("cattack", new List<string> { "C" });
             RegisterGroundMove("battack", new List<string> { "B" });
             RegisterGroundMove("aattack", new List<string> { "A" });
@@ -634,6 +633,10 @@ namespace MH4F
                   CharacterState.AIRBORNEHIT == sprite.CurrentMoveAnimation.CharacterState)
               {
                   Sprite.CurrentAnimation = "hitground";
+                  if (CurrentHealth <= 0)
+                  {
+                      Sprite.CurrentAnimation = "KO";
+                  }
               }
               else
               {
@@ -936,7 +939,11 @@ namespace MH4F
                 ProjectileManager.createHitparticle(collisionZone, hitInfo.HitType);
                 // So many different ways to get hit
                 //
-                if (hitInfo.Hitzone == Hitzone.LOW)
+                if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.CROUCHING )
+                {
+                    Sprite.CurrentAnimation = "crouchhit";
+                }
+                else if (hitInfo.Hitzone == Hitzone.LOW)
                 {
                     Sprite.CurrentAnimation = "lowhit";
                 }
@@ -944,7 +951,8 @@ namespace MH4F
                 {
                     Sprite.CurrentAnimation = "hit";
                 }
-            
+
+               
 
                 Sprite.CurrentMoveAnimation.CurrentFrame = Sprite.CurrentMoveAnimation.StartFrame;
                 CurrentHealth -= ComboManager.calculateProratedDamage(hitInfo);
@@ -961,6 +969,12 @@ namespace MH4F
                     HitAnimation hit = (HitAnimation)Sprite.CurrentMoveAnimation;
                     hit.HitStunCounter = ComboManager.calculateProratedHitStun(hitInfo);
                     hit.reset();
+                    if (CurrentHealth <= 0)
+                    {
+                        hitInfo = new HitInfo(100, 10, Hitzone.MID);
+                        hitInfo.AirXVelocity = 300;
+                        hitInfo.AirYVelocity = -100;
+                    }
                     if (IsAirborne || hitInfo.ForceAirborne || CurrentHealth <= 0)
                     {
                         untechTime = hitInfo.AirUntechTime;

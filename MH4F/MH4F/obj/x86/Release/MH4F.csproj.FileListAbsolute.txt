@@ -360,3 +360,9 @@ C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\2battac
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\2B.xnb
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\2cattack.txt
 C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\2C.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\2battack.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\2cattack.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\2B.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\2C.xnb
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\downed.txt
+C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\ko.txt

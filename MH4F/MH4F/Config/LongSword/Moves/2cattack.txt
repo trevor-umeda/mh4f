@@ -5,12 +5,12 @@ YImageStart= 0
 Width= 990
 Height= 576
 FrameCount= 12
-Columns= 3
+Columns= 4
 FrameLength= 0.0167
 FrameLengthInfo=2,2,2,2,4,5,2,4,4,4,4,4
 ResetHitInfo=6
 CharacterState= STANDING
-HitType=IMPACT
+HitType=SLASH
 IsAttack= true
 Hitbox=[5;200;458;186;88
 6;243;342;254;159
