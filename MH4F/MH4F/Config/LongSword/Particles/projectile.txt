@@ -11,10 +11,10 @@ IsProjectile=true
 Hitbox=[0;256;128;400;150
 1;256;128;400;150]
 NumOfHits = 3
-Hitstun= 6
+Hitstun= 12
 Blockstun= 2 
 Hitzone= MID
-Damage= 50
+Damage= 75
 TimerLength=300
 XSpeed=10
 YSpeed=0

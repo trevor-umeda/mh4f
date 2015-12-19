@@ -259,7 +259,7 @@ namespace MH4F
                             //
                             Rectangle test = Rectangle.Intersect(player1.Sprite.Hitbox, player2.Sprite.Hurtbox);
 
-                            hitstop = 7;
+                            hitstop = 11;
                             comboManager.player1LandedHit(player2.CharacterState);
                             player2.hitByEnemy(Keyboard.GetState(), player1.Sprite.CurrentMoveAnimation.HitInfo, test);
                             player1.hitEnemy();
@@ -273,6 +273,7 @@ namespace MH4F
                         }
                         else if (player2.Sprite.Hitbox.Intersects(player1.Sprite.Hurtbox) && !player2.HasHitOpponent && player2.Sprite.CurrentMoveAnimation.HitInfo != null)
                         {
+                            hitstop = 7;
                             Rectangle test = Rectangle.Intersect(player1.Sprite.Hurtbox, player2.Sprite.Hitbox);
 
                             comboManager.player2LandedHit(player1.CharacterState);

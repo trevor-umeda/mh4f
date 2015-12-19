@@ -28,4 +28,4 @@ IsHardKnockDown= false
 AirUntechTime= 3
 AirXVelocity= 5
 AirYVelocity= 5
-Input= B
+Input= A

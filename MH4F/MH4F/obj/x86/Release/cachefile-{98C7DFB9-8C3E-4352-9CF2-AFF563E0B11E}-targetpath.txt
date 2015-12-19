@@ -76,6 +76,7 @@ Content\bgm\20.xnb
 Content\bgm\20.wma
 Content\bgm\25.xnb
 Content\bgm\25.wma
+Content\LongSword\2_HIT.xnb
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png

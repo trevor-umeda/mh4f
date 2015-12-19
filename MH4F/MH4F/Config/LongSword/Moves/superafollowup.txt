@@ -4,12 +4,13 @@ XImageStart=0
 YImageStart= 0
 Width=900
 Height=650
-FrameCount=17
+FrameCount=16
 Columns=4
-FrameLength=0.04
+FrameLength=0.018
+StartFrame=7
 CharacterState=STANDING
 IsAttack=true
-XMovement=0,0,0,6,6,6,6,6,6,6,8,8,8,8,8,6,6
+XMovement=0,0,0,20,20,20,20,20,20,20,15,10,8,8,8,6,6
 Hurtbox=[ 0;411;541;294;149
 1;411;541;294;149
 2;411;541;294;149
@@ -25,6 +26,5 @@ Hurtbox=[ 0;411;541;294;149
 12;411;541;294;149
 13;411;541;294;149
 14;411;541;294;149 
-15;411;541;294;149
-16;411;541;294;149 ]
+15;411;541;294;149 ]
 NextAnimation=superaslash

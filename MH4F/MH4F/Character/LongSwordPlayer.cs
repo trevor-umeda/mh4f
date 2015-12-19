@@ -46,6 +46,12 @@ namespace MH4F
             SwordGaugeGains.Add("aattack", 5);
             SwordGaugeGains.Add("battack", 10);
             SwordGaugeGains.Add("cattack", 15);
+            SwordGaugeGains.Add("2aattack", 5);
+            SwordGaugeGains.Add("2battack", 10);
+            SwordGaugeGains.Add("2cattack", 15);
+            SwordGaugeGains.Add("jaattack", 5);
+            SwordGaugeGains.Add("jbattack", 10);
+            SwordGaugeGains.Add("jcattack", 15);
            // MoveCosts.Add("battack", 10);
             MoveCosts.Add("backfireball", 25);
 

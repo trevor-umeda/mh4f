@@ -679,6 +679,15 @@
       <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\bgm\25.wma</Extra>
       <Time>2015-09-07T22:53:19.8282416-07:00</Time>
     </Item>
+    <Item>
+      <Source>LongSword\2_HIT.png</Source>
+      <Name>LongSword\2_HIT</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\2_HIT.xnb</Output>
+      <Time>2015-12-14T19:22:38.1158122-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

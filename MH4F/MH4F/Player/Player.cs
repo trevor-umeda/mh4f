@@ -711,7 +711,7 @@ namespace MH4F
             {
                 Backstep();
             }
-            if (Sprite.CurrentAnimation == "dash")
+            if (Sprite.CurrentAnimation == "dash" && IsCancealableMove)
             {
                 Dash();
                 // If dash and they jump, do a dash jump

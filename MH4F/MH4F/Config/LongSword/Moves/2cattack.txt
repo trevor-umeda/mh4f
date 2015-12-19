@@ -22,12 +22,12 @@ Hurtbox=[ 0;238;287;229;346
 4;238;287;229;346
 5;238;287;229;346
 6;238;287;229;346 ]
-Hitstun= 3
+Hitstun= 11
 Blockstun= 2 
 Hitzone= LOW
 Damage= 50
 IsHardKnockDown= false
 AirUntechTime= 3
-AirXVelocity= 5
-AirYVelocity= 5
-Input= B
+AirXVelocity= 200
+AirYVelocity= -500
+Input= C
