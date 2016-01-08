@@ -170,6 +170,12 @@
     <Content Include="Config\Base\portraits\LongSword.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\HuntingHorn\Moves\crouching.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\HuntingHorn\Moves\crouchingidle.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\HuntingHorn\Moves\standing.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

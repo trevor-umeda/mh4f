@@ -398,15 +398,6 @@
       <Time>2015-10-21T00:26:08.13366-07:00</Time>
     </Item>
     <Item>
-      <Source>HuntingHorn\HH5.png</Source>
-      <Name>HuntingHorn\HH5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH5.xnb</Output>
-      <Time>2015-11-10T23:48:06.9842987-08:00</Time>
-    </Item>
-    <Item>
       <Source>punch2_fx.png</Source>
       <Name>punch2_fx</Name>
       <Importer>TextureImporter</Importer>
@@ -687,6 +678,24 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm\25.xnb</Output>
       <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\bgm\25.wma</Extra>
       <Time>2015-09-07T22:53:19.8282416-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_2.png</Source>
+      <Name>HuntingHorn\HH_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH_2.xnb</Output>
+      <Time>2016-01-07T18:45:03.1849586-08:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_5.png</Source>
+      <Name>HuntingHorn\HH_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH_5.xnb</Output>
+      <Time>2016-01-07T18:45:03.1859586-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
