@@ -87,6 +87,7 @@ namespace MH4F
                 rekkaLevel = 1;
                 SuperManager.endSuper(PlayerNumber);
                 DisplayShadow = false;
+                IsPhysical = true;
             }
         }
 

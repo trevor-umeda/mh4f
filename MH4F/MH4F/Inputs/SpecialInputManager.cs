@@ -38,7 +38,7 @@ namespace MH4F
 
             if (inputManager.DetermineJumpPress(newKeyboardState))
             {
-                Console.WriteLine("JUMP CANCEL");
+               // Console.WriteLine("JUMP CANCEL");
                 return "jumpcancel";
             }
             if(!inputManager.DetermineButtonPress(newKeyboardState))

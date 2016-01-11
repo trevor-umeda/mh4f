@@ -407,7 +407,7 @@ namespace MH4F
 
         public void determineCurrentMove(GameTime gameTime, KeyboardState ks, Boolean inHitstop)
         {
- 
+
           String moveName = SpecialInputManager.checkMoves(Sprite.CurrentMoveAnimation.CharacterState, Direction, Sprite.CurrentAnimation, ks);
         
           // See if we are in a state to change moves
@@ -443,7 +443,7 @@ namespace MH4F
                       }
                   }
                   else if (Sprite.CurrentMoveAnimation == null ||
-               Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
+                            Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
                   {
                       if ((IsCancealableMove || HasHitOpponent) && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
                       {
@@ -924,7 +924,8 @@ namespace MH4F
         {
             //Check if blocked or not
             //int hitStun, int blockStun, Hitzone hitzone, float? xVel, float? yVel
-            if(!hitInfo.Unblockable && isAttackBlocked(keyState, hitInfo.Hitzone) )
+            if(!hitInfo.Unblockable && Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT
+                && !Sprite.CurrentMoveAnimation.IsAttack && isAttackBlocked(keyState, hitInfo.Hitzone) )
             {
                 Sprite.CurrentAnimation = "block";
                 HitAnimation block = (HitAnimation)Sprite.CurrentMoveAnimation;

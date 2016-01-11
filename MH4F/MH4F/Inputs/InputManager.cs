@@ -43,7 +43,7 @@ namespace MH4F
             dashList.Add(new MoveInput("dash", new List<string> { "6", "5", "6" }));           
         }
 
-        public String checkMoves(Direction direction, KeyboardState newKeyboardState, List<MoveInput> moveList)
+        public String checkMoves(Direction direction, KeyboardState newKeyboardState, List<MoveInput> moveList, Boolean dashCancealable)
         {
           
             // on a button press determine if a special move was inputted.
@@ -89,7 +89,7 @@ namespace MH4F
             }
             // Otherwise this is a movement special input like a dash
             //
-            else
+            else if(dashCancealable)
             {
                 // Atm we only really care about reading a dash
                 //
@@ -124,11 +124,13 @@ namespace MH4F
             // Check to see if we have a gatling table for the move. otherwise just have everything
             //
             List<MoveInput> possibleMoveList = gatlingTable.getPossibleGatlings(currentMove);
+            Boolean dashCancealable = false;
             if (possibleMoveList == null)
             {
                 possibleMoveList = groundMoveList;
+                dashCancealable = true;
             }
-            return checkMoves(direction, newKeyboardState, possibleMoveList);
+            return checkMoves(direction, newKeyboardState, possibleMoveList, dashCancealable);
         }
 
         public String checkAirMoves(Direction direction, String currentMove, KeyboardState newKeyboardState)
@@ -140,7 +142,7 @@ namespace MH4F
             {
                 possibleMoveList = airMoveList;
             }
-            return checkMoves(direction, newKeyboardState, possibleMoveList);
+            return checkMoves(direction, newKeyboardState, possibleMoveList, true);
         }
 
         public bool DetermineJumpPress(KeyboardState presentState)

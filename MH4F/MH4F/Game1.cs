@@ -195,6 +195,7 @@ namespace MH4F
             }
             else if (gameState == GameState.ROUNDEND)
             {
+                projectileManager.clearAllProjectiles();
                 player1.Update(gameTime, Keyboard.GetState(), false);
                 player2.Update(gameTime, Keyboard.GetState(), false); 
                 roundManager.handleRoundEnd(projectileManager);
@@ -414,16 +415,16 @@ namespace MH4F
 
                 string health = string.Format("Health: {0}", player1.CurrentHealth);
 
-                spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
-                spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
-                spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
+                //spriteBatch.DrawString(spriteFont, fps, new Vector2(33, 33), Color.Black);
+                //spriteBatch.DrawString(spriteFont, fps, new Vector2(32, 32), Color.White);
+                //spriteBatch.DrawString(spriteFont, health, new Vector2(50, 50), Color.Black);
 
                 spriteBatch.End();
 
                 spriteBatch.Begin();
         
-                spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(500, 30), Color.Black);
-                spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(501, 31), Color.White);
+                spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(640, 30), Color.Black);
+                spriteBatch.DrawString(spriteFont, roundManager.displayTime(), new Vector2(641, 31), Color.White);
                 comboManager.displayComboMessage(spriteBatch);
                 Color black = Color.Black * roundManager.FadeAmount;
                 spriteBatch.Draw(dummyTexture, mainFrame, black);

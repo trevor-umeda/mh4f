@@ -368,3 +368,7 @@ C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\downed.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\ko.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\crouchhit.txt
 C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\LongSword\2_HIT.xnb
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\crouchhit.txt
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\downed.txt
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Config\LongSword\Moves\ko.txt
+C:\Users\Frogg\src\mh4f\MH4F\MH4F\bin\x86\Release\Content\LongSword\2_HIT.xnb

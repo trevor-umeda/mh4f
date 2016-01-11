@@ -12,8 +12,8 @@ namespace MH4F
         private String FORWARD_THROW_INPUT = "6C";
         private String BACK_THROW_INPUT = "4C";
 
-        private String FORWARD_THROW_WHIFF_MOVE = "forwardcattack";
-        private String BACK_THROW_WHIFF_MOVE = "backcattack";
+        private String FORWARD_THROW_WHIFF_MOVE = "cattack";
+        private String BACK_THROW_WHIFF_MOVE = "cattack";
 
         private CharacterState player1State;
         private CharacterState player2State;
