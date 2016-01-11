@@ -154,7 +154,7 @@ namespace MH4F
 
             characterSelection = new CharacterSelectList(Content);
             gameState = GameState.LOADING;
-            player1CharacterId = "LongSword";
+            player1CharacterId = "HuntingHorn";
             player2CharacterId = "LongSword";
            
         }

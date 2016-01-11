@@ -1,12 +1,12 @@
 ﻿name= standing
-sprite= HH5
+sprite= HH_5
 XImageStart= 0
 YImageStart= 0
-Width=550
-Height=600
-FrameCount=12
-Columns=3
-FrameLength=0.05
+Width=449
+Height=555
+FrameCount=13
+Columns=5
+FrameLength=0.08
 CharacterState=STANDING
 Hurtbox=[ 0;280;233;155;452
 1;280;233;155;452
@@ -19,4 +19,5 @@ Hurtbox=[ 0;280;233;155;452
 8;280;233;155;452
 9;280;233;155;452 
 10;280;233;155;452
-11;280;233;155;452 ]
+11;280;233;155;452 
+12;280;233;155;452]

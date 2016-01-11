@@ -133,7 +133,7 @@ namespace MH4F
            
             characterSelection = new CharacterSelectList(Content);
            
-            player1CharacterId = "LongSword";
+            player1CharacterId = "HuntingHorn";
      
 
             PlayerFactory playerFactory = new PlayerFactory();

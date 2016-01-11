@@ -466,13 +466,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HuntingHorn\HH5.png">
-      <Name>HH5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="punch2_fx.png">
       <Name>punch2_fx</Name>
       <Importer>TextureImporter</Importer>
@@ -634,6 +627,20 @@
       <Name>2_HIT</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HuntingHorn\HH_2.png">
+      <Name>HH_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="HuntingHorn\HH_5.png">
+      <Name>HH_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

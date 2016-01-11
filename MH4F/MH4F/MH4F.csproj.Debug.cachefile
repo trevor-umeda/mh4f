@@ -42,7 +42,6 @@ Content\LongSword\JUMP_PT1.xnb
 Content\LongSword\JUMP_PT2.xnb
 Content\LongSword\2A_THINSLICE.xnb
 Content\LongSword\2A_BIGSLICE.xnb
-Content\HuntingHorn\HH5.xnb
 Content\punch2_fx.xnb
 Content\slash_fx_1.xnb
 Content\LongSword\LIARA_SPECIAL_STARTUP.xnb
@@ -74,6 +73,8 @@ Content\airbackdash_h.xnb
 Content\bgm.xnb
 Content\bgm\20.xnb
 Content\bgm\25.xnb
+Content\HuntingHorn\HH_2.xnb
+Content\HuntingHorn\HH_5.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -100,6 +101,8 @@ Content\LongSword\2A_THINSLICE.png
 Content\LongSword\2A_BIGSLICE.png
 Content\LongSword\super_decal_liara.png
 Content\LongSword\5C.png
+Content\HuntingHorn\HH_2.png
+Content\HuntingHorn\HH_5.png
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png
@@ -115,6 +118,8 @@ Content\LongSword\RUN.png
 Content\LongSword\6WALK.png
 Content\LongSword\dash_1.png
 Content\LongSword\neutral.png
+Config\HuntingHorn\Moves\crouching.txt
+Config\HuntingHorn\Moves\crouchingidle.txt
 Config\HuntingHorn\Moves\standing.txt
 Config\LongSword\Gatling.txt
 Config\LongSword\Moves\aattack.txt
