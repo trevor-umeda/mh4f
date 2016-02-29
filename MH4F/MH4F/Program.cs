@@ -10,7 +10,7 @@ namespace MH4F
         /// </summary>
         static void Main(string[] args)
         {
-            using (HitboxEditor game = new HitboxEditor())
+            using (Game1 game = new Game1())
             {
                 game.Run();
             }

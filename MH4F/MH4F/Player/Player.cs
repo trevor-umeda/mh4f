@@ -440,11 +440,21 @@ namespace MH4F
                           {
                               Jump();
                           }
+                          if (Direction == Direction.Right)
+                          {
+                              ProjectileManager.createJumpParticle(Position.X, Position.Y + Sprite.CurrentMoveAnimation.FrameHeight, Direction.Left);
+                          }
+                          else
+                          {
+                              ProjectileManager.createJumpParticle(Position.X + Sprite.CurrentMoveAnimation.FrameWidth, Position.Y + Sprite.CurrentMoveAnimation.FrameHeight, Direction.Right);
+                          }
                       }
                   }
                   else if (Sprite.CurrentMoveAnimation == null ||
                             Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
                   {
+                      // Jump canceling moves
+                      //
                       if ((IsCancealableMove || HasHitOpponent) && timesJumped < airJumpLimit && prevKeyboardState.IsKeyUp(controlSetting.Controls["up"]) && ks.IsKeyDown(controlSetting.Controls["up"]))
                       {
 
@@ -527,7 +537,10 @@ namespace MH4F
                               // Doing an airdash or back step
                               //
                               SoundManager.PlaySound(moveName);
-
+                              if(moveName == "dash" && Sprite.CurrentAnimation != "dash")
+                              {
+                                  ProjectileManager.createDashParticle(Position.X, Position.Y + Sprite.CurrentMoveAnimation.FrameHeight, Direction);
+                              }
                               Sprite.CurrentAnimation = moveName;
 
                               // If we're in the air when we do it, note we jumped up
@@ -559,9 +572,7 @@ namespace MH4F
         public void handlePerformCurrentMove(GameTime gameTime, KeyboardState ks)
         {
           // Parse the ground special inputs here
-          //
-            
-            
+          //   
           if (!IsAirborne)
           {
               performGroundSpecialMove(ks, Sprite.CurrentAnimation);
@@ -676,6 +687,7 @@ namespace MH4F
             {
                 Sprite.MoveBy(DashVel, 0);
             }
+            
         }
 
         public virtual void cleanUp()
@@ -713,6 +725,7 @@ namespace MH4F
             }
             if (Sprite.CurrentAnimation == "dash" && IsCancealableMove)
             {
+                
                 Dash();
                 // If dash and they jump, do a dash jump
                 //

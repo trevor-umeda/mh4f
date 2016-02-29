@@ -13,6 +13,7 @@ namespace MH4F
         Vector2 v2Position = new Vector2(0, 0);
         Vector2 v2Center;
         float rotation;
+        SpriteEffects effects;
         Random random = new Random();
         public float Rotation
         {
@@ -42,7 +43,7 @@ namespace MH4F
             FrameLength = frameLength;
             Columns = columns;
         }
-        public ParticleAnimation NewInstance(int XPos, int YPos)
+        public ParticleAnimation NewInstance(int XPos, int YPos, bool randomized)
         {
            ParticleAnimation clonedParticle = new ParticleAnimation(
                Texture,
@@ -55,14 +56,38 @@ namespace MH4F
                 FrameLength
                );
             clonedParticle.Position = new Vector2(XPos, YPos);
-            
-            double mantissa = (random.NextDouble() * 2.0) - 1.0;
-            double exponent = Math.Pow(2.0, random.Next(0, 6));
-            float RotationAngle = (float)(mantissa * exponent);
-            float circle = MathHelper.Pi * 2;
-            clonedParticle.Rotation = RotationAngle % circle;
+
+            if (randomized)
+            {
+                double mantissa = (random.NextDouble() * 2.0) - 1.0;
+                double exponent = Math.Pow(2.0, random.Next(0, 6));
+                float RotationAngle = (float)(mantissa * exponent);
+                float circle = MathHelper.Pi * 2;
+                clonedParticle.Rotation = RotationAngle % circle;
+            }
+            else 
+            {
+                clonedParticle.Rotation = 0;
+            }
+            clonedParticle.effects = SpriteEffects.FlipHorizontally;
             return clonedParticle;
         }
+
+        public ParticleAnimation NewInstance(int XPos, int YPos, bool randomized, Direction direction)
+        {
+            ParticleAnimation clonedParticle = NewInstance(XPos, YPos, randomized);
+            if (direction == Direction.Left)
+            {
+                clonedParticle.effects = SpriteEffects.FlipHorizontally;
+                
+            }
+            else
+            {
+                clonedParticle.effects = SpriteEffects.None;
+            }
+            return clonedParticle;
+        }
+
         public void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -81,7 +106,7 @@ namespace MH4F
             
             spriteBatch.Draw(Texture, (v2Position),
                                   FrameRectangle, Color.White,
-                                  Rotation, v2Center, 1f, SpriteEffects.FlipHorizontally, 0);
+                                  Rotation, v2Center, 1f, effects, 0);
         }
     }
 }

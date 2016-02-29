@@ -697,6 +697,24 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH_5.xnb</Output>
       <Time>2016-01-07T18:45:03.1859586-08:00</Time>
     </Item>
+    <Item>
+      <Source>jump_dust.png</Source>
+      <Name>jump_dust</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\jump_dust.xnb</Output>
+      <Time>2016-02-28T21:41:43.2110052-08:00</Time>
+    </Item>
+    <Item>
+      <Source>dash_dust.png</Source>
+      <Name>dash_dust</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\dash_dust.xnb</Output>
+      <Time>2016-02-28T22:31:42.9655814-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

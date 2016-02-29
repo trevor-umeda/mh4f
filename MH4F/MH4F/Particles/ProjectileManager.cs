@@ -19,6 +19,10 @@ namespace MH4F
         ParticleAnimation slashEffect;
         ParticleAnimation blockEffect;
 
+        ParticleAnimation jumpEffect;
+
+        ParticleAnimation dashEffect;
+
         ParticleAnimation portrait;
         public ProjectileManager(ContentManager content)
         {
@@ -83,6 +87,34 @@ namespace MH4F
                 int.Parse((String)moveInfo["Columns"]),
                 float.Parse((String)moveInfo["FrameLength"])
                ); // As a default this is prob fine
+
+            moveInfo = PlayerFactory.parseMoveInfo("Config/Base/effect/jumpDust.txt");
+
+            Texture2D jumpTexture = content.Load<Texture2D>((String)moveInfo["sprite"]);
+            jumpEffect = new ParticleAnimation(
+                jumpTexture,
+                int.Parse((String)moveInfo["XImageStart"]),
+                int.Parse((String)moveInfo["YImageStart"]),
+                int.Parse((String)moveInfo["Width"]),
+                int.Parse((String)moveInfo["Height"]),
+                int.Parse((String)moveInfo["FrameCount"]),
+                int.Parse((String)moveInfo["Columns"]),
+                float.Parse((String)moveInfo["FrameLength"])
+               ); // As a default this is prob fine
+
+            moveInfo = PlayerFactory.parseMoveInfo("Config/Base/effect/dashDust.txt");
+
+            Texture2D dashTexture = content.Load<Texture2D>((String)moveInfo["sprite"]);
+            dashEffect = new ParticleAnimation(
+                dashTexture,
+                int.Parse((String)moveInfo["XImageStart"]),
+                int.Parse((String)moveInfo["YImageStart"]),
+                int.Parse((String)moveInfo["Width"]),
+                int.Parse((String)moveInfo["Height"]),
+                int.Parse((String)moveInfo["FrameCount"]),
+                int.Parse((String)moveInfo["Columns"]),
+                float.Parse((String)moveInfo["FrameLength"])
+               ); // As a default this is prob fine
         }
 
         public List<Projectile> getPlayerProjectiles(int playerNumber)
@@ -104,6 +136,24 @@ namespace MH4F
             particles = new List<ParticleAnimation>();
          
         }
+
+        public void createJumpParticle(float xPos, float yPos, Direction direction)
+        {
+            if (direction == Direction.Right)
+            {
+                particles.Add(jumpEffect.NewInstance((int)xPos - jumpEffect.FrameWidth, (int)yPos - jumpEffect.FrameHeight, false, direction));
+            }
+            else
+            {
+                particles.Add(jumpEffect.NewInstance((int)xPos, (int)yPos - jumpEffect.FrameHeight, false, direction));
+            }
+        }
+
+        public void createDashParticle(float xPos, float yPos, Direction direction)
+        {
+            particles.Add(dashEffect.NewInstance((int)xPos, (int)yPos - dashEffect.FrameHeight, false, direction));
+        }
+
         public void createHitparticle(Rectangle hitSection, HitType hitType)
         {
             Vector2 center = new Vector2(hitSection.X + (hitSection.Width/2), hitSection.Y + (hitSection.Height/2));
@@ -112,19 +162,19 @@ namespace MH4F
             {
                 int xPos = ((int)center.X - punchEffect.FrameHeight / 2);
                 int yPos = (int)center.Y - punchEffect.FrameWidth / 2;
-                particles.Add(punchEffect.NewInstance(xPos, yPos));
+                particles.Add(punchEffect.NewInstance(xPos, yPos, true));
             }
             else if (hitType == HitType.BLOCK)
             {
                 int xPos = ((int)center.X - blockEffect.FrameHeight / 2);
                 int yPos = (int)center.Y - blockEffect.FrameWidth / 2;
-                particles.Add(blockEffect.NewInstance(xPos, yPos));
+                particles.Add(blockEffect.NewInstance(xPos, yPos, true));
             }
             else
             {
                 int xPos = ((int)center.X - slashEffect.FrameHeight / 2);
                 int yPos = (int)center.Y - slashEffect.FrameWidth / 2;
-                particles.Add(slashEffect.NewInstance(xPos, yPos));
+                particles.Add(slashEffect.NewInstance(xPos, yPos, true));
             }
 
         }

@@ -75,6 +75,8 @@ Content\bgm\20.xnb
 Content\bgm\25.xnb
 Content\HuntingHorn\HH_2.xnb
 Content\HuntingHorn\HH_5.xnb
+Content\jump_dust.xnb
+Content\dash_dust.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
@@ -169,8 +171,10 @@ Config\LongSword\Moves\wakeup.txt
 Config\LongSword\Moves\walk.txt
 LongSwordSprites.txt
 Config\Base\effect\block.txt
+Config\Base\effect\dashDust.txt
 Config\Base\effect\slash.txt
 Config\Base\effect\impact.txt
+Config\Base\effect\jumpDust.txt
 Config\Base\portraits\LongSword.txt
 Config\LongSword\Moves\cattack.txt
 Config\LongSword\Moves\lowhit.txt
