@@ -122,6 +122,7 @@
     <Compile Include="Inputs\GatlingTable.cs" />
     <Compile Include="Inputs\InputMoveBuffer.cs" />
     <Compile Include="Particles\ProjectileManager.cs" />
+    <Compile Include="Player\Gauge.cs" />
     <Compile Include="RoundManager.cs" />
     <Compile Include="Sound\BGMManager.cs" />
     <Compile Include="Sound\SoundManager.cs" />

@@ -48,19 +48,13 @@ namespace MH4F
         int collisionBufferX = 0;
         int collisionBufferY = 0;
 
-        
-
         // Health
         //
-        private int health;
-        private int maxHealth;
-        Texture2D healthBar;
-        private int healthBarMargin;
+        Gauge healthBar;
+  
         // Special bar
         //
-        private int special;
-        private int maxSpecial = 100;
-        Texture2D specialBar;
+        Gauge specialBar;
 
         // Determine the status of the sprite.  An inactive sprite will not be updated but will be drawn.
         bool active = true;
@@ -114,7 +108,7 @@ namespace MH4F
         int untechTime = 0;
 
         Vector2 startingPosition;
-        public Player(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager)
+        public Player(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager, Gauge healthBar)
         {
             sprite = new SpriteAnimationManager();
             PlayerNumber = playerNumber;
@@ -127,6 +121,7 @@ namespace MH4F
             ControlSetting = new ControlSetting();
             InputMoveBuffer = new InputMoveBuffer();
             IsPhysical = true;
+            HealthBar = healthBar;
         }
 
         public ControlSetting ControlSetting
@@ -376,6 +371,8 @@ namespace MH4F
 
                sprite.Update(gameTime, Direction);
 
+               HealthBar.Update(gameTime);
+               SpecialBar.Update(gameTime);
                handleExtraMovement();
                cleanUp();
            }
@@ -1107,25 +1104,24 @@ namespace MH4F
 
         public virtual void DrawGauges(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
-                        20, (int)(HealthBar.Width * ((double)CurrentHealth / MaxHealth)), 44), new Rectangle(0, 45, HealthBar.Width, 44), Color.Red);
+            //spriteBatch.Draw(HealthBar.HealthBarTexture, new Rectangle(HealthBar.HealthBarMargin,
+            //            20, 425, 150), new Rectangle(0, 0, 425, 150), Color.White);
 
             //Draw the box around the health bar
-            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
-                    20, HealthBar.Width, 44), new Rectangle(0, 0, HealthBar.Width, 44), Color.White);
-
-            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
-                        675, (int)(HealthBar.Width * ((double)CurrentSpecial / MaxSpecial)), 44), new Rectangle(0, 45, HealthBar.Width, 44), Color.Blue);
+            HealthBar.Draw(spriteBatch);
+            SpecialBar.Draw(spriteBatch);
+            //spriteBatch.Draw(HealthBar.HealthBarTexture, new Rectangle(HealthBar.HealthBarMargin,
+            //            675, (int)(HealthBar.Width * ((double)CurrentSpecial / MaxSpecial)), 44), new Rectangle(0, 45, HealthBar.Width, 44), Color.Blue);
 
             //Draw the box around the health bar
-            spriteBatch.Draw(HealthBar, new Rectangle(healthBarMargin,
-                    675, HealthBar.Width, 44), new Rectangle(0, 0, HealthBar.Width, 44), Color.White);
+            //spriteBatch.Draw(HealthBar.HealthBarTexture, new Rectangle(HealthBar.HealthBarMargin,
+            //        675, HealthBar.Width, 44), new Rectangle(0, 0, HealthBar.Width, 44), Color.White);
 
         }
 
         public virtual void setUpGauges(ContentManager content, int healthBar)
         {
-            healthBarMargin = healthBar;
+   
         }
 
         public virtual void resetRound()
@@ -1149,17 +1145,17 @@ namespace MH4F
         }
         public int CurrentHealth
         {
-            get { return health; }
-            set { health = value; }
+            get { return HealthBar.CurrentAmount; }
+            set { HealthBar.CurrentAmount = value; }
         }
 
         public int MaxHealth
         {
-            get { return maxHealth; }
-            set { maxHealth = value; }
+            get { return HealthBar.MaxAmount; }
+            set { HealthBar.MaxAmount = value; }
         }
 
-        public Texture2D HealthBar
+        public Gauge HealthBar
         {
             get { return healthBar; }
             set { healthBar = value; }
@@ -1167,17 +1163,17 @@ namespace MH4F
 
         public int CurrentSpecial
         {
-            get { return special; }
-            set { special = value; }
+            get { return SpecialBar.CurrentAmount; }
+            set { SpecialBar.CurrentAmount = value; }
         }
 
         public int MaxSpecial
         {
-            get { return maxSpecial; }
-            set { maxSpecial = value; }
+            get { return SpecialBar.MaxAmount; }
+            set { SpecialBar.MaxAmount = value; }
         }
 
-        public Texture2D SpecialBar
+        public Gauge SpecialBar
         {
             get { return specialBar; }
             set { specialBar = value; }

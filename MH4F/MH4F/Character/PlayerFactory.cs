@@ -21,38 +21,46 @@ namespace MH4F
 
             int xPosition;
             int healthBarMargin;
-            Texture2D healthBar = content.Load<Texture2D>("HealthBar2");
+            Texture2D healthBar = content.Load<Texture2D>("healthBar1");
+            Texture2D healthOuterBar = content.Load<Texture2D>("HealthBar_empty");
+            Texture2D specialBar = content.Load<Texture2D>("specialbar2");
+            Texture2D specialOuterBar = content.Load<Texture2D>("Special_4split_empty");
             Direction direction;
             if (playerNumber == 1)
             {
                 xPosition = Config.Instance.Player1XPosition;
-                healthBarMargin = ((Config.Instance.ScreenWidth / 2) - healthBar.Width) / 2;
+                healthBarMargin = ((Config.Instance.ScreenWidth / 2) - 600) / 2;
                 direction = Direction.Right;
             }
             else
             {
                 xPosition = Config.Instance.Player2XPosition;
-                healthBarMargin = (((Config.Instance.ScreenWidth / 2) - healthBar.Width) / 2) + (Config.Instance.ScreenWidth / 2);
+                healthBarMargin = (((Config.Instance.ScreenWidth / 2) - 600) / 2) + (Config.Instance.ScreenWidth / 2);
                 direction = Direction.Left;
             }
-
+            Gauge HealthBar = new Gauge(healthBar, 20, healthBarMargin, playerNumber, 10, new Rectangle(0,0,1276,150));
+            HealthBar.OuterBarTexture = healthOuterBar;
             if (CharacterId.Equals("LongSword"))
             {
-                player = new LongSwordPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager);
+                player = new LongSwordPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager, HealthBar);
             }
             else if (CharacterId.Equals("HuntingHorn"))
             {
-                player = new HuntingHornPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager);
+                player = new HuntingHornPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager, HealthBar);
             }
             else
             {
-                player = new LongSwordPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager);
+                player = new LongSwordPlayer(playerNumber, xPosition, Config.Instance.PlayerYHeight, comboManager, throwManager, HealthBar);
             }
             player.SuperManager = superManager;
             player.ProjectileManager = projectileManager;
             player.Sprite.dummyTexture = DummyTexture;
 
-            player.HealthBar = healthBar;
+            player.SpecialBar = new Gauge(specialBar, 675, healthBarMargin, playerNumber, 15, new Rectangle(0, 0, 934, 68));
+            player.SpecialBar.CurrentAmount = 0;
+            player.SpecialBar.MaxAmount = 100;
+            player.SpecialBar.OuterBarTexture = specialOuterBar;
+
             player.Direction = direction;
             player.setUpGauges(content, healthBarMargin);        
             

@@ -13,7 +13,11 @@ namespace MH4F
     {
         bool DisplayShadow { get;  set;}
         int SwordLevel { get; set; }
-        int SwordGauge { get; set; }
+        int SwordGauge
+        {
+            get { return SwordGaugeBar.CurrentAmount; }
+            set { SwordGaugeBar.CurrentAmount = value; }
+        }
 
         int MaxSwordGauge = 100;
         int rekkaLevel;
@@ -25,11 +29,11 @@ namespace MH4F
         Dictionary<String, int> SwordGaugeGains { get; set; }
         Dictionary<String, int> MoveCosts { get; set; }
 
-        Texture2D SwordGaugeBar { get; set; }
+        Gauge SwordGaugeBar { get; set; }
         int swordGaugeBarMargin;
         int[] test;
-        public LongSwordPlayer(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager) 
-            : base ( playerNumber, xPosition, yHeight, comboManager, throwManager)
+        public LongSwordPlayer(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager, Gauge healthBar) 
+            : base ( playerNumber, xPosition, yHeight, comboManager, throwManager, healthBar)
         {
             CurrentHealth = 1000;
             MaxHealth = 1000;
@@ -38,7 +42,7 @@ namespace MH4F
             // D mechanic related moves
             //
             SwordLevel = 1;
-            SwordGauge = 0;
+           
 
             SwordGaugeGains = new Dictionary<String, int>();
             MoveCosts = new Dictionary<String, int>();
@@ -434,19 +438,24 @@ namespace MH4F
             base.DrawGauges(spriteBatch);
             //Draw the special filled
             //
-            spriteBatch.Draw(SwordGaugeBar, new Rectangle(swordGaugeBarMargin,
-                        630, (int)(SwordGaugeBar.Width * ((double)SwordGauge / MaxSwordGauge)), 25), new Rectangle(0, 45, SwordGaugeBar.Width, 44), Color.Green);
-
+            //spriteBatch.Draw(SwordGaugeBar, new Rectangle(swordGaugeBarMargin,
+            //            630, (int)(SwordGaugeBar.Width * ((double)SwordGauge / MaxSwordGauge)), 25), new Rectangle(0, 45, SwordGaugeBar.Width, 44), Color.Green);
+            SwordGaugeBar.Draw(spriteBatch);
             //Draw the box around the Special bar
-            spriteBatch.Draw(SwordGaugeBar, new Rectangle(swordGaugeBarMargin,
-                    630, SwordGaugeBar.Width, 25), new Rectangle(0, 0, SwordGaugeBar.Width, 44), Color.White);
+            //spriteBatch.Draw(SwordGaugeBar, new Rectangle(swordGaugeBarMargin,
+            //        630, SwordGaugeBar.Width, 25), new Rectangle(0, 0, SwordGaugeBar.Width, 44), Color.White);
         }
 
         public override void setUpGauges(ContentManager content, int healthBarMargin)
         {
             base.setUpGauges(content, healthBarMargin);
-            SwordGaugeBar = content.Load<Texture2D>("HealthBar2");
-            swordGaugeBarMargin = healthBarMargin;
+            Texture2D SwordGaugeBarTexture = content.Load<Texture2D>("swordlbar2");
+            Texture2D SwordGaugeBarOuterTexture = content.Load<Texture2D>("Liara_Special_empty");
+            SwordGaugeBar = new Gauge(SwordGaugeBarTexture, 630, healthBarMargin, PlayerNumber, 15, new Rectangle(0, 0, 948, 26));
+            SwordGaugeBar.OuterBarTexture = SwordGaugeBarOuterTexture;
+            SwordGaugeBar.MaxAmount = 100;
+            SwordGaugeBar.CurrentAmount = 0;
+        
         }
 
         public override void resetRound()

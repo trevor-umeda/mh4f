@@ -77,9 +77,16 @@ Content\HuntingHorn\HH_2.xnb
 Content\HuntingHorn\HH_5.xnb
 Content\jump_dust.xnb
 Content\dash_dust.xnb
+Content\healthbar1.xnb
+Content\specialbar2.xnb
+Content\Special_4split_empty.xnb
+Content\HealthBar_empty.xnb
+Content\swordlbar2.xnb
+Content\Liara_Special_empty.xnb
 Content\bgm.wma
 Content\bgm\20.wma
 Content\bgm\25.wma
+Content\HealthBar2.png
 Content\slap_large.wav
 Content\bgm.mp3
 Content\LongSword\STAND2.png
@@ -105,6 +112,10 @@ Content\LongSword\super_decal_liara.png
 Content\LongSword\5C.png
 Content\HuntingHorn\HH_2.png
 Content\HuntingHorn\HH_5.png
+Content\healthbar1.png
+Content\specialbar2.png
+Content\HealthBar_empty.png
+Content\Liara_Special_empty.png
 Content\LongSword\TEST.png
 Content\LongSword\TEST2.png
 Content\LongSword\combinedsprite.png

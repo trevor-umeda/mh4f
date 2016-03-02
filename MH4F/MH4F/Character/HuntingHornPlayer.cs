@@ -8,8 +8,8 @@ namespace MH4F
     class HuntingHornPlayer : Player
     {
 
-        public HuntingHornPlayer(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager) 
-            : base ( playerNumber, xPosition, yHeight, comboManager, throwManager)
+        public HuntingHornPlayer(int playerNumber, int xPosition, int yHeight, ComboManager comboManager, ThrowManager throwManager, Gauge healthBar) 
+            : base ( playerNumber, xPosition, yHeight, comboManager, throwManager, healthBar)
         {
             CurrentHealth = 1000;
             MaxHealth = 1000;

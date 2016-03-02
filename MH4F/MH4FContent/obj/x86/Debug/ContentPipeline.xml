@@ -715,6 +715,60 @@
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\dash_dust.xnb</Output>
       <Time>2016-02-28T22:31:42.9655814-08:00</Time>
     </Item>
+    <Item>
+      <Source>healthbar1.png</Source>
+      <Name>healthbar1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\healthbar1.xnb</Output>
+      <Time>2016-02-29T20:53:58.5657263-08:00</Time>
+    </Item>
+    <Item>
+      <Source>specialbar2.png</Source>
+      <Name>specialbar2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\specialbar2.xnb</Output>
+      <Time>2016-03-01T01:08:21.9967446-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Special_4split_empty.png</Source>
+      <Name>Special_4split_empty</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\Special_4split_empty.xnb</Output>
+      <Time>2016-03-01T21:18:15.05383-08:00</Time>
+    </Item>
+    <Item>
+      <Source>HealthBar_empty.png</Source>
+      <Name>HealthBar_empty</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HealthBar_empty.xnb</Output>
+      <Time>2016-03-01T21:25:20.3501555-08:00</Time>
+    </Item>
+    <Item>
+      <Source>swordlbar2.png</Source>
+      <Name>swordlbar2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\swordlbar2.xnb</Output>
+      <Time>2016-03-01T21:28:45.579894-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Liara_Special_empty.png</Source>
+      <Name>Liara_Special_empty</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\Liara_Special_empty.xnb</Output>
+      <Time>2016-03-01T21:32:58.3853536-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
