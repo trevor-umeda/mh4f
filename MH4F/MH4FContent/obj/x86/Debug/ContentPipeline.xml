@@ -695,7 +695,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH_5.xnb</Output>
-      <Time>2016-01-07T18:45:03.1859586-08:00</Time>
+      <Time>2016-03-01T22:47:14.0292019-08:00</Time>
     </Item>
     <Item>
       <Source>jump_dust.png</Source>
@@ -768,6 +768,78 @@
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\Liara_Special_empty.xnb</Output>
       <Time>2016-03-01T21:32:58.3853536-08:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_2A.png</Source>
+      <Name>HuntingHorn\HH_2A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH_2A.xnb</Output>
+      <Time>2016-03-01T22:40:02.8405393-08:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_5A.png</Source>
+      <Name>HuntingHorn\HH_5A</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH_5A.xnb</Output>
+      <Time>2016-03-01T22:40:02.8415394-08:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_5B.png</Source>
+      <Name>HuntingHorn\HH_5B</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\HuntingHorn\HH_5B.xnb</Output>
+      <Time>2016-03-01T22:40:02.8425394-08:00</Time>
+    </Item>
+    <Item>
+      <Source>background.png</Source>
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2016-03-02T23:06:34.8401071-08:00</Time>
+    </Item>
+    <Item>
+      <Source>main_castle.png</Source>
+      <Name>main_castle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\main_castle.xnb</Output>
+      <Time>2016-03-02T23:12:13.4854765-08:00</Time>
+    </Item>
+    <Item>
+      <Source>foreground.png</Source>
+      <Name>foreground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\foreground.xnb</Output>
+      <Time>2016-03-03T00:12:58.5159603-08:00</Time>
+    </Item>
+    <Item>
+      <Source>ground_placeholder.png</Source>
+      <Name>ground_placeholder</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\ground_placeholder.xnb</Output>
+      <Time>2016-03-03T00:12:58.5259609-08:00</Time>
+    </Item>
+    <Item>
+      <Source>midground.png</Source>
+      <Name>midground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Debug\Content\midground.xnb</Output>
+      <Time>2016-03-03T00:12:58.526961-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

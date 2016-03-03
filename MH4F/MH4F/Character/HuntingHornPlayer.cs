@@ -32,8 +32,8 @@ namespace MH4F
 
         public override void checkValidityAndChangeMove(string moveName)
         {
-            // If we have a designated cost for our move. Make sure we can perform it. 
-          
+           
+            base.changeMove(moveName);
         }
     }
 }

@@ -1,0 +1,4 @@
+﻿           | 2aattack  |aattack | battack    
+2aattack   |    x      |   x    |      x  	   
+aattack    |           |   x    |      x  
+battack    |           |        |         

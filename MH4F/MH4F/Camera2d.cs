@@ -13,6 +13,8 @@ namespace MH4F
         public Matrix transform; // Matrix Transform
         public Vector2 position; // Camera Position
         protected float rotation; // Camera Rotation
+        public Vector2 Origin { get; set; }
+
         protected float leftSideLimit;
         protected float rightSideLimit;
         protected float bottomSideLimit;
@@ -29,7 +31,7 @@ namespace MH4F
             zoom = 1.0f;
             rotation = 0.0f;
             position = new Vector2(gameWidth / 2, 360.0f);
-
+            Origin = new Vector2(screenWidth / 2.0f, screenHeight / 2.0f);
             this.gameWidth = gameWidth;
             this.gameHeight = gameHeight;            
             this.screenWidth = screenWidth;
@@ -151,6 +153,16 @@ namespace MH4F
                                          Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                                          Matrix.CreateTranslation(new Vector3(screenWidth * 0.5f, screenHeight * 0.5f, 0));
             return transform;
+        }
+        public Matrix GetViewMatrix(Vector2 parallax)
+        {
+            // To add parallax, simply multiply it by the position
+            return Matrix.CreateTranslation(new Vector3(-Pos * parallax, 0.0f)) *
+                // The next line has a catch. See note below.
+                Matrix.CreateTranslation(new Vector3(-Origin, 0.0f)) *
+                Matrix.CreateRotationZ(Rotation) *
+                Matrix.CreateScale(Zoom, Zoom, 1) *
+                Matrix.CreateTranslation(new Vector3(Origin, 0.0f));
         }
     }
 }
