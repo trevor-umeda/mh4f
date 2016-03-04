@@ -110,10 +110,10 @@ namespace MH4F
                  new Layer(cam) { Parallax = new Vector2(1.0f, 1.0f) }
             };
 
-            layers[0].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("background"), mainFrame = new Rectangle(-100, 0, 2200, Config.Instance.GameHeight) });
-            layers[1].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("main_castle"), mainFrame = new Rectangle(-100, 275, 2200, Config.Instance.GameHeight - 300) });
-            layers[2].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("midground"), mainFrame = new Rectangle(-100, 100, 2200, Config.Instance.GameHeight) });
-            layers[3].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("foreground"), mainFrame = new Rectangle(-100, 0, 2200, Config.Instance.GameHeight) });
+            layers[0].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("background"), mainFrame = new Rectangle(-500, -100, 2200, Config.Instance.GameHeight) });
+            layers[1].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("main_castle"), mainFrame = new Rectangle(-100, 280, 1700, Config.Instance.GameHeight - 600) });
+            layers[2].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("midground"), mainFrame = new Rectangle(-200, 50, 1950, Config.Instance.GameHeight - 200) });
+            layers[3].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("foreground"), mainFrame = new Rectangle(10, -40, 2200, Config.Instance.GameHeight) });
             layers[4].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("ground_placeholder"), mainFrame = new Rectangle(500, 0, 2200, Config.Instance.GameHeight) });
             //cam.Pos = new Vector2(Config.Instance.GameWidth/2, 360.0f);
             mainFrame = new Rectangle(-150, -450, 2200, Config.Instance.GameHeight);
@@ -174,7 +174,7 @@ namespace MH4F
             characterSelection = new CharacterSelectList(Content);
             gameState = GameState.LOADING;
             player1CharacterId = "LongSword";
-            player2CharacterId = "HuntingHorn";
+            player2CharacterId = "LongSword";
            
         }
 
