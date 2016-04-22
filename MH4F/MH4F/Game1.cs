@@ -110,11 +110,13 @@ namespace MH4F
                  new Layer(cam) { Parallax = new Vector2(1.0f, 1.0f) }
             };
 
+
             layers[0].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("background"), mainFrame = new Rectangle(-100, 0, 2200, Config.Instance.GameHeight) });
             layers[1].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("main_castle"), mainFrame = new Rectangle(-100, 275, 2200, Config.Instance.GameHeight - 300) });
             layers[2].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("midground"), mainFrame = new Rectangle(-100, 100, 2200, Config.Instance.GameHeight) });
             layers[3].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("foreground"), mainFrame = new Rectangle(-100, 0, 2200, Config.Instance.GameHeight) });
             layers[4].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("new_groundplane"), mainFrame = new Rectangle(500, 0, 2200, Config.Instance.GameHeight) });
+
             //cam.Pos = new Vector2(Config.Instance.GameWidth/2, 360.0f);
             mainFrame = new Rectangle(-150, -450, 2200, Config.Instance.GameHeight);
             
@@ -174,9 +176,11 @@ namespace MH4F
             characterSelection = new CharacterSelectList(Content);
             gameState = GameState.LOADING;
             player1CharacterId = "LongSword";
+
             player2CharacterId = "HuntingHorn";
 
             pauseMenu = new PauseMenu(spriteFont);
+
            
         }
 

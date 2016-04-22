@@ -36,13 +36,13 @@ namespace MH4F
             if (isInSuperFreeze())
             {
                 Color backgroundTint = Color.Lerp(Color.White, Color.Yellow, 0.5f);
-                spriteBatch.Draw(background, mainFrame, backgroundTint);
+                //spriteBatch.Draw(background, mainFrame, backgroundTint);
 
             }
             else if (isInSuper())
             {
                 Color backgroundTint = Color.Lerp(Color.White, Color.Black, 0.5f);
-                spriteBatch.Draw(background, mainFrame, backgroundTint);
+                //spriteBatch.Draw(background, mainFrame, backgroundTint);
             }
         }
 
