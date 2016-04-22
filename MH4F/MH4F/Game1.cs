@@ -60,7 +60,7 @@ namespace MH4F
         private SoundEffect effect;
 
         CharacterSelectList characterSelection;
-
+        PauseMenu pauseMenu;
         // Amount of time (in seconds) to display each frame
         private float frameLength = 0.016f;
 
@@ -114,7 +114,7 @@ namespace MH4F
             layers[1].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("main_castle"), mainFrame = new Rectangle(-100, 275, 2200, Config.Instance.GameHeight - 300) });
             layers[2].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("midground"), mainFrame = new Rectangle(-100, 100, 2200, Config.Instance.GameHeight) });
             layers[3].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("foreground"), mainFrame = new Rectangle(-100, 0, 2200, Config.Instance.GameHeight) });
-            layers[4].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("ground_placeholder"), mainFrame = new Rectangle(500, 0, 2200, Config.Instance.GameHeight) });
+            layers[4].Sprites.Add(new BackgroundObject { texture = Content.Load<Texture2D>("new_groundplane"), mainFrame = new Rectangle(500, 0, 2200, Config.Instance.GameHeight) });
             //cam.Pos = new Vector2(Config.Instance.GameWidth/2, 360.0f);
             mainFrame = new Rectangle(-150, -450, 2200, Config.Instance.GameHeight);
             
@@ -150,8 +150,8 @@ namespace MH4F
             effect = Content.Load<SoundEffect>("slap_large");
             
             
-            //MediaPlayer.Play(bgmManager.getRandomBGM());
-            //MediaPlayer.Volume = 0.4f;
+            MediaPlayer.Play(bgmManager.getRandomBGM());
+            MediaPlayer.Volume = 0.4f;
 
             player1Controls.setControl("down", Keys.Down);
             player1Controls.setControl("right", Keys.Right);
@@ -175,6 +175,8 @@ namespace MH4F
             gameState = GameState.LOADING;
             player1CharacterId = "LongSword";
             player2CharacterId = "HuntingHorn";
+
+            pauseMenu = new PauseMenu(spriteFont);
            
         }
 
@@ -223,6 +225,44 @@ namespace MH4F
                     gameState = GameState.PLAYING;
                 }
                 adjustCamera();
+            }
+            else if (gameState == GameState.PAUSED)
+            {
+                pauseMenu.moveMenuSelection(Keyboard.GetState(), player1Controls.Controls, player2Controls.Controls);
+                if (pauseMenu.menuItemSelected())
+                {
+
+                    if (pauseMenu.SelectedMenu == "Exit")
+                    {
+                        Exit();
+                    }
+                    else if (pauseMenu.SelectedMenu == "Controller Settings")
+                    {
+                        Keys[] test = Keyboard.GetState().GetPressedKeys();
+                        if (test.Length > 0)
+                        {
+                            for (var i = 0; i < test.Length; i++)
+                            {
+                                Console.WriteLine(test[i]);
+                            }
+                        }
+                        GamePadState padState1 = GamePad.GetState(PlayerIndex.One);
+                        if(padState1.IsConnected)
+                        {
+                            if (padState1.Buttons.A == ButtonState.Pressed)
+                            {
+                                Console.WriteLine("Button A pressed on gamepad");
+                            }
+                        }
+                        
+                    }
+                    else if (pauseMenu.SelectedMenu == "Resume")
+                    {
+                        gameState = GameState.PLAYING;
+                        pauseMenu.resetMenuSelection();
+                    }
+                }
+               
             }
             else if (gameState == GameState.PLAYING)
             {
@@ -314,7 +354,8 @@ namespace MH4F
                         }
                         else if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                         {
-                            Exit();
+                            //Exit();
+                            gameState = GameState.PAUSED;
                         }
                         else if (Keyboard.GetState().IsKeyDown(Keys.O))
                         {
@@ -355,7 +396,7 @@ namespace MH4F
                 }
             }
                             
-            //}
+           
         }
 
         /// <summary>
@@ -396,7 +437,7 @@ namespace MH4F
                
                 spriteBatch.End();
             }
-            if (gameState == GameState.PLAYING || gameState == GameState.ROUNDEND)
+            if (gameState == GameState.PLAYING || gameState == GameState.ROUNDEND || gameState == GameState.PAUSED)
             {
                 //spriteBatch.Begin();
                 foreach (Layer layer in layers)
@@ -455,6 +496,17 @@ namespace MH4F
                 player1.DrawGauges(spriteBatch);
                 player2.DrawGauges(spriteBatch);
                 spriteBatch.End();
+
+                // Have some pause drawing stuff
+                //
+                if (gameState == GameState.PAUSED)
+                {
+                    spriteBatch.Begin();
+                    Color black2 = Color.Black * .5f;
+                    spriteBatch.Draw(dummyTexture, mainFrame, black2);
+                    pauseMenu.Draw(spriteBatch);
+                    spriteBatch.End();
+                }
             }
             base.Draw(gameTime);
         }

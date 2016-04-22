@@ -1,4 +1,5 @@
-﻿           | 2aattack  |aattack | battack    
-2aattack   |    x      |   x    |      x  	   
-aattack    |           |   x    |      x  
-battack    |           |        |         
+﻿           |slide | 2aattack  |aattack | battack    
+slide      |       |          |         |
+2aattack   |  x    |  x       |   x    |      x  	   
+aattack    |   x   |          |   x    |      x  
+battack    |  x    |          |        |         

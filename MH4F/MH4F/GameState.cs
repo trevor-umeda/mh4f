@@ -10,6 +10,7 @@ namespace MH4F
         PLAYERSELECT,
         LOADING,
         PLAYING,
-        ROUNDEND
+        ROUNDEND,
+        PAUSED
     }
 }

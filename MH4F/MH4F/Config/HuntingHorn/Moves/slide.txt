@@ -1,0 +1,14 @@
+name= slide
+sprite= HH_SLIDE
+XImageStart=0
+YImageStart= 0
+Width=550
+Height=550
+FrameCount=12
+Columns=3
+FrameLength= 0.016
+FrameLengthInfo=2,2,3,5,2,2,4,9,4,4,4,4
+CharacterState=STANDING
+IsAttack=true
+BackupMove=battack
+Input=2;1;4;B

@@ -12,6 +12,7 @@ namespace MH4F
         DASHING,
         AIRDASH,
         BACKSTEP,
+        HOP,
         CROUCHING,
         AIRBORNE,
         HIT,

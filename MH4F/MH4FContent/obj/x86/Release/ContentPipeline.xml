@@ -620,7 +620,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_2.xnb</Output>
-      <Time>2016-01-07T18:45:03.1849586-08:00</Time>
+      <Time>2016-04-10T23:44:43.759284-07:00</Time>
     </Item>
     <Item>
       <Source>jump_dust.png</Source>
@@ -701,7 +701,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_2A.xnb</Output>
-      <Time>2016-03-01T22:40:02.8405393-08:00</Time>
+      <Time>2016-04-10T23:45:34.881208-07:00</Time>
     </Item>
     <Item>
       <Source>HuntingHorn\HH_5A.png</Source>
@@ -710,7 +710,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_5A.xnb</Output>
-      <Time>2016-03-01T22:40:02.8415394-08:00</Time>
+      <Time>2016-04-10T23:46:08.5241323-07:00</Time>
     </Item>
     <Item>
       <Source>HuntingHorn\HH_5B.png</Source>
@@ -840,6 +840,214 @@
       <Options>None</Options>
       <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\midground.xnb</Output>
       <Time>2016-03-03T00:12:58.526961-08:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_5C.png</Source>
+      <Name>HuntingHorn\HH_5C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_5C.xnb</Output>
+      <Time>2016-04-10T23:49:10.9375657-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_WALK.png</Source>
+      <Name>HuntingHorn\HH_WALK</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_WALK.xnb</Output>
+      <Time>2016-04-10T23:52:35.4602637-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_BACK_WALK.png</Source>
+      <Name>HuntingHorn\HH_BACK_WALK</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_BACK_WALK.xnb</Output>
+      <Time>2016-04-10T23:54:37.3392348-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_HIT_HIGH.png</Source>
+      <Name>HuntingHorn\HH_HIT_HIGH</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_HIT_HIGH.xnb</Output>
+      <Time>2016-04-10T23:57:25.8358723-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_HIT_LOW_STAND.png</Source>
+      <Name>HuntingHorn\HH_HIT_LOW_STAND</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_HIT_LOW_STAND.xnb</Output>
+      <Time>2016-04-10T23:59:39.9335422-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_HIT_LOW.png</Source>
+      <Name>HuntingHorn\HH_HIT_LOW</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_HIT_LOW.xnb</Output>
+      <Time>2016-04-11T00:01:17.330113-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_JUMP_PT1.png</Source>
+      <Name>HuntingHorn\HH_JUMP_PT1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_JUMP_PT1.xnb</Output>
+      <Time>2016-04-11T00:04:48.8202095-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_JUMP_PT2.png</Source>
+      <Name>HuntingHorn\HH_JUMP_PT2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_JUMP_PT2.xnb</Output>
+      <Time>2016-04-11T00:04:48.8382106-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_2block.png</Source>
+      <Name>HuntingHorn\HH_2block</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_2block.xnb</Output>
+      <Time>2016-04-21T23:05:59.2535716-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_2C.png</Source>
+      <Name>HuntingHorn\HH_2C</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_2C.xnb</Output>
+      <Time>2016-04-21T23:05:59.2555718-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\hh_5block.png</Source>
+      <Name>HuntingHorn\hh_5block</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\hh_5block.xnb</Output>
+      <Time>2016-04-21T23:05:59.2565718-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_airblock.png</Source>
+      <Name>HuntingHorn\HH_airblock</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_airblock.xnb</Output>
+      <Time>2016-04-21T23:05:59.2565718-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_AIRDASH.png</Source>
+      <Name>HuntingHorn\HH_AIRDASH</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_AIRDASH.xnb</Output>
+      <Time>2016-04-21T23:05:59.2575719-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_BACKHOP.png</Source>
+      <Name>HuntingHorn\HH_BACKHOP</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_BACKHOP.xnb</Output>
+      <Time>2016-04-21T23:05:59.259572-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_FWD_DASH.png</Source>
+      <Name>HuntingHorn\HH_FWD_DASH</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_FWD_DASH.xnb</Output>
+      <Time>2016-04-21T23:05:59.260572-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_HITFALL1.png</Source>
+      <Name>HuntingHorn\HH_HITFALL1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_HITFALL1.xnb</Output>
+      <Time>2016-04-21T23:05:59.2615721-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_HITFALL2.png</Source>
+      <Name>HuntingHorn\HH_HITFALL2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_HITFALL2.xnb</Output>
+      <Time>2016-04-21T23:05:59.2625722-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HIT_FALL3.png</Source>
+      <Name>HuntingHorn\HIT_FALL3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HIT_FALL3.xnb</Output>
+      <Time>2016-04-21T23:43:44.3701289-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HIT_FALL_RECOVER.png</Source>
+      <Name>HuntingHorn\HIT_FALL_RECOVER</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HIT_FALL_RECOVER.xnb</Output>
+      <Time>2016-04-21T23:43:44.4011307-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\KNOCKDOWN.png</Source>
+      <Name>HuntingHorn\KNOCKDOWN</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\KNOCKDOWN.xnb</Output>
+      <Time>2016-04-21T23:43:44.4031308-07:00</Time>
+    </Item>
+    <Item>
+      <Source>HuntingHorn\HH_SLIDE.png</Source>
+      <Name>HuntingHorn\HH_SLIDE</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\HuntingHorn\HH_SLIDE.xnb</Output>
+      <Time>2016-04-22T00:54:16.8942154-07:00</Time>
+    </Item>
+    <Item>
+      <Source>new_groundplane.png</Source>
+      <Name>new_groundplane</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\new_groundplane.xnb</Output>
+      <Time>2016-04-22T01:41:05.385852-07:00</Time>
+    </Item>
+    <Item>
+      <Source>bgm\Liara's Theme.mp3</Source>
+      <Name>bgm\Liara's Theme</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\bgm\Liara's Theme.xnb</Output>
+      <Extra>C:\src\mh4f\MH4F\MH4F\MH4F\bin\x86\Release\Content\bgm\Liara's Theme.wma</Extra>
+      <Time>2016-04-22T01:44:09.4233783-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

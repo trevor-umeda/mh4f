@@ -156,7 +156,7 @@ namespace MH4F
             get { return Sprite.CurrentMoveAnimation != null &&
                 (!isGettingHit) && // If we aren't getting hit
                 (Sprite.CurrentMoveAnimation.IsAttack && Sprite.CurrentMoveAnimation.IsDone || // or if the move is done
-                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.DASHING || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRDASH || // or if the current move is dashing
+                Sprite.CurrentMoveAnimation.CharacterState == CharacterState.DASHING  || Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRDASH || // or if the current move is dashing
                 !Sprite.CurrentMoveAnimation.IsAttack);  // or if the  move is not an attack
               }
         }
@@ -715,12 +715,11 @@ namespace MH4F
 
         public virtual void performGroundSpecialMove(KeyboardState ks, String moveName)
         {
-
             if (Sprite.CurrentAnimation == "backstep")
             {
                 Backstep();
             }
-            if (Sprite.CurrentAnimation == "dash" && IsCancealableMove)
+            if (Sprite.CurrentAnimation == "dash" && (IsCancealableMove|| Sprite.CurrentMoveAnimation.CharacterState == CharacterState.HOP))
             {
                 
                 Dash();
@@ -937,7 +936,19 @@ namespace MH4F
             if(!hitInfo.Unblockable && Sprite.CurrentMoveAnimation.CharacterState != CharacterState.HIT
                 && !Sprite.CurrentMoveAnimation.IsAttack && isAttackBlocked(keyState, hitInfo.Hitzone) )
             {
-                Sprite.CurrentAnimation = "block";
+                if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.AIRBORNE)
+                {
+                    Sprite.CurrentAnimation = "airblock";
+                }
+                else if (Sprite.CurrentMoveAnimation.CharacterState == CharacterState.CROUCHING)
+                {
+                    Sprite.CurrentAnimation = "crouchblock";
+                }
+                else
+                {
+                    Sprite.CurrentAnimation = "block";
+                }
+                
                 HitAnimation block = (HitAnimation)Sprite.CurrentMoveAnimation;
                 Console.WriteLine("DID A BLOCK!");
                 block.reset();

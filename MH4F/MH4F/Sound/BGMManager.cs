@@ -14,8 +14,8 @@ namespace MH4F
         public BGMManager(ContentManager content)
         {
             songList = new List<Song>();
-            songList.Add(content.Load<Song>("bgm/20"));
-            songList.Add(content.Load<Song>("bgm/25"));
+            //songList.Add(content.Load<Song>("bgm/20"));
+            songList.Add(content.Load<Song>("bgm/Liara's Theme"));
         }
         
         public Song getRandomBGM()

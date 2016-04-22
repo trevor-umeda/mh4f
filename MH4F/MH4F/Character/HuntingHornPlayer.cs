@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 
 namespace MH4F
 {
@@ -34,6 +35,29 @@ namespace MH4F
         {
            
             base.changeMove(moveName);
+        }
+
+        public override void performGroundSpecialMove(KeyboardState ks, String moveName)
+        {
+            if (moveName == "slide")
+            {
+                if (Sprite.CurrentMoveAnimation.CurrentFrame > 3)
+                {
+                    if (Direction == Direction.Left)
+                    {
+                        Sprite.MoveBy(-10, 0);
+                    }
+                    else
+                    {
+                        Sprite.MoveBy(10, 0);
+                    }
+                }
+                
+            }
+            else
+            {
+                base.performGroundSpecialMove(ks, moveName);
+            }
         }
     }
 }
